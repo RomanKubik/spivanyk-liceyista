@@ -1,18 +1,22 @@
-package com.roman.kubik.spivanyklicejista.interaction.entity;
+package com.roman.kubik.spivanyklicejista.data.song;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.roman.kubik.spivanyklicejista.data.category.CategoryEntity;
+
+
 /**
- * Created by kubik on 12/25/17.
+ * Room-specific Song Entity data type.
+ * Created by kubik on 1/14/18.
  */
 @Entity(tableName = "song",
-        foreignKeys = @ForeignKey(entity = Category.class,
+        foreignKeys = @ForeignKey(entity = CategoryEntity.class,
                 parentColumns = "id",
                 childColumns = "category_id"))
-public class Song {
+public class SongEntity {
 
     @PrimaryKey
     private int id;
@@ -22,6 +26,13 @@ public class Song {
     private String lyrics;
     @ColumnInfo(name = "category_id")
     private int categoryId;
+
+    public SongEntity(int id, String title, String lyrics, int categoryId) {
+        this.id = id;
+        this.title = title;
+        this.lyrics = lyrics;
+        this.categoryId = categoryId;
+    }
 
     public int getId() {
         return id;
@@ -54,4 +65,5 @@ public class Song {
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
+
 }

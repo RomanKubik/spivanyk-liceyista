@@ -13,6 +13,15 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+    ext {
+        rxJavaVersion = "2.1.8"
+        annimonStreamVersion = "1.1.9"
+        libs = [
+                rxJava: ('io.reactivex.rxjava2:rxjava:' + rxJavaVersion),
+                stream: ('com.annimon:stream:' + annimonStreamVersion)
+        ]
+    }
 }
 
 allprojects {
@@ -25,6 +34,8 @@ allprojects {
 ext {
     minSdk = 15
     targetSdk = 27
+    versionCode = 1
+    versionName = "1.0.0"
     supportLibraryVersion = '27.0.2'
     roomVersion = '1.0.0'
 }
