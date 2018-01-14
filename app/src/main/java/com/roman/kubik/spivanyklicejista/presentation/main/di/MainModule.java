@@ -1,10 +1,9 @@
 package com.roman.kubik.spivanyklicejista.presentation.main.di;
 
-import android.app.Activity;
-
 import com.roman.kubik.spivanyklicejista.general.di.ActivityScope;
 import com.roman.kubik.spivanyklicejista.presentation.main.MainActivity;
 import com.roman.kubik.spivanyklicejista.presentation.main.MainContract;
+import com.roman.kubik.spivanyklicejista.presentation.main.MainPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -30,8 +29,8 @@ public class MainModule {
 
     @Provides
     @ActivityScope
-    public Activity getActivity() {
-        return activity;
+    public MainContract.Presenter getPresenter() {
+        return new MainPresenter(activity);
     }
 
 }
