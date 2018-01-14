@@ -1,20 +1,21 @@
 package com.roman.kubik.spivanyklicejista;
 
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
-import com.annimon.stream.Optional;
-import com.annimon.stream.Stream;
-import com.roman.kubik.spivanyklicejista.interaction.entity.Song;
-import com.roman.kubik.spivanyklicejista.interaction.repository.AppDatabase;
-import com.roman.kubik.spivanyklicejista.interaction.repository.DatabaseHelper;
-import com.roman.kubik.spivanyklicejista.interaction.repository.SongDao;
+import com.roman.kubik.spivanyklicejista.database.DatabaseCopyHelper;
+import com.roman.kubik.spivanyklicejista.database.DatabaseDaoProvider;
+import com.roman.kubik.spivanyklicejista.song.SongModelMapper;
+import com.roman.kubik.spivanyklicejista.song.SongRepositoryImpl;
+import com.roman.kubik.spivanyklicejista.song.interaction.SongsInteractor;
+import com.roman.kubik.spivanyklicejista.song.repository.SongRepository;
 
 import java.io.IOException;
-import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class EmptyActivity extends AppCompatActivity {
 
@@ -25,13 +26,20 @@ public class EmptyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_empty);
 
-        AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "spivanyk.db").allowMainThreadQueries().build();
+        SongsInteractor songsInteractor =new SongsInteractor(new SongRepositoryImpl(DatabaseDaoProvider.getInstance(this).songDao(), new SongModelMapper()));
 
-        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        DatabaseCopyHelper databaseHelper = new DatabaseCopyHelper(this);
         try {
             databaseHelper.createDataBase();
-            List<Song> list = appDatabase.songDao().getAll();
-            Log.d(TAG, "onCreate: " + list.size());
+
+            songsInteractor.getAll().subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(s -> {
+                        Toast.makeText(this, "Size: " +  s.size(), Toast.LENGTH_SHORT).show();
+                    }, t -> {
+                        Toast.makeText(this, "Throwable: " +  t.getMessage(), Toast.LENGTH_SHORT).show();
+                        t.printStackTrace();
+                    });
         } catch (IOException e) {
             e.printStackTrace();
         }

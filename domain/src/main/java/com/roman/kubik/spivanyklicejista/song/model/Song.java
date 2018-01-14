@@ -1,27 +1,23 @@
-package com.roman.kubik.spivanyklicejista.interaction.entity;
-
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.ForeignKey;
-import android.arch.persistence.room.PrimaryKey;
+package com.roman.kubik.spivanyklicejista.song.model;
 
 /**
- * Created by kubik on 12/25/17.
+ * Represents Song data model
+ * Created by kubik on 1/14/18.
  */
-@Entity(tableName = "song",
-        foreignKeys = @ForeignKey(entity = Category.class,
-                parentColumns = "id",
-                childColumns = "category_id"))
+
 public class Song {
 
-    @PrimaryKey
     private int id;
-    @ColumnInfo(name = "title")
     private String title;
-    @ColumnInfo(name = "lyrics")
     private String lyrics;
-    @ColumnInfo(name = "category_id")
     private int categoryId;
+
+    public Song(int id, String title, String lyrics, int categoryId) {
+        this.id = id;
+        this.title = title;
+        this.lyrics = lyrics;
+        this.categoryId = categoryId;
+    }
 
     public int getId() {
         return id;

@@ -1,0 +1,20 @@
+package com.roman.kubik.spivanyklicejista.song;
+
+import com.roman.kubik.spivanyklicejista.EntityModelMapper;
+import com.roman.kubik.spivanyklicejista.song.model.Song;
+
+/**
+ * Created by kubik on 1/14/18.
+ */
+
+public class SongModelMapper implements EntityModelMapper<SongEntity, Song> {
+    @Override
+    public Song fromEntity(SongEntity from) {
+        return new Song(from.getId(), from.getTitle(), from.getLyrics(), from.getCategoryId());
+    }
+
+    @Override
+    public SongEntity toEntity(Song from) {
+        return new SongEntity(from.getId(), from.getTitle(), from.getLyrics(), from.getCategoryId());
+    }
+}

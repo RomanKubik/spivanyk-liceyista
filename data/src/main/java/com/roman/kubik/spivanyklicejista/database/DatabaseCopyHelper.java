@@ -1,4 +1,4 @@
-package com.roman.kubik.spivanyklicejista.interaction.repository;
+package com.roman.kubik.spivanyklicejista.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,17 +12,18 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
+ * Provides method to copy Database from assets folder to native android
  * Created by kubik on 12/25/17.
  */
 
-public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String TAG = DatabaseHelper.class.getSimpleName();
+public class DatabaseCopyHelper extends SQLiteOpenHelper {
+    private static final String TAG = DatabaseCopyHelper.class.getSimpleName();
     private static final int DB_VERSION = 1;
     private static String DB_PATH = "";
     private static String DB_NAME = "spivanyk.db";
     private final Context context;
 
-    public DatabaseHelper(Context context) {
+    public DatabaseCopyHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         if (android.os.Build.VERSION.SDK_INT >= 17) {
             DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
