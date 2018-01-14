@@ -1,4 +1,4 @@
-package com.roman.kubik.spivanyklicejista.category;
+package com.roman.kubik.spivanyklicejista.data.category;
 
 /**
  * Created by kubik on 1/14/18.

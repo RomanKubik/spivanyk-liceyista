@@ -1,4 +1,4 @@
-package com.roman.kubik.spivanyklicejista.song;
+package com.roman.kubik.spivanyklicejista.data.song;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;

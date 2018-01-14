@@ -1,4 +1,4 @@
-package com.roman.kubik.spivanyklicejista.database;
+package com.roman.kubik.spivanyklicejista.data.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

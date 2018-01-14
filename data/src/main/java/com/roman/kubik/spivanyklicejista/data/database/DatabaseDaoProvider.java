@@ -1,9 +1,10 @@
-package com.roman.kubik.spivanyklicejista.database;
+package com.roman.kubik.spivanyklicejista.data.database;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import com.roman.kubik.spivanyklicejista.song.SongDao;
+import com.roman.kubik.spivanyklicejista.data.song.SongDao;
+
 
 /**
  * Provides selected DAO instance

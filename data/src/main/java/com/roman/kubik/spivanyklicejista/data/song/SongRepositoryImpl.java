@@ -1,9 +1,9 @@
-package com.roman.kubik.spivanyklicejista.song;
+package com.roman.kubik.spivanyklicejista.data.song;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
-import com.roman.kubik.spivanyklicejista.song.model.Song;
-import com.roman.kubik.spivanyklicejista.song.repository.SongRepository;
+import com.roman.kubik.spivanyklicejista.domain.song.model.Song;
+import com.roman.kubik.spivanyklicejista.domain.song.repository.SongRepository;
 
 import java.util.List;
 

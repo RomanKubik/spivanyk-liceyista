@@ -1,4 +1,4 @@
-package com.roman.kubik.spivanyklicejista;
+package com.roman.kubik.spivanyklicejista.domain;
 
 /**
  * Data mapper used to map database entities to model classes and vice versa.

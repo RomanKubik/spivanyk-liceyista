@@ -2,15 +2,14 @@ package com.roman.kubik.spivanyklicejista;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
-import com.roman.kubik.spivanyklicejista.database.DatabaseCopyHelper;
-import com.roman.kubik.spivanyklicejista.database.DatabaseDaoProvider;
-import com.roman.kubik.spivanyklicejista.song.SongModelMapper;
-import com.roman.kubik.spivanyklicejista.song.SongRepositoryImpl;
-import com.roman.kubik.spivanyklicejista.song.interaction.SongsInteractor;
-import com.roman.kubik.spivanyklicejista.song.repository.SongRepository;
+
+import com.roman.kubik.spivanyklicejista.data.database.DatabaseCopyHelper;
+import com.roman.kubik.spivanyklicejista.data.database.DatabaseDaoProvider;
+import com.roman.kubik.spivanyklicejista.data.song.SongModelMapper;
+import com.roman.kubik.spivanyklicejista.data.song.SongRepositoryImpl;
+import com.roman.kubik.spivanyklicejista.domain.song.interaction.SongsInteractor;
 
 import java.io.IOException;
 
