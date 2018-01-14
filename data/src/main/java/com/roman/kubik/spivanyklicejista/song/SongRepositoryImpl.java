@@ -8,6 +8,7 @@ import com.roman.kubik.spivanyklicejista.song.repository.SongRepository;
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
@@ -44,7 +45,7 @@ public class SongRepositoryImpl implements SongRepository {
 
     @Override
     public Single<List<Song>> search(String text) {
-        return songDao.search(text)
+        return songDao.search("%" + text + "%")
                 .map(s -> Stream.of(s)
                         .map(s1 -> songModelMapper.fromEntity(s1)).
                                 collect(Collectors.toList()));

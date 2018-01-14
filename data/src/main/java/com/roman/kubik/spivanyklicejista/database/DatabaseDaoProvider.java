@@ -6,6 +6,7 @@ import android.content.Context;
 import com.roman.kubik.spivanyklicejista.song.SongDao;
 
 /**
+ * Provides selected DAO instance
  * Created by kubik on 1/14/18.
  */
 

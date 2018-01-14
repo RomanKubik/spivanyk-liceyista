@@ -4,6 +4,7 @@ import com.roman.kubik.spivanyklicejista.EntityModelMapper;
 import com.roman.kubik.spivanyklicejista.song.model.Song;
 
 /**
+ * Data mapper used to map song entity to model classes and vice versa.
  * Created by kubik on 1/14/18.
  */
 

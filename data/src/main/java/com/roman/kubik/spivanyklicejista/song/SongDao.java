@@ -10,7 +10,6 @@ import java.util.List;
 
 import io.reactivex.Maybe;
 import io.reactivex.Single;
-import io.reactivex.functions.Action;
 
 /**
  * Simple Room Song DAO
