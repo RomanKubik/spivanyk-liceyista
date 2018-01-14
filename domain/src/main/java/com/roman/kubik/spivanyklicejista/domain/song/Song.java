@@ -1,4 +1,4 @@
-package com.roman.kubik.spivanyklicejista.domain.song.model;
+package com.roman.kubik.spivanyklicejista.domain.song;
 
 /**
  * Represents Song data model

@@ -2,13 +2,12 @@ package com.roman.kubik.spivanyklicejista.data.song;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
-import com.roman.kubik.spivanyklicejista.domain.song.model.Song;
-import com.roman.kubik.spivanyklicejista.domain.song.repository.SongRepository;
+import com.roman.kubik.spivanyklicejista.domain.song.Song;
+import com.roman.kubik.spivanyklicejista.domain.song.SongRepository;
 
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 

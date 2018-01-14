@@ -1,7 +1,4 @@
-package com.roman.kubik.spivanyklicejista.domain.song.repository;
-
-
-import com.roman.kubik.spivanyklicejista.domain.song.model.Song;
+package com.roman.kubik.spivanyklicejista.domain.song;
 
 import java.util.List;
 
