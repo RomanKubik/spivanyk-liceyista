@@ -27,15 +27,13 @@ public class EmptyActivity extends AppCompatActivity {
 
         AppDatabase appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "spivanyk.db").allowMainThreadQueries().build();
 
-
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
         try {
             databaseHelper.createDataBase();
+            List<Song> list = appDatabase.songDao().getAll();
+            Log.d(TAG, "onCreate: " + list.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        List<Song> list = appDatabase.songDao().getAll();
-        Log.d(TAG, "onCreate: " + list.size());
     }
 }
