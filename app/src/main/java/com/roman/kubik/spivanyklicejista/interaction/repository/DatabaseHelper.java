@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static String TAG = "DataBaseHelper"; // Tag just for the LogCat window
     //destination path (location) of our database on device
     private static String DB_PATH = "";
-    private static String DB_NAME = "YourDbName";// Database name
+    private static String DB_NAME = "spivanyk.db";// Database name
     private SQLiteDatabase mDataBase;
     private final Context mContext;
 
@@ -44,10 +44,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             try {
                 //Copy the database from assests
                 copyDataBase();
-                Log.e(TAG, "createDatabase database created");
+                Log.d(TAG, "createDatabase database created");
             } catch (IOException mIOException) {
                 throw new Error("ErrorCopyingDataBase");
             }
+        } else {
+            Log.d(TAG, "createDataBase: DataBase exists");
         }
     }
 
