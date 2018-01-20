@@ -2,6 +2,7 @@ package com.roman.kubik.spivanyklicejista.domain.chord;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 
@@ -17,5 +18,5 @@ public interface ChordRepository {
 
     Maybe<Chord> getByName(String name);
 
-    void add(Chord chord);
+    Completable add(Chord chord);
 }

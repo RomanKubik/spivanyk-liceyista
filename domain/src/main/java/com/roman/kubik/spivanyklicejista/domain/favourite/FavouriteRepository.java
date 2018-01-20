@@ -4,6 +4,7 @@ import com.roman.kubik.spivanyklicejista.domain.song.Song;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -14,7 +15,7 @@ public interface FavouriteRepository {
 
     Single<List<Song>> getAll();
 
-    void add(Song song);
+    Completable add(Song song);
 
-    void delete(Song song);
+    Completable delete(Song song);
 }
