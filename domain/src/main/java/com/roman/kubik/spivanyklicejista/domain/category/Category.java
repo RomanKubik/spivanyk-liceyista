@@ -1,23 +1,16 @@
-package com.roman.kubik.spivanyklicejista.data.category;
+package com.roman.kubik.spivanyklicejista.domain.category;
 
 /**
+ * Represents Category data model
  * Created by kubik on 1/14/18.
  */
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+public class Category {
 
-@Entity(tableName = "category")
-public class CategoryEntity {
-
-    @PrimaryKey
     private int id;
-
-    @ColumnInfo(name = "name")
     private String name;
 
-    public CategoryEntity(int id, String name) {
+    public Category(int id, String name) {
         this.id = id;
         this.name = name;
     }

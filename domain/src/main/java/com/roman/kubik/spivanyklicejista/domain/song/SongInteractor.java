@@ -1,8 +1,5 @@
-package com.roman.kubik.spivanyklicejista.domain.song.interaction;
+package com.roman.kubik.spivanyklicejista.domain.song;
 
-
-import com.roman.kubik.spivanyklicejista.domain.song.model.Song;
-import com.roman.kubik.spivanyklicejista.domain.song.repository.SongRepository;
 
 import java.util.List;
 
@@ -14,11 +11,11 @@ import io.reactivex.Single;
  * Created by kubik on 1/14/18.
  */
 
-public class SongsInteractor {
+public class SongInteractor {
 
     private SongRepository songRepository;
 
-    public SongsInteractor(SongRepository songRepository) {
+    public SongInteractor(SongRepository songRepository) {
         this.songRepository = songRepository;
     }
 
