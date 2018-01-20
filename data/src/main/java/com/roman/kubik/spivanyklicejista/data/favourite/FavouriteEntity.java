@@ -2,6 +2,7 @@ package com.roman.kubik.spivanyklicejista.data.favourite;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 /**
@@ -16,6 +17,7 @@ public class FavouriteEntity {
     @ColumnInfo(name = "song_id")
     private int songId;
 
+    @Ignore
     public FavouriteEntity(int songId) {
         this.songId = songId;
     }

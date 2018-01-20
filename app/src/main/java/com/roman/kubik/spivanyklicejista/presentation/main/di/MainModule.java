@@ -1,5 +1,6 @@
 package com.roman.kubik.spivanyklicejista.presentation.main.di;
 
+import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor;
 import com.roman.kubik.spivanyklicejista.general.di.ActivityScope;
 import com.roman.kubik.spivanyklicejista.presentation.main.MainActivity;
 import com.roman.kubik.spivanyklicejista.presentation.main.MainContract;
@@ -29,8 +30,8 @@ public class MainModule {
 
     @Provides
     @ActivityScope
-    public MainContract.Presenter getPresenter() {
-        return new MainPresenter(activity);
+    public MainContract.Presenter getPresenter(SongInteractor songInteractor) {
+        return new MainPresenter(activity, songInteractor);
     }
 
 }

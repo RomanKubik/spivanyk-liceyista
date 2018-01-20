@@ -1,6 +1,10 @@
 package com.roman.kubik.spivanyklicejista.general.di;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
+
+import com.roman.kubik.spivanyklicejista.Constants;
+import com.roman.kubik.spivanyklicejista.data.database.AppDatabase;
 
 import javax.inject.Singleton;
 

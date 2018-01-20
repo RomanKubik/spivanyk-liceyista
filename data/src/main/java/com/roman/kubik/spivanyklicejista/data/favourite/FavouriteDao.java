@@ -1,6 +1,7 @@
 package com.roman.kubik.spivanyklicejista.data.favourite;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
@@ -18,9 +19,9 @@ public interface FavouriteDao {
     @Query("SELECT * FROM favourite")
     Single<List<FavouriteEntity>> getAll();
 
-    @Query("INSERT INTO favourite (song_id) VALUES (:songId)")
-    Completable add(int songId);
+    @Insert
+    void add(FavouriteEntity favouriteEntity);
 
     @Query("DELETE FROM favourite WHERE favourite.song_id = :songId")
-    Completable delete(int songId);
+    void delete(int songId);
 }
