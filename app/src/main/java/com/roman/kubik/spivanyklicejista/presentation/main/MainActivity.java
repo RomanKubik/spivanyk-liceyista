@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.roman.kubik.spivanyklicejista.R;
 import com.roman.kubik.spivanyklicejista.domain.song.Song;
+import com.roman.kubik.spivanyklicejista.presentation.BaseActivity;
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainModule;
 
 import java.util.List;
@@ -28,7 +29,7 @@ import static com.roman.kubik.spivanyklicejista.general.android.SpivanykApplicat
  * Created by kubik on 1/14/18.
  */
 
-public class MainActivity extends AppCompatActivity implements MainContract.View {
+public class MainActivity extends BaseActivity implements MainContract.View {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -43,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         component.mainComponent(new MainModule(this)).inject(this);
-        ButterKnife.bind(this);
     }
 
     @Override
