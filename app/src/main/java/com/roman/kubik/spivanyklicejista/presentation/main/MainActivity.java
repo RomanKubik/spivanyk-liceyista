@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.roman.kubik.spivanyklicejista.R;
 import com.roman.kubik.spivanyklicejista.domain.song.Song;
 import com.roman.kubik.spivanyklicejista.presentation.BaseActivity;
+import com.roman.kubik.spivanyklicejista.presentation.Navigate;
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainModule;
 
 import java.util.List;
@@ -71,6 +72,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     private void init() {
         songsAdapter.setOnClickListener(s -> {
             Log.d(TAG, "songClicked: " + s.getTitle());
+            Navigate.toSongActivity(this, s);
         });
         songList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         songList.setAdapter(songsAdapter);

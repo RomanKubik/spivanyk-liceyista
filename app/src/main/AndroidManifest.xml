@@ -22,7 +22,9 @@
         <activity
             android:name=".presentation.main.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".presentation.song.SongActivity" />
+        <activity
+            android:name=".presentation.song.SongActivity"
+            android:theme="@style/AppTheme" />
 
     </application>
 

@@ -7,5 +7,9 @@ package com.roman.kubik.spivanyklicejista;
 
 public interface Constants {
 
-    static String APP_DB_FILE_NAME = "spivanyk.db";
+    String APP_DB_FILE_NAME = "spivanyk.db";
+
+    interface Extras {
+        String SONG_ID = "song.id";
+    }
 }
