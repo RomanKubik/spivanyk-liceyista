@@ -18,14 +18,11 @@ import javax.inject.Inject;
 
 public class SplashActivity extends AppCompatActivity {
 
-    @Inject
-    DatabaseCopyHelper databaseCopyHelper;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            databaseCopyHelper.createDataBase();
+            new DatabaseCopyHelper(this).createDataBase();
             Navigate.toMainActivity(this);
         } catch (IOException ignored) {
         }

@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         component.mainComponent(new MainModule(this)).inject(this);
         ButterKnife.bind(this);
     }

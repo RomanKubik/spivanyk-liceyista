@@ -38,12 +38,6 @@ public class DatabaseModule {
 
     @Provides
     @Singleton
-    DatabaseCopyHelper getDatabaseCopyHelper(Context context) {
-        return new DatabaseCopyHelper(context);
-    }
-
-    @Provides
-    @Singleton
     SongDao getSongDao(AppDatabase appDatabase) {
         return appDatabase.songDao();
     }
