@@ -3,6 +3,8 @@ package com.roman.kubik.spivanyklicejista.presentation.main;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,15 +37,21 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.songList)
+    RecyclerView songList;
 
     @Inject
     MainContract.Presenter presenter;
+    @Inject
+    SongsAdapter songsAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         component.mainComponent(new MainModule(this)).inject(this);
+        init();
+        presenter.fetchAllSongs();
     }
 
     @Override
@@ -61,10 +69,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void onSongsFetched(List<Song> songList) {
         Log.d(TAG, "onSongsFetched: " + songList.size());
+        songsAdapter.addSongList(songList);
     }
 
-    @OnClick(R.id.button)
-    void onClicked() {
-        presenter.fetchAllSongs();
+    private void init() {
+        songsAdapter.setOnClickListener(s -> {
+            Log.d(TAG, "songClicked: " + s.getTitle());
+        });
+        songList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        songList.setAdapter(songsAdapter);
     }
 }
