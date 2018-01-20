@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/tvLyrics"
-        style="@style/AppTheme.SongLyrics"
+        style="@style/AppTheme.SongLyrics.List"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

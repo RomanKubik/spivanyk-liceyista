@@ -17,7 +17,10 @@
         <item name="android:textSize">@dimen/text_size_20</item>
     </style>
 
-
+    <style name="AppTheme.SongLyrics.List" parent="AppTheme.SongLyrics">
+        <item name="android:maxLines">8</item>
+        <item name="android:ellipsize">end</item>
+    </style>
 
     <style name="AppTheme.SongLyrics" parent="android:Widget.TextView">
         <item name="android:textStyle">normal</item>
