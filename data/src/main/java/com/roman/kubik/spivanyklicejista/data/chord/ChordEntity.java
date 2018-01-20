@@ -7,6 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 /**
  * Created by kubik on 1/20/18.
  */
+
 @Entity(tableName = "chord")
 public class ChordEntity {
 

@@ -9,12 +9,13 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-/** Main application component
+/**
+ * Main application component
  * Created by kubik on 1/14/18.
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class})
+@Component(modules = {ApplicationModule.class, DatabaseModule.class, InteractionModule.class})
 public interface ApplicationComponent {
     Context getApplicationContext();
 

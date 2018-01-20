@@ -1,11 +1,30 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+    </style>
+
+    <style name="AppTheme.SongTitle" parent="android:Widget.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_20</item>
+    </style>
+
+    <style name="AppTheme.SongLyrics" parent="android:Widget.TextView">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
+    <style name="AppTheme.SongLyrics.List" parent="AppTheme.SongLyrics">
+        <item name="android:maxLines">8</item>
+        <item name="android:ellipsize">end</item>
     </style>
 
 </resources>
