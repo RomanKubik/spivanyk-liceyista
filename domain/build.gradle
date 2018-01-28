@@ -4,6 +4,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation libs.rxJava
     implementation libs.stream
+    testImplementation 'junit:junit:4.12'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
