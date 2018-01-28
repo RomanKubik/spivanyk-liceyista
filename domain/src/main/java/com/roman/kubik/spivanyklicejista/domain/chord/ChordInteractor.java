@@ -11,7 +11,7 @@ import io.reactivex.Single;
 
 public class ChordInteractor {
 
-    ChordRepository repository;
+    private ChordRepository repository;
 
     public ChordInteractor(ChordRepository repository) {
         this.repository = repository;
