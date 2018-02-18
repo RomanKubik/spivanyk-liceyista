@@ -1,8 +1,13 @@
 package com.roman.kubik.spivanyklicejista.presentation.main
 
+import android.content.Context
 import android.os.Bundle
+import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SearchView
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import com.annimon.stream.function.Consumer
@@ -35,6 +40,24 @@ class MainActivity : BaseActivity(), MainContract.View {
         presenter.fetchAllSongs()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        val menuItem = menu?.findItem(R.id.app_bar_search)
+        val searchView = menuItem?.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                presenter.filter(query!!)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                presenter.filter(newText!!)
+                return true
+            }
+        })
+        return true
+    }
+
     override fun showProgress(show: Boolean) {
         Log.d(TAG, "showProgress: " + show)
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
@@ -47,7 +70,7 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun onSongsFetched(songList: List<Song>) {
         Log.d(TAG, "onSongsFetched: " + songList.size)
-        songsAdapter.addSongList(songList)
+        songsAdapter.setSongList(songList)
     }
 
     private fun init() {
@@ -57,6 +80,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         })
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
+        setSupportActionBar(toolbar)
     }
 
     companion object {
