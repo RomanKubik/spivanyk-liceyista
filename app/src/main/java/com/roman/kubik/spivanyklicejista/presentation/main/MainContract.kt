@@ -17,5 +17,6 @@ interface MainContract {
 
     interface Presenter {
         fun fetchAllSongs()
+        fun filter(byTitle: String)
     }
 }
