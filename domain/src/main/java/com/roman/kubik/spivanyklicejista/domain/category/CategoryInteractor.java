@@ -11,7 +11,7 @@ import io.reactivex.Single;
 
 public class CategoryInteractor {
 
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
 
     public CategoryInteractor(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
