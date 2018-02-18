@@ -1,10 +1,6 @@
 package com.roman.kubik.spivanyklicejista.presentation
 
 import android.support.v7.app.AppCompatActivity
-import android.view.View
-import android.view.ViewGroup
-
-import butterknife.ButterKnife
 
 /**
  * Base activity for all application activities

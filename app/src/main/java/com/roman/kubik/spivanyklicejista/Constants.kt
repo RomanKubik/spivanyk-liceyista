@@ -10,4 +10,10 @@ interface Constants {
 
         const val APP_DB_FILE_NAME = "spivanyk.db"
     }
+
+    interface Extras {
+        companion object {
+            const val SONG_ID = "song.id"
+        }
+    }
 }

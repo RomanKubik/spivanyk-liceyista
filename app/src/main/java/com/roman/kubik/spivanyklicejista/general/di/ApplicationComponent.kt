@@ -4,6 +4,8 @@ import android.content.Context
 
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainComponent
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainModule
+import com.roman.kubik.spivanyklicejista.presentation.song.di.SongComponent
+import com.roman.kubik.spivanyklicejista.presentation.song.di.SongModule
 
 import javax.inject.Singleton
 
@@ -20,4 +22,6 @@ interface ApplicationComponent {
     fun getApplicationContext(): Context
 
     fun mainComponent(mainModule: MainModule): MainComponent
+    fun songComponent(songModule: SongModule): SongComponent
+
 }

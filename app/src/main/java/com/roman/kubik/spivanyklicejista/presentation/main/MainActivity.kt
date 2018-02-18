@@ -10,6 +10,7 @@ import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication.Companion.component
 import com.roman.kubik.spivanyklicejista.presentation.BaseActivity
+import com.roman.kubik.spivanyklicejista.presentation.Navigate
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -50,7 +51,10 @@ class MainActivity : BaseActivity(), MainContract.View {
     }
 
     private fun init() {
-        songsAdapter.setOnClickListener(Consumer { s -> Log.d(TAG, "songClicked: " + s.title)  })
+        songsAdapter.setOnClickListener(Consumer { s ->
+            Log.d(TAG, "songClicked: " + s.title)
+            Navigate.toSongActivity(this, s)
+        })
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
     }
