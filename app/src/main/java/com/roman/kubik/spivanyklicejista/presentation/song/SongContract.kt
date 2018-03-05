@@ -11,7 +11,7 @@ interface SongContract {
     interface View {
         fun showSong(song: Song)
 
-        fun showError(errorMessage: String?)
+        fun showError(errorMessage: String)
     }
 
     interface Presenter {

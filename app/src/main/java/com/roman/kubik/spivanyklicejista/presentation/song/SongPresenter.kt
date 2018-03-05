@@ -19,6 +19,6 @@ constructor(private val view: SongContract.View, private val songInteractor: Son
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ s -> view.showSong(s) }
-                ) { t -> view.showError(t.message) }
+                ) { t -> view.showError(t.message!!) }
     }
 }
