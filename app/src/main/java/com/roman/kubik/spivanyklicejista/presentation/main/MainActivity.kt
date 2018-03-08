@@ -1,13 +1,10 @@
 package com.roman.kubik.spivanyklicejista.presentation.main
 
-import android.content.Context
 import android.os.Bundle
-import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.widget.Toast
 import com.annimon.stream.function.Consumer
