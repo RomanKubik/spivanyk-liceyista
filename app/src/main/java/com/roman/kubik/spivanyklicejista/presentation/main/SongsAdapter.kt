@@ -1,6 +1,7 @@
 package com.roman.kubik.spivanyklicejista.presentation.main
 
 import android.support.v7.widget.RecyclerView
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.song.Song
+import com.roman.kubik.spivanyklicejista.utils.SpannableStringChordsCreator
 import javax.inject.Inject
 
 /**
@@ -16,7 +18,7 @@ import javax.inject.Inject
  */
 
 class SongsAdapter @Inject
-constructor() : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
+constructor(val chordsCreator: SpannableStringChordsCreator) : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
 
     private var onClickListener: Consumer<Song>? = null
 
@@ -30,7 +32,7 @@ constructor() : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
     override fun onBindViewHolder(holder: SongHolder, position: Int) {
         holder.setItem(songList[position])
         holder.setOnItemClickListener(View.OnClickListener {
-                onClickListener?.accept(songList[holder.adapterPosition])
+            onClickListener?.accept(songList[holder.adapterPosition])
         })
     }
 
@@ -51,20 +53,20 @@ constructor() : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
 
     fun addSongList(songList: List<Song>?) {
         if (songList != null) {
-            val possitionStart = this.songList.size
+            val positionStart = this.songList.size
             this.songList.addAll(songList)
-            notifyItemRangeInserted(possitionStart, songList.size)
+            notifyItemRangeInserted(positionStart, songList.size)
         }
     }
 
-    class SongHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SongHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         private var tvLyrics: TextView = itemView.findViewById(R.id.tvLyrics)
 
         fun setItem(song: Song) {
             tvTitle.text = song.title
-            tvLyrics.text = song.lyrics
+            tvLyrics.text = chordsCreator.selectChords(song.lyrics, null)
         }
 
         fun setOnItemClickListener(onClickListener: View.OnClickListener) {

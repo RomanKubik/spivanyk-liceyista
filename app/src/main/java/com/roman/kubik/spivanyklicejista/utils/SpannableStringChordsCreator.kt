@@ -5,8 +5,6 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.ClickableSpan
-import android.text.style.StyleSpan
-import android.util.Log
 import android.view.View
 import java.util.regex.Pattern
 import javax.inject.Inject
@@ -19,7 +17,7 @@ class SpannableStringChordsCreator @Inject constructor() {
 
     private val bracketsPattern: Pattern = Pattern.compile("(<\\S+>)")
 
-    fun selectChords(text: String, clickListener: OnChordClickListener): SpannableString {
+    fun selectChords(text: String, clickListener: OnChordClickListener?): SpannableString {
         val selections = findSelections(text)
         val formattedText = clearFormatting(text)
         val spannableString = SpannableString(formattedText)
@@ -45,13 +43,14 @@ class SpannableStringChordsCreator @Inject constructor() {
         return txt
     }
 
-    private fun attachClickableSpan(spannableString: SpannableString, clickListener: OnChordClickListener, spans: List<IntRange>): SpannableString {
+    private fun attachClickableSpan(spannableString: SpannableString, clickListener: OnChordClickListener?, spans: List<IntRange>): SpannableString {
 
         for (range in spans) {
             val chord = spannableString.substring(range).removeSurrounding(" ")
             val clickable = object : ClickableSpan() {
-                override fun onClick(v: View?) = clickListener.onChordClicked(chord)
-
+                override fun onClick(v: View?) {
+                    clickListener?.onChordClicked(chord)
+                }
 
                 override fun updateDrawState(ds: TextPaint?) {
                     super.updateDrawState(ds)
