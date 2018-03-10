@@ -6,6 +6,7 @@ import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 
 import com.roman.kubik.spivanyklicejista.presentation.main.MainActivity
+import com.roman.kubik.spivanyklicejista.presentation.preferences.PreferencesActivity
 import com.roman.kubik.spivanyklicejista.presentation.song.SongActivity
 
 /**
@@ -23,5 +24,9 @@ object Navigate {
         val intent = Intent(activity, SongActivity::class.java)
         intent.putExtra(Constants.Extras.SONG_ID, song.id)
         activity.startActivity(intent)
+    }
+
+    fun toPreferencesActivity(activity: Activity) {
+        activity.startActivityForResult(Intent(activity, PreferencesActivity::class.java), Constants.RequestCode.PREFERENCES_ACTIVITY)
     }
 }

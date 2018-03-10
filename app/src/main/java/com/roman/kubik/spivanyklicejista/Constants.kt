@@ -16,4 +16,10 @@ interface Constants {
             const val SONG_ID = "song.id"
         }
     }
+
+    interface RequestCode {
+        companion object {
+            const val PREFERENCES_ACTIVITY = 7901
+        }
+    }
 }
