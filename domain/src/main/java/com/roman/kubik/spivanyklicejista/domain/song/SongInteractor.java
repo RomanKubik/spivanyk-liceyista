@@ -35,6 +35,14 @@ public class SongInteractor {
         return songRepository.getById(id);
     }
 
+    public Single<Integer> getCount() {
+        return songRepository.getCount();
+    }
+
+    public Single<Integer> getCountByCategory(int categoryId) {
+        return songRepository.getCountByCategory(categoryId);
+    }
+
     public Completable addSong(Song song) {
         return songRepository.insertOrUpdate(song);
     }

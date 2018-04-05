@@ -56,6 +56,16 @@ public class SongRepositoryImpl implements SongRepository {
     }
 
     @Override
+    public Single<Integer> getCount() {
+        return songDao.getCount();
+    }
+
+    @Override
+    public Single<Integer> getCountByCategory(int categoryId) {
+        return songDao.getCountByCategoryId(categoryId);
+    }
+
+    @Override
     public Completable insertOrUpdate(Song song) {
         return Completable.fromAction(() -> songDao.insertOrUpdate(songModelMapper.toEntity(song)));
     }

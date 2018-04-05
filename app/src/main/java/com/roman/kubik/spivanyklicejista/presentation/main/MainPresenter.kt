@@ -5,41 +5,60 @@ import com.roman.kubik.spivanyklicejista.general.di.ActivityScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
 
 @ActivityScope
 class MainPresenter @Inject
 constructor(private val view: MainContract.View, private val songInteractor: SongInteractor, private val compositeDisposable: CompositeDisposable) : MainContract.Presenter {
+
+    val random = Random(Int.MAX_VALUE.toLong())
+
     override fun requestData() {
         compositeDisposable.addAll(
-                songInteractor.getAllByCategory(1)
+                songInteractor.getCountByCategory(1)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .map { l -> l.size }
                         .subscribe(view::setPatrioticsCount, view::showError),
-                songInteractor.getAllByCategory(2)
+                songInteractor.getCountByCategory(2)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .map { l -> l.size }
                         .subscribe(view::setBonfiresCount, view::showError),
-                songInteractor.getAllByCategory(3)
+                songInteractor.getCountByCategory(3)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .map { l -> l.size }
                         .subscribe(view::setAbroadsCount, view::showError),
-                songInteractor.all
+                songInteractor.count
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .map { l -> l.size }
                         .subscribe(view::setAllCount, view::showError))
     }
 
     override fun requestRandom() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        compositeDisposable.add(
+                songInteractor.all
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ l -> view.navigateToSong(l[random.nextInt(l.size)]) }, view::showError))
+    }
+
+    override fun onLastClicked() {
+    }
+
+    override fun onPatrioticClicked() {
+    }
+
+    override fun onBonfireClicked() {
+    }
+
+    override fun onAbroadClicked() {
+    }
+
+    override fun onAllClicked() {
     }
 
     override fun onDestroy() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        compositeDisposable.clear()
     }
 
 

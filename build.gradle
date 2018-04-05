@@ -39,6 +39,7 @@ ext {
     versionName = "1.0.0"
     supportLibraryVersion = '27.0.2'
     roomVersion = '1.0.0'
+    butterKnife = '8.8.1'
 }
 
 task clean(type: Delete) {
