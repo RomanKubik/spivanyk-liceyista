@@ -1,7 +1,6 @@
-package com.roman.kubik.spivanyklicejista.presentation.main
+package com.roman.kubik.spivanyklicejista.presentation.list
 
 import android.support.v7.widget.RecyclerView
-import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

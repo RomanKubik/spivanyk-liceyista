@@ -2,6 +2,8 @@ package com.roman.kubik.spivanyklicejista.general.di
 
 import android.content.Context
 
+import com.roman.kubik.spivanyklicejista.presentation.list.di.ListComponent
+import com.roman.kubik.spivanyklicejista.presentation.list.di.ListModule
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainComponent
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainModule
 import com.roman.kubik.spivanyklicejista.presentation.song.di.SongComponent
@@ -22,6 +24,7 @@ interface ApplicationComponent {
     fun getApplicationContext(): Context
 
     fun mainComponent(mainModule: MainModule): MainComponent
+    fun listComponent(listModule: ListModule): ListComponent
     fun songComponent(songModule: SongModule): SongComponent
 
 }
