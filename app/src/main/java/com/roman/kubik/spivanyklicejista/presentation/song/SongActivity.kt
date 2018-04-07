@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.song.Song
@@ -22,6 +23,8 @@ import javax.inject.Inject
 
 class SongActivity : BaseActivity(), SongContract.View {
 
+    private lateinit var bookmarkItem: MenuItem
+
     @Inject
     lateinit var presenter: SongContract.Presenter
     @Inject
@@ -35,8 +38,18 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        
-        return super.onCreateOptionsMenu(menu)
+        Log.d("MyTag", "onCreateOptionsMenu")
+        menuInflater.inflate(R.menu.menu_song, menu)
+        bookmarkItem = menu?.findItem(R.id.app_bar_bookmark)!!
+        presenter.isFavouriteSong()
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.app_bar_bookmark -> presenter.addToFavourite()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showSong(song: Song) {
@@ -52,7 +65,14 @@ class SongActivity : BaseActivity(), SongContract.View {
         Log.d(TAG, "showError: $errorMessage")
     }
 
+    override fun isFavouriteSong(isFavourite: Boolean) {
+        bookmarkItem.setIcon(if (isFavourite) R.drawable.ic_bookmark_black_24dp else R.drawable.ic_bookmark_border_black_24dp)
+    }
+
     private fun init() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         lyrics.movementMethod = LinkMovementMethod.getInstance()
         presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
     }

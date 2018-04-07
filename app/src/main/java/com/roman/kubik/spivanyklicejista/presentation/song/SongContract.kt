@@ -12,9 +12,15 @@ interface SongContract {
         fun showSong(song: Song)
 
         fun showError(errorMessage: String)
+
+        fun isFavouriteSong(isFavourite: Boolean)
     }
 
     interface Presenter {
         fun fetchSong(id: Int)
+
+        fun addToFavourite()
+
+        fun isFavouriteSong()
     }
 }
