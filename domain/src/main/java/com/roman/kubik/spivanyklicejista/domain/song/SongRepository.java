@@ -19,6 +19,10 @@ public interface SongRepository {
 
     Maybe<Song> getById(int id);
 
+    Single<Integer> getCount();
+
+    Single<Integer> getCountByCategory(int categoryId);
+
     Completable insertOrUpdate(Song song);
 
     Completable delete(Song song);

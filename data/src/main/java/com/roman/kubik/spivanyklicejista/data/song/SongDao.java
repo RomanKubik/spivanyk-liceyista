@@ -31,6 +31,12 @@ public interface SongDao {
     @Query("SELECT * FROM song WHERE song.id = :id LIMIT 1")
     Maybe<SongEntity> getById(int id);
 
+    @Query("SELECT count(id) FROM song")
+    Single<Integer> getCount();
+
+    @Query("SELECT count(id) FROM song WHERE song.category_id = :categoryId")
+    Single<Integer> getCountByCategoryId(int categoryId);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertOrUpdate(SongEntity song) ;
 

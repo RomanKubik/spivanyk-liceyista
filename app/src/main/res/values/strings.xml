@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Spivanyk Licejista</string>
+    <string name="ttl_last_played">Last played</string>
+    <string name="dsc_last_played">Last 100 played songs</string>
+    <string name="ttl_bonfire_songs">Bonfire songs</string>
+    <string formatted="false" name="dsc_bonfire_songs">%d bonfire songs</string>
+    <string name="ttl_abroad_songs">Abroad songs</string>
+    <string formatted="false" name="dsc_abroad_songs">%d abroad songs</string>
+    <string name="ttl_surprise_me">Surprise me</string>
+    <string formatted="false" name="dsc_surprise_me">Song randomly selected from singer</string>
+    <string name="ttl_all_songs">All songs</string>
+    <string formatted="false" name="dsc_all_songs">All %d songs</string>
+    <string name="ttl_patriotic">Patriotic songs</string>
+    <string formatted="false" name="dsc_patriotic">%d patriotic songs</string>
 </resources>

@@ -6,6 +6,7 @@ import dagger.Module
 import javax.inject.Singleton
 
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Main application module
@@ -17,4 +18,7 @@ class ApplicationModule(private val applicationContext: Context) {
     @Provides
     @Singleton
     fun getApplicationContext(): Context = applicationContext
+
+    @Provides
+    fun getCompositeDisposable(): CompositeDisposable = CompositeDisposable()
 }

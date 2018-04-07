@@ -25,6 +25,10 @@
             android:theme="@style/AppTheme" />
 
         <activity
+            android:name=".presentation.list.ListActivity"
+            android:theme="@style/AppTheme" />
+
+        <activity
             android:name=".presentation.song.SongActivity"
             android:theme="@style/AppTheme" />
 
