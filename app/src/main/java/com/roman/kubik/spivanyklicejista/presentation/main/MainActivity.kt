@@ -26,19 +26,19 @@ class MainActivity: BaseActivity(), MainContract.View {
     }
 
     override fun setPatrioticsCount(count: Int) {
-        categoryDescriptionPatriotic.text = String.format(getString(R.string.dsc_patriotic), count)
+        patrioticCategory.setDescription(String.format(getString(R.string.dsc_patriotic), count))
     }
 
     override fun setBonfiresCount(count: Int) {
-        categoryDescriptionBonfire.text = String.format(getString(R.string.dsc_bonfire_songs), count)
+        bonfireCategory.setDescription(String.format(getString(R.string.dsc_bonfire_songs), count))
     }
 
     override fun setAbroadsCount(count: Int) {
-        categoryDescriptionAbroad.text = String.format(getString(R.string.dsc_abroad_songs), count)
+        abroadCategory.setDescription(String.format(getString(R.string.dsc_abroad_songs), count))
     }
 
     override fun setAllCount(count: Int) {
-        categoryDescriptionAll.text = String.format(getString(R.string.dsc_all_songs), count)
+        allCategory.setDescription(String.format(getString(R.string.dsc_all_songs), count))
     }
 
     override fun showError(error: Throwable) {
@@ -54,32 +54,32 @@ class MainActivity: BaseActivity(), MainContract.View {
     }
 
 
-    @OnClick(R.id.layoutLast)
+    @OnClick(R.id.lastCategory)
     fun onLastClicked() {
         presenter.onLastClicked()
     }
 
-    @OnClick(R.id.layoutPatriotic)
+    @OnClick(R.id.patrioticCategory)
     fun onPatrioticClicked() {
         presenter.onPatrioticClicked()
     }
 
-    @OnClick(R.id.layoutBonfire)
+    @OnClick(R.id.bonfireCategory)
     fun onBonfireClicked() {
         presenter.onBonfireClicked()
     }
 
-    @OnClick(R.id.layoutAbroad)
+    @OnClick(R.id.abroadCategory)
     fun onAbroadClicked() {
         presenter.onAbroadClicked()
     }
 
-    @OnClick(R.id.layoutRandom)
+    @OnClick(R.id.surpriseCategory)
     fun onRandomClicked() {
         presenter.requestRandom()
     }
 
-    @OnClick(R.id.layoutAll)
+    @OnClick(R.id.allCategory)
     fun onAllClicked() {
         presenter.onAllClicked()
     }

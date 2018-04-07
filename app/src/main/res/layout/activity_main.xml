@@ -25,331 +25,74 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/layoutLast"
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/lastCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72">
-
-                <ImageView
-                    android:id="@+id/imageViewLast"
-                    android:layout_width="@dimen/view_size_40"
-                    android:layout_height="@dimen/view_size_40"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/hot_pink"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/categoryTitleLast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/ttl_last_played"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewLast"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/categoryDescriptionLast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/dsc_last_played"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewLast"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryTitleLast"
-                    app:layout_constraintVertical_bias="0.0" />
-            </android.support.constraint.ConstraintLayout>
+                android:layout_height="@dimen/view_size_72"
+                app:image="@color/hot_pink"
+                app:title="@string/ttl_last_played"
+                app:description="@string/dsc_last_played"/>
 
             <View
-                android:id="@+id/separatorPatriotic"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorAccent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/layoutPatriotic"
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/patrioticCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72">
-
-                <ImageView
-                    android:id="@+id/imageViewPatriotic"
-                    android:layout_width="@dimen/view_size_40"
-                    android:layout_height="@dimen/view_size_40"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/olive_green"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/categoryTitlePatriotic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/ttl_patriotic"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewPatriotic"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/categoryDescriptionPatriotic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/dsc_patriotic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewPatriotic"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryTitlePatriotic"
-                    app:layout_constraintVertical_bias="0.0" />
-            </android.support.constraint.ConstraintLayout>
+                android:layout_height="@dimen/view_size_72"
+                app:image="@color/olive_green"
+                app:title="@string/ttl_patriotic" />
 
             <View
-                android:id="@+id/separatorLast"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorAccent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/layoutBonfire"
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/bonfireCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72">
-
-                <ImageView
-                    android:id="@+id/imageViewBonfire"
-                    android:layout_width="@dimen/view_size_40"
-                    android:layout_height="@dimen/view_size_40"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/bright_green"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/categoryTitleBonfire"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/ttl_bonfire_songs"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewBonfire"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/categoryDescriptionBonfire"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/dsc_bonfire_songs"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewBonfire"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryTitleBonfire"
-                    app:layout_constraintVertical_bias="0.0" />
-            </android.support.constraint.ConstraintLayout>
+                android:layout_height="@dimen/view_size_72"
+                app:image="@color/bright_green"
+                app:title="@string/ttl_bonfire_songs" />
 
             <View
-                android:id="@+id/separatorBonfire"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorAccent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/layoutAbroad"
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/abroadCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72">
-
-                <ImageView
-                    android:id="@+id/imageViewAbroad"
-                    android:layout_width="@dimen/view_size_40"
-                    android:layout_height="@dimen/view_size_40"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/aqua_marine"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/categoryTitleAbroad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/ttl_abroad_songs"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewAbroad"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/categoryDescriptionAbroad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/dsc_abroad_songs"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewAbroad"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryTitleAbroad"
-                    app:layout_constraintVertical_bias="0.0" />
-            </android.support.constraint.ConstraintLayout>
+                android:layout_height="@dimen/view_size_72"
+                app:image="@color/aqua_marine"
+                app:title="@string/ttl_abroad_songs" />
 
             <View
-                android:id="@+id/separatorRandom"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorAccent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/layoutRandom"
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/surpriseCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72">
-
-                <ImageView
-                    android:id="@+id/imageViewRandom"
-                    android:layout_width="@dimen/view_size_40"
-                    android:layout_height="@dimen/view_size_40"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/darkish_grey"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/categoryTitleRandom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/ttl_surprise_me"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewRandom"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/categoryDescriptionRandom"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/dsc_surprise_me"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewRandom"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryTitleRandom"
-                    app:layout_constraintVertical_bias="0.0" />
-            </android.support.constraint.ConstraintLayout>
+                android:layout_height="@dimen/view_size_72"
+                app:image="@color/darkish_grey"
+                app:title="@string/ttl_surprise_me"
+                app:description="@string/dsc_surprise_me"/>
 
             <View
-                android:id="@+id/separatorAll"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/colorAccent" />
 
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/layoutAll"
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/allCategory"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72">
-
-                <ImageView
-                    android:id="@+id/imageViewAll"
-                    android:layout_width="@dimen/view_size_40"
-                    android:layout_height="@dimen/view_size_40"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@color/just_purple"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/categoryTitleAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/ttl_all_songs"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewAll"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/categoryDescriptionAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/dsc_all_songs"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageViewAll"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryTitleAll"
-                    app:layout_constraintVertical_bias="0.0" />
-            </android.support.constraint.ConstraintLayout>
-
+                android:layout_height="@dimen/view_size_72"
+                app:image="@color/just_purple"
+                app:title="@string/ttl_all_songs" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
