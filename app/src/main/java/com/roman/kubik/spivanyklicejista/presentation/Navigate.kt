@@ -21,11 +21,9 @@ object Navigate {
         activity.startActivity(Intent(activity, MainActivity::class.java))
     }
 
-    fun toListActivity(activity: Activity, category: Category?) {
+    fun toListActivity(activity: Activity, categoryId: Int) {
         val intent = Intent(activity, ListActivity::class.java)
-        if (category != null) {
-            intent.putExtra(Constants.Extras.CATEGORY_ID, category.id)
-        }
+        intent.putExtra(Constants.Extras.CATEGORY_ID, categoryId)
         activity.startActivity(intent)
     }
 

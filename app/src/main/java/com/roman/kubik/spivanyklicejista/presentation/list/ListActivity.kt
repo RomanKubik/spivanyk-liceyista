@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import com.annimon.stream.function.Consumer
+import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication.Companion.component
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
 
 /**
- * Main activity
+ * Main list activity
  * Created by kubik on 1/14/18.
  */
 
@@ -34,7 +35,7 @@ class ListActivity : BaseActivity(), ListContract.View {
         setContentView(R.layout.activity_list)
         component.listComponent(ListModule(this)).inject(this)
         init()
-        presenter.fetchAllSongs()
+        presenter.fetchSongByCategory(intent.getIntExtra(Constants.Extras.CATEGORY_ID, Constants.Category.ALL_ID))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

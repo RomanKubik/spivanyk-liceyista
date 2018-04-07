@@ -12,7 +12,7 @@ import javax.inject.Inject
 class MainPresenter @Inject
 constructor(private val view: MainContract.View, private val songInteractor: SongInteractor, private val compositeDisposable: CompositeDisposable) : MainContract.Presenter {
 
-    val random = Random(Int.MAX_VALUE.toLong())
+    private val random = Random()
 
     override fun requestData() {
         compositeDisposable.addAll(
@@ -40,21 +40,6 @@ constructor(private val view: MainContract.View, private val songInteractor: Son
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({ l -> view.navigateToSong(l[random.nextInt(l.size)]) }, view::showError))
-    }
-
-    override fun onLastClicked() {
-    }
-
-    override fun onPatrioticClicked() {
-    }
-
-    override fun onBonfireClicked() {
-    }
-
-    override fun onAbroadClicked() {
-    }
-
-    override fun onAllClicked() {
     }
 
     override fun onDestroy() {

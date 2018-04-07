@@ -11,18 +11,12 @@ interface MainContract {
         fun setAbroadsCount(count: Int)
         fun setAllCount(count: Int)
         fun showError(error: Throwable)
-        fun navigateToCategory(category: Category?)
         fun navigateToSong(song: Song)
     }
 
     interface Presenter {
         fun requestData()
         fun requestRandom()
-        fun onLastClicked()
-        fun onPatrioticClicked()
-        fun onBonfireClicked()
-        fun onAbroadClicked()
-        fun onAllClicked()
         fun onDestroy()
     }
 }

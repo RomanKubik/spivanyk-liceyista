@@ -3,6 +3,7 @@ package com.roman.kubik.spivanyklicejista.presentation.main
 import android.os.Bundle
 import android.widget.Toast
 import butterknife.OnClick
+import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.category.Category
 import com.roman.kubik.spivanyklicejista.domain.song.Song
@@ -45,10 +46,6 @@ class MainActivity: BaseActivity(), MainContract.View {
         Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun navigateToCategory(category: Category?) {
-        Navigate.toListActivity(this, category)
-    }
-
     override fun navigateToSong(song: Song) {
         Navigate.toSongActivity(this, song)
     }
@@ -56,22 +53,22 @@ class MainActivity: BaseActivity(), MainContract.View {
 
     @OnClick(R.id.lastCategory)
     fun onLastClicked() {
-        presenter.onLastClicked()
+        Navigate.toListActivity(this, Constants.Category.LAST_ID)
     }
 
     @OnClick(R.id.patrioticCategory)
     fun onPatrioticClicked() {
-        presenter.onPatrioticClicked()
+        Navigate.toListActivity(this, Constants.Category.PATRIOTIC_ID)
     }
 
     @OnClick(R.id.bonfireCategory)
     fun onBonfireClicked() {
-        presenter.onBonfireClicked()
+        Navigate.toListActivity(this, Constants.Category.BONFIRE_ID)
     }
 
     @OnClick(R.id.abroadCategory)
     fun onAbroadClicked() {
-        presenter.onAbroadClicked()
+        Navigate.toListActivity(this, Constants.Category.ABROAD_ID)
     }
 
     @OnClick(R.id.surpriseCategory)
@@ -81,6 +78,6 @@ class MainActivity: BaseActivity(), MainContract.View {
 
     @OnClick(R.id.allCategory)
     fun onAllClicked() {
-        presenter.onAllClicked()
+        Navigate.toListActivity(this, Constants.Category.ALL_ID)
     }
 }

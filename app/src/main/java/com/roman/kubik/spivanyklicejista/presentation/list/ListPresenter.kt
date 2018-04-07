@@ -21,8 +21,24 @@ constructor(private val view: ListContract.View, private val songInteractor: Son
 
     private var songs = mutableListOf<Song>()
 
-    override fun fetchAllSongs() {
+    override fun fetchSongByCategory(categoryId: Int) {
         view.showProgress(true)
+        when (categoryId) {
+            -1 -> fetchAll()
+            0 -> fetchLast()
+            else -> fetchByCategoryId(categoryId)
+        }
+
+    }
+
+    override fun filter(byTitle: String) {
+        val title = byTitle.toLowerCase()
+        view.onSongsFetched(Stream.of(songs)
+                .filter({ s -> s.title.toLowerCase().contains(title) })
+                .collect(Collectors.toList()))
+    }
+
+    private fun fetchAll() {
         compositeDisposable.add(songInteractor.all
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -32,10 +48,15 @@ constructor(private val view: ListContract.View, private val songInteractor: Son
                 ) { t -> view.showError(t.message) })
     }
 
-    override fun filter(byTitle: String) {
-        val title = byTitle.toLowerCase()
-        view.onSongsFetched(Stream.of(songs)
-                .filter({ s -> s.title.toLowerCase().contains(title) })
-                .collect(Collectors.toList()))
+    private fun fetchLast() {}
+
+    private fun fetchByCategoryId(categoryId: Int) {
+        compositeDisposable.add(songInteractor.getAllByCategory(categoryId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally { view.showProgress(false) }
+                .doOnSuccess({ s -> songs.addAll(s) })
+                .subscribe(view::onSongsFetched
+                ) { t -> view.showError(t.message) })
     }
 }
