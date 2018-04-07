@@ -60,8 +60,8 @@ constructor(val chordsCreator: SpannableStringChordsCreator) : RecyclerView.Adap
 
     inner class SongHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private var tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
-        private var tvLyrics: TextView = itemView.findViewById(R.id.tvLyrics)
+        private var tvTitle: TextView = itemView.findViewById(R.id.title)
+        private var tvLyrics: TextView = itemView.findViewById(R.id.lyrics)
 
         fun setItem(song: Song) {
             tvTitle.text = song.title

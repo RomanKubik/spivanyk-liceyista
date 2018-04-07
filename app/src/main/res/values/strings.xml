@@ -12,4 +12,9 @@
     <string formatted="false" name="dsc_all_songs">All %d songs</string>
     <string name="ttl_patriotic">Patriotic songs</string>
     <string formatted="false" name="dsc_patriotic">%d patriotic songs</string>
+    <string name="share">Share</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="chords">Chords</string>
+    <string name="similar_songs">Similar songs</string>
+    <string name="slash">/</string>
 </resources>

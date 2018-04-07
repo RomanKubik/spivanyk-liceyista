@@ -3,6 +3,7 @@ package com.roman.kubik.spivanyklicejista.presentation.song
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.util.Log
+import android.view.Menu
 import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.song.Song
@@ -33,9 +34,14 @@ class SongActivity : BaseActivity(), SongContract.View {
         init()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun showSong(song: Song) {
-        tvTitle.text = song.title
-        tvLyrics.text = chordsCreator.selectChords(song.lyrics, object : OnChordClickListener {
+        songTitle.text = song.title
+        lyrics.text = chordsCreator.selectChords(song.lyrics, object : OnChordClickListener {
             override fun onChordClicked(chord: String) {
                 Log.d(TAG, "chordClicked: $chord")
             }
@@ -47,7 +53,7 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     private fun init() {
-        tvLyrics.movementMethod = LinkMovementMethod.getInstance()
+        lyrics.movementMethod = LinkMovementMethod.getInstance()
         presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
     }
 
