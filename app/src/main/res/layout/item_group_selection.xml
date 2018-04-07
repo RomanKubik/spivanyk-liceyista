@@ -17,6 +17,7 @@
         app:srcCompat="@color/colorPrimary" />
 
     <TextView
+        style="@style/AppTheme.MainItemTitle"
         android:id="@+id/categoryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,14 +25,14 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Останні проспівані"/>
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        tools:text="Останні проспівані" />
 
     <TextView
+        style="@style/AppTheme.MainItemDescription"
         android:id="@+id/categoryDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,7 +40,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

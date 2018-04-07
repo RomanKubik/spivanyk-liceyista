@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@color/extra_light_grey</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -25,6 +26,17 @@
     <style name="AppTheme.SongLyrics.List" parent="AppTheme.SongLyrics">
         <item name="android:maxLines">8</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="AppTheme.MainItemTitle" parent="android:Widget.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.MainItemDescription" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textSize">13sp</item>
     </style>
 
 </resources>
