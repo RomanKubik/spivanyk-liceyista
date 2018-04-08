@@ -19,7 +19,7 @@ import dagger.Component
  */
 
 @Singleton
-@Component(modules = arrayOf(ApplicationModule::class, DatabaseModule::class, InteractionModule::class))
+@Component(modules = [(ApplicationModule::class), (DatabaseModule::class), (InteractionModule::class), (GeneralModule::class)])
 interface ApplicationComponent {
     fun getApplicationContext(): Context
 

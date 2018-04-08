@@ -1,6 +1,5 @@
 package com.roman.kubik.spivanyklicejista.utils
 
-import android.graphics.Color
 import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.Spanned
@@ -47,7 +46,7 @@ class SpannableStringChordsCreator @Inject constructor() {
     private fun attachClickableSpan(spannableString: SpannableString, clickListener: OnChordClickListener?, spans: List<IntRange>, textColor: Int, backgroundColor: Int): SpannableString {
 
         for (range in spans) {
-            val chord = spannableString.substring(range).removeSurrounding(" ")
+            val chord = spannableString.substring(range).replace(" ","")
             val clickable = object : ClickableSpan() {
                 override fun onClick(v: View?) {
                     clickListener?.onChordClicked(chord)

@@ -1,6 +1,7 @@
 package com.roman.kubik.spivanyklicejista.presentation.song
 
 import com.roman.kubik.spivanyklicejista.domain.category.Category
+import com.roman.kubik.spivanyklicejista.domain.chord.Chord
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 
 /**
@@ -19,6 +20,8 @@ interface SongContract {
         fun showCategory(category: Category)
 
         fun showDifficulty(difficulty: String)
+
+        fun showChords(chords: List<Chord>)
     }
 
     interface Presenter {

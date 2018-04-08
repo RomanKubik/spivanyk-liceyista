@@ -1,5 +1,7 @@
 package com.roman.kubik.spivanyklicejista.data.chord;
 
+import android.util.Log;
+
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.roman.kubik.spivanyklicejista.domain.chord.Chord;
@@ -41,8 +43,10 @@ public class ChordRepositoryImpl implements ChordRepository {
 
     @Override
     public Maybe<Chord> getByName(String name) {
+        Log.d("MyTag", "getByName: " + name);
         return chordDao.getByName(name)
-                .map(c -> chordModelMapper.fromEntity(c));
+                .map(c -> chordModelMapper.fromEntity(c))
+                .doOnSuccess(c -> Log.d("MyTag", "getByName: " + c.getName()));
     }
 
     @Override

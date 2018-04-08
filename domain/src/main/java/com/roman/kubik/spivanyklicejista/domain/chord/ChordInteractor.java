@@ -1,8 +1,13 @@
 package com.roman.kubik.spivanyklicejista.domain.chord;
 
+import com.roman.kubik.spivanyklicejista.domain.song.Song;
+import com.roman.kubik.spivanyklicejista.domain.utils.MarkedChordsRecognizer;
+
 import java.util.List;
+import java.util.Set;
 
 import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -12,9 +17,11 @@ import io.reactivex.Single;
 public class ChordInteractor {
 
     private ChordRepository repository;
+    private MarkedChordsRecognizer markedChordsRecognizer;
 
-    public ChordInteractor(ChordRepository repository) {
+    public ChordInteractor(ChordRepository repository, MarkedChordsRecognizer markedChordsRecognizer) {
         this.repository = repository;
+        this.markedChordsRecognizer = markedChordsRecognizer;
     }
 
     public Single<List<Chord>> getAll() {
@@ -31,5 +38,12 @@ public class ChordInteractor {
 
     public void add(Chord chord) {
         repository.add(chord);
+    }
+
+    public Single<List<Chord>> getChordsFromSong(Song song) {
+        Set<String> chords = markedChordsRecognizer.findSelections(song.getLyrics());
+        return Observable.fromIterable(chords)
+                .flatMap(s -> repository.getByName(s).toObservable())
+                .toList();
     }
 }
