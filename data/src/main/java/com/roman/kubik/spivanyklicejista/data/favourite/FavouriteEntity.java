@@ -5,6 +5,8 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.util.UUID;
+
 /**
  * Created by kubik on 1/20/18.
  */
@@ -19,6 +21,7 @@ public class FavouriteEntity {
 
     @Ignore
     public FavouriteEntity(int songId) {
+        this.id = UUID.randomUUID().hashCode();
         this.songId = songId;
     }
 

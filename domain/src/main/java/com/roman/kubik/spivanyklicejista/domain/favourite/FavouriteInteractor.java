@@ -4,6 +4,7 @@ import com.roman.kubik.spivanyklicejista.domain.song.Song;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
@@ -22,4 +23,15 @@ public class FavouriteInteractor {
         return favouriteRepository.getAll();
     }
 
+    public Single<Boolean> isInFavouriteList(Song song) {
+        return favouriteRepository.isInFavourite(song);
+    }
+
+    public Completable addSong(Song song) {
+        return favouriteRepository.add(song);
+    }
+
+    public Completable removeSong(Song song) {
+        return favouriteRepository.delete(song);
+    }
 }

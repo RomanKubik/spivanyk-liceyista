@@ -15,6 +15,8 @@ public interface FavouriteRepository {
 
     Single<List<Song>> getAll();
 
+    Single<Boolean> isInFavourite(Song song);
+
     Completable add(Song song);
 
     Completable delete(Song song);

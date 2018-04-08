@@ -1,10 +1,14 @@
 package com.roman.kubik.spivanyklicejista.presentation.song
 
+import android.graphics.Color
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
+import com.roman.kubik.spivanyklicejista.domain.category.Category
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication
 import com.roman.kubik.spivanyklicejista.presentation.BaseActivity
@@ -21,6 +25,8 @@ import javax.inject.Inject
 
 class SongActivity : BaseActivity(), SongContract.View {
 
+    private lateinit var bookmarkItem: MenuItem
+
     @Inject
     lateinit var presenter: SongContract.Presenter
     @Inject
@@ -33,22 +39,52 @@ class SongActivity : BaseActivity(), SongContract.View {
         init()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        Log.d("MyTag", "onCreateOptionsMenu")
+        menuInflater.inflate(R.menu.menu_song, menu)
+        bookmarkItem = menu?.findItem(R.id.app_bar_bookmark)!!
+        presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.app_bar_bookmark -> presenter.addToFavourite()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun showSong(song: Song) {
-        tvTitle.text = song.title
-        tvLyrics.text = chordsCreator.selectChords(song.lyrics, object : OnChordClickListener {
+        songTitle.text = song.title
+        lyrics.text = chordsCreator.selectChords(song.lyrics, object : OnChordClickListener {
             override fun onChordClicked(chord: String) {
                 Log.d(TAG, "chordClicked: $chord")
             }
-        })
+        }, Color.BLACK, resources.getColor(R.color.transparent_grey))
     }
 
     override fun showError(errorMessage: String) {
         Log.d(TAG, "showError: $errorMessage")
     }
 
+    override fun isFavouriteSong(isFavourite: Boolean) {
+        bookmarkItem.setIcon(if (isFavourite) R.drawable.ic_bookmark_black_24dp else R.drawable.ic_bookmark_border_black_24dp)
+    }
+
+    override fun showCategory(category: Category) {
+        categoryView.text = category.name
+    }
+
+    override fun showDifficulty(difficulty: String) {
+
+    }
+
+
     private fun init() {
-        tvLyrics.movementMethod = LinkMovementMethod.getInstance()
-        presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        lyrics.movementMethod = LinkMovementMethod.getInstance()
     }
 
     companion object {

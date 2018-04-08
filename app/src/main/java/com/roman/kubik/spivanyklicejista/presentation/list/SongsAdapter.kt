@@ -1,5 +1,6 @@
 package com.roman.kubik.spivanyklicejista.presentation.list
 
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -60,12 +61,12 @@ constructor(val chordsCreator: SpannableStringChordsCreator) : RecyclerView.Adap
 
     inner class SongHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private var tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
-        private var tvLyrics: TextView = itemView.findViewById(R.id.tvLyrics)
+        private var tvTitle: TextView = itemView.findViewById(R.id.title)
+        private var tvLyrics: TextView = itemView.findViewById(R.id.lyrics)
 
         fun setItem(song: Song) {
             tvTitle.text = song.title
-            tvLyrics.text = chordsCreator.selectChords(song.lyrics, null)
+            tvLyrics.text = chordsCreator.selectChords(song.lyrics, null, Color.BLACK, Color.TRANSPARENT)
         }
 
         fun setOnItemClickListener(onClickListener: View.OnClickListener) {

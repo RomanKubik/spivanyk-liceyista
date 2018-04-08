@@ -14,13 +14,29 @@
     </style>
 
     <style name="AppTheme.SongTitle" parent="android:Widget.TextView">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_28</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="AppTheme.SongLyrics" parent="android:Widget.TextView">
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.SongCategory" parent="AppTheme.SongLyrics">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="AppTheme.ChordsTitle" parent="AppTheme.SongLyrics">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="AppTheme.SongLyrics.List" parent="AppTheme.SongLyrics">
