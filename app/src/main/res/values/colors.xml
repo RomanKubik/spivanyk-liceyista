@@ -10,6 +10,8 @@
     <color name="aqua_marine">#50e3c2</color>
     <color name="darkish_grey">#9b9b9b</color>
     <color name="just_purple">#bd10e0</color>
+    
+    <color name="transparent_grey">#379b9b9b</color>
 
     <color name="extra_light_grey">#f8f8f8</color>
     <color name="light_grey">#f4f4f4</color>

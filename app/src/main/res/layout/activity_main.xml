@@ -36,7 +36,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorAccent" />
+                android:background="@color/grey" />
 
             <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
                 android:id="@+id/patrioticCategory"
@@ -48,7 +48,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorAccent" />
+                android:background="@color/grey" />
 
             <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
                 android:id="@+id/bonfireCategory"
@@ -60,7 +60,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorAccent" />
+                android:background="@color/grey" />
 
             <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
                 android:id="@+id/abroadCategory"
@@ -72,7 +72,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorAccent" />
+                android:background="@color/grey" />
 
             <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
                 android:id="@+id/surpriseCategory"
@@ -85,7 +85,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorAccent" />
+                android:background="@color/grey" />
 
             <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
                 android:id="@+id/allCategory"

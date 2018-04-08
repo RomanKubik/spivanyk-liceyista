@@ -1,5 +1,6 @@
 package com.roman.kubik.spivanyklicejista.utils
 
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.Spanned
@@ -17,11 +18,11 @@ class SpannableStringChordsCreator @Inject constructor() {
 
     private val bracketsPattern: Pattern = Pattern.compile("(<\\S+>)")
 
-    fun selectChords(text: String, clickListener: OnChordClickListener?): SpannableString {
+    fun selectChords(text: String, clickListener: OnChordClickListener?, textColor: Int, backgroundColor: Int): SpannableString {
         val selections = findSelections(text)
         val formattedText = clearFormatting(text)
         val spannableString = SpannableString(formattedText)
-        return attachClickableSpan(spannableString, clickListener, selections)
+        return attachClickableSpan(spannableString, clickListener, selections, textColor, backgroundColor)
     }
 
 
@@ -43,7 +44,7 @@ class SpannableStringChordsCreator @Inject constructor() {
         return txt
     }
 
-    private fun attachClickableSpan(spannableString: SpannableString, clickListener: OnChordClickListener?, spans: List<IntRange>): SpannableString {
+    private fun attachClickableSpan(spannableString: SpannableString, clickListener: OnChordClickListener?, spans: List<IntRange>, textColor: Int, backgroundColor: Int): SpannableString {
 
         for (range in spans) {
             val chord = spannableString.substring(range).removeSurrounding(" ")
@@ -54,6 +55,8 @@ class SpannableStringChordsCreator @Inject constructor() {
 
                 override fun updateDrawState(ds: TextPaint?) {
                     super.updateDrawState(ds)
+                    ds?.bgColor = backgroundColor
+                    ds?.color = textColor
                     ds?.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
                     ds?.isUnderlineText = false
                 }
