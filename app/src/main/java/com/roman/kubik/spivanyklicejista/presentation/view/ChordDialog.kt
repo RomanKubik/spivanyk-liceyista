@@ -37,11 +37,6 @@ class ChordDialog : Dialog {
     private fun init() {
         setContentView(R.layout.dialog_chord)
         ButterKnife.bind(this)
-        if (chords.size > currentPosition) {
-            chord.text = chords[currentPosition].name
-            chordImage.setImageDrawable(assetsDrawableLoader.loadDrawable(chords[currentPosition].imagePath))
-            setCurrentPage()
-        }
     }
 
     private fun setCurrentPage() {
