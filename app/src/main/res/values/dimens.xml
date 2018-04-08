@@ -30,4 +30,6 @@
     <dimen name="view_size_40">40dp</dimen>
     <dimen name="view_size_32">32dp</dimen>
     <dimen name="view_size_24">24dp</dimen>
+    
+    <dimen name="dialog_chord_image">140dp</dimen>
 </resources>

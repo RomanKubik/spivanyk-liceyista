@@ -17,4 +17,9 @@
     <string name="chords">Chords</string>
     <string name="similar_songs">Similar songs</string>
     <string name="slash">/</string>
+    <string name="close">Close</string>
+    <string name="forward">Forward</string>
+    <string name="backward">Backward</string>
+    <string name="chord">Chord</string>
+    <string formatted="false" name="page_of_pages">%d of %d</string>
 </resources>

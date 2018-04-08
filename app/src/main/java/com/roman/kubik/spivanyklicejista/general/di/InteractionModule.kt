@@ -15,6 +15,7 @@ import com.roman.kubik.spivanyklicejista.domain.category.CategoryInteractor
 import com.roman.kubik.spivanyklicejista.domain.chord.ChordInteractor
 import com.roman.kubik.spivanyklicejista.domain.favourite.FavouriteInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
+import com.roman.kubik.spivanyklicejista.domain.utils.MarkedChordsRecognizer
 
 import javax.inject.Singleton
 
@@ -48,7 +49,7 @@ class InteractionModule {
 
     @Provides
     @Singleton
-    internal fun getChordInteractor(chordDao: ChordDao, chordModelMapper: ChordModelMapper): ChordInteractor {
-        return ChordInteractor(ChordRepositoryImpl(chordDao, chordModelMapper))
+    internal fun getChordInteractor(chordDao: ChordDao, chordModelMapper: ChordModelMapper, markedChordsRecognizer: MarkedChordsRecognizer): ChordInteractor {
+        return ChordInteractor(ChordRepositoryImpl(chordDao, chordModelMapper), markedChordsRecognizer)
     }
 }

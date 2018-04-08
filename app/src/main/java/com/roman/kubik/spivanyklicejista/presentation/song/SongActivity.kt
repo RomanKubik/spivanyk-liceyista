@@ -9,10 +9,13 @@ import android.view.MenuItem
 import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.category.Category
+import com.roman.kubik.spivanyklicejista.domain.chord.Chord
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication
 import com.roman.kubik.spivanyklicejista.presentation.BaseActivity
 import com.roman.kubik.spivanyklicejista.presentation.song.di.SongModule
+import com.roman.kubik.spivanyklicejista.presentation.view.ChordDialog
+import com.roman.kubik.spivanyklicejista.utils.AssetsDrawableLoader
 import com.roman.kubik.spivanyklicejista.utils.OnChordClickListener
 import com.roman.kubik.spivanyklicejista.utils.SpannableStringChordsCreator
 import kotlinx.android.synthetic.main.activity_song.*
@@ -26,11 +29,14 @@ import javax.inject.Inject
 class SongActivity : BaseActivity(), SongContract.View {
 
     private lateinit var bookmarkItem: MenuItem
+    private lateinit var chordDialog: ChordDialog
 
     @Inject
     lateinit var presenter: SongContract.Presenter
     @Inject
     lateinit var chordsCreator: SpannableStringChordsCreator
+    @Inject
+    lateinit var assetsDrawableLoader: AssetsDrawableLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +64,8 @@ class SongActivity : BaseActivity(), SongContract.View {
         songTitle.text = song.title
         lyrics.text = chordsCreator.selectChords(song.lyrics, object : OnChordClickListener {
             override fun onChordClicked(chord: String) {
-                Log.d(TAG, "chordClicked: $chord")
+                Log.d(TAG, "onChordClicked $chord")
+                chordDialog.showActiveChordName(chord)
             }
         }, Color.BLACK, resources.getColor(R.color.transparent_grey))
     }
@@ -79,6 +86,9 @@ class SongActivity : BaseActivity(), SongContract.View {
 
     }
 
+    override fun showChords(chords: List<Chord>) {
+        chordDialog = ChordDialog(this, chords, assetsDrawableLoader)
+    }
 
     private fun init() {
         setSupportActionBar(toolbar)
