@@ -2,18 +2,21 @@ package com.roman.kubik.spivanyklicejista.data.chord;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 /**
  * Created by kubik on 1/20/18.
  */
 
-@Entity(tableName = "chord")
+@Entity(indices = {@Index(name = "chord_nonclustered_index", value = "name"), @Index(name = "chord_id_clustered_index", value = "id")}, tableName = "chord")
 public class ChordEntity {
 
     @PrimaryKey
     private int id;
     @ColumnInfo(name = "name")
+    @NonNull
     private String name;
     @ColumnInfo(name = "img_path")
     private String imagePath;
