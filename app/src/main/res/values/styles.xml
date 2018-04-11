@@ -69,4 +69,17 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="AppTheme.ChordsList"/>
+
+    <style name="AppTheme.ChordsList.Chord" parent="AppTheme.ChordsList">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppTheme.ChordsList.ChordImage" parent="AppTheme.ChordsList">
+        <item name="android:layout_width">@dimen/view_size_48</item>
+        <item name="android:layout_height">@dimen/view_size_48</item>
+    </style>
+
 </resources>
