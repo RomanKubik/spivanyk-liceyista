@@ -1,6 +1,8 @@
 package com.roman.kubik.spivanyklicejista.general.di
 
+import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Room
+import android.arch.persistence.room.migration.Migration
 import android.content.Context
 
 import com.roman.kubik.spivanyklicejista.Constants
@@ -48,6 +50,10 @@ class DatabaseModule {
     @Singleton
     internal fun getAppDatabase(context: Context) =
             Room.databaseBuilder(context, AppDatabase::class.java, Constants.APP_DB_FILE_NAME)
+                    .addMigrations(object : Migration(1, 2) {
+                        override fun migrate(database: SupportSQLiteDatabase) {
+                        }
+                    })
                     .build()
 
     @Provides

@@ -7,6 +7,7 @@ package com.roman.kubik.spivanyklicejista.data.category;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 @Entity(tableName = "category")
 public class CategoryEntity {
@@ -15,6 +16,7 @@ public class CategoryEntity {
     private int id;
 
     @ColumnInfo(name = "name")
+    @NonNull
     private String name;
 
     public CategoryEntity(int id, String name) {

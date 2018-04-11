@@ -43,6 +43,7 @@ class MainActivity: BaseActivity(), MainContract.View {
     }
 
     override fun showError(error: Throwable) {
+        error.printStackTrace()
         Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
     }
 
