@@ -22,11 +22,15 @@ interface SongContract {
         fun showDifficulty(difficulty: String)
 
         fun showChords(chords: List<Chord>)
+
+        fun share(type: String, title: String, lyrics: String)
     }
 
     interface Presenter {
         fun fetchSong(id: Int)
 
         fun addToFavourite()
+
+        fun shareSong()
     }
 }

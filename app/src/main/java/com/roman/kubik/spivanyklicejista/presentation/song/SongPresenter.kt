@@ -1,5 +1,6 @@
 package com.roman.kubik.spivanyklicejista.presentation.song
 
+import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.domain.category.CategoryInteractor
 import com.roman.kubik.spivanyklicejista.domain.chord.ChordInteractor
 import com.roman.kubik.spivanyklicejista.domain.favourite.FavouriteInteractor
@@ -14,10 +15,11 @@ import javax.inject.Inject
  */
 
 class SongPresenter @Inject
-constructor(private val view: SongContract.View, private val songInteractor: SongInteractor,
+constructor(private val view: SongContract.View,
+            private val songInteractor: SongInteractor,
             private val favouriteInteractor: FavouriteInteractor,
             private val categoryInteractor: CategoryInteractor,
-            private val chordInteractor: ChordInteractor) : SongContract.Presenter {
+            private val chordInteractor: ChordInteractor): SongContract.Presenter {
 
     private lateinit var song: Song
 
@@ -40,6 +42,10 @@ constructor(private val view: SongContract.View, private val songInteractor: Son
                     if (b) removeSongFromFavourite(song)
                     else addSongToFavourite(song)
                 })
+    }
+
+    override fun shareSong() {
+        view.share(Constants.SHARE_TEXT_TYPE, song.title, song.lyrics)
     }
 
     private fun isFavouriteSong(song: Song) {

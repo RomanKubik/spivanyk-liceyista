@@ -9,6 +9,7 @@ interface Constants {
     companion object {
 
         const val APP_DB_FILE_NAME = "spivanyk.db"
+        const val SHARE_TEXT_TYPE = "text/plain"
     }
 
     interface Extras {
