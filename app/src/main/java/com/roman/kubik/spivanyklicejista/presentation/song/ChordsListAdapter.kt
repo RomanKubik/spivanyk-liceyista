@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
+import butterknife.OnClick
+import com.annimon.stream.function.Consumer
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.chord.Chord
 import com.roman.kubik.spivanyklicejista.utils.AssetsDrawableLoader
@@ -17,6 +19,7 @@ class ChordsListAdapter @Inject constructor(private val assetsDrawableLoader: As
     : RecyclerView.Adapter<ChordsListAdapter.ChordHolder>() {
 
     private val chords = mutableListOf<Chord>()
+    var chordClickListener: Consumer<Chord>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChordHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -27,6 +30,7 @@ class ChordsListAdapter @Inject constructor(private val assetsDrawableLoader: As
 
     override fun onBindViewHolder(holder: ChordHolder?, position: Int) {
         holder?.setChord(chords[position])
+        holder?.setOnClickListener(Consumer { chordClickListener?.accept(chords[it]) })
     }
 
     fun setChords(chords: List<Chord>) {
@@ -54,6 +58,11 @@ class ChordsListAdapter @Inject constructor(private val assetsDrawableLoader: As
         fun setChord(chord: Chord) {
             chordName.text = chord.name
             chordImage.setImageDrawable(assetsDrawableLoader.loadDrawable(chord.imagePath))
+        }
+
+        fun setOnClickListener(clickListener: Consumer<Int>) {
+            itemView.setOnClickListener { clickListener.accept(this.adapterPosition) }
+
         }
 
     }

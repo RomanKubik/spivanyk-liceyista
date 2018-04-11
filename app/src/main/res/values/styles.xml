@@ -34,7 +34,7 @@
 
     <style name="AppTheme.ChordsTitle" parent="AppTheme.SongLyrics">
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textAllCaps">true</item>
     </style>

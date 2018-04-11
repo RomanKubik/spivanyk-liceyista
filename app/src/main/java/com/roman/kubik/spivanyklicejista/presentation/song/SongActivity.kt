@@ -8,6 +8,7 @@ import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.annimon.stream.function.Consumer
 import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.category.Category
@@ -69,7 +70,7 @@ class SongActivity : BaseActivity(), SongContract.View {
         lyrics.text = chordsCreator.selectChords(song.lyrics, object : OnChordClickListener {
             override fun onChordClicked(chord: String) {
                 Log.d(TAG, "onChordClicked $chord")
-                chordDialog.showActiveChordName(chord)
+                showChord(chord)
             }
         }, Color.BLACK, resources.getColor(R.color.transparent_grey))
     }
@@ -100,8 +101,13 @@ class SongActivity : BaseActivity(), SongContract.View {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         lyrics.movementMethod = LinkMovementMethod.getInstance()
+        chordsAdapter.chordClickListener = Consumer { showChord(it.name) }
         chordsList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         chordsList.adapter = chordsAdapter
+    }
+
+    private fun showChord(chordName: String) {
+        chordDialog.showActiveChordName(chordName)
     }
 
     companion object {
