@@ -2,6 +2,8 @@ package com.roman.kubik.spivanyklicejista.presentation.song
 
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.Menu
@@ -37,6 +39,8 @@ class SongActivity : BaseActivity(), SongContract.View {
     lateinit var chordsCreator: SpannableStringChordsCreator
     @Inject
     lateinit var assetsDrawableLoader: AssetsDrawableLoader
+    @Inject
+    lateinit var chordsAdapter: ChordsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +50,7 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        Log.d("MyTag", "onCreateOptionsMenu")
+        Log.d(TAG, "onCreateOptionsMenu")
         menuInflater.inflate(R.menu.menu_song, menu)
         bookmarkItem = menu?.findItem(R.id.app_bar_bookmark)!!
         presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
@@ -87,6 +91,7 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     override fun showChords(chords: List<Chord>) {
+        chordsAdapter.setChords(chords)
         chordDialog = ChordDialog(this, chords, assetsDrawableLoader)
     }
 
@@ -95,6 +100,8 @@ class SongActivity : BaseActivity(), SongContract.View {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         lyrics.movementMethod = LinkMovementMethod.getInstance()
+        chordsList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        chordsList.adapter = chordsAdapter
     }
 
     companion object {
