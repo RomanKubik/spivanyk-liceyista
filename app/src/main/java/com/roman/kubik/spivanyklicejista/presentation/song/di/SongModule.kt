@@ -11,6 +11,7 @@ import com.roman.kubik.spivanyklicejista.presentation.song.SongPresenter
 
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Created by kubik on 1/20/18.
@@ -24,7 +25,7 @@ class SongModule(private val activity: SongActivity) {
 
     @Provides
     @ActivityScope
-    fun getPresenter(songInteractor: SongInteractor, favouriteInteractor: FavouriteInteractor, categoryInteractor: CategoryInteractor, chordInteractor: ChordInteractor): SongContract.Presenter {
-        return SongPresenter(activity, songInteractor, favouriteInteractor, categoryInteractor, chordInteractor)
+    fun getPresenter(songInteractor: SongInteractor, favouriteInteractor: FavouriteInteractor, categoryInteractor: CategoryInteractor, chordInteractor: ChordInteractor, compositeDisposable: CompositeDisposable): SongContract.Presenter {
+        return SongPresenter(activity, songInteractor, favouriteInteractor, categoryInteractor, chordInteractor, compositeDisposable)
     }
 }

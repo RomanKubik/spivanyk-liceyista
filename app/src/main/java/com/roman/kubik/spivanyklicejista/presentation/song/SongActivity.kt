@@ -1,5 +1,6 @@
 package com.roman.kubik.spivanyklicejista.presentation.song
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutCompat
@@ -61,6 +62,8 @@ class SongActivity : BaseActivity(), SongContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.app_bar_bookmark -> presenter.addToFavourite()
+            R.id.app_bar_share -> presenter.shareSong()
+            android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -94,6 +97,15 @@ class SongActivity : BaseActivity(), SongContract.View {
     override fun showChords(chords: List<Chord>) {
         chordsAdapter.setChords(chords)
         chordDialog = ChordDialog(this, chords, assetsDrawableLoader)
+    }
+
+    override fun share(type: String, title: String, lyrics: String) {
+        val intent = Intent()
+                .setAction(Intent.ACTION_SEND)
+                .setType(type)
+                .putExtra(Intent.EXTRA_TITLE, title)
+                .putExtra(Intent.EXTRA_TEXT, lyrics)
+        startActivity(intent)
     }
 
     private fun init() {
