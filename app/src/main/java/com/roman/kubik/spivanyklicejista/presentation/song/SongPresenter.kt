@@ -7,6 +7,7 @@ import com.roman.kubik.spivanyklicejista.domain.favourite.FavouriteInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -19,12 +20,13 @@ constructor(private val view: SongContract.View,
             private val songInteractor: SongInteractor,
             private val favouriteInteractor: FavouriteInteractor,
             private val categoryInteractor: CategoryInteractor,
-            private val chordInteractor: ChordInteractor): SongContract.Presenter {
+            private val chordInteractor: ChordInteractor,
+            private val compositeDisposable: CompositeDisposable) : SongContract.Presenter {
 
     private lateinit var song: Song
 
     override fun fetchSong(id: Int) {
-        songInteractor.getById(id)
+        compositeDisposable.add(songInteractor.getById(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess({ s -> song = s })
@@ -32,16 +34,16 @@ constructor(private val view: SongContract.View,
                 .doOnSuccess(this::getCategory)
                 .doOnSuccess(this::fetchChords)
                 .subscribe({ s -> view.showSong(s) }
-                ) { t -> view.showError(t.message!!) }
+                ) { t -> view.showError(t.message!!) })
     }
 
     override fun addToFavourite() {
-        favouriteInteractor.isInFavouriteList(song)
+        compositeDisposable.add(favouriteInteractor.isInFavouriteList(song)
                 .subscribeOn(Schedulers.io())
                 .subscribe({ b ->
                     if (b) removeSongFromFavourite(song)
                     else addSongToFavourite(song)
-                })
+                }))
     }
 
     override fun shareSong() {
@@ -49,42 +51,42 @@ constructor(private val view: SongContract.View,
     }
 
     private fun isFavouriteSong(song: Song) {
-        favouriteInteractor.isInFavouriteList(song)
+        compositeDisposable.add(favouriteInteractor.isInFavouriteList(song)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(view::isFavouriteSong, { t -> view.showError(t.message!!) })
+                .subscribe(view::isFavouriteSong, { t -> view.showError(t.message!!) }))
     }
 
     private fun removeSongFromFavourite(song: Song) {
-        favouriteInteractor.removeSong(song)
+        compositeDisposable.add(favouriteInteractor.removeSong(song)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     view.isFavouriteSong(false)
-                }
+                })
     }
 
     private fun addSongToFavourite(song: Song) {
-        favouriteInteractor.addSong(song)
+        compositeDisposable.add(favouriteInteractor.addSong(song)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     view.isFavouriteSong(true)
-                }
+                })
     }
 
     private fun getCategory(song: Song) {
-        categoryInteractor.getById(song.categoryId)
+        compositeDisposable.add(categoryInteractor.getById(song.categoryId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(view::showCategory)
+                .subscribe(view::showCategory))
     }
 
     private fun fetchChords(song: Song) {
-        chordInteractor.getChordsFromSong(song)
+        compositeDisposable.add(chordInteractor.getChordsFromSong(song)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(view::showChords)
+                .subscribe(view::showChords))
     }
 
 }
