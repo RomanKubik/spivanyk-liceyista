@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 /**
  * Helps to recognize chords in the song
  * Created by kubik on 1/21/18.
@@ -34,6 +36,10 @@ public class ChordsRecognizer {
     private static final List<String> MINOR_GROUP = Arrays.asList(EMPTY_STRING, MINOR);
     private static final List<String> SEPT_GROUP = Arrays.asList(EMPTY_STRING, SEPT);
     private static final List<String> ACCIDENTAL_GROUP = Arrays.asList(EMPTY_STRING, SHARP, FLAT);
+
+    @Inject
+    public ChordsRecognizer() {
+    }
 
     /**
      * Takes song and marks chord inside with specific symbols.

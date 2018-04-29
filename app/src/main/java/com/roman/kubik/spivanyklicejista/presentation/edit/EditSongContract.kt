@@ -8,6 +8,8 @@ interface EditSongContract {
 
         fun showSong(song: Song)
 
+        fun onChordsRecognized(lyrics: String)
+
         fun showProgress(show: Boolean)
 
         fun showError(text: String)
@@ -16,6 +18,8 @@ interface EditSongContract {
     interface Presenter {
 
         fun fetchSong(songId: Int)
+
+        fun recognizeChords(lyrics: String)
 
         fun destroy()
     }

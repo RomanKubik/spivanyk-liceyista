@@ -38,7 +38,7 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.app_bar_recognize -> {}
+            R.id.app_bar_recognize -> presenter.recognizeChords(lyrics.text.toString())
             R.id.app_bar_save -> {}
             android.R.id.home -> onBackPressed()
         }
@@ -48,6 +48,10 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
     override fun showSong(song: Song) {
         songTitle.setText(song.title)
         lyrics.setText(song.lyrics)
+    }
+
+    override fun onChordsRecognized(lyrics: String) {
+        this.lyrics.setText(lyrics)
     }
 
     override fun showProgress(show: Boolean) {
