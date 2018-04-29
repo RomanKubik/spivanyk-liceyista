@@ -24,6 +24,8 @@ interface SongContract {
         fun showChords(chords: List<Chord>)
 
         fun share(type: String, title: String, lyrics: String)
+
+        fun edit(song: Song)
     }
 
     interface Presenter {
@@ -32,5 +34,9 @@ interface SongContract {
         fun addToFavourite()
 
         fun shareSong()
+
+        fun edit()
+
+        fun showChords()
     }
 }

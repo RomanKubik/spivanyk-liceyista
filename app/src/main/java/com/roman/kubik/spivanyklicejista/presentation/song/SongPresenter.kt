@@ -50,6 +50,14 @@ constructor(private val view: SongContract.View,
         view.share(Constants.SHARE_TEXT_TYPE, song.title, song.lyrics)
     }
 
+    override fun edit() {
+        view.edit(song)
+    }
+
+    override fun showChords() {
+
+    }
+
     private fun isFavouriteSong(song: Song) {
         compositeDisposable.add(favouriteInteractor.isInFavouriteList(song)
                 .subscribeOn(Schedulers.io())
