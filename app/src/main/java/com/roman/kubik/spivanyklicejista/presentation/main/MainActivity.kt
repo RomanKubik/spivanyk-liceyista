@@ -1,6 +1,8 @@
 package com.roman.kubik.spivanyklicejista.presentation.main
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import butterknife.OnClick
 import com.roman.kubik.spivanyklicejista.Constants
@@ -23,7 +25,20 @@ class MainActivity: BaseActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         component.mainComponent(MainModule(this)).inject(this)
+        init()
         presenter.requestData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.app_bar_add_song -> Navigate.toEditActivity(this)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun setPatrioticsCount(count: Int) {
@@ -51,6 +66,10 @@ class MainActivity: BaseActivity(), MainContract.View {
         Navigate.toSongActivity(this, song)
     }
 
+    private fun init() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.title = getString(R.string.app_name)
+    }
 
     @OnClick(R.id.lastCategory)
     fun onLastClicked() {
