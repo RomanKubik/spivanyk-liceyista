@@ -1,5 +1,6 @@
 package com.roman.kubik.spivanyklicejista.presentation.song
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -72,6 +73,12 @@ class SongActivity : BaseActivity(), SongContract.View {
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == Constants.RequestCodes.EDIT_SONG && resultCode == Activity.RESULT_OK) {
+            presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
+        }
     }
 
     override fun showSong(song: Song) {

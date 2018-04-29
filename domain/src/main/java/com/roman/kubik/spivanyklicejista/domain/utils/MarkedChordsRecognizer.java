@@ -5,8 +5,14 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 public class MarkedChordsRecognizer {
     private static final Pattern bracketsPattern = Pattern.compile("(<\\S+>)");
+
+    @Inject
+    public MarkedChordsRecognizer() {
+    }
 
     public Set<String> findSelections(String text) {
         Set<String> selectionsList = new HashSet<>();

@@ -1,6 +1,8 @@
 package com.roman.kubik.spivanyklicejista.general.di
 
 import android.content.Context
+import com.roman.kubik.spivanyklicejista.presentation.edit.di.EditSongComponent
+import com.roman.kubik.spivanyklicejista.presentation.edit.di.EditSongModule
 
 import com.roman.kubik.spivanyklicejista.presentation.list.di.ListComponent
 import com.roman.kubik.spivanyklicejista.presentation.list.di.ListModule
@@ -26,5 +28,6 @@ interface ApplicationComponent {
     fun mainComponent(mainModule: MainModule): MainComponent
     fun listComponent(listModule: ListModule): ListComponent
     fun songComponent(songModule: SongModule): SongComponent
+    fun editSongComponent(editSongModule: EditSongModule): EditSongComponent
 
 }

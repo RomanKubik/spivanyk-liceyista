@@ -28,9 +28,9 @@ class ChordsListAdapter @Inject constructor(private val assetsDrawableLoader: As
 
     override fun getItemCount() = chords.size
 
-    override fun onBindViewHolder(holder: ChordHolder?, position: Int) {
-        holder?.setChord(chords[position])
-        holder?.setOnClickListener(Consumer { chordClickListener?.accept(chords[it]) })
+    override fun onBindViewHolder(holder: ChordHolder, position: Int) {
+        holder.setChord(chords[position])
+        holder.setOnClickListener(Consumer { chordClickListener?.accept(chords[it]) })
     }
 
     fun setChords(chords: List<Chord>) {

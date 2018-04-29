@@ -26,6 +26,13 @@ interface Constants {
             const val PATRIOTIC_ID = 1
             const val BONFIRE_ID = 2
             const val ABROAD_ID = 3
+            const val USERS_ID = 4
+        }
+    }
+
+    interface RequestCodes {
+        companion object {
+            const val EDIT_SONG = 1401
         }
     }
 }
