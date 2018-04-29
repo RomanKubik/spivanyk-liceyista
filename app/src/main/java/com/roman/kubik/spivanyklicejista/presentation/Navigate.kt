@@ -36,12 +36,12 @@ object Navigate {
 
     fun toEditActivity(activity: Activity) {
         val intent = Intent(activity, EditSongActivity::class.java)
-        activity.startActivity(intent)
+        activity.startActivityForResult(intent, Constants.RequestCodes.EDIT_SONG)
     }
 
     fun toEditActivity(activity: Activity, song: Song) {
         val intent = Intent(activity, EditSongActivity::class.java)
         intent.putExtra(Constants.Extras.SONG_ID, song.id)
-        activity.startActivity(intent)
+        activity.startActivityForResult(intent, Constants.RequestCodes.EDIT_SONG)
     }
 }

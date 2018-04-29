@@ -28,4 +28,7 @@
     <string name="lyrics">Lyrics</string>
     <string name="save">Save</string>
     <string name="auto_recognize">Auto recognize</string>
+    <string name="ttl_save_changes">Save changes</string>
+    <string name="msg_save_changes">Would you like to save changes before exit?</string>
+    <string name="discard">Discard</string>
 </resources>

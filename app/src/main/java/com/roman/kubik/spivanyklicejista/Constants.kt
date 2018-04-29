@@ -29,4 +29,10 @@ interface Constants {
             const val USERS_ID = 4
         }
     }
+
+    interface RequestCodes {
+        companion object {
+            const val EDIT_SONG = 1401
+        }
+    }
 }

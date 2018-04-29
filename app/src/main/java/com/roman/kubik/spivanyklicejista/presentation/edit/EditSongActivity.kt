@@ -1,7 +1,6 @@
 package com.roman.kubik.spivanyklicejista.presentation.edit
 
 import android.app.Activity
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.view.Menu
@@ -83,12 +82,12 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
 
     private fun showSaveDialog() {
         AlertDialog.Builder(this)
-                .setTitle("Save changes")
-                .setMessage("Would you like to save changes before exit?")
-                .setPositiveButton("Save", { _, _ ->
+                .setTitle(R.string.ttl_save_changes)
+                .setMessage(R.string.msg_save_changes)
+                .setPositiveButton(R.string.save, { _, _ ->
                     presenter.saveSong(songTitle.text.toString(), lyrics.text.toString())
                 })
-                .setNegativeButton("Discard", { _, _ ->
+                .setNegativeButton(R.string.discard, { _, _ ->
                     setResult(Activity.RESULT_CANCELED)
                     finish()
                 })
