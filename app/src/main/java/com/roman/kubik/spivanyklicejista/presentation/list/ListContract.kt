@@ -12,10 +12,12 @@ interface ListContract {
     interface View {
         fun showProgress(show: Boolean)
         fun showError(errorMessage: String?)
+        fun onPreferencesFetched(showChords: Boolean)
         fun onSongsFetched(songList: List<Song>)
     }
 
     interface Presenter {
+        fun fetchPreferences()
         fun fetchSongByCategory(categoryId: Int)
         fun filter(byTitle: String)
     }

@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.song.Song
+import com.roman.kubik.spivanyklicejista.domain.utils.ChordsRemover
 import com.roman.kubik.spivanyklicejista.utils.SpannableStringChordsCreator
 import javax.inject.Inject
 
@@ -18,11 +19,14 @@ import javax.inject.Inject
  */
 
 class SongsAdapter @Inject
-constructor(val chordsCreator: SpannableStringChordsCreator) : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
+constructor(val chordsCreator: SpannableStringChordsCreator,
+            val chordsRemover: ChordsRemover) : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
 
     private var onClickListener: Consumer<Song>? = null
 
     private val songList = mutableListOf<Song>()
+
+    private var showChords = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,6 +42,11 @@ constructor(val chordsCreator: SpannableStringChordsCreator) : RecyclerView.Adap
 
     override fun getItemCount(): Int {
         return songList.size
+    }
+
+    fun setShowChords(showChords: Boolean) {
+        this.showChords = showChords
+        notifyDataSetChanged()
     }
 
     fun setOnClickListener(onClickListener: Consumer<Song>?) {
@@ -66,11 +75,18 @@ constructor(val chordsCreator: SpannableStringChordsCreator) : RecyclerView.Adap
 
         fun setItem(song: Song) {
             tvTitle.text = song.title
-            tvLyrics.text = chordsCreator.selectChords(song.lyrics, null, Color.BLACK, Color.TRANSPARENT)
+            tvLyrics.text = getLyrics(song.lyrics)
         }
 
         fun setOnItemClickListener(onClickListener: View.OnClickListener) {
             tvTitle.rootView.setOnClickListener(onClickListener)
+        }
+
+        private fun getLyrics(lyrics: String): CharSequence {
+            return if (showChords)
+                chordsCreator.selectChords(lyrics, null, Color.BLACK, Color.TRANSPARENT)
+            else
+                chordsRemover.removeChords(lyrics)
         }
     }
 }
