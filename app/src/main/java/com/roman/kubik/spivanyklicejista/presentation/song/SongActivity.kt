@@ -10,12 +10,14 @@ import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.category.Category
 import com.roman.kubik.spivanyklicejista.domain.chord.Chord
 import com.roman.kubik.spivanyklicejista.domain.song.Song
+import com.roman.kubik.spivanyklicejista.domain.utils.ChordsRemover
 import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication
 import com.roman.kubik.spivanyklicejista.presentation.BaseActivity
 import com.roman.kubik.spivanyklicejista.presentation.Navigate
@@ -43,6 +45,8 @@ class SongActivity : BaseActivity(), SongContract.View {
     @Inject
     lateinit var chordsCreator: SpannableStringChordsCreator
     @Inject
+    lateinit var chordsRemover: ChordsRemover
+    @Inject
     lateinit var assetsDrawableLoader: AssetsDrawableLoader
     @Inject
     lateinit var chordsAdapter: ChordsListAdapter
@@ -60,7 +64,6 @@ class SongActivity : BaseActivity(), SongContract.View {
         bookmarkItem = menu?.findItem(R.id.app_bar_bookmark)!!
         showChordsItem = menu.findItem(R.id.app_bar_show_chords)
         presenter.fetchPreferences()
-        presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
         return true
     }
 
@@ -83,12 +86,15 @@ class SongActivity : BaseActivity(), SongContract.View {
 
     override fun showSong(song: Song) {
         songTitle.text = song.title
-        lyrics.text = chordsCreator.selectChords(song.lyrics, object : OnChordClickListener {
-            override fun onChordClicked(chord: String) {
-                Log.d(TAG, "onChordClicked $chord")
-                showChord(chord)
-            }
-        }, Color.BLACK, resources.getColor(R.color.transparent_grey))
+        if (showChordsItem.isChecked) {
+            lyrics.text = chordsCreator.selectChords(song.lyrics, object : OnChordClickListener {
+                override fun onChordClicked(chord: String) {
+                    showChord(chord)
+                }
+            }, Color.BLACK, resources.getColor(R.color.transparent_grey))
+        } else {
+            lyrics.text = chordsRemover.removeChords(song.lyrics)
+        }
     }
 
     override fun showError(errorMessage: String) {
@@ -127,6 +133,9 @@ class SongActivity : BaseActivity(), SongContract.View {
 
     override fun chordsVisible(visible: Boolean) {
         showChordsItem.isChecked = visible
+        chordsList.visibility = if (visible) View.VISIBLE else View.GONE
+        chords.visibility = if (visible) View.VISIBLE else View.GONE
+        presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
     }
 
     private fun init() {
