@@ -43,11 +43,7 @@ public class SongInteractor {
         return songRepository.getCountByCategory(categoryId);
     }
 
-    public Completable addSong(Song song) {
-        return songRepository.insertOrUpdate(song);
-    }
-
-    public Completable updateSong(Song song) {
+    public Completable insertOrUpdate(Song song) {
         return songRepository.insertOrUpdate(song);
     }
 

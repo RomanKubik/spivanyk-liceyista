@@ -1,6 +1,9 @@
 package com.roman.kubik.spivanyklicejista.presentation.edit
 
+import android.app.Activity
+import android.content.DialogInterface
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -31,6 +34,10 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
         super.onDestroy()
     }
 
+    override fun onBackPressed() {
+        showSaveDialog()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_edit_song, menu)
         return true
@@ -39,7 +46,7 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.app_bar_recognize -> presenter.recognizeChords(lyrics.text.toString())
-            R.id.app_bar_save -> {}
+            R.id.app_bar_save -> presenter.saveSong(songTitle.text.toString(), lyrics.text.toString())
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
@@ -52,6 +59,11 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
 
     override fun onChordsRecognized(lyrics: String) {
         this.lyrics.setText(lyrics)
+    }
+
+    override fun onSongSaved() {
+        setResult(Activity.RESULT_OK)
+        finish()
     }
 
     override fun showProgress(show: Boolean) {
@@ -67,5 +79,19 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
         presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, -1))
+    }
+
+    private fun showSaveDialog() {
+        AlertDialog.Builder(this)
+                .setTitle("Save changes")
+                .setMessage("Would you like to save changes before exit?")
+                .setPositiveButton("Save", { _, _ ->
+                    presenter.saveSong(songTitle.text.toString(), lyrics.text.toString())
+                })
+                .setNegativeButton("Discard", { _, _ ->
+                    setResult(Activity.RESULT_CANCELED)
+                    finish()
+                })
+                .show()
     }
 }

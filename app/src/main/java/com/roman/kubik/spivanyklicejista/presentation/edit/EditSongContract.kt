@@ -10,6 +10,8 @@ interface EditSongContract {
 
         fun onChordsRecognized(lyrics: String)
 
+        fun onSongSaved()
+
         fun showProgress(show: Boolean)
 
         fun showError(text: String)
@@ -20,6 +22,8 @@ interface EditSongContract {
         fun fetchSong(songId: Int)
 
         fun recognizeChords(lyrics: String)
+
+        fun saveSong(title: String, lyrics: String)
 
         fun destroy()
     }
