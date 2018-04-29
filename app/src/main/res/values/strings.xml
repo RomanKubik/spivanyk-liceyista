@@ -24,4 +24,6 @@
     <string formatted="false" name="page_of_pages">%d of %d</string>
     <string name="show_chords">Show chords</string>
     <string name="edit">Edit</string>
+    <string name="title">Title</string>
+    <string name="lyrics">Lyrics</string>
 </resources>

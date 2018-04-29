@@ -5,6 +5,7 @@ import android.content.Intent
 import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.domain.category.Category
 import com.roman.kubik.spivanyklicejista.domain.song.Song
+import com.roman.kubik.spivanyklicejista.presentation.edit.EditSongActivity
 
 import com.roman.kubik.spivanyklicejista.presentation.list.ListActivity
 import com.roman.kubik.spivanyklicejista.presentation.main.MainActivity
@@ -33,8 +34,13 @@ object Navigate {
         activity.startActivity(intent)
     }
 
+    fun toEditActivity(activity: Activity) {
+        val intent = Intent(activity, EditSongActivity::class.java)
+        activity.startActivity(intent)
+    }
+
     fun toEditActivity(activity: Activity, song: Song) {
-        val intent = Intent(activity, SongActivity::class.java)
+        val intent = Intent(activity, EditSongActivity::class.java)
         intent.putExtra(Constants.Extras.SONG_ID, song.id)
         activity.startActivity(intent)
     }
