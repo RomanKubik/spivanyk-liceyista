@@ -45,6 +45,11 @@ class ListActivity : BaseActivity(), ListContract.View {
         presenter.fetchSongByCategory(categoryId)
     }
 
+    override fun onStart() {
+        presenter.fetchPreferences()
+        super.onStart()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         val menuItem = menu?.findItem(R.id.app_bar_search)
@@ -71,23 +76,23 @@ class ListActivity : BaseActivity(), ListContract.View {
     }
 
     override fun showProgress(show: Boolean) {
-        Log.d(TAG, "showProgress: " + show)
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     override fun showError(errorMessage: String?) {
-        Log.d(TAG, "showError: " + errorMessage)
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onPreferencesFetched(showChords: Boolean) {
+        songsAdapter.setShowChords(showChords)
+    }
+
     override fun onSongsFetched(songList: List<Song>) {
-        Log.d(TAG, "onSongsFetched: " + songList.size)
         songsAdapter.setSongList(songList)
     }
 
     private fun init(categoryId: Int) {
         songsAdapter.setOnClickListener(Consumer { s ->
-            Log.d(TAG, "songClicked: " + s.title)
             Navigate.toSongActivity(this, s)
         })
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

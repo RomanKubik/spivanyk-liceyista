@@ -23,6 +23,6 @@ class ListModule constructor(private val activity: ListActivity) {
 
     @Provides
     @ActivityScope
-    fun getPresenter(songInteractor: SongInteractor, compositeDisposable: CompositeDisposable): ListContract.Presenter = ListPresenter(activity, songInteractor, compositeDisposable)
+    fun getPresenter(listPresenter: ListPresenter): ListContract.Presenter = listPresenter
 
 }

@@ -2,6 +2,8 @@ package com.roman.kubik.spivanyklicejista.presentation.list
 
 import com.annimon.stream.Collectors
 import com.annimon.stream.Stream
+import com.roman.kubik.spivanyklicejista.Constants
+import com.roman.kubik.spivanyklicejista.domain.preferences.PreferencesInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
 import com.roman.kubik.spivanyklicejista.general.di.ActivityScope
@@ -19,15 +21,25 @@ import javax.inject.Inject
 class ListPresenter @Inject
 constructor(private val view: ListContract.View,
             private val songInteractor: SongInteractor,
+            private val preferencesInteractor: PreferencesInteractor,
             private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
 
     private var songs = mutableListOf<Song>()
 
+    override fun fetchPreferences() {
+        compositeDisposable.add(preferencesInteractor
+                .isChordsVisible
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(view::onPreferencesFetched
+                ) { t -> view.showError(t.message) })
+    }
+
     override fun fetchSongByCategory(categoryId: Int) {
         view.showProgress(true)
         when (categoryId) {
-            -1 -> fetchAll()
-            0 -> fetchLast()
+            Constants.Category.ALL_ID -> fetchAll()
+            Constants.Category.LAST_ID -> fetchLast()
             else -> fetchByCategoryId(categoryId)
         }
 
