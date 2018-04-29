@@ -1,6 +1,7 @@
 package com.roman.kubik.spivanyklicejista.presentation.edit
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -30,8 +31,15 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
         super.onDestroy()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_edit_song, menu)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            R.id.app_bar_recognize -> {}
+            R.id.app_bar_save -> {}
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
@@ -53,6 +61,7 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
     private fun init() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, -1))
     }
 }

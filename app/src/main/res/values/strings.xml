@@ -26,4 +26,6 @@
     <string name="edit">Edit</string>
     <string name="title">Title</string>
     <string name="lyrics">Lyrics</string>
+    <string name="save">Save</string>
+    <string name="auto_recognize">Auto recognize</string>
 </resources>
