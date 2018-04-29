@@ -1,10 +1,12 @@
 package com.roman.kubik.spivanyklicejista.presentation.list
 
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.annimon.stream.function.Consumer
@@ -15,8 +17,10 @@ import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication.Com
 import com.roman.kubik.spivanyklicejista.presentation.BaseActivity
 import com.roman.kubik.spivanyklicejista.presentation.Navigate
 import com.roman.kubik.spivanyklicejista.presentation.list.di.ListModule
+import com.roman.kubik.spivanyklicejista.utils.CategoryTitleMapper
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
+
 
 /**
  * Main list activity
@@ -29,13 +33,16 @@ class ListActivity : BaseActivity(), ListContract.View {
     lateinit var presenter: ListContract.Presenter
     @Inject
     lateinit var songsAdapter: SongsAdapter
+    @Inject
+    lateinit var categoryTitleMapper: CategoryTitleMapper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
         component.listComponent(ListModule(this)).inject(this)
-        init()
-        presenter.fetchSongByCategory(intent.getIntExtra(Constants.Extras.CATEGORY_ID, Constants.Category.ALL_ID))
+        val categoryId = intent.getIntExtra(Constants.Extras.CATEGORY_ID, Constants.Category.ALL_ID)
+        init(categoryId)
+        presenter.fetchSongByCategory(categoryId)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -56,6 +63,13 @@ class ListActivity : BaseActivity(), ListContract.View {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> this.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun showProgress(show: Boolean) {
         Log.d(TAG, "showProgress: " + show)
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
@@ -71,7 +85,7 @@ class ListActivity : BaseActivity(), ListContract.View {
         songsAdapter.setSongList(songList)
     }
 
-    private fun init() {
+    private fun init(categoryId: Int) {
         songsAdapter.setOnClickListener(Consumer { s ->
             Log.d(TAG, "songClicked: " + s.title)
             Navigate.toSongActivity(this, s)
@@ -79,6 +93,14 @@ class ListActivity : BaseActivity(), ListContract.View {
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = categoryTitleMapper.getCategoryTitle(categoryId)
+        addDividers()
+    }
+
+    private fun addDividers() {
+        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+        songList.addItemDecoration(dividerItemDecoration)
     }
 
     companion object {

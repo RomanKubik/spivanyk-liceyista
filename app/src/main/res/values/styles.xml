@@ -39,8 +39,14 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="AppTheme.SongTitle.List" parent="AppTheme.SongTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
+    </style>
+
     <style name="AppTheme.SongLyrics.List" parent="AppTheme.SongLyrics">
-        <item name="android:maxLines">8</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:maxLines">4</item>
         <item name="android:ellipsize">end</item>
     </style>
 
