@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication.Companion.component
@@ -52,5 +53,6 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
     private fun init() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, -1))
     }
 }
