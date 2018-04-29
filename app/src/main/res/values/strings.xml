@@ -22,4 +22,6 @@
     <string name="backward">Backward</string>
     <string name="chord">Chord</string>
     <string formatted="false" name="page_of_pages">%d of %d</string>
+    <string name="show_chords">Show chords</string>
+    <string name="edit">Edit</string>
 </resources>
