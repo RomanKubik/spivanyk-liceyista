@@ -20,7 +20,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/songTitle"
         style="@style/AppTheme.SongTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
