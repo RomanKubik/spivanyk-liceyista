@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.annimon.stream.function.Consumer
@@ -62,6 +63,13 @@ class ListActivity : BaseActivity(), ListContract.View {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> this.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun showProgress(show: Boolean) {
         Log.d(TAG, "showProgress: " + show)
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
@@ -85,6 +93,7 @@ class ListActivity : BaseActivity(), ListContract.View {
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = categoryTitleMapper.getCategoryTitle(categoryId)
         addDividers()
     }
