@@ -1,6 +1,7 @@
 package com.roman.kubik.spivanyklicejista.presentation.list
 
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.util.Log
@@ -17,6 +18,7 @@ import com.roman.kubik.spivanyklicejista.presentation.Navigate
 import com.roman.kubik.spivanyklicejista.presentation.list.di.ListModule
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
+
 
 /**
  * Main list activity
@@ -79,6 +81,12 @@ class ListActivity : BaseActivity(), ListContract.View {
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
         setSupportActionBar(toolbar)
+        addDividers()
+    }
+
+    private fun addDividers() {
+        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+        songList.addItemDecoration(dividerItemDecoration)
     }
 
     companion object {
