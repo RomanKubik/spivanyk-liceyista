@@ -32,4 +32,10 @@ object Navigate {
         intent.putExtra(Constants.Extras.SONG_ID, song.id)
         activity.startActivity(intent)
     }
+
+    fun toEditActivity(activity: Activity, song: Song) {
+        val intent = Intent(activity, SongActivity::class.java)
+        intent.putExtra(Constants.Extras.SONG_ID, song.id)
+        activity.startActivity(intent)
+    }
 }

@@ -17,6 +17,7 @@ import com.roman.kubik.spivanyklicejista.domain.chord.Chord
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication
 import com.roman.kubik.spivanyklicejista.presentation.BaseActivity
+import com.roman.kubik.spivanyklicejista.presentation.Navigate
 import com.roman.kubik.spivanyklicejista.presentation.song.di.SongModule
 import com.roman.kubik.spivanyklicejista.presentation.view.ChordDialog
 import com.roman.kubik.spivanyklicejista.utils.AssetsDrawableLoader
@@ -33,6 +34,7 @@ import javax.inject.Inject
 class SongActivity : BaseActivity(), SongContract.View {
 
     private lateinit var bookmarkItem: MenuItem
+    private lateinit var showChordsItem: MenuItem
     private lateinit var chordDialog: ChordDialog
 
     @Inject
@@ -55,6 +57,8 @@ class SongActivity : BaseActivity(), SongContract.View {
         Log.d(TAG, "onCreateOptionsMenu")
         menuInflater.inflate(R.menu.menu_song, menu)
         bookmarkItem = menu?.findItem(R.id.app_bar_bookmark)!!
+        showChordsItem = menu.findItem(R.id.app_bar_show_chords)
+        presenter.fetchPreferences()
         presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
         return true
     }
@@ -63,6 +67,8 @@ class SongActivity : BaseActivity(), SongContract.View {
         when (item?.itemId) {
             R.id.app_bar_bookmark -> presenter.addToFavourite()
             R.id.app_bar_share -> presenter.shareSong()
+            R.id.app_bar_edit -> presenter.edit()
+            R.id.app_bar_show_chords -> presenter.showChords()
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
@@ -106,6 +112,14 @@ class SongActivity : BaseActivity(), SongContract.View {
                 .putExtra(Intent.EXTRA_TITLE, title)
                 .putExtra(Intent.EXTRA_TEXT, lyrics)
         startActivity(intent)
+    }
+
+    override fun edit(song: Song) {
+        Navigate.toEditActivity(this, song)
+    }
+
+    override fun chordsVisible(visible: Boolean) {
+        showChordsItem.isChecked = visible
     }
 
     private fun init() {

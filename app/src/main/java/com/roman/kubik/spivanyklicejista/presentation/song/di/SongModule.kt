@@ -25,7 +25,7 @@ class SongModule(private val activity: SongActivity) {
 
     @Provides
     @ActivityScope
-    fun getPresenter(songInteractor: SongInteractor, favouriteInteractor: FavouriteInteractor, categoryInteractor: CategoryInteractor, chordInteractor: ChordInteractor, compositeDisposable: CompositeDisposable): SongContract.Presenter {
-        return SongPresenter(activity, songInteractor, favouriteInteractor, categoryInteractor, chordInteractor, compositeDisposable)
+    fun getPresenter(songPresenter: SongPresenter): SongContract.Presenter {
+        return songPresenter
     }
 }

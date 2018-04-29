@@ -24,13 +24,23 @@ interface SongContract {
         fun showChords(chords: List<Chord>)
 
         fun share(type: String, title: String, lyrics: String)
+
+        fun edit(song: Song)
+
+        fun chordsVisible(visible: Boolean)
     }
 
     interface Presenter {
         fun fetchSong(id: Int)
 
+        fun fetchPreferences()
+
         fun addToFavourite()
 
         fun shareSong()
+
+        fun edit()
+
+        fun showChords()
     }
 }
