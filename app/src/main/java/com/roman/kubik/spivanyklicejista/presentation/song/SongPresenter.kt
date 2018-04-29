@@ -4,6 +4,7 @@ import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.domain.category.CategoryInteractor
 import com.roman.kubik.spivanyklicejista.domain.chord.ChordInteractor
 import com.roman.kubik.spivanyklicejista.domain.favourite.FavouriteInteractor
+import com.roman.kubik.spivanyklicejista.domain.preferences.PreferencesInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,6 +22,7 @@ constructor(private val view: SongContract.View,
             private val favouriteInteractor: FavouriteInteractor,
             private val categoryInteractor: CategoryInteractor,
             private val chordInteractor: ChordInteractor,
+            private val preferencesInteractor: PreferencesInteractor,
             private val compositeDisposable: CompositeDisposable) : SongContract.Presenter {
 
     private lateinit var song: Song
@@ -34,6 +36,15 @@ constructor(private val view: SongContract.View,
                 .doOnSuccess(this::getCategory)
                 .doOnSuccess(this::fetchChords)
                 .subscribe({ s -> view.showSong(s) }
+                ) { t -> view.showError(t.message!!) })
+    }
+
+    override fun fetchPreferences() {
+        compositeDisposable.add(preferencesInteractor
+                .isChordsVisible
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ s -> view.chordsVisible(s) }
                 ) { t -> view.showError(t.message!!) })
     }
 
@@ -55,7 +66,11 @@ constructor(private val view: SongContract.View,
     }
 
     override fun showChords() {
-
+        compositeDisposable.add(preferencesInteractor
+                .switchChordsVisibility()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ fetchPreferences() }))
     }
 
     private fun isFavouriteSong(song: Song) {

@@ -26,10 +26,14 @@ interface SongContract {
         fun share(type: String, title: String, lyrics: String)
 
         fun edit(song: Song)
+
+        fun chordsVisible(visible: Boolean)
     }
 
     interface Presenter {
         fun fetchSong(id: Int)
+
+        fun fetchPreferences()
 
         fun addToFavourite()
 
