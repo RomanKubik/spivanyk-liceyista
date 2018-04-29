@@ -16,6 +16,7 @@ import com.roman.kubik.spivanyklicejista.general.android.SpivanykApplication.Com
 import com.roman.kubik.spivanyklicejista.presentation.BaseActivity
 import com.roman.kubik.spivanyklicejista.presentation.Navigate
 import com.roman.kubik.spivanyklicejista.presentation.list.di.ListModule
+import com.roman.kubik.spivanyklicejista.utils.CategoryTitleMapper
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
 
@@ -31,13 +32,16 @@ class ListActivity : BaseActivity(), ListContract.View {
     lateinit var presenter: ListContract.Presenter
     @Inject
     lateinit var songsAdapter: SongsAdapter
+    @Inject
+    lateinit var categoryTitleMapper: CategoryTitleMapper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
         component.listComponent(ListModule(this)).inject(this)
-        init()
-        presenter.fetchSongByCategory(intent.getIntExtra(Constants.Extras.CATEGORY_ID, Constants.Category.ALL_ID))
+        val categoryId = intent.getIntExtra(Constants.Extras.CATEGORY_ID, Constants.Category.ALL_ID)
+        init(categoryId)
+        presenter.fetchSongByCategory(categoryId)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -73,7 +77,7 @@ class ListActivity : BaseActivity(), ListContract.View {
         songsAdapter.setSongList(songList)
     }
 
-    private fun init() {
+    private fun init(categoryId: Int) {
         songsAdapter.setOnClickListener(Consumer { s ->
             Log.d(TAG, "songClicked: " + s.title)
             Navigate.toSongActivity(this, s)
@@ -81,6 +85,7 @@ class ListActivity : BaseActivity(), ListContract.View {
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
         setSupportActionBar(toolbar)
+        supportActionBar?.title = categoryTitleMapper.getCategoryTitle(categoryId)
         addDividers()
     }
 

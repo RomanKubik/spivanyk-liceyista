@@ -17,7 +17,9 @@ import javax.inject.Inject
 
 @ActivityScope
 class ListPresenter @Inject
-constructor(private val view: ListContract.View, private val songInteractor: SongInteractor, private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
+constructor(private val view: ListContract.View,
+            private val songInteractor: SongInteractor,
+            private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
 
     private var songs = mutableListOf<Song>()
 
