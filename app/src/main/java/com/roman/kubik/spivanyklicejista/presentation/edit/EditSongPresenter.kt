@@ -37,7 +37,7 @@ class EditSongPresenter @Inject constructor(
     override fun saveSong(title: String, lyrics: String) {
         view.showProgress(true)
         if (song == null) {
-            song = Song(UUID.randomUUID().clockSequence(), title, lyrics, Constants.Category.USERS_ID)
+            song = Song(UUID.randomUUID().hashCode(), title, lyrics, Constants.Category.USERS_ID)
         } else {
             song?.title = title
             song?.lyrics = lyrics

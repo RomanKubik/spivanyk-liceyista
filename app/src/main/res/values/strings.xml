@@ -31,4 +31,7 @@
     <string name="ttl_save_changes">Save changes</string>
     <string name="msg_save_changes">Would you like to save changes before exit?</string>
     <string name="discard">Discard</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="add_song">Add song</string>
 </resources>
