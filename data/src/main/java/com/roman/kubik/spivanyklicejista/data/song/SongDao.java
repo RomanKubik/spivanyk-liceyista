@@ -19,10 +19,10 @@ import io.reactivex.Single;
 @Dao
 public interface SongDao {
 
-    @Query("SELECT * FROM song")
+    @Query("SELECT * FROM song ORDER BY song.title")
     Single<List<SongEntity>> getAll();
 
-    @Query("SELECT * FROM song WHERE song.category_id = :categoryId")
+    @Query("SELECT * FROM song WHERE song.category_id = :categoryId ORDER BY song.title")
     Single<List<SongEntity>> getAllByCategory(int categoryId);
 
     @Query("SELECT * FROM song WHERE song.title LIKE :title")
