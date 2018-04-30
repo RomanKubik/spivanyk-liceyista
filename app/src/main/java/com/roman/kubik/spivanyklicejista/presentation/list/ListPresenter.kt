@@ -27,12 +27,13 @@ constructor(private val view: ListContract.View,
     private var songs = mutableListOf<Song>()
 
     override fun fetchPreferences() {
-        compositeDisposable.add(preferencesInteractor
-                .isChordsVisible
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(view::onPreferencesFetched
-                ) { t -> view.showError(t.message) })
+        compositeDisposable.add(
+                preferencesInteractor
+                        .isChordsVisible
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(view::onPreferencesFetched
+                        ) { t -> view.showError(t.message) })
     }
 
     override fun fetchSongByCategory(categoryId: Int) {
@@ -52,25 +53,34 @@ constructor(private val view: ListContract.View,
                 .collect(Collectors.toList()))
     }
 
-    private fun fetchAll() {
-        compositeDisposable.add(songInteractor.all
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doFinally { view.showProgress(false) }
-                .doOnSuccess({ s -> songs.addAll(s) })
-                .subscribe(view::onSongsFetched
-                ) { t -> view.showError(t.message) })
+    override fun destroy() {
+        compositeDisposable.clear()
     }
 
-    private fun fetchLast() {}
+    private fun fetchAll() {
+        compositeDisposable.add(
+                songInteractor.all
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doFinally { view.showProgress(false) }
+                        .doOnSuccess({ s -> songs.addAll(s) })
+                        .subscribe(view::onSongsFetched
+                        ) { t -> view.showError(t.message) })
+    }
+
+    private fun fetchLast() {
+        view.showProgress(false)
+        view.showError("Not implemented yet")
+    }
 
     private fun fetchByCategoryId(categoryId: Int) {
-        compositeDisposable.add(songInteractor.getAllByCategory(categoryId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doFinally { view.showProgress(false) }
-                .doOnSuccess({ s -> songs.addAll(s) })
-                .subscribe(view::onSongsFetched
-                ) { t -> view.showError(t.message) })
+        compositeDisposable.add(
+                songInteractor.getAllByCategory(categoryId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doFinally { view.showProgress(false) }
+                        .doOnSuccess({ s -> songs.addAll(s) })
+                        .subscribe(view::onSongsFetched
+                        ) { t -> view.showError(t.message) })
     }
 }

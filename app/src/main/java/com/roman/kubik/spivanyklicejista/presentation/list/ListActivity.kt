@@ -75,6 +75,11 @@ class ListActivity : BaseActivity(), ListContract.View {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onDestroy() {
+        presenter.destroy()
+        super.onDestroy()
+    }
+
     override fun showProgress(show: Boolean) {
         progressBar.visibility = if (show) View.VISIBLE else View.GONE
     }
@@ -97,10 +102,10 @@ class ListActivity : BaseActivity(), ListContract.View {
         })
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
+        addDividers()
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = categoryTitleMapper.getCategoryTitle(categoryId)
-        addDividers()
     }
 
     private fun addDividers() {
@@ -108,8 +113,4 @@ class ListActivity : BaseActivity(), ListContract.View {
         songList.addItemDecoration(dividerItemDecoration)
     }
 
-    companion object {
-
-        private val TAG = ListActivity::class.java.simpleName
-    }
 }
