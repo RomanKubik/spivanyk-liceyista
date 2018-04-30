@@ -26,6 +26,10 @@ class MainActivity: BaseActivity(), MainContract.View {
         setContentView(R.layout.activity_main)
         component.mainComponent(MainModule(this)).inject(this)
         init()
+    }
+
+    override fun onStart() {
+        super.onStart()
         presenter.requestData()
     }
 

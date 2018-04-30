@@ -1,5 +1,7 @@
 package com.roman.kubik.spivanyklicejista.domain.utils;
 
+import com.roman.kubik.spivanyklicejista.domain.formatting.LyricsFormatter;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -12,7 +14,7 @@ import javax.inject.Inject;
  * Created by kubik on 1/21/18.
  */
 
-public class ChordsRecognizer {
+public class ChordsRecognizer implements LyricsFormatter {
 
     public static final String A = "A";
     public static final String B = "B";
@@ -48,7 +50,8 @@ public class ChordsRecognizer {
      * @param text text to be recognized
      * @return recognized text
      */
-    public String markChordsInText(String text) {
+    @Override
+    public CharSequence format(String text) {
 
         String result = text;
 

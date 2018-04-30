@@ -20,5 +20,6 @@ interface ListContract {
         fun fetchPreferences()
         fun fetchSongByCategory(categoryId: Int)
         fun filter(byTitle: String)
+        fun destroy()
     }
 }

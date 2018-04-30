@@ -1,6 +1,5 @@
 package com.roman.kubik.spivanyklicejista.presentation.main
 
-import com.roman.kubik.spivanyklicejista.domain.category.Category
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 
 interface MainContract {
@@ -17,6 +16,6 @@ interface MainContract {
     interface Presenter {
         fun requestData()
         fun requestRandom()
-        fun onDestroy()
+        fun destroy()
     }
 }

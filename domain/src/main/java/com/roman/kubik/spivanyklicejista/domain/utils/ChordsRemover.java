@@ -1,11 +1,13 @@
 package com.roman.kubik.spivanyklicejista.domain.utils;
 
+import com.roman.kubik.spivanyklicejista.domain.formatting.LyricsFormatter;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-public class ChordsRemover {
+public class ChordsRemover implements LyricsFormatter {
 
     private static final Pattern bracketsPattern = Pattern.compile("(<\\S+>)");
     private static final Pattern emptyLinePattern = Pattern.compile("(\\n\\s+\\n)");
@@ -14,12 +16,13 @@ public class ChordsRemover {
     public ChordsRemover() {
     }
 
-    public String removeChords(String text) {
+    @Override
+    public CharSequence format(String text) {
         Matcher matcher = bracketsPattern.matcher(text);
         String str = text;
         while (matcher.find()) {
             String chord = matcher.group(1);
-            str = str.replaceAll(chord, "");
+            str = str.replaceAll(chord, " ");
         }
         return removeEmptyLines(str);
     }

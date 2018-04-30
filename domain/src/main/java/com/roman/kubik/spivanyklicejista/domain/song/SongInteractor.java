@@ -2,6 +2,7 @@ package com.roman.kubik.spivanyklicejista.domain.song;
 
 
 import java.util.List;
+import java.util.Random;
 
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
@@ -13,6 +14,7 @@ import io.reactivex.Single;
 
 public class SongInteractor {
 
+    private Random random = new Random();
     private SongRepository songRepository;
 
     public SongInteractor(SongRepository songRepository) {
@@ -49,5 +51,10 @@ public class SongInteractor {
 
     public Completable deleteSong(Song song) {
         return songRepository.delete(song);
+    }
+
+    public Single<Song> getRandomSong() {
+        return songRepository.getAll()
+                .map(l -> l.get(random.nextInt(l.size())));
     }
 }

@@ -51,7 +51,7 @@ class ListActivity : BaseActivity(), ListContract.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_song_list, menu)
         val menuItem = menu?.findItem(R.id.app_bar_search)
         val searchView = menuItem?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -73,6 +73,11 @@ class ListActivity : BaseActivity(), ListContract.View {
             android.R.id.home -> this.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        presenter.destroy()
+        super.onDestroy()
     }
 
     override fun showProgress(show: Boolean) {
@@ -97,10 +102,10 @@ class ListActivity : BaseActivity(), ListContract.View {
         })
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
+        addDividers()
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = categoryTitleMapper.getCategoryTitle(categoryId)
-        addDividers()
     }
 
     private fun addDividers() {
@@ -108,8 +113,4 @@ class ListActivity : BaseActivity(), ListContract.View {
         songList.addItemDecoration(dividerItemDecoration)
     }
 
-    companion object {
-
-        private val TAG = ListActivity::class.java.simpleName
-    }
 }

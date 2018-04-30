@@ -56,7 +56,7 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
         lyrics.setText(song.lyrics)
     }
 
-    override fun onChordsRecognized(lyrics: String) {
+    override fun onChordsRecognized(lyrics: CharSequence) {
         this.lyrics.setText(lyrics)
     }
 

@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.spivanyklicejista.R
+import com.roman.kubik.spivanyklicejista.domain.formatting.LyricsFormattingInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.Song
-import com.roman.kubik.spivanyklicejista.domain.utils.ChordsRemover
-import com.roman.kubik.spivanyklicejista.utils.SpannableStringChordsCreator
 import javax.inject.Inject
 
 /**
@@ -19,8 +18,8 @@ import javax.inject.Inject
  */
 
 class SongsAdapter @Inject
-constructor(val chordsCreator: SpannableStringChordsCreator,
-            val chordsRemover: ChordsRemover) : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
+constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
+    : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
 
     private var onClickListener: Consumer<Song>? = null
 
@@ -84,9 +83,9 @@ constructor(val chordsCreator: SpannableStringChordsCreator,
 
         private fun getLyrics(lyrics: String): CharSequence {
             return if (showChords)
-                chordsCreator.selectChords(lyrics, null, Color.BLACK, Color.TRANSPARENT)
+                lyricsFormattingInteractor.createChords(lyrics, null, Color.BLACK, Color.TRANSPARENT)
             else
-                chordsRemover.removeChords(lyrics)
+                lyricsFormattingInteractor.removeChords(lyrics)
         }
     }
 }
