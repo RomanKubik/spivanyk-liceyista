@@ -84,7 +84,7 @@ public class ChordsRecognizerTest {
                         "<Am#> <Bm#> <Cm#> <Dm#> <Em#> <Fm#> <Gm#> <Hm#>\n" +
                         "recognized as chords";
 
-        Assert.assertEquals(expectedResult, chordsRecognizer.markChordsInText(toRecognize));
+        Assert.assertEquals(expectedResult, chordsRecognizer.format(toRecognize));
     }
 
     @Test

@@ -8,7 +8,7 @@ interface EditSongContract {
 
         fun showSong(song: Song)
 
-        fun onChordsRecognized(lyrics: String)
+        fun onChordsRecognized(lyrics: CharSequence)
 
         fun onSongSaved()
 

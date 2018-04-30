@@ -1,9 +1,9 @@
 package com.roman.kubik.spivanyklicejista.presentation.edit
 
 import com.roman.kubik.spivanyklicejista.Constants
+import com.roman.kubik.spivanyklicejista.domain.formatting.LyricsFormattingInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
-import com.roman.kubik.spivanyklicejista.domain.utils.ChordsRecognizer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -13,7 +13,7 @@ import javax.inject.Inject
 class EditSongPresenter @Inject constructor(
         private val view: EditSongContract.View,
         private val songInteractor: SongInteractor,
-        private val chordsRecognizer: ChordsRecognizer,
+        private val lyricsFormattingInteractor: LyricsFormattingInteractor,
         private val compositeDisposable: CompositeDisposable) : EditSongContract.Presenter {
 
     private var song: Song? = null
@@ -31,7 +31,7 @@ class EditSongPresenter @Inject constructor(
     }
 
     override fun recognizeChords(lyrics: String) {
-        view.onChordsRecognized(chordsRecognizer.markChordsInText(lyrics))
+        view.onChordsRecognized(lyricsFormattingInteractor.recognizeChords(lyrics))
     }
 
     override fun saveSong(title: String, lyrics: String) {
