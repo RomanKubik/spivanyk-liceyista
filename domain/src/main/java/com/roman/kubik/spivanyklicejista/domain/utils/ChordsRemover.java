@@ -22,7 +22,7 @@ public class ChordsRemover implements LyricsFormatter {
         String str = text;
         while (matcher.find()) {
             String chord = matcher.group(1);
-            str = str.replaceAll(chord, "");
+            str = str.replaceAll(chord, " ");
         }
         return removeEmptyLines(str);
     }
