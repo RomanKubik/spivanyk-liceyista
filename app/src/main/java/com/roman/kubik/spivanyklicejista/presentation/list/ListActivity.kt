@@ -51,7 +51,7 @@ class ListActivity : BaseActivity(), ListContract.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_song_list, menu)
         val menuItem = menu?.findItem(R.id.app_bar_search)
         val searchView = menuItem?.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

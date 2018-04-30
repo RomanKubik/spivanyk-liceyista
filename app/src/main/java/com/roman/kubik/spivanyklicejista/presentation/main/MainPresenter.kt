@@ -1,5 +1,6 @@
 package com.roman.kubik.spivanyklicejista.presentation.main
 
+import com.roman.kubik.spivanyklicejista.Constants
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
 import com.roman.kubik.spivanyklicejista.general.di.ActivityScope
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -10,21 +11,21 @@ import javax.inject.Inject
 
 @ActivityScope
 class MainPresenter @Inject
-constructor(private val view: MainContract.View, private val songInteractor: SongInteractor, private val compositeDisposable: CompositeDisposable) : MainContract.Presenter {
-
-    private val random = Random()
+constructor(private val view: MainContract.View,
+            private val songInteractor: SongInteractor,
+            private val compositeDisposable: CompositeDisposable) : MainContract.Presenter {
 
     override fun requestData() {
         compositeDisposable.addAll(
-                songInteractor.getCountByCategory(1)
+                songInteractor.getCountByCategory(Constants.Category.PATRIOTIC_ID)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setPatrioticsCount, view::showError),
-                songInteractor.getCountByCategory(2)
+                songInteractor.getCountByCategory(Constants.Category.BONFIRE_ID)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setBonfiresCount, view::showError),
-                songInteractor.getCountByCategory(3)
+                songInteractor.getCountByCategory(Constants.Category.ABROAD_ID)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setAbroadsCount, view::showError),
@@ -36,15 +37,14 @@ constructor(private val view: MainContract.View, private val songInteractor: Son
 
     override fun requestRandom() {
         compositeDisposable.add(
-                songInteractor.all
+                songInteractor.randomSong
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ l -> view.navigateToSong(l[random.nextInt(l.size)]) }, view::showError))
+                        .subscribe(view::navigateToSong, view::showError))
     }
 
-    override fun onDestroy() {
+    override fun destroy() {
         compositeDisposable.clear()
     }
-
 
 }
