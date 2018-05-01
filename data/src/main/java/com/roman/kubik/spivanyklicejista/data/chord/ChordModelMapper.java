@@ -10,7 +10,7 @@ import com.roman.kubik.spivanyklicejista.domain.chord.Chord;
 public class ChordModelMapper implements EntityModelMapper<ChordEntity, Chord> {
     @Override
     public Chord fromEntity(ChordEntity from) {
-        return new Chord(from.getId(), from.getName(), from.getImagePath(), from.getSoundPath());
+        return new Chord(from.getId(), from.getName(), from.getImagePath().replace("guitar", "ukulele"), from.getSoundPath());
     }
 
     @Override
