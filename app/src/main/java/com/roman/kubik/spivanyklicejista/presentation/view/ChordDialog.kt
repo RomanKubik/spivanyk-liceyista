@@ -43,8 +43,8 @@ class ChordDialog : Dialog {
         indicator.text = String.format(context.getString(R.string.page_of_pages), currentPosition + 1, chords.size)
     }
 
-    fun showActiveChord(id: Int) {
-        val c = chords.findLast { c -> c.id == id }
+    fun showActiveChord(name: String) {
+        val c = chords.findLast { c -> c.name == name }
         if (c != null) {
             chord.text = c.name
             chordImage.setImageDrawable(assetsDrawableLoader.loadDrawable(c.imagePath))

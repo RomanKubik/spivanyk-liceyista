@@ -8,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.spivanyklicejista.R
 import com.roman.kubik.spivanyklicejista.domain.chord.Chord
@@ -23,7 +22,8 @@ class ChordsListAdapter @Inject constructor(private val assetsDrawableLoader: As
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChordHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return ChordHolder(inflater.inflate(R.layout.item_chord, parent, false), assetsDrawableLoader)
+        return ChordHolder(inflater.inflate(R.layout.item_chord, parent, false),
+                assetsDrawableLoader)
     }
 
     override fun getItemCount() = chords.size

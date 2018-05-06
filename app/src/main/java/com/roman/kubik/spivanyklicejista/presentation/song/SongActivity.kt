@@ -3,7 +3,6 @@ package com.roman.kubik.spivanyklicejista.presentation.song
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.text.method.LinkMovementMethod
