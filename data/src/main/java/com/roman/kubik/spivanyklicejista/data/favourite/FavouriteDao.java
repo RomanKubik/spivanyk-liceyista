@@ -4,6 +4,9 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
+import com.roman.kubik.spivanyklicejista.domain.favourite.Favourite;
+import com.roman.kubik.spivanyklicejista.domain.song.Song;
+
 import java.util.List;
 
 import io.reactivex.Completable;
@@ -24,4 +27,7 @@ public interface FavouriteDao {
 
     @Query("DELETE FROM favourite WHERE favourite.song_id = :songId")
     void delete(int songId);
+
+    @Query("SELECT * FROM favourite WHERE favourite.song_id = :songId")
+    Single<FavouriteEntity> isSongExists(int songId);
 }

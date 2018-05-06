@@ -5,16 +5,12 @@ import com.roman.kubik.spivanyklicejista.general.di.ActivityScope
 import com.roman.kubik.spivanyklicejista.presentation.main.MainActivity
 import com.roman.kubik.spivanyklicejista.presentation.main.MainContract
 import com.roman.kubik.spivanyklicejista.presentation.main.MainPresenter
-
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 
-/**
- * [MainActivity] module
- * Created by kubik on 1/14/18.
- */
 @Module
-class MainModule constructor(private val activity: MainActivity) {
+class MainModule(private val activity: MainActivity) {
 
     @Provides
     @ActivityScope
@@ -22,6 +18,6 @@ class MainModule constructor(private val activity: MainActivity) {
 
     @Provides
     @ActivityScope
-    fun getPresenter(songInteractor: SongInteractor): MainContract.Presenter = MainPresenter(activity, songInteractor)
+    fun getPresenter(songInteractor: SongInteractor, compositeDisposable: CompositeDisposable): MainContract.Presenter = MainPresenter(activity, songInteractor, compositeDisposable)
 
 }

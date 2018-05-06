@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/extra_light_grey</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -13,18 +14,78 @@
     </style>
 
     <style name="AppTheme.SongTitle" parent="android:Widget.TextView">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/text_size_20</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_28</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="AppTheme.SongLyrics" parent="android:Widget.TextView">
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.SongCategory" parent="AppTheme.SongLyrics">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="AppTheme.ChordsTitle" parent="AppTheme.SongLyrics">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="AppTheme.SongTitle.List" parent="AppTheme.SongTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
     </style>
 
     <style name="AppTheme.SongLyrics.List" parent="AppTheme.SongLyrics">
-        <item name="android:maxLines">8</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:maxLines">4</item>
         <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="AppTheme.MainItemTitle" parent="android:Widget.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="AppTheme.MainItemDescription" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="AppTheme.ChordDialog" >
+    </style>
+    <style name="AppTheme.ChordDialog.Chord" parent="AppTheme.ChordDialog">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="AppTheme.ChordDialog.Indicator" parent="AppTheme.ChordDialog">
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AppTheme.ChordsList"/>
+
+    <style name="AppTheme.ChordsList.Chord" parent="AppTheme.ChordsList">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="AppTheme.ChordsList.ChordImage" parent="AppTheme.ChordsList">
+        <item name="android:layout_width">@dimen/view_size_48</item>
+        <item name="android:layout_height">@dimen/view_size_48</item>
     </style>
 
 </resources>

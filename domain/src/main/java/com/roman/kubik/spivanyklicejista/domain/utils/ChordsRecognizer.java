@@ -1,16 +1,20 @@
 package com.roman.kubik.spivanyklicejista.domain.utils;
 
+import com.roman.kubik.spivanyklicejista.domain.formatting.LyricsFormatter;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.inject.Inject;
 
 /**
  * Helps to recognize chords in the song
  * Created by kubik on 1/21/18.
  */
 
-public class ChordsRecognizer {
+public class ChordsRecognizer implements LyricsFormatter {
 
     public static final String A = "A";
     public static final String B = "B";
@@ -35,6 +39,10 @@ public class ChordsRecognizer {
     private static final List<String> SEPT_GROUP = Arrays.asList(EMPTY_STRING, SEPT);
     private static final List<String> ACCIDENTAL_GROUP = Arrays.asList(EMPTY_STRING, SHARP, FLAT);
 
+    @Inject
+    public ChordsRecognizer() {
+    }
+
     /**
      * Takes song and marks chord inside with specific symbols.
      * For example Am -> <Am>
@@ -42,7 +50,8 @@ public class ChordsRecognizer {
      * @param text text to be recognized
      * @return recognized text
      */
-    public String markChordsInText(String text) {
+    @Override
+    public CharSequence format(String text) {
 
         String result = text;
 

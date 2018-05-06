@@ -2,7 +2,6 @@ package com.roman.kubik.spivanyklicejista.presentation.main.di
 
 import com.roman.kubik.spivanyklicejista.general.di.ActivityScope
 import com.roman.kubik.spivanyklicejista.presentation.main.MainActivity
-
 import dagger.Subcomponent
 
 /**

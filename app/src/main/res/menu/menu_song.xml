@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/app_bar_bookmark"
+        android:icon="@drawable/ic_bookmark_border_black_24dp"
+        android:title="@string/bookmark"
+        app:showAsAction="ifRoom|collapseActionView" />
+    <item
+        android:id="@+id/app_bar_share"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:title="@string/share"
+        app:showAsAction="ifRoom|collapseActionView" />
+    <item
+        android:id="@+id/app_bar_edit"
+        android:icon="@drawable/ic_edit_black_24dp"
+        android:title="@string/edit"
+        app:showAsAction="ifRoom|collapseActionView" />
+    <item
+        android:id="@+id/app_bar_show_chords"
+        android:checkable="true"
+        android:title="@string/show_chords"
+        app:showAsAction="never" />
+</menu>

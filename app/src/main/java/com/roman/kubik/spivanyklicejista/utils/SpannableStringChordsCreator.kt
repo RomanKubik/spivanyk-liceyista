@@ -6,6 +6,8 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.ClickableSpan
 import android.view.View
+import com.roman.kubik.spivanyklicejista.domain.formatting.ChordsMarker
+import com.roman.kubik.spivanyklicejista.domain.formatting.OnChordClickListener
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -13,17 +15,17 @@ import javax.inject.Inject
  * Created by kubik on 2/19/18.
  */
 
-class SpannableStringChordsCreator @Inject constructor() {
+class SpannableStringChordsCreator @Inject constructor(): ChordsMarker {
 
     private val bracketsPattern: Pattern = Pattern.compile("(<\\S+>)")
 
-    fun selectChords(text: String, clickListener: OnChordClickListener?): SpannableString {
+
+    override fun format(text: String, clickListener: OnChordClickListener?, textColor: Int, backgroundColor: Int): CharSequence {
         val selections = findSelections(text)
         val formattedText = clearFormatting(text)
         val spannableString = SpannableString(formattedText)
-        return attachClickableSpan(spannableString, clickListener, selections)
+        return attachClickableSpan(spannableString, clickListener, selections, textColor, backgroundColor)
     }
-
 
     private fun findSelections(text: String): List<IntRange> {
         val selectionsList = mutableListOf<IntRange>()
@@ -43,10 +45,12 @@ class SpannableStringChordsCreator @Inject constructor() {
         return txt
     }
 
-    private fun attachClickableSpan(spannableString: SpannableString, clickListener: OnChordClickListener?, spans: List<IntRange>): SpannableString {
+    private fun attachClickableSpan(spannableString: SpannableString, clickListener: OnChordClickListener?, spans: List<IntRange>, textColor: Int, backgroundColor: Int): SpannableString {
 
         for (range in spans) {
-            val chord = spannableString.substring(range).removeSurrounding(" ")
+            val chord = spannableString.substring(range)
+                    .replace(" ","")
+                    .replace("\n", "")
             val clickable = object : ClickableSpan() {
                 override fun onClick(v: View?) {
                     clickListener?.onChordClicked(chord)
@@ -54,6 +58,8 @@ class SpannableStringChordsCreator @Inject constructor() {
 
                 override fun updateDrawState(ds: TextPaint?) {
                     super.updateDrawState(ds)
+                    ds?.bgColor = backgroundColor
+                    ds?.color = textColor
                     ds?.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
                     ds?.isUnderlineText = false
                 }
