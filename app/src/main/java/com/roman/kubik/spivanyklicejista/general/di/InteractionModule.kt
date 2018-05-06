@@ -5,9 +5,7 @@ import android.preference.PreferenceManager
 import com.roman.kubik.spivanyklicejista.data.category.CategoryDao
 import com.roman.kubik.spivanyklicejista.data.category.CategoryModelMapper
 import com.roman.kubik.spivanyklicejista.data.category.CategoryRepositoryImpl
-import com.roman.kubik.spivanyklicejista.data.chord.ChordDao
-import com.roman.kubik.spivanyklicejista.data.chord.ChordModelMapper
-import com.roman.kubik.spivanyklicejista.data.chord.ChordRepositoryImpl
+import com.roman.kubik.spivanyklicejista.data.chord.GuitarChordRepository
 import com.roman.kubik.spivanyklicejista.data.favourite.FavouriteDao
 import com.roman.kubik.spivanyklicejista.data.favourite.FavouriteRepositoryImpl
 import com.roman.kubik.spivanyklicejista.data.preferences.PreferencesImpl
@@ -53,8 +51,8 @@ class InteractionModule {
 
     @Provides
     @Singleton
-    internal fun getChordInteractor(chordDao: ChordDao, chordModelMapper: ChordModelMapper, markedChordsRecognizer: MarkedChordsRecognizer): ChordInteractor {
-        return ChordInteractor(ChordRepositoryImpl(chordDao, chordModelMapper), markedChordsRecognizer)
+    internal fun getChordInteractor(guitarChordRepository: GuitarChordRepository, markedChordsRecognizer: MarkedChordsRecognizer): ChordInteractor {
+        return ChordInteractor(guitarChordRepository, markedChordsRecognizer)
     }
 
     @Provides
