@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="show_chords"
+        android:summary="Show chords with song"
+        android:title="@string/show_chords" />
+    <ListPreference
+        android:defaultValue="0"
+        android:entries="@array/instrument_name"
+        android:entryValues="@array/instrument_key"
+        android:key="selected_instrument"
+        android:title="List preference" />
+</PreferenceScreen>

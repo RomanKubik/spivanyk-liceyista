@@ -7,5 +7,8 @@ package com.roman.kubik.spivanyklicejista.presentation.preferences
 interface PreferencesContract {
     interface View
 
-    interface Presenter
+    interface Presenter {
+        fun start()
+        fun destroy()
+    }
 }

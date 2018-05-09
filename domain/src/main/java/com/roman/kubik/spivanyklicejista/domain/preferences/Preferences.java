@@ -1,6 +1,7 @@
 package com.roman.kubik.spivanyklicejista.domain.preferences;
 
 import io.reactivex.Completable;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface Preferences {
@@ -9,5 +10,6 @@ public interface Preferences {
 
     Completable setChordsVisible(boolean visible);
 
+    Observable<String> preferenceChange();
 
 }

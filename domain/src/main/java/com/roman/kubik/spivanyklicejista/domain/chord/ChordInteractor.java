@@ -39,4 +39,8 @@ public class ChordInteractor {
     public String getChordPath(String chord) {
         return repository.getChordImagePath(chord);
     }
+
+    public void setChordRepository(ChordRepository chordRepository) {
+        this.repository = chordRepository;
+    }
 }

@@ -35,8 +35,7 @@ object Navigate {
     }
 
     fun toPreferencesActivity(activity: Activity) {
-        activity.startActivityForResult(Intent(activity, PreferencesActivity::class.java),
-                Constants.RequestCode.PREFERENCES_ACTIVITY)
+        activity.startActivity(Intent(activity, PreferencesActivity::class.java))
     }
 
     fun toEditActivity(activity: Activity) {

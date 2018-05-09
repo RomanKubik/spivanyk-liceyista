@@ -1,6 +1,7 @@
 package com.roman.kubik.spivanyklicejista.domain.preferences;
 
 import io.reactivex.Completable;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public class PreferencesInteractor {
@@ -18,5 +19,9 @@ public class PreferencesInteractor {
     public Completable switchChordsVisibility() {
         return preferences.isChordsVisible()
                 .flatMapCompletable(visible -> preferences.setChordsVisible(!visible));
+    }
+
+    public Observable<String> preferenceChange() {
+        return preferences.preferenceChange();
     }
 }
