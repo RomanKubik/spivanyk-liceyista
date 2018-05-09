@@ -5,6 +5,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.ClickableSpan
+import android.util.Log
 import android.view.View
 import com.roman.kubik.spivanyklicejista.domain.formatting.ChordsMarker
 import com.roman.kubik.spivanyklicejista.domain.formatting.OnChordClickListener
@@ -15,7 +16,7 @@ import javax.inject.Inject
  * Created by kubik on 2/19/18.
  */
 
-class SpannableStringChordsCreator @Inject constructor(): ChordsMarker {
+class SpannableStringChordsCreator @Inject constructor() : ChordsMarker {
 
     private val bracketsPattern: Pattern = Pattern.compile("(<\\S+>)")
 
@@ -33,7 +34,7 @@ class SpannableStringChordsCreator @Inject constructor(): ChordsMarker {
         while (matcher.find()) {
             val chord = matcher.group(1)
             val start = text.indexOf(chord, if (selectionsList.size > 0) selectionsList.last().last else 0)
-            val end = start + chord.length
+            val end = if (start + chord.length < text.length) start + chord.length else text.length - 1
             selectionsList.add(IntRange(start, end))
         }
         return selectionsList
