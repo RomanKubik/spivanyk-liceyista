@@ -8,7 +8,6 @@ interface PreferencesContract {
     interface View
 
     interface Presenter {
-        fun start()
         fun destroy()
     }
 }

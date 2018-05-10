@@ -22,7 +22,7 @@
     <string name="backward">Backward</string>
     <string name="chord">Chord</string>
     <string formatted="false" name="page_of_pages">%d of %d</string>
-    <string name="show_chords">Show chords</string>
+    <string name="settings_show_chords_ttl">Show chords</string>
     <string name="edit">Edit</string>
     <string name="title">Title</string>
     <string name="lyrics">Lyrics</string>
@@ -34,4 +34,6 @@
     <string name="search">Search</string>
     <string name="settings">Settings</string>
     <string name="add_song">Add song</string>
+    <string name="settings_preferred_instrument_ttl">Preferred instrument</string>
+    <string name="settings_display_chords_msg">Display chords with song</string>
 </resources>

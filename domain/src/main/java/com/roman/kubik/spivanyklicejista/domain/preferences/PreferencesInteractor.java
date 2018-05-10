@@ -1,7 +1,6 @@
 package com.roman.kubik.spivanyklicejista.domain.preferences;
 
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public class PreferencesInteractor {
@@ -21,7 +20,7 @@ public class PreferencesInteractor {
                 .flatMapCompletable(visible -> preferences.setChordsVisible(!visible));
     }
 
-    public Observable<String> preferenceChange() {
-        return preferences.preferenceChange();
+    public Single<String> selectedInstrument() {
+        return preferences.selectedInstrument();
     }
 }

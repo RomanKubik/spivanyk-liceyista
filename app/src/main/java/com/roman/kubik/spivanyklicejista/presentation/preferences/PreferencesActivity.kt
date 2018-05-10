@@ -12,7 +12,7 @@ import javax.inject.Inject
 /**
  * Created by kubik on 3/10/18.
  */
-class PreferencesActivity : BaseActivity() {
+class PreferencesActivity : BaseActivity(), PreferencesContract.View {
 
     @Inject
     lateinit var presenter: PreferencesContract.Presenter
@@ -27,9 +27,14 @@ class PreferencesActivity : BaseActivity() {
         init()
     }
 
+    override fun onDestroy() {
+        presenter.destroy()
+        super.onDestroy()
+    }
+
     private fun init() {
         setSupportActionBar(toolbar)
-        supportActionBar?.title = getString(R.string.app_name)
+        supportActionBar?.title = getString(R.string.settings)
     }
 
 
@@ -38,7 +43,6 @@ class PreferencesActivity : BaseActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             addPreferencesFromResource(R.xml.app_preferences)
-
         }
     }
 

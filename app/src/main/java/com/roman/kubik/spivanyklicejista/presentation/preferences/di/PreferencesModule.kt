@@ -19,5 +19,5 @@ class PreferencesModule (private val activity: PreferencesActivity) {
 
     @Provides
     @ActivityScope
-    fun getPresenter(): PreferencesContract.Presenter = PreferencesPresenter(activity)
+    fun getPresenter(presenter: PreferencesPresenter): PreferencesContract.Presenter = presenter
 }

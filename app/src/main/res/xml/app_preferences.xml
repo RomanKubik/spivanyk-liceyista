@@ -4,12 +4,12 @@
     <SwitchPreference
         android:defaultValue="true"
         android:key="show_chords"
-        android:summary="Show chords with song"
-        android:title="@string/show_chords" />
+        android:summary="@string/settings_display_chords_msg"
+        android:title="@string/settings_show_chords_ttl" />
     <ListPreference
-        android:defaultValue="0"
+        android:defaultValue="guitar"
         android:entries="@array/instrument_name"
         android:entryValues="@array/instrument_key"
         android:key="selected_instrument"
-        android:title="List preference" />
+        android:title="@string/settings_preferred_instrument_ttl" />
 </PreferenceScreen>

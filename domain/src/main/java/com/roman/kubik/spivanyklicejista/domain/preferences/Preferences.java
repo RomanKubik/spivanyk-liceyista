@@ -10,6 +10,5 @@ public interface Preferences {
 
     Completable setChordsVisible(boolean visible);
 
-    Observable<String> preferenceChange();
-
+    Single<String> selectedInstrument();
 }
