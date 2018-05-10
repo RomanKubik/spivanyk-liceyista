@@ -19,6 +19,6 @@
     <item
         android:id="@+id/app_bar_show_chords"
         android:checkable="true"
-        android:title="@string/show_chords"
+        android:title="@string/settings_show_chords_ttl"
         app:showAsAction="never" />
 </menu>

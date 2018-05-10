@@ -19,4 +19,8 @@ public class PreferencesInteractor {
         return preferences.isChordsVisible()
                 .flatMapCompletable(visible -> preferences.setChordsVisible(!visible));
     }
+
+    public Single<String> selectedInstrument() {
+        return preferences.selectedInstrument();
+    }
 }

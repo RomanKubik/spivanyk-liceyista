@@ -41,6 +41,7 @@ class MainActivity: BaseActivity(), MainContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.app_bar_add_song -> Navigate.toEditActivity(this)
+            R.id.app_bar_settings -> Navigate.toPreferencesActivity(this)
         }
         return super.onOptionsItemSelected(item)
     }

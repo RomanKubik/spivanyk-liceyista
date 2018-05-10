@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/extra_light_grey</color>
     <color name="colorPrimaryDark">@color/light_grey</color>
-    <color name="colorAccent">@color/grey</color>
+    <color name="colorAccent">@color/olive_green</color>
 
     <color name="hot_pink">#e8198b</color>
     <color name="olive_green">#417505</color>

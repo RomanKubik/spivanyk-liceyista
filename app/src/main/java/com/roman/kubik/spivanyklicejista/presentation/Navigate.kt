@@ -3,12 +3,12 @@ package com.roman.kubik.spivanyklicejista.presentation
 import android.app.Activity
 import android.content.Intent
 import com.roman.kubik.spivanyklicejista.Constants
-import com.roman.kubik.spivanyklicejista.domain.category.Category
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.presentation.edit.EditSongActivity
 
 import com.roman.kubik.spivanyklicejista.presentation.list.ListActivity
 import com.roman.kubik.spivanyklicejista.presentation.main.MainActivity
+import com.roman.kubik.spivanyklicejista.presentation.preferences.PreferencesActivity
 import com.roman.kubik.spivanyklicejista.presentation.song.SongActivity
 
 /**
@@ -34,14 +34,18 @@ object Navigate {
         activity.startActivity(intent)
     }
 
+    fun toPreferencesActivity(activity: Activity) {
+        activity.startActivity(Intent(activity, PreferencesActivity::class.java))
+    }
+
     fun toEditActivity(activity: Activity) {
         val intent = Intent(activity, EditSongActivity::class.java)
-        activity.startActivityForResult(intent, Constants.RequestCodes.EDIT_SONG)
+        activity.startActivityForResult(intent, Constants.RequestCode.EDIT_SONG)
     }
 
     fun toEditActivity(activity: Activity, song: Song) {
         val intent = Intent(activity, EditSongActivity::class.java)
         intent.putExtra(Constants.Extras.SONG_ID, song.id)
-        activity.startActivityForResult(intent, Constants.RequestCodes.EDIT_SONG)
+        activity.startActivityForResult(intent, Constants.RequestCode.EDIT_SONG)
     }
 }

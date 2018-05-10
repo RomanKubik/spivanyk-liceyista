@@ -30,9 +30,10 @@ interface Constants {
         }
     }
 
-    interface RequestCodes {
+    interface RequestCode {
         companion object {
             const val EDIT_SONG = 1401
+            const val PREFERENCES_ACTIVITY = 1402
         }
     }
 }

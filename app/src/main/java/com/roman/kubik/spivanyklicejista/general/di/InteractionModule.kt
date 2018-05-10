@@ -5,6 +5,7 @@ import android.preference.PreferenceManager
 import com.roman.kubik.spivanyklicejista.data.category.CategoryDao
 import com.roman.kubik.spivanyklicejista.data.category.CategoryModelMapper
 import com.roman.kubik.spivanyklicejista.data.category.CategoryRepositoryImpl
+import com.roman.kubik.spivanyklicejista.data.chord.ChordRepositoryFactoryImpl
 import com.roman.kubik.spivanyklicejista.data.chord.GuitarChordRepository
 import com.roman.kubik.spivanyklicejista.data.favourite.FavouriteDao
 import com.roman.kubik.spivanyklicejista.data.favourite.FavouriteRepositoryImpl
@@ -51,13 +52,14 @@ class InteractionModule {
 
     @Provides
     @Singleton
-    internal fun getChordInteractor(guitarChordRepository: GuitarChordRepository, markedChordsRecognizer: MarkedChordsRecognizer): ChordInteractor {
-        return ChordInteractor(guitarChordRepository, markedChordsRecognizer)
+    internal fun getPreferencesInteractor(context: Context): PreferencesInteractor {
+        return PreferencesInteractor(PreferencesImpl(PreferenceManager.getDefaultSharedPreferences(context.applicationContext)))
     }
 
     @Provides
     @Singleton
-    internal fun getPreferencesInteractor(context: Context): PreferencesInteractor {
-        return PreferencesInteractor(PreferencesImpl(PreferenceManager.getDefaultSharedPreferences(context.applicationContext)))
+    internal fun getChordInteractor(chordRepositoryFactoryImpl: ChordRepositoryFactoryImpl, preferencesInteractor: PreferencesInteractor, markedChordsRecognizer: MarkedChordsRecognizer): ChordInteractor {
+        return ChordInteractor(chordRepositoryFactoryImpl, preferencesInteractor, markedChordsRecognizer)
     }
+
 }

@@ -73,7 +73,7 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == Constants.RequestCodes.EDIT_SONG && resultCode == Activity.RESULT_OK) {
+        if (requestCode == Constants.RequestCode.EDIT_SONG && resultCode == Activity.RESULT_OK) {
             presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
         }
     }

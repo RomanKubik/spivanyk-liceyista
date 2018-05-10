@@ -8,6 +8,8 @@ import com.roman.kubik.spivanyklicejista.presentation.list.di.ListComponent
 import com.roman.kubik.spivanyklicejista.presentation.list.di.ListModule
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainComponent
 import com.roman.kubik.spivanyklicejista.presentation.main.di.MainModule
+import com.roman.kubik.spivanyklicejista.presentation.preferences.di.PreferencesComponent
+import com.roman.kubik.spivanyklicejista.presentation.preferences.di.PreferencesModule
 import com.roman.kubik.spivanyklicejista.presentation.song.di.SongComponent
 import com.roman.kubik.spivanyklicejista.presentation.song.di.SongModule
 
@@ -28,6 +30,7 @@ interface ApplicationComponent {
     fun mainComponent(mainModule: MainModule): MainComponent
     fun listComponent(listModule: ListModule): ListComponent
     fun songComponent(songModule: SongModule): SongComponent
+    fun preferencesComponent(preferencesModule: PreferencesModule): PreferencesComponent
     fun editSongComponent(editSongModule: EditSongModule): EditSongComponent
 
 }
