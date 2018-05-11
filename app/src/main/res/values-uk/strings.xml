@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Співаник Ліцеїста</string>
+    <string name="ttl_last_played">Останні проспівані</string>
+    <string name="dsc_last_played">100 останніх проспіваних пісень</string>
+    <string name="ttl_bonfire_songs">При ватрі</string>
+    <string formatted="false" name="dsc_bonfire_songs">%d приватрених пісень</string>
+    <string name="ttl_abroad_songs">Цікаве закордонне</string>
+    <string formatted="false" name="dsc_abroad_songs">%d закордонних пісень</string>
+    <string name="ttl_surprise_me">Здивуй мене</string>
+    <string formatted="false" name="dsc_surprise_me">Пісня зі співанику вибрана наймання</string>
+    <string name="ttl_all_songs">Усі пісні</string>
+    <string formatted="false" name="dsc_all_songs">Усі-усі %d пісень</string>
+    <string name="ttl_patriotic">Патріотичні пісні</string>
+    <string formatted="false" name="dsc_patriotic">%d пісень патріотичного ліцеїста</string>
+    <string name="ttl_favourite">Мої улюблені</string>
+    <string formatted="false" name="dsc_favourite">%d моїх улюблених пісень</string>
+    <string name="share">Поділитися</string>
+    <string name="bookmark">Вподобайка</string>
+    <string name="chords">Акорди</string>
+    <string name="similar_songs">Схожі пісні</string>
+    <string name="slash">/</string>
+    <string name="close">Закрити</string>
+    <string name="forward">Вперед</string>
+    <string name="backward">Назад</string>
+    <string name="chord">Акорд</string>
+    <string formatted="false" name="page_of_pages">%d із %d</string>
+    <string name="settings_show_chords_ttl">Показувати акорди</string>
+    <string name="edit">Редагувати</string>
+    <string name="title">Назва</string>
+    <string name="lyrics">Текст</string>
+    <string name="save">Зберегти</string>
+    <string name="auto_recognize">Самовизначалка</string>
+    <string name="ttl_save_changes">Зберегти зміни</string>
+    <string name="msg_save_changes">Зберегти зміни перед тим, як закрити це вікно?</string>
+    <string name="discard">Ні</string>
+    <string name="search">Пошук</string>
+    <string name="settings">Налаштування</string>
+    <string name="add_song">Добавити пісню</string>
+    <string name="settings_preferred_instrument_ttl">Обраний інструмент</string>
+    <string name="settings_display_chords_msg">Показувати акорди із піснею</string>
+</resources>
