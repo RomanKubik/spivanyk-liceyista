@@ -59,4 +59,8 @@ class DatabaseModule {
     @Singleton
     internal fun getFavouriteDao(appDatabase: AppDatabase) = appDatabase.favouriteDao()
 
+    @Provides
+    @Singleton
+    internal fun getHistoryDao(appDatabase: AppDatabase) = appDatabase.historyDao()
+
 }
