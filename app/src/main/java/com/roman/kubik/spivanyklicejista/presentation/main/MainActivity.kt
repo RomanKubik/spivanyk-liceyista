@@ -16,7 +16,7 @@ import com.roman.kubik.spivanyklicejista.presentation.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity: BaseActivity(), MainContract.View {
+class MainActivity : BaseActivity(), MainContract.View {
     @Inject
     lateinit var presenter: MainContract.Presenter
 
@@ -62,6 +62,10 @@ class MainActivity: BaseActivity(), MainContract.View {
         allCategory.setDescription(String.format(getString(R.string.dsc_all_songs), count))
     }
 
+    override fun setFavouriteCount(count: Int) {
+        favouriteCategory.setDescription(String.format(getString(R.string.dsc_favourite), count))
+    }
+
     override fun showError(error: Throwable) {
         error.printStackTrace()
         Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
@@ -104,5 +108,10 @@ class MainActivity: BaseActivity(), MainContract.View {
     @OnClick(R.id.allCategory)
     fun onAllClicked() {
         Navigate.toListActivity(this, Constants.Category.ALL_ID)
+    }
+
+    @OnClick(R.id.favouriteCategory)
+    fun onFavouriteClicked() {
+        Navigate.toListActivity(this, Constants.Category.FAVOURITE_ID)
     }
 }

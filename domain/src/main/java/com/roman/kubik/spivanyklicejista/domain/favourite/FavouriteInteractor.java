@@ -27,6 +27,10 @@ public class FavouriteInteractor {
         return favouriteRepository.isInFavourite(song);
     }
 
+    public Single<Integer> getCount() {
+        return favouriteRepository.getCount();
+    }
+
     public Completable addSong(Song song) {
         return favouriteRepository.add(song);
     }
