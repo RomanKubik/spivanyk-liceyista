@@ -11,5 +11,6 @@
         android:entries="@array/instrument_name"
         android:entryValues="@array/instrument_key"
         android:key="selected_instrument"
+        android:summary="%s"
         android:title="@string/settings_preferred_instrument_ttl" />
 </PreferenceScreen>
