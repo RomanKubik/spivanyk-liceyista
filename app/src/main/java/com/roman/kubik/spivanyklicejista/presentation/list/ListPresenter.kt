@@ -3,6 +3,7 @@ package com.roman.kubik.spivanyklicejista.presentation.list
 import com.annimon.stream.Collectors
 import com.annimon.stream.Stream
 import com.roman.kubik.spivanyklicejista.Constants
+import com.roman.kubik.spivanyklicejista.domain.history.HistoryInteractor
 import com.roman.kubik.spivanyklicejista.domain.preferences.PreferencesInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
@@ -21,6 +22,7 @@ import javax.inject.Inject
 class ListPresenter @Inject
 constructor(private val view: ListContract.View,
             private val songInteractor: SongInteractor,
+            private val historyInteractor: HistoryInteractor,
             private val preferencesInteractor: PreferencesInteractor,
             private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
 
@@ -69,8 +71,14 @@ constructor(private val view: ListContract.View,
     }
 
     private fun fetchLast() {
-        view.showProgress(false)
-        view.showError("Not implemented yet")
+        compositeDisposable.add(
+                historyInteractor.lastPlayed
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doFinally { view.showProgress(false) }
+                        .doOnSuccess({ s -> songs.addAll(s) })
+                        .subscribe(view::onSongsFetched
+                        ) { t -> view.showError(t.message) })
     }
 
     private fun fetchByCategoryId(categoryId: Int) {

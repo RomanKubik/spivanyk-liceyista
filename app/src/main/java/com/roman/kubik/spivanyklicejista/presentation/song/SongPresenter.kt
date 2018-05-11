@@ -5,12 +5,14 @@ import com.roman.kubik.spivanyklicejista.domain.category.CategoryInteractor
 import com.roman.kubik.spivanyklicejista.domain.chord.ChordInteractor
 import com.roman.kubik.spivanyklicejista.domain.favourite.FavouriteInteractor
 import com.roman.kubik.spivanyklicejista.domain.formatting.LyricsFormattingInteractor
+import com.roman.kubik.spivanyklicejista.domain.history.HistoryInteractor
 import com.roman.kubik.spivanyklicejista.domain.preferences.PreferencesInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.Song
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -25,6 +27,7 @@ constructor(private val view: SongContract.View,
             private val chordInteractor: ChordInteractor,
             private val preferencesInteractor: PreferencesInteractor,
             private val lyricsFormattingInteractor: LyricsFormattingInteractor,
+            private val historyInteractor: HistoryInteractor,
             private val compositeDisposable: CompositeDisposable) : SongContract.Presenter {
 
     private lateinit var song: Song
@@ -48,6 +51,7 @@ constructor(private val view: SongContract.View,
                         .doOnSuccess(this::isFavouriteSong)
                         .doOnSuccess(this::getCategory)
                         .doOnSuccess(this::fetchChords)
+                        .doOnSuccess(this::addToHistory)
                         .doOnSuccess({ s -> view.setSongTitle(s.title) })
                         .subscribe({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }
                         ) { t -> view.showError(t.message!!) })
@@ -144,6 +148,15 @@ constructor(private val view: SongContract.View,
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setSongChords))
+    }
+
+    private fun addToHistory(song: Song) {
+        compositeDisposable.add(
+                historyInteractor.addSong(song)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+        )
     }
 
 }
