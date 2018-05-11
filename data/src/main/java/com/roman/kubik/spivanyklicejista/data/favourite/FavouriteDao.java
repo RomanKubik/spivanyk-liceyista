@@ -30,4 +30,7 @@ public interface FavouriteDao {
 
     @Query("SELECT * FROM favourite WHERE favourite.song_id = :songId")
     Single<FavouriteEntity> isSongExists(int songId);
+
+    @Query("SELECT count(id) FROM favourite")
+    Single<Integer> getCount();
 }

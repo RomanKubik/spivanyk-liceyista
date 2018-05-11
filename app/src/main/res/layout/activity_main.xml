@@ -93,6 +93,17 @@
                 android:layout_height="@dimen/view_size_72"
                 app:image="@color/just_purple"
                 app:title="@string/ttl_all_songs" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/favouriteCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@color/dark_grey"
+                app:title="@string/ttl_favourite" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

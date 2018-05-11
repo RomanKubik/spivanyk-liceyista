@@ -17,6 +17,8 @@ public interface FavouriteRepository {
 
     Single<Boolean> isInFavourite(Song song);
 
+    Single<Integer> getCount();
+
     Completable add(Song song);
 
     Completable delete(Song song);

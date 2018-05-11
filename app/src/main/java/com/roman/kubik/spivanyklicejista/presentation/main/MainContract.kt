@@ -9,6 +9,7 @@ interface MainContract {
         fun setBonfiresCount(count: Int)
         fun setAbroadsCount(count: Int)
         fun setAllCount(count: Int)
+        fun setFavouriteCount(count: Int)
         fun showError(error: Throwable)
         fun navigateToSong(song: Song)
     }

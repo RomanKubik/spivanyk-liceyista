@@ -1,6 +1,7 @@
 package com.roman.kubik.spivanyklicejista.presentation.main
 
 import com.roman.kubik.spivanyklicejista.Constants
+import com.roman.kubik.spivanyklicejista.domain.favourite.FavouriteInteractor
 import com.roman.kubik.spivanyklicejista.domain.song.SongInteractor
 import com.roman.kubik.spivanyklicejista.general.di.ActivityScope
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,6 +14,7 @@ import javax.inject.Inject
 class MainPresenter @Inject
 constructor(private val view: MainContract.View,
             private val songInteractor: SongInteractor,
+            private val favouriteInteractor: FavouriteInteractor,
             private val compositeDisposable: CompositeDisposable) : MainContract.Presenter {
 
     override fun requestData() {
@@ -32,7 +34,11 @@ constructor(private val view: MainContract.View,
                 songInteractor.count
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(view::setAllCount, view::showError))
+                        .subscribe(view::setAllCount, view::showError),
+                favouriteInteractor.count
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(view::setFavouriteCount, view::showError))
     }
 
     override fun requestRandom() {

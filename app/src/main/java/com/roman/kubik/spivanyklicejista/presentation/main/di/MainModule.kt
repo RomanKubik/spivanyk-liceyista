@@ -18,6 +18,6 @@ class MainModule(private val activity: MainActivity) {
 
     @Provides
     @ActivityScope
-    fun getPresenter(songInteractor: SongInteractor, compositeDisposable: CompositeDisposable): MainContract.Presenter = MainPresenter(activity, songInteractor, compositeDisposable)
+    fun getPresenter(mainPresenter: MainPresenter): MainContract.Presenter = mainPresenter
 
 }

@@ -21,6 +21,7 @@ interface Constants {
 
     interface Category {
         companion object {
+            const val FAVOURITE_ID = -2
             const val ALL_ID = -1
             const val LAST_ID = 0
             const val PATRIOTIC_ID = 1

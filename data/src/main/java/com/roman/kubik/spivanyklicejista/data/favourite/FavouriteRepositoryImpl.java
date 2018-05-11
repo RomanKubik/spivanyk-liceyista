@@ -50,6 +50,11 @@ public class FavouriteRepositoryImpl implements FavouriteRepository {
     }
 
     @Override
+    public Single<Integer> getCount() {
+        return favouriteDao.getCount();
+    }
+
+    @Override
     public Completable add(Song song) {
         return Completable.fromAction(() -> favouriteDao.add(new FavouriteEntity(song.getId())));
     }
