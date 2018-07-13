@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/lastCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_history"
+                app:title="@string/ttl_last_played"
+                app:description="@string/dsc_last_played"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/patrioticCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_flag_on_pole"
+                app:title="@string/ttl_patriotic" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/bonfireCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_campfire"
+                app:title="@string/ttl_bonfire_songs" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/abroadCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_abroad"
+                app:title="@string/ttl_abroad_songs" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/surpriseCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_shocked"
+                app:title="@string/ttl_surprise_me"
+                app:description="@string/dsc_surprise_me"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/allCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_books"
+                app:title="@string/ttl_all_songs" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey" />
+
+            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+                android:id="@+id/favouriteCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_bookmark_button"
+                app:title="@string/ttl_favourite" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
