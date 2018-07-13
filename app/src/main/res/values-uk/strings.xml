@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Співаник Ліцеїста</string>
+    <string name="app_name">Співаник</string>
     <string name="ttl_last_played">Останні проспівані</string>
     <string name="dsc_last_played">100 останніх проспіваних пісень</string>
     <string name="ttl_bonfire_songs">При ватрі</string>
@@ -7,7 +7,7 @@
     <string name="ttl_abroad_songs">Цікаве закордонне</string>
     <string formatted="false" name="dsc_abroad_songs">%d закордонних пісень</string>
     <string name="ttl_surprise_me">Здивуй мене</string>
-    <string formatted="false" name="dsc_surprise_me">Пісня зі співанику вибрана наймання</string>
+    <string formatted="false" name="dsc_surprise_me">Пісня зі співанику вибрана навмання</string>
     <string name="ttl_all_songs">Усі пісні</string>
     <string formatted="false" name="dsc_all_songs">Усі-усі %d пісень</string>
     <string name="ttl_patriotic">Патріотичні пісні</string>
