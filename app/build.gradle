@@ -2,11 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion targetSdk
     defaultConfig {
-        applicationId "com.roman.kubik.spivanyklicejista"
+        applicationId "com.roman.kubik.songer"
         minSdkVersion minSdk
         targetSdkVersion targetSdk
         versionCode versionCode
@@ -66,8 +67,15 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // Firebase
+    implementation "com.google.firebase:firebase-core:$rootProject.firebase"
+
+    // Crashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
 }
 
 repositories {
     mavenCentral()
 }
+
+apply plugin: 'com.google.gms.google-services'
