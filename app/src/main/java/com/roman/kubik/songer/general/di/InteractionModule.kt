@@ -10,6 +10,7 @@ import com.roman.kubik.songer.data.chord.GuitarChordRepository
 import com.roman.kubik.songer.data.favourite.FavouriteDao
 import com.roman.kubik.songer.data.favourite.FavouriteRepositoryImpl
 import com.roman.kubik.songer.data.history.HistoryRepositoryImpl
+import com.roman.kubik.songer.data.logger.FirebaseLogger
 import com.roman.kubik.songer.data.preferences.PreferencesImpl
 import com.roman.kubik.songer.data.song.SongDao
 import com.roman.kubik.songer.data.song.SongModelMapper
@@ -18,6 +19,7 @@ import com.roman.kubik.songer.domain.category.CategoryInteractor
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
 import com.roman.kubik.songer.domain.history.HistoryInteractor
+import com.roman.kubik.songer.domain.logger.LoggerInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.domain.utils.MarkedChordsRecognizer
@@ -69,5 +71,9 @@ class InteractionModule {
     internal fun getHistoryInteractor(historyRepositoryImpl: HistoryRepositoryImpl): HistoryInteractor {
         return HistoryInteractor(historyRepositoryImpl)
     }
+
+    @Provides
+    @Singleton
+    internal fun getLoggerInteractor(firebaseLogger: FirebaseLogger): LoggerInteractor = LoggerInteractor(firebaseLogger)
 
 }

@@ -4,6 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'io.fabric'
 
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
 android {
     compileSdkVersion targetSdk
     defaultConfig {
@@ -71,7 +75,9 @@ dependencies {
     implementation "com.google.firebase:firebase-core:$rootProject.firebase"
 
     // Crashlytics
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
+    compile('com.crashlytics.sdk.android:crashlytics:2.9.4@aar') {
+        transitive = true;
+    }
 }
 
 repositories {

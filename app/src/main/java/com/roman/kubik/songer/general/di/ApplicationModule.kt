@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.general.di
 
 import android.content.Context
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 
 import javax.inject.Singleton
@@ -21,4 +22,8 @@ class ApplicationModule(private val applicationContext: Context) {
 
     @Provides
     fun getCompositeDisposable(): CompositeDisposable = CompositeDisposable()
+
+    @Provides
+    @Singleton
+    fun getFirebaseAnalytics(context: Context): FirebaseAnalytics = FirebaseAnalytics.getInstance(context)
 }

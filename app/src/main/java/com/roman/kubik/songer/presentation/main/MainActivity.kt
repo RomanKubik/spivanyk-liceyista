@@ -7,7 +7,9 @@ import android.widget.Toast
 import butterknife.OnClick
 import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
-import com.roman.kubik.songer.domain.category.Category
+import com.roman.kubik.songer.domain.logger.Logger
+import com.roman.kubik.songer.domain.logger.LoggerInteractor
+import com.roman.kubik.songer.domain.logger.event.CategoryEvent
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.general.android.SpivanykApplication.Companion.component
 import com.roman.kubik.songer.presentation.BaseActivity
@@ -19,6 +21,8 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), MainContract.View {
     @Inject
     lateinit var presenter: MainContract.Presenter
+    @Inject
+    lateinit var logger: LoggerInteractor
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,36 +86,43 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     @OnClick(R.id.lastCategory)
     fun onLastClicked() {
+        logger.log(CategoryEvent("lastCategory"))
         Navigate.toListActivity(this, Constants.Category.LAST_ID)
     }
 
     @OnClick(R.id.patrioticCategory)
     fun onPatrioticClicked() {
+        logger.log(CategoryEvent("patrioticCategory"))
         Navigate.toListActivity(this, Constants.Category.PATRIOTIC_ID)
     }
 
     @OnClick(R.id.bonfireCategory)
     fun onBonfireClicked() {
+        logger.log(CategoryEvent("bonfireCategory"))
         Navigate.toListActivity(this, Constants.Category.BONFIRE_ID)
     }
 
     @OnClick(R.id.abroadCategory)
     fun onAbroadClicked() {
+        logger.log(CategoryEvent("abroadCategory"))
         Navigate.toListActivity(this, Constants.Category.ABROAD_ID)
     }
 
     @OnClick(R.id.surpriseCategory)
     fun onRandomClicked() {
+        logger.log(CategoryEvent("surpriseCategory"))
         presenter.requestRandom()
     }
 
     @OnClick(R.id.allCategory)
     fun onAllClicked() {
+        logger.log(CategoryEvent("allCategory"))
         Navigate.toListActivity(this, Constants.Category.ALL_ID)
     }
 
     @OnClick(R.id.favouriteCategory)
     fun onFavouriteClicked() {
+        logger.log(CategoryEvent("favouriteCategory"))
         Navigate.toListActivity(this, Constants.Category.FAVOURITE_ID)
     }
 }
