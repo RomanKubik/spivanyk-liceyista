@@ -2,11 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
 
 android {
     compileSdkVersion targetSdk
     defaultConfig {
-        applicationId "com.roman.kubik.spivanyklicejista"
+        applicationId "com.roman.kubik.songer"
         minSdkVersion minSdk
         targetSdkVersion targetSdk
         versionCode versionCode
@@ -15,13 +20,16 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        checkReleaseBuilds false
     }
 }
 
@@ -66,8 +74,16 @@ dependencies {
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
+    // Firebase
+    implementation "com.google.firebase:firebase-core:$rootProject.firebase"
+
+    // Crashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
+
 }
 
 repositories {
     mavenCentral()
 }
+
+apply plugin: 'com.google.gms.google-services'

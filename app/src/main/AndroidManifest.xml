@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.roman.kubik.spivanyklicejista">
+    package="com.roman.kubik.songer">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".general.android.SpivanykApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="233640e9f6b617b44be9d00285c7743485f1fd82"
+            />
+
         <activity
             android:name=".presentation.splash.SplashActivity"
             android:theme="@style/SplashTheme">

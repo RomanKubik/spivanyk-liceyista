@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/lastCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
@@ -38,7 +38,7 @@
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/patrioticCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
@@ -50,7 +50,7 @@
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/bonfireCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
@@ -62,7 +62,7 @@
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/abroadCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
@@ -74,7 +74,7 @@
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/surpriseCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
@@ -87,7 +87,7 @@
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/allCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
@@ -98,7 +98,7 @@
                 android:layout_height="1dp"
                 android:background="@color/grey" />
 
-            <com.roman.kubik.spivanyklicejista.presentation.view.MainItemView
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/favouriteCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
