@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Співаник</string>
+    <string name="app_name">Співаник ліцеїста</string>
     <string name="ttl_last_played">Останні проспівані</string>
     <string name="dsc_last_played">100 останніх проспіваних пісень</string>
     <string name="ttl_bonfire_songs">При ватрі</string>
