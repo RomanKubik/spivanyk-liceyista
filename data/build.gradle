@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion minSdk
         targetSdkVersion targetSdk
-        versionCode versionCode
-        versionName versionName
+        versionCode appCode
+        versionName appName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
