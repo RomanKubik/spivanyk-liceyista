@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">Spivanyk Licejista</string>
+    <string name="ttl_last_played">Last played</string>
+    <string name="dsc_last_played">Last 100 played songs</string>
+    <string name="ttl_bonfire_songs">Bonfire songs</string>
+    <string formatted="false" name="dsc_bonfire_songs">%d bonfire songs</string>
+    <string name="ttl_abroad_songs">Abroad songs</string>
+    <string formatted="false" name="dsc_abroad_songs">%d abroad songs</string>
+    <string name="ttl_surprise_me">Surprise me</string>
+    <string formatted="false" name="dsc_surprise_me">Song randomly selected from singer</string>
+    <string name="ttl_all_songs">All songs</string>
+    <string formatted="false" name="dsc_all_songs">All %d songs</string>
+    <string name="ttl_patriotic">Patriotic songs</string>
+    <string formatted="false" name="dsc_patriotic">%d patriotic songs</string>
+    <string name="ttl_favourite">Favourite songs</string>
+    <string formatted="false" name="dsc_favourite">%d favourite songs</string>
+    <string name="share">Share</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="chords">Chords</string>
+    <string name="similar_songs">Similar songs</string>
+    <string name="slash">/</string>
+    <string name="close">Close</string>
+    <string name="forward">Forward</string>
+    <string name="backward">Backward</string>
+    <string name="chord">Chord</string>
+    <string formatted="false" name="page_of_pages">%d of %d</string>
+    <string name="settings_show_chords_ttl">Show chords</string>
+    <string name="edit">Edit</string>
+    <string name="title">Title</string>
+    <string name="lyrics">Lyrics</string>
+    <string name="save">Save</string>
+    <string name="auto_recognize">Auto recognize</string>
+    <string name="ttl_save_changes">Save changes</string>
+    <string name="msg_save_changes">Would you like to save changes before exit?</string>
+    <string name="discard">Discard</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="add_song">Add song</string>
+    <string name="settings_preferred_instrument_ttl">Preferred instrument</string>
+    <string name="settings_display_chords_msg">Display chords with song</string>
 </resources>

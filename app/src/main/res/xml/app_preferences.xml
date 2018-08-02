@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="show_chords"
+        android:summary="@string/settings_display_chords_msg"
+        android:title="@string/settings_show_chords_ttl" />
+    <ListPreference
+        android:defaultValue="guitar"
+        android:entries="@array/instrument_name"
+        android:entryValues="@array/instrument_key"
+        android:key="selected_instrument"
+        android:summary="%s"
+        android:title="@string/settings_preferred_instrument_ttl" />
+</PreferenceScreen>
