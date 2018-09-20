@@ -2,6 +2,7 @@ package com.roman.kubik.songer.data.song;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.roman.kubik.songer.domain.category.Category;
 import com.roman.kubik.songer.domain.song.Song;
 import com.roman.kubik.songer.domain.song.SongRepository;
 
@@ -43,11 +44,19 @@ public class SongRepositoryImpl implements SongRepository {
     }
 
     @Override
-    public Single<List<Song>> search(String text) {
-        return songDao.search("%" + text + "%")
+    public Single<List<Song>> search(String query) {
+        return songDao.search("%" + query + "%")
                 .map(s -> Stream.of(s)
-                        .map(s1 -> songModelMapper.fromEntity(s1)).
-                                collect(Collectors.toList()));
+                        .map(songModelMapper::fromEntity)
+                        .collect(Collectors.toList()));
+    }
+
+    @Override
+    public Single<List<Song>> search(String query, @Category.CategoryId int categoryId) {
+        return songDao.search("%" + query + "%", categoryId)
+                .map(s -> Stream.of(s)
+                        .map(songModelMapper::fromEntity)
+                        .collect(Collectors.toList()));
     }
 
     @Override

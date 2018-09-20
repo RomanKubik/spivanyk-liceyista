@@ -47,8 +47,21 @@ public class SongInteractor {
         }
     }
 
-    public Single<List<Song>> search(String text) {
-        return songRepository.search(text);
+    public Single<List<Song>> search(String query, @Category.CategoryId int categoryId) {
+        switch (categoryId) {
+            case Category.FAVOURITE_ID:
+                return favouriteRepository.search(query);
+            case Category.LAST_ID:
+                return historyRepository.search(query);
+            case Category.ALL_ID:
+                return songRepository.search(query);
+            case Category.ABROAD_ID:
+            case Category.BONFIRE_ID:
+            case Category.PATRIOTIC_ID:
+            case Category.USERS_ID:
+            default:
+                return songRepository.search(query, categoryId);
+        }
     }
 
     public Maybe<Song> getById(int id) {
