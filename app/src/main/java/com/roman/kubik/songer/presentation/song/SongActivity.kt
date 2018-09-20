@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.text.method.LinkMovementMethod
 import android.view.Menu
@@ -140,7 +141,7 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     private fun init() {
-        presenter.setChordColors(Color.BLACK, resources.getColor(R.color.transparent_grey))
+        presenter.setChordColors(Color.BLACK, ContextCompat.getColor(this, R.color.transparent_grey))
         lyrics.movementMethod = LinkMovementMethod.getInstance()
         chordsAdapter.chordClickListener = Consumer { showChord(it.name) }
         chordsList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)

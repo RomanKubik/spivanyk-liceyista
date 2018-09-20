@@ -13,7 +13,7 @@ public interface CategoryRepository {
 
     Single<List<Category>> getAll();
 
-    Maybe<Category> getById(int id);
+    Maybe<Category> getById(@Category.CategoryId int id);
 
 
 }

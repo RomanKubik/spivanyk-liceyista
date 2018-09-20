@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.roman.kubik.songer.data.song.SongModelMapper;
 import com.roman.kubik.songer.domain.favourite.FavouriteRepository;
 import com.roman.kubik.songer.domain.song.Song;
 import com.roman.kubik.songer.domain.song.SongInteractor;
@@ -22,20 +23,19 @@ import io.reactivex.internal.operators.observable.ObservableAllSingle;
 
 public class FavouriteRepositoryImpl implements FavouriteRepository {
 
-    private SongInteractor songInteractor;
+    private SongModelMapper mapper;
     private FavouriteDao favouriteDao;
 
-    public FavouriteRepositoryImpl(FavouriteDao favouriteDao, SongInteractor songInteractor) {
+    public FavouriteRepositoryImpl(FavouriteDao favouriteDao, SongModelMapper mapper) {
         this.favouriteDao = favouriteDao;
-        this.songInteractor = songInteractor;
+        this.mapper = mapper;
     }
 
     @Override
     public Single<List<Song>> getAll() {
         return favouriteDao.getAll()
-                .map(f -> Stream.of(f)
-                        .map(f1 -> songInteractor.getById(f1.getSongId())
-                                .blockingGet())
+                .map(s -> Stream.of(s)
+                        .map(mapper::fromEntity)
                         .collect(Collectors.toList()));
     }
 

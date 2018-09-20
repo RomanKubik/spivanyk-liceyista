@@ -2,6 +2,7 @@ package com.roman.kubik.songer.data.history;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
+import com.roman.kubik.songer.data.song.SongModelMapper;
 import com.roman.kubik.songer.domain.history.HistoryRepository;
 import com.roman.kubik.songer.domain.song.Song;
 import com.roman.kubik.songer.domain.song.SongInteractor;
@@ -16,25 +17,25 @@ import io.reactivex.Single;
 public class HistoryRepositoryImpl implements HistoryRepository {
 
     private HistoryDao historyDao;
-    private SongInteractor songInteractor;
+    private SongModelMapper mapper;
 
     @Inject
-    public HistoryRepositoryImpl(HistoryDao historyDao, SongInteractor songInteractor) {
+    public HistoryRepositoryImpl(HistoryDao historyDao, SongModelMapper mapper) {
         this.historyDao = historyDao;
-        this.songInteractor = songInteractor;
+        this.mapper = mapper;
     }
 
     @Override
     public Single<List<Song>> getLastSongs() {
         return historyDao.getHistory()
                 .map(l -> Stream.of(l)
-                        .map(f1 -> songInteractor.getById(f1.getSongId())
-                                .blockingGet())
+                        .map(mapper::fromEntity)
                         .collect(Collectors.toList()));
     }
 
     @Override
     public Completable addSongToHistory(Song song) {
-        return Completable.fromAction(() -> historyDao.addToHistory(new HistoryEntity(song.getId())));
+        return Completable
+                .fromAction(() -> historyDao.addToHistory(new HistoryEntity(song.getId())));
     }
 }

@@ -21,7 +21,7 @@ public class CategoryInteractor {
         return categoryRepository.getAll();
     }
 
-    public Maybe<Category> getById(int id) {
+    public Maybe<Category> getById(@Category.CategoryId int id) {
         return categoryRepository.getById(id);
     }
 }

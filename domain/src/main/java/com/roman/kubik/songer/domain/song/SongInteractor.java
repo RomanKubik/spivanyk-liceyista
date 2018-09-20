@@ -1,6 +1,10 @@
 package com.roman.kubik.songer.domain.song;
 
 
+import com.roman.kubik.songer.domain.category.Category;
+import com.roman.kubik.songer.domain.favourite.FavouriteRepository;
+import com.roman.kubik.songer.domain.history.HistoryRepository;
+
 import java.util.List;
 import java.util.Random;
 
@@ -14,19 +18,33 @@ import io.reactivex.Single;
 
 public class SongInteractor {
 
-    private Random random = new Random();
-    private SongRepository songRepository;
+    private final Random random = new Random();
+    private final SongRepository songRepository;
+    private final FavouriteRepository favouriteRepository;
+    private final HistoryRepository historyRepository;
 
-    public SongInteractor(SongRepository songRepository) {
+    public SongInteractor(SongRepository songRepository, FavouriteRepository favouriteRepository,
+            final HistoryRepository historyRepository) {
         this.songRepository = songRepository;
+        this.favouriteRepository = favouriteRepository;
+        this.historyRepository = historyRepository;
     }
 
-    public Single<List<Song>> getAll() {
-        return songRepository.getAll();
-    }
-
-    public Single<List<Song>> getAllByCategory(int categoryId) {
-        return songRepository.getAllByCategory(categoryId);
+    public Single<List<Song>> getAllByCategory(@Category.CategoryId int categoryId) {
+        switch (categoryId) {
+            case Category.FAVOURITE_ID:
+                return favouriteRepository.getAll();
+            case Category.LAST_ID:
+                return historyRepository.getLastSongs();
+            case Category.ALL_ID:
+                return songRepository.getAll();
+            case Category.ABROAD_ID:
+            case Category.BONFIRE_ID:
+            case Category.PATRIOTIC_ID:
+            case Category.USERS_ID:
+            default:
+                return songRepository.getAllByCategory(categoryId);
+        }
     }
 
     public Single<List<Song>> search(String text) {
@@ -41,7 +59,7 @@ public class SongInteractor {
         return songRepository.getCount();
     }
 
-    public Single<Integer> getCountByCategory(int categoryId) {
+    public Single<Integer> getCountByCategory(@Category.CategoryId int categoryId) {
         return songRepository.getCountByCategory(categoryId);
     }
 
