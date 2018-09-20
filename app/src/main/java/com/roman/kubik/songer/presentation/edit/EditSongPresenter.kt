@@ -1,6 +1,6 @@
 package com.roman.kubik.songer.presentation.edit
 
-import com.roman.kubik.songer.Constants
+import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.formatting.LyricsFormattingInteractor
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.domain.song.SongInteractor
@@ -37,7 +37,7 @@ class EditSongPresenter @Inject constructor(
     override fun saveSong(title: String, lyrics: String) {
         view.showProgress(true)
         if (song == null) {
-            song = Song(UUID.randomUUID().hashCode(), title, lyrics, Constants.Category.USERS_ID)
+            song = Song(UUID.randomUUID().hashCode(), title, lyrics, Category.USERS_ID)
         } else {
             song?.title = title
             song?.lyrics = lyrics
@@ -46,8 +46,8 @@ class EditSongPresenter @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally { view.showProgress(false) }
-                .subscribe(view::onSongSaved,
-                        { t -> view.showError(t.message!!) }))
+                .subscribe(view::onSongSaved
+                ) { t -> view.showError(t.message!!) })
     }
 
     override fun destroy() {

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +11,7 @@ import android.widget.Toast
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
+import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.general.android.SpivanykApplication.Companion.component
 import com.roman.kubik.songer.presentation.BaseActivity
@@ -40,7 +40,7 @@ class ListActivity : BaseActivity(), ListContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
         component.listComponent(ListModule(this)).inject(this)
-        val categoryId = intent.getIntExtra(Constants.Extras.CATEGORY_ID, Constants.Category.ALL_ID)
+        val categoryId = intent.getIntExtra(Constants.Extras.CATEGORY_ID, Category.ALL_ID)
         init(categoryId)
         presenter.fetchSongByCategory(categoryId)
     }

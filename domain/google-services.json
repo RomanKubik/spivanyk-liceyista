@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "668868331656",
+    "firebase_url": "https://lyceum-songer.firebaseio.com",
+    "project_id": "lyceum-songer",
+    "storage_bucket": "lyceum-songer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668868331656:android:456ba6ed9241639b",
+        "android_client_info": {
+          "package_name": "com.roman.kubik.songer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668868331656-bn4luhibsqgg0lr351rhril9pqug0bna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWHcmbx4v2zqwdKh1vPC4obSSHHR7vMZ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

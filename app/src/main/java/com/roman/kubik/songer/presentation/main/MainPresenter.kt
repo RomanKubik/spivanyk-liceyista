@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.presentation.main
 
 import com.roman.kubik.songer.Constants
+import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
@@ -19,15 +20,15 @@ constructor(private val view: MainContract.View,
 
     override fun requestData() {
         compositeDisposable.addAll(
-                songInteractor.getCountByCategory(Constants.Category.PATRIOTIC_ID)
+                songInteractor.getCountByCategory(Category.PATRIOTIC_ID)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setPatrioticsCount, view::showError),
-                songInteractor.getCountByCategory(Constants.Category.BONFIRE_ID)
+                songInteractor.getCountByCategory(Category.BONFIRE_ID)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setBonfiresCount, view::showError),
-                songInteractor.getCountByCategory(Constants.Category.ABROAD_ID)
+                songInteractor.getCountByCategory(Category.ABROAD_ID)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setAbroadsCount, view::showError),

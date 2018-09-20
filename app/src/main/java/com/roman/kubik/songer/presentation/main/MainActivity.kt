@@ -5,9 +5,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import butterknife.OnClick
-import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
-import com.roman.kubik.songer.domain.logger.Logger
+import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
 import com.roman.kubik.songer.domain.logger.event.CategoryEvent
 import com.roman.kubik.songer.domain.song.Song
@@ -87,25 +86,25 @@ class MainActivity : BaseActivity(), MainContract.View {
     @OnClick(R.id.lastCategory)
     fun onLastClicked() {
         logger.log(CategoryEvent("lastCategory"))
-        Navigate.toListActivity(this, Constants.Category.LAST_ID)
+        Navigate.toListActivity(this, Category.LAST_ID)
     }
 
     @OnClick(R.id.patrioticCategory)
     fun onPatrioticClicked() {
         logger.log(CategoryEvent("patrioticCategory"))
-        Navigate.toListActivity(this, Constants.Category.PATRIOTIC_ID)
+        Navigate.toListActivity(this, Category.PATRIOTIC_ID)
     }
 
     @OnClick(R.id.bonfireCategory)
     fun onBonfireClicked() {
         logger.log(CategoryEvent("bonfireCategory"))
-        Navigate.toListActivity(this, Constants.Category.BONFIRE_ID)
+        Navigate.toListActivity(this, Category.BONFIRE_ID)
     }
 
     @OnClick(R.id.abroadCategory)
     fun onAbroadClicked() {
         logger.log(CategoryEvent("abroadCategory"))
-        Navigate.toListActivity(this, Constants.Category.ABROAD_ID)
+        Navigate.toListActivity(this, Category.ABROAD_ID)
     }
 
     @OnClick(R.id.surpriseCategory)
@@ -117,12 +116,12 @@ class MainActivity : BaseActivity(), MainContract.View {
     @OnClick(R.id.allCategory)
     fun onAllClicked() {
         logger.log(CategoryEvent("allCategory"))
-        Navigate.toListActivity(this, Constants.Category.ALL_ID)
+        Navigate.toListActivity(this, Category.ALL_ID)
     }
 
     @OnClick(R.id.favouriteCategory)
     fun onFavouriteClicked() {
         logger.log(CategoryEvent("favouriteCategory"))
-        Navigate.toListActivity(this, Constants.Category.FAVOURITE_ID)
+        Navigate.toListActivity(this, Category.FAVOURITE_ID)
     }
 }
