@@ -34,6 +34,14 @@ public class HistoryRepositoryImpl implements HistoryRepository {
     }
 
     @Override
+    public Single<List<Song>> search(final String query) {
+        return historyDao.search("%" + query + "%")
+                .map(l -> Stream.of(l)
+                        .map(mapper::fromEntity)
+                        .collect(Collectors.toList()));
+    }
+
+    @Override
     public Completable addSongToHistory(Song song) {
         return Completable
                 .fromAction(() -> historyDao.addToHistory(new HistoryEntity(song.getId())));

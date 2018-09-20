@@ -15,6 +15,8 @@ public interface FavouriteRepository {
 
     Single<List<Song>> getAll();
 
+    Single<List<Song>> search(String query);
+
     Single<Boolean> isInFavourite(Song song);
 
     Single<Integer> getCount();

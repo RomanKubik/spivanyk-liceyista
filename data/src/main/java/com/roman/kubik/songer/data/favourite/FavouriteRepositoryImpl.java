@@ -40,6 +40,14 @@ public class FavouriteRepositoryImpl implements FavouriteRepository {
     }
 
     @Override
+    public Single<List<Song>> search(final String query) {
+        return favouriteDao.search("%" + query + "%")
+                .map(s -> Stream.of(s)
+                        .map(mapper::fromEntity)
+                        .collect(Collectors.toList()));
+    }
+
+    @Override
     public Single<Boolean> isInFavourite(Song song) {
         Log.d("MyTag", "isInFavourite: " + song.getId());
         return favouriteDao.isSongExists(song.getId())

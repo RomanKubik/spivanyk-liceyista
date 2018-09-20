@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.presentation.list
 
+import android.text.TextUtils
 import com.annimon.stream.Collectors
 import com.annimon.stream.Stream
 import com.roman.kubik.songer.domain.category.Category
@@ -52,10 +53,13 @@ constructor(private val view: ListContract.View,
     }
 
     override fun filter(query: String) {
-        val title = query.toLowerCase()
-        view.onSongsFetched(Stream.of(songs)
-                .filter { s -> s.title.toLowerCase().contains(title) }
-                .collect(Collectors.toList()))
+        if (TextUtils.isEmpty(query)) return
+        compositeDisposable.add(
+                songInteractor.search(query, categoryId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(view::onSongsFetched
+                        ) { t -> view.showError(t.message) })
     }
 
     override fun destroy() {
