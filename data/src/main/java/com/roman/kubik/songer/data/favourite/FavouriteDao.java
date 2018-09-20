@@ -23,7 +23,7 @@ public interface FavouriteDao {
     @Query("SELECT * FROM favourite INNER JOIN song ON favourite.song_id = song.id ORDER BY song.title")
     Single<List<SongEntity>> getAll();
 
-    @Query("SELECT * FROM favourite INNER JOIN song ON song.id = favourite.song_id WHERE song.title LIKE :query ORDER BY song.title")
+    @Query("SELECT * FROM favourite INNER JOIN song ON song.id = favourite.song_id WHERE song.title LIKE :query OR song.lyrics LIKE :query ORDER BY song.title")
     Single<List<SongEntity>> search(String query);
 
     @Insert

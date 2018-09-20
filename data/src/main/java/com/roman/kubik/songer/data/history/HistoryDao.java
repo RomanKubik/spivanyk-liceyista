@@ -19,7 +19,7 @@ public interface HistoryDao {
     @Query("SELECT * FROM history INNER JOIN song ON song.id = history.song_id")
     Single<List<SongEntity>> getHistory();
 
-    @Query("SELECT * FROM history INNER JOIN song ON song.id = history.song_id WHERE song.title LIKE :query ORDER BY song.title")
+    @Query("SELECT * FROM history INNER JOIN song ON song.id = history.song_id WHERE song.title LIKE :query OR song.lyrics LIKE :query ORDER BY song.title")
     Single<List<SongEntity>> search(String query);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

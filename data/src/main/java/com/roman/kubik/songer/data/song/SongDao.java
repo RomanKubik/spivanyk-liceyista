@@ -27,10 +27,10 @@ public interface SongDao {
     @Query("SELECT * FROM song WHERE song.category_id = :categoryId ORDER BY song.title")
     Single<List<SongEntity>> getAllByCategory(int categoryId);
 
-    @Query("SELECT * FROM song WHERE song.title LIKE :query ORDER BY song.title")
+    @Query("SELECT * FROM song WHERE song.title LIKE :query OR song.lyrics LIKE :query ORDER BY song.title")
     Single<List<SongEntity>> search(String query);
 
-    @Query("SELECT * FROM song WHERE song.title LIKE :query AND song.category_id = :categoryId ORDER BY song.title")
+    @Query("SELECT * FROM song WHERE song.title LIKE :query AND song.category_id = :categoryId OR song.lyrics LIKE :query ORDER BY song.title")
     Single<List<SongEntity>> search(String query, @Category.CategoryId int categoryId);
 
     @Query("SELECT * FROM song WHERE song.id = :id LIMIT 1")
