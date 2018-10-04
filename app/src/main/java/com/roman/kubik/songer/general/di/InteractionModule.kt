@@ -14,6 +14,8 @@ import com.roman.kubik.songer.domain.history.HistoryInteractor
 import com.roman.kubik.songer.domain.history.HistoryRepository
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
+import com.roman.kubik.songer.domain.shaker.ShakeDetector
+import com.roman.kubik.songer.domain.shaker.ShakeInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.domain.song.SongRepository
 import com.roman.kubik.songer.domain.utils.MarkedChordsRecognizer
@@ -67,5 +69,9 @@ class InteractionModule {
     @Provides
     @Singleton
     internal fun getLoggerInteractor(firebaseLogger: FirebaseLogger): LoggerInteractor = LoggerInteractor(firebaseLogger)
+
+    @Provides
+    @Singleton
+    internal fun getShakerInteractor(shakeDetector: ShakeDetector) = ShakeInteractor(shakeDetector)
 
 }

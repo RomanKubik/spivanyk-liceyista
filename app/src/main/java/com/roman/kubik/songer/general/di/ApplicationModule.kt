@@ -2,6 +2,7 @@ package com.roman.kubik.songer.general.di
 
 import android.content.Context
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.roman.kubik.songer.data.shaker.ShakeDetectorImpl
 import dagger.Module
 
 import javax.inject.Singleton
@@ -26,4 +27,8 @@ class ApplicationModule(private val applicationContext: Context) {
     @Provides
     @Singleton
     fun getFirebaseAnalytics(context: Context): FirebaseAnalytics = FirebaseAnalytics.getInstance(context)
+
+    @Provides
+    @Singleton
+    fun getShackerDetector(context: Context) = ShakeDetectorImpl(context)
 }

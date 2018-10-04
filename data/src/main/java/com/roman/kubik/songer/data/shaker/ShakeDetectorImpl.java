@@ -15,12 +15,15 @@ import io.reactivex.subjects.PublishSubject;
 public class ShakeDetectorImpl implements ShakeDetector, SensorEventListener {
 
     private static final float SHAKE_THRESHOLD_GRAVITY = 2.7F;
-
-    private final Context context;
+    
     private final PublishSubject<ShakeEvent> shakeSubject = PublishSubject.create();
 
     public ShakeDetectorImpl(Context context) {
-        this.context = context;
+        SensorManager sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager != null) {
+            Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
+        }
     }
 
     @Override
