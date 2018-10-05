@@ -9,10 +9,8 @@ import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
 import com.roman.kubik.songer.domain.logger.event.CategoryEvent
-import com.roman.kubik.songer.domain.song.Song
-import com.roman.kubik.songer.general.android.SpivanykApplication.Companion.component
+import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
-import com.roman.kubik.songer.presentation.Navigate
 import com.roman.kubik.songer.presentation.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -27,8 +25,11 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        component.mainComponent(MainModule(this)).inject(this)
         init()
+    }
+
+    override fun injectActivity(activityComponent: ActivityComponent) {
+        activityComponent.mainComponent(MainModule(this)).inject(this)
     }
 
     override fun onStart() {
@@ -43,8 +44,8 @@ class MainActivity : BaseActivity(), MainContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.app_bar_add_song -> Navigate.toEditActivity(this)
-            R.id.app_bar_settings -> Navigate.toPreferencesActivity(this)
+            R.id.app_bar_add_song -> presenter.addSong()
+            R.id.app_bar_settings -> presenter.showSettings()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -74,10 +75,6 @@ class MainActivity : BaseActivity(), MainContract.View {
         Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun navigateToSong(song: Song) {
-        Navigate.toSongActivity(this, song)
-    }
-
     private fun init() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.app_name)
@@ -86,25 +83,25 @@ class MainActivity : BaseActivity(), MainContract.View {
     @OnClick(R.id.lastCategory)
     fun onLastClicked() {
         logger.log(CategoryEvent("lastCategory"))
-        Navigate.toListActivity(this, Category.LAST_ID)
+        presenter.selectCategory(Category.LAST_ID)
     }
 
     @OnClick(R.id.patrioticCategory)
     fun onPatrioticClicked() {
         logger.log(CategoryEvent("patrioticCategory"))
-        Navigate.toListActivity(this, Category.PATRIOTIC_ID)
+        presenter.selectCategory(Category.PATRIOTIC_ID)
     }
 
     @OnClick(R.id.bonfireCategory)
     fun onBonfireClicked() {
         logger.log(CategoryEvent("bonfireCategory"))
-        Navigate.toListActivity(this, Category.BONFIRE_ID)
+        presenter.selectCategory(Category.BONFIRE_ID)
     }
 
     @OnClick(R.id.abroadCategory)
     fun onAbroadClicked() {
         logger.log(CategoryEvent("abroadCategory"))
-        Navigate.toListActivity(this, Category.ABROAD_ID)
+        presenter.selectCategory(Category.ABROAD_ID)
     }
 
     @OnClick(R.id.surpriseCategory)
@@ -116,12 +113,12 @@ class MainActivity : BaseActivity(), MainContract.View {
     @OnClick(R.id.allCategory)
     fun onAllClicked() {
         logger.log(CategoryEvent("allCategory"))
-        Navigate.toListActivity(this, Category.ALL_ID)
+        presenter.selectCategory(Category.ALL_ID)
     }
 
     @OnClick(R.id.favouriteCategory)
     fun onFavouriteClicked() {
         logger.log(CategoryEvent("favouriteCategory"))
-        Navigate.toListActivity(this, Category.FAVOURITE_ID)
+        presenter.selectCategory(Category.FAVOURITE_ID)
     }
 }

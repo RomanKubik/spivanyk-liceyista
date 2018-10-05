@@ -16,10 +16,8 @@ import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.chord.Chord
-import com.roman.kubik.songer.domain.song.Song
-import com.roman.kubik.songer.general.android.SpivanykApplication
+import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
-import com.roman.kubik.songer.presentation.Navigate
 import com.roman.kubik.songer.presentation.song.di.SongModule
 import com.roman.kubik.songer.presentation.view.ChordDialog
 import com.roman.kubik.songer.utils.AssetsDrawableLoader
@@ -50,8 +48,11 @@ class SongActivity : BaseActivity(), SongContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_song)
-        SpivanykApplication.component.songComponent(SongModule(this)).inject(this)
         init()
+    }
+
+    override fun injectActivity(activityComponent: ActivityComponent) {
+        activityComponent.songComponent(SongModule(this)).inject(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -80,7 +81,7 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     override fun onDestroy() {
-        presenter.detroy()
+        presenter.destroy()
         super.onDestroy()
     }
 
@@ -118,19 +119,6 @@ class SongActivity : BaseActivity(), SongContract.View {
 
     override fun showChord(chord: String) {
         chordDialog.showActiveChordName(chord)
-    }
-
-    override fun share(type: String, title: String, lyrics: String) {
-        val intent = Intent()
-                .setAction(Intent.ACTION_SEND)
-                .setType(type)
-                .putExtra(Intent.EXTRA_TITLE, title)
-                .putExtra(Intent.EXTRA_TEXT, lyrics)
-        startActivity(intent)
-    }
-
-    override fun edit(song: Song) {
-        Navigate.toEditActivity(this, song)
     }
 
     override fun showProgress(show: Boolean) {

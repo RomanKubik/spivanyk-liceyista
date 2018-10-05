@@ -1,9 +1,7 @@
 package com.roman.kubik.songer.presentation.list
 
-import android.text.TextUtils
-import com.annimon.stream.Collectors
-import com.annimon.stream.Stream
 import com.roman.kubik.songer.domain.category.Category
+import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.domain.song.SongInteractor
@@ -21,12 +19,17 @@ import javax.inject.Inject
 @ActivityScope
 class ListPresenter @Inject
 constructor(private val view: ListContract.View,
+            private val navigationInteractor: NavigationInteractor,
             private val songInteractor: SongInteractor,
             private val preferencesInteractor: PreferencesInteractor,
             private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
 
     private var songs = mutableListOf<Song>()
     private var categoryId = Category.ALL_ID
+
+    override fun showSong(song: Song) {
+        navigationInteractor.toSongActivity(song)
+    }
 
     override fun fetchPreferences() {
         compositeDisposable.add(
@@ -53,7 +56,6 @@ constructor(private val view: ListContract.View,
     }
 
     override fun filter(query: String) {
-        if (TextUtils.isEmpty(query)) return
         compositeDisposable.add(
                 songInteractor.search(query, categoryId)
                         .subscribeOn(Schedulers.io())

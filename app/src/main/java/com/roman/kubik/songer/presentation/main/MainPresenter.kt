@@ -1,19 +1,19 @@
 package com.roman.kubik.songer.presentation.main
 
-import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
+import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.util.*
 import javax.inject.Inject
 
 @ActivityScope
 class MainPresenter @Inject
 constructor(private val view: MainContract.View,
+            private val navigationInteractor: NavigationInteractor,
             private val songInteractor: SongInteractor,
             private val favouriteInteractor: FavouriteInteractor,
             private val compositeDisposable: CompositeDisposable) : MainContract.Presenter {
@@ -42,16 +42,14 @@ constructor(private val view: MainContract.View,
                         .subscribe(view::setFavouriteCount, view::showError))
     }
 
-    override fun requestRandom() {
-        compositeDisposable.add(
-                songInteractor.randomSong
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(view::navigateToSong, view::showError))
-    }
+    override fun requestRandom() = navigationInteractor.toRandomSong()
 
-    override fun destroy() {
-        compositeDisposable.clear()
-    }
+    override fun selectCategory(categoryId: Int) = navigationInteractor.toListActivity(categoryId)
+
+    override fun addSong() = navigationInteractor.toAddSongActivity()
+
+    override fun showSettings() = navigationInteractor.toPreferencesActivity()
+
+    override fun destroy() = compositeDisposable.clear()
 
 }

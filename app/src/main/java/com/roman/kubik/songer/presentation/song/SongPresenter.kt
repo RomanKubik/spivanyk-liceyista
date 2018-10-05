@@ -6,6 +6,7 @@ import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
 import com.roman.kubik.songer.domain.formatting.LyricsFormattingInteractor
 import com.roman.kubik.songer.domain.history.HistoryInteractor
+import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.domain.song.SongInteractor
@@ -20,6 +21,7 @@ import javax.inject.Inject
 
 class SongPresenter @Inject
 constructor(private val view: SongContract.View,
+            private val navigationInteractor: NavigationInteractor,
             private val songInteractor: SongInteractor,
             private val favouriteInteractor: FavouriteInteractor,
             private val categoryInteractor: CategoryInteractor,
@@ -46,12 +48,12 @@ constructor(private val view: SongContract.View,
                 songInteractor.getById(id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSuccess({ s -> song = s })
+                        .doOnSuccess { song = it }
                         .doOnSuccess(this::isFavouriteSong)
                         .doOnSuccess(this::getCategory)
                         .doOnSuccess(this::fetchChords)
                         .doOnSuccess(this::addToHistory)
-                        .doOnSuccess({ s -> view.setSongTitle(s.title) })
+                        .doOnSuccess { s -> view.setSongTitle(s.title) }
                         .subscribe({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }
                         ) { t -> view.showError(t.message!!) })
     }
@@ -62,7 +64,7 @@ constructor(private val view: SongContract.View,
                         .isChordsVisible
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSuccess({ s -> showChords = s })
+                        .doOnSuccess { s -> showChords = s }
                         .subscribe({ s -> view.setChordsVisibility(s) }
                         ) { t -> view.showError(t.message!!) })
     }
@@ -71,18 +73,18 @@ constructor(private val view: SongContract.View,
         compositeDisposable.add(
                 favouriteInteractor.isInFavouriteList(song)
                         .subscribeOn(Schedulers.io())
-                        .subscribe({ b ->
+                        .subscribe { b ->
                             if (b) removeSongFromFavourite(song)
                             else addSongToFavourite(song)
-                        }))
+                        })
     }
 
     override fun shareSong() {
-        view.share(Constants.SHARE_TEXT_TYPE, song.title, song.lyrics)
+        navigationInteractor.toShareText(song)
     }
 
     override fun edit() {
-        view.edit(song)
+        navigationInteractor.toEditActivity(song)
     }
 
     override fun showChords() {
@@ -91,10 +93,10 @@ constructor(private val view: SongContract.View,
                         .switchChordsVisibility()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({ fetchPreferences() }))
+                        .subscribe { fetchPreferences() })
     }
 
-    override fun detroy() {
+    override fun destroy() {
         compositeDisposable.clear()
     }
 
@@ -110,7 +112,7 @@ constructor(private val view: SongContract.View,
                 favouriteInteractor.isInFavouriteList(song)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(view::isFavouriteSong, { t -> view.showError(t.message!!) }))
+                        .subscribe(view::isFavouriteSong) { t -> view.showError(t.message!!) })
     }
 
     private fun removeSongFromFavourite(song: Song) {
