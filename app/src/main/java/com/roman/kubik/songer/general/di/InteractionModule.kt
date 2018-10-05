@@ -2,18 +2,9 @@ package com.roman.kubik.songer.general.di
 
 import android.content.Context
 import android.preference.PreferenceManager
-import com.roman.kubik.songer.data.category.CategoryDao
-import com.roman.kubik.songer.data.category.CategoryModelMapper
-import com.roman.kubik.songer.data.category.CategoryRepositoryImpl
 import com.roman.kubik.songer.data.chord.ChordRepositoryFactoryImpl
-import com.roman.kubik.songer.data.favourite.FavouriteDao
-import com.roman.kubik.songer.data.favourite.FavouriteRepositoryImpl
-import com.roman.kubik.songer.data.history.HistoryRepositoryImpl
 import com.roman.kubik.songer.data.logger.FirebaseLogger
 import com.roman.kubik.songer.data.preferences.PreferencesImpl
-import com.roman.kubik.songer.data.song.SongDao
-import com.roman.kubik.songer.data.song.SongModelMapper
-import com.roman.kubik.songer.data.song.SongRepositoryImpl
 import com.roman.kubik.songer.domain.category.CategoryInteractor
 import com.roman.kubik.songer.domain.category.CategoryRepository
 import com.roman.kubik.songer.domain.chord.ChordInteractor
@@ -26,11 +17,9 @@ import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.domain.song.SongRepository
 import com.roman.kubik.songer.domain.utils.MarkedChordsRecognizer
-
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by kubik on 1/20/18.

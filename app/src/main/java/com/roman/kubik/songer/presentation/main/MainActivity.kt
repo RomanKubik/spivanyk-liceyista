@@ -10,9 +10,8 @@ import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
 import com.roman.kubik.songer.domain.logger.event.CategoryEvent
 import com.roman.kubik.songer.domain.song.Song
-import com.roman.kubik.songer.general.android.SpivanykApplication.Companion.component
+import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
-import com.roman.kubik.songer.presentation.Navigate
 import com.roman.kubik.songer.presentation.main.di.MainModule
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -27,8 +26,11 @@ class MainActivity : BaseActivity(), MainContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        component.mainComponent(MainModule(this)).inject(this)
         init()
+    }
+
+    override fun injectActivity(activityComponent: ActivityComponent) {
+        activityComponent.mainComponent(MainModule(this)).inject(this)
     }
 
     override fun onStart() {

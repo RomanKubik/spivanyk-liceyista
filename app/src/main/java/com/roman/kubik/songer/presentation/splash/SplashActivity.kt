@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 
 import com.roman.kubik.songer.data.database.DatabaseCopyHelper
-import com.roman.kubik.songer.presentation.Navigate
 
 import java.io.IOException
 

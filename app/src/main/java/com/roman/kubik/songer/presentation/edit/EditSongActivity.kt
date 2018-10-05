@@ -10,7 +10,7 @@ import android.widget.Toast
 import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.song.Song
-import com.roman.kubik.songer.general.android.SpivanykApplication.Companion.component
+import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
 import com.roman.kubik.songer.presentation.edit.di.EditSongModule
 import kotlinx.android.synthetic.main.activity_edit_song.*
@@ -24,8 +24,11 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_song)
-        component.editSongComponent(EditSongModule(this)).inject(this)
         init()
+    }
+
+    override fun injectActivity(activityComponent: ActivityComponent) {
+        activityComponent.editSongComponent(EditSongModule(this)).inject(this)
     }
 
     override fun onDestroy() {
