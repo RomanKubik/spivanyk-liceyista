@@ -90,10 +90,10 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
                 .setPositiveButton(R.string.save, { _, _ ->
                     presenter.saveSong(songTitle.text.toString(), lyrics.text.toString())
                 })
-                .setNegativeButton(R.string.discard, { _, _ ->
+                .setNegativeButton(R.string.discard) { _, _ ->
                     setResult(Activity.RESULT_CANCELED)
                     finish()
-                })
+                }
                 .show()
     }
 }

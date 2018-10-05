@@ -80,7 +80,7 @@ constructor(private val view: SongContract.View,
     }
 
     override fun shareSong() {
-        view.share(Constants.SHARE_TEXT_TYPE, song.title, song.lyrics)
+        navigationInteractor.toShareText(song)
     }
 
     override fun edit() {

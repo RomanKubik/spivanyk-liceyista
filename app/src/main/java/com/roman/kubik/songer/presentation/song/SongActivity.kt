@@ -121,15 +121,6 @@ class SongActivity : BaseActivity(), SongContract.View {
         chordDialog.showActiveChordName(chord)
     }
 
-    override fun share(type: String, title: String, lyrics: String) {
-        val intent = Intent()
-                .setAction(Intent.ACTION_SEND)
-                .setType(type)
-                .putExtra(Intent.EXTRA_TITLE, title)
-                .putExtra(Intent.EXTRA_TEXT, lyrics)
-        startActivity(intent)
-    }
-
     override fun showProgress(show: Boolean) {
     }
 

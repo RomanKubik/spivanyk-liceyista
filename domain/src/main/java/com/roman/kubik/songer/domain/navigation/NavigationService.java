@@ -15,4 +15,6 @@ public interface NavigationService {
     void toAddSongActivity();
 
     void toEditActivity(Song song);
+
+    void toShareText(String title, String text);
 }

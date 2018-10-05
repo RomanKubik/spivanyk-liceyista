@@ -44,4 +44,14 @@ class NavigationServiceImpl(private val activity: Activity) : NavigationService 
         intent.putExtra(Constants.Extras.SONG_ID, song.id)
         activity.startActivityForResult(intent, Constants.RequestCode.EDIT_SONG)
     }
+
+    override fun toShareText(title: String?, text: String?) {
+        val intent = Intent()
+                .setAction(Intent.ACTION_SEND)
+                .setType(Constants.SHARE_TEXT_TYPE)
+                .putExtra(Intent.EXTRA_TITLE, title)
+                .putExtra(Intent.EXTRA_TEXT, text)
+        activity.startActivity(intent)
+    }
+
 }

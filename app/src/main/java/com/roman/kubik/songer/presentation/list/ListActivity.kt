@@ -99,9 +99,7 @@ class ListActivity : BaseActivity(), ListContract.View {
     }
 
     private fun init(categoryId: Int) {
-        songsAdapter.setOnClickListener(Consumer { s ->
-            Navigate.toSongActivity(this, s)
-        })
+        songsAdapter.setOnClickListener(Consumer { presenter.showSong(it) })
         songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
         addDividers()
