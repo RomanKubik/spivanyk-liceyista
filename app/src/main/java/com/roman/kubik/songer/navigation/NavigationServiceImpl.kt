@@ -28,6 +28,9 @@ class NavigationServiceImpl(private val activity: Activity) : NavigationService 
         val intent = Intent(activity, SongActivity::class.java)
         intent.putExtra(Constants.Extras.SONG_ID, song.id)
         activity.startActivity(intent)
+        if (activity.javaClass.name == SongActivity::class.java.name) {
+            activity.finish()
+        }
     }
 
     override fun toPreferencesActivity() {

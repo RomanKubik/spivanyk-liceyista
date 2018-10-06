@@ -13,6 +13,7 @@ import com.roman.kubik.songer.domain.favourite.FavouriteRepository
 import com.roman.kubik.songer.domain.history.HistoryInteractor
 import com.roman.kubik.songer.domain.history.HistoryRepository
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
+import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.shaker.ShakeDetector
 import com.roman.kubik.songer.domain.shaker.ShakeInteractor
