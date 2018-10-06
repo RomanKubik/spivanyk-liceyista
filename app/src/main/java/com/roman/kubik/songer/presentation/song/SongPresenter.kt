@@ -1,6 +1,5 @@
 package com.roman.kubik.songer.presentation.song
 
-import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.domain.category.CategoryInteractor
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
