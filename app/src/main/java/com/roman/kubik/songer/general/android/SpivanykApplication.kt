@@ -5,6 +5,7 @@ import com.roman.kubik.songer.general.di.ApplicationComponent
 import com.roman.kubik.songer.general.di.ApplicationModule
 import com.roman.kubik.songer.general.di.DaggerApplicationComponent
 import com.crashlytics.android.Crashlytics
+import com.roman.kubik.songer.BuildConfig
 import io.fabric.sdk.android.Fabric
 
 
@@ -23,7 +24,8 @@ class SpivanykApplication : Application() {
     }
 
     private fun initializeCrashlytics() {
-        Fabric.with(this, Crashlytics())
+        if (!BuildConfig.DEBUG)
+            Fabric.with(this, Crashlytics())
     }
 
     private fun initializeDi() {
