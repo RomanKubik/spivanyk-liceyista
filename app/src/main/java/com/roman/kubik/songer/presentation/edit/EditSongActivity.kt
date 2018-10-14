@@ -13,10 +13,13 @@ import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
 import com.roman.kubik.songer.presentation.edit.di.EditSongModule
+import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
+import com.roman.kubik.songer.presentation.tutorial.TutorialType
+import com.roman.kubik.songer.utils.hasOpenDialog
 import kotlinx.android.synthetic.main.activity_edit_song.*
 import javax.inject.Inject
 
-class EditSongActivity : BaseActivity(), EditSongContract.View {
+class EditSongActivity : BaseActivity(), EditSongContract.View, TutorialDialog.DismissListener {
 
     @Inject
     lateinit var presenter: EditSongContract.Presenter
@@ -76,6 +79,16 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
+    override fun showTutorial(tutorialType: TutorialType) {
+        if (!hasOpenDialog()) {
+            val dialog = TutorialDialog.getInstance(tutorialType)
+            dialog.dismissListener = this
+            dialog.show(supportFragmentManager, TUTORIAL_DLG_TAG)
+        }
+    }
+
+    override fun onDismissed(tutorialType: TutorialType) = presenter.tutorialShown(tutorialType)
+
     private fun init() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -87,13 +100,17 @@ class EditSongActivity : BaseActivity(), EditSongContract.View {
         AlertDialog.Builder(this)
                 .setTitle(R.string.ttl_save_changes)
                 .setMessage(R.string.msg_save_changes)
-                .setPositiveButton(R.string.save, { _, _ ->
+                .setPositiveButton(R.string.save) { _, _ ->
                     presenter.saveSong(songTitle.text.toString(), lyrics.text.toString())
-                })
+                }
                 .setNegativeButton(R.string.discard) { _, _ ->
                     setResult(Activity.RESULT_CANCELED)
                     finish()
                 }
                 .show()
+    }
+
+    companion object {
+        private const val TUTORIAL_DLG_TAG = "tutorial_dlg_tag"
     }
 }

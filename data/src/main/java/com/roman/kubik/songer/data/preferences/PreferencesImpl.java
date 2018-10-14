@@ -50,4 +50,14 @@ public class PreferencesImpl implements Preferences {
     public Completable setAddSongTutorialShown(boolean shown) {
         return Completable.fromAction(sharedPreferences.edit().putBoolean(Keys.TUTORIAL_ADD_SONG, shown)::commit);
     }
+
+    @Override
+    public Single<Boolean> isMarkChordsTutorialShown() {
+        return Single.just(sharedPreferences.getBoolean(Keys.TUTORIAL_MARK_CHORDS, false));
+    }
+
+    @Override
+    public Completable setMarkChordsTutorialShown(boolean shown) {
+        return Completable.fromAction(sharedPreferences.edit().putBoolean(Keys.TUTORIAL_MARK_CHORDS, shown)::commit);
+    }
 }

@@ -133,6 +133,6 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
     }
 
     companion object {
-        private const val TUTORIAL_DLG_TAG = "shake_tutorial_dlg_tag"
+        private const val TUTORIAL_DLG_TAG = "tutorial_dlg_tag"
     }
 }

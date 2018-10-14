@@ -7,5 +7,6 @@ public interface Keys {
 
     String TUTORIAL_ADD_SONG = "tutorial_add_song";
     String TUTORIAL_SHAKE = "tutorial_shake";
+    String TUTORIAL_MARK_CHORDS = "tutorial_mark_chords";
 
 }

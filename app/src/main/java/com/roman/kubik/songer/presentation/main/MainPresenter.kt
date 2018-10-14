@@ -67,7 +67,7 @@ constructor(private val view: MainContract.View,
         when (type) {
             TutorialType.TYPE_ADD_SONG -> {
                 compositeDisposable.addAll(
-                        preferencesInteractor.isAddSongTutorialShown
+                        preferencesInteractor.setAddSongTutorialShown()
                                 .subscribe(),
                         preferencesInteractor.isShakeTutorialShown
                                 .subscribeOn(Schedulers.io())
@@ -81,6 +81,8 @@ constructor(private val view: MainContract.View,
                 )
             }
             TutorialType.TYPE_SHAKE -> compositeDisposable.add(preferencesInteractor.setShakeTutorialShown().subscribe())
+            else -> {
+            }
         }
     }
 

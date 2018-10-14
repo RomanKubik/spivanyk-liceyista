@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.presentation.edit
 
 import com.roman.kubik.songer.domain.song.Song
+import com.roman.kubik.songer.presentation.tutorial.TutorialType
 
 interface EditSongContract {
 
@@ -15,6 +16,8 @@ interface EditSongContract {
         fun showProgress(show: Boolean)
 
         fun showError(text: String)
+
+        fun showTutorial(tutorialType: TutorialType)
     }
 
     interface Presenter {
@@ -24,6 +27,8 @@ interface EditSongContract {
         fun recognizeChords(lyrics: String)
 
         fun saveSong(title: String, lyrics: String)
+
+        fun tutorialShown(tutorialType: TutorialType)
 
         fun destroy()
     }

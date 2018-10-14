@@ -33,10 +33,18 @@ public class PreferencesInteractor {
     }
 
     public Single<Boolean> isAddSongTutorialShown() {
-        return preferences.isShakeTutorialShown();
+        return preferences.isAddSongTutorialShown();
     }
 
     public Completable setAddSongTutorialShown() {
-        return preferences.setShakeTutorialShown(true);
+        return preferences.setAddSongTutorialShown(true);
+    }
+
+    public Single<Boolean> isMarkChordsTutorialShown() {
+        return preferences.isMarkChordsTutorialShown();
+    }
+
+    public Completable setMarkChordsTutorialShown() {
+        return preferences.setMarkChordsTutorialShown(true);
     }
 }
