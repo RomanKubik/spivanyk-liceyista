@@ -43,14 +43,14 @@ constructor(private val view: MainContract.View,
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setFavouriteCount, view::showError),
-                preferencesInteractor.isShakeTutorialShown
+                preferencesInteractor.isAddSongTutorialShown
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             if (!it)
-                                view.showShakeTutorial()
+                                view.showTutorial(TutorialType.TYPE_ADD_SONG)
                             else
-                                tutorialShown(TutorialType.TYPE_SHAKE)
+                                tutorialShown(TutorialType.TYPE_ADD_SONG)
                         }, view::showError)
         )
     }
@@ -65,6 +65,21 @@ constructor(private val view: MainContract.View,
 
     override fun tutorialShown(type: TutorialType) {
         when (type) {
+            TutorialType.TYPE_ADD_SONG -> {
+                compositeDisposable.addAll(
+                        preferencesInteractor.isAddSongTutorialShown
+                                .subscribe(),
+                        preferencesInteractor.isShakeTutorialShown
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe({
+                                    if (!it)
+                                        view.showTutorial(TutorialType.TYPE_SHAKE)
+                                    else
+                                        tutorialShown(TutorialType.TYPE_SHAKE)
+                                }, view::showError)
+                )
+            }
             TutorialType.TYPE_SHAKE -> compositeDisposable.add(preferencesInteractor.setShakeTutorialShown().subscribe())
         }
     }

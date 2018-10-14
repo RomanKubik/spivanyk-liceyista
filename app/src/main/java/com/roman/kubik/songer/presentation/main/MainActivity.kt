@@ -70,11 +70,11 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
         favouriteCategory.setDescription(String.format(getString(R.string.dsc_favourite), count))
     }
 
-    override fun showShakeTutorial() {
+    override fun showTutorial(tutorialType: TutorialType) {
         if (!hasOpenDialog()) {
-            val dialog = TutorialDialog.getInstance(TutorialType.TYPE_SHAKE)
+            val dialog = TutorialDialog.getInstance(tutorialType)
             dialog.dismissListener = this
-            dialog.show(supportFragmentManager, SHAKE_TUTORIAL_DLG_TAG)
+            dialog.show(supportFragmentManager, TUTORIAL_DLG_TAG)
         }
     }
 
@@ -133,6 +133,6 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
     }
 
     companion object {
-        private const val SHAKE_TUTORIAL_DLG_TAG = "shake_tutorial_dlg_tag"
+        private const val TUTORIAL_DLG_TAG = "shake_tutorial_dlg_tag"
     }
 }

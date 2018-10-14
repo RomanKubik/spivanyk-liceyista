@@ -11,7 +11,7 @@ interface MainContract {
         fun setAbroadsCount(count: Int)
         fun setAllCount(count: Int)
         fun setFavouriteCount(count: Int)
-        fun showShakeTutorial()
+        fun showTutorial(tutorialType: TutorialType)
         fun showError(error: Throwable)
     }
 

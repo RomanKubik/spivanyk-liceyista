@@ -40,4 +40,14 @@ public class PreferencesImpl implements Preferences {
     public Completable setShakeTutorialShown(boolean shown) {
         return Completable.fromAction(sharedPreferences.edit().putBoolean(Keys.TUTORIAL_SHAKE, shown)::commit);
     }
+
+    @Override
+    public Single<Boolean> isAddSongTutorialShown() {
+        return Single.just(sharedPreferences.getBoolean(Keys.TUTORIAL_ADD_SONG, false));
+    }
+
+    @Override
+    public Completable setAddSongTutorialShown(boolean shown) {
+        return Completable.fromAction(sharedPreferences.edit().putBoolean(Keys.TUTORIAL_ADD_SONG, shown)::commit);
+    }
 }

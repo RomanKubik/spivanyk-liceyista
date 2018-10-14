@@ -31,4 +31,12 @@ public class PreferencesInteractor {
     public Completable setShakeTutorialShown() {
         return preferences.setShakeTutorialShown(true);
     }
+
+    public Single<Boolean> isAddSongTutorialShown() {
+        return preferences.isShakeTutorialShown();
+    }
+
+    public Completable setAddSongTutorialShown() {
+        return preferences.setShakeTutorialShown(true);
+    }
 }
