@@ -29,7 +29,7 @@
     <string name="title">Назва</string>
     <string name="lyrics">Текст</string>
     <string name="save">Зберегти</string>
-    <string name="auto_recognize">Самовизначалка</string>
+    <string name="auto_recognize">Промаркувати акорди</string>
     <string name="ttl_save_changes">Зберегти зміни</string>
     <string name="msg_save_changes">Зберегти зміни перед тим, як закрити це вікно?</string>
     <string name="discard">Ні</string>
@@ -39,5 +39,7 @@
     <string name="settings_preferred_instrument_ttl">Обраний інструмент</string>
     <string name="settings_display_chords_msg">Показувати акорди із піснею</string>
     <string name="got_it">Зрозуміло</string>
+    <string name="tutorial_add_song">Клікни по такій іконці, щоб добавити нову пісню до свого співаника</string>
     <string name="tutorial_shake_phone">Встряхни телефоном, щоб побачити випадкову пісню.</string>
+    <string name="tutorial_mark_chords">Клікни по такій іконці, щоб автоматично промаркувати акорди у пісні, використовуючи супер потужний алгоритм</string>
 </resources>

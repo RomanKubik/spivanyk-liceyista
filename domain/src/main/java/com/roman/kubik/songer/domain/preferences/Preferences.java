@@ -14,4 +14,8 @@ public interface Preferences {
 
     Single<Boolean> isShakeTutorialShown();
     Completable setShakeTutorialShown(boolean shown);
+    Single<Boolean> isAddSongTutorialShown();
+    Completable setAddSongTutorialShown(boolean shown);
+    Single<Boolean> isMarkChordsTutorialShown();
+    Completable setMarkChordsTutorialShown(boolean shown);
 }
