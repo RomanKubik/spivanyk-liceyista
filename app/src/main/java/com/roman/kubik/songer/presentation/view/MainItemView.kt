@@ -43,12 +43,12 @@ class MainItemView : ConstraintLayout {
                 /* ignored */
             }
             try {
-                setTitle(a.getString(R.styleable.MainItemView_title)!!)
+                setTitle(a.getString(R.styleable.MainItemView_title))
             } catch (e: IllegalStateException) {
                 /* ignored */
             }
             try {
-                setDescription(a.getString(R.styleable.MainItemView_description)!!)
+                setDescription(a.getString(R.styleable.MainItemView_description))
             } catch (e: IllegalStateException) {
                 /* ignored */
             }
@@ -57,7 +57,7 @@ class MainItemView : ConstraintLayout {
         }
     }
 
-    fun setTitle(title: String) {
+    fun setTitle(title: String?) {
         categoryTitle.text = title
     }
 
@@ -65,7 +65,7 @@ class MainItemView : ConstraintLayout {
         imageView.setImageResource(resId)
     }
 
-    fun setDescription(description: String) {
+    fun setDescription(description: String?) {
         categoryDescription.text = description
     }
 
