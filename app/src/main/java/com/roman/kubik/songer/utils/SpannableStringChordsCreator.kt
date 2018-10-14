@@ -57,12 +57,12 @@ class SpannableStringChordsCreator @Inject constructor() : ChordsMarker {
                     clickListener?.onChordClicked(chord)
                 }
 
-                override fun updateDrawState(ds: TextPaint?) {
+                override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
-                    ds?.bgColor = backgroundColor
-                    ds?.color = textColor
-                    ds?.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
-                    ds?.isUnderlineText = false
+                    ds.bgColor = backgroundColor
+                    ds.color = textColor
+                    ds.typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+                    ds.isUnderlineText = false
                 }
             }
             spannableString.setSpan(clickable, range.first, range.last, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)

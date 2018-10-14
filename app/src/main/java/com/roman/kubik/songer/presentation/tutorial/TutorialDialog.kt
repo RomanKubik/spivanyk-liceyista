@@ -23,7 +23,7 @@ class TutorialDialog : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog.window.setBackgroundDrawable(
+        dialog.window?.setBackgroundDrawable(
                 ColorDrawable(ResourcesCompat.getColor(resources, R.color.transparent_black, null)))
         return inflater.inflate(R.layout.dialog_tutorial, container, false)
     }
