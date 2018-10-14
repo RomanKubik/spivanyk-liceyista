@@ -4,6 +4,7 @@ package com.roman.kubik.songer.domain.song;
 import com.roman.kubik.songer.domain.category.Category;
 import com.roman.kubik.songer.domain.favourite.FavouriteRepository;
 import com.roman.kubik.songer.domain.history.HistoryRepository;
+import com.roman.kubik.songer.domain.utils.TextUtils;
 
 import java.util.List;
 import java.util.Random;
@@ -77,6 +78,12 @@ public class SongInteractor {
     }
 
     public Completable insertOrUpdate(Song song) {
+        if (TextUtils.isEmpty(song.getTitle())) {
+            return Completable.error(new IllegalArgumentException("Title must be not empty"));
+        }
+        if (TextUtils.isEmpty(song.getLyrics())) {
+            return Completable.error(new IllegalArgumentException("Lyrics must be not empty"));
+        }
         return songRepository.insertOrUpdate(song);
     }
 
