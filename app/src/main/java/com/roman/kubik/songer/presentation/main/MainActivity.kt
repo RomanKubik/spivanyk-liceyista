@@ -30,6 +30,10 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+    }
+
+    override fun onStart() {
+        super.onStart()
         presenter.requestData()
     }
 
