@@ -3,8 +3,10 @@ package com.roman.kubik.songer.presentation.main
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
+import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
+import com.roman.kubik.songer.presentation.tutorial.TutorialType
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -16,6 +18,7 @@ constructor(private val view: MainContract.View,
             private val navigationInteractor: NavigationInteractor,
             private val songInteractor: SongInteractor,
             private val favouriteInteractor: FavouriteInteractor,
+            private val preferencesInteractor: PreferencesInteractor,
             private val compositeDisposable: CompositeDisposable) : MainContract.Presenter {
 
     override fun requestData() {
@@ -39,7 +42,17 @@ constructor(private val view: MainContract.View,
                 favouriteInteractor.count
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(view::setFavouriteCount, view::showError))
+                        .subscribe(view::setFavouriteCount, view::showError),
+                preferencesInteractor.isShakeTutorialShown
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            if (!it)
+                                view.showShakeTutorial()
+                            else
+                                tutorialShown(TutorialType.TYPE_SHAKE)
+                        }, view::showError)
+        )
     }
 
     override fun requestRandom() = navigationInteractor.toRandomSong()
@@ -49,6 +62,12 @@ constructor(private val view: MainContract.View,
     override fun addSong() = navigationInteractor.toAddSongActivity()
 
     override fun showSettings() = navigationInteractor.toPreferencesActivity()
+
+    override fun tutorialShown(type: TutorialType) {
+        when (type) {
+            TutorialType.TYPE_SHAKE -> compositeDisposable.add(preferencesInteractor.setShakeTutorialShown().subscribe())
+        }
+    }
 
     override fun destroy() = compositeDisposable.clear()
 

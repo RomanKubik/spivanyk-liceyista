@@ -12,10 +12,14 @@ import com.roman.kubik.songer.domain.logger.event.CategoryEvent
 import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
 import com.roman.kubik.songer.presentation.main.di.MainModule
+import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
+import com.roman.kubik.songer.presentation.tutorial.TutorialType
+import com.roman.kubik.songer.utils.hasOpenDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainContract.View {
+class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissListener {
+
     @Inject
     lateinit var presenter: MainContract.Presenter
     @Inject
@@ -26,15 +30,11 @@ class MainActivity : BaseActivity(), MainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+        presenter.requestData()
     }
 
     override fun injectActivity(activityComponent: ActivityComponent) {
         activityComponent.mainComponent(MainModule(this)).inject(this)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.requestData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -70,10 +70,20 @@ class MainActivity : BaseActivity(), MainContract.View {
         favouriteCategory.setDescription(String.format(getString(R.string.dsc_favourite), count))
     }
 
+    override fun showShakeTutorial() {
+        if (!hasOpenDialog()) {
+            val dialog = TutorialDialog.getInstance(TutorialType.TYPE_SHAKE)
+            dialog.dismissListener = this
+            dialog.show(supportFragmentManager, SHAKE_TUTORIAL_DLG_TAG)
+        }
+    }
+
     override fun showError(error: Throwable) {
         error.printStackTrace()
         Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
     }
+
+    override fun onDismissed(tutorialType: TutorialType) = presenter.tutorialShown(tutorialType)
 
     private fun init() {
         setSupportActionBar(toolbar)
@@ -120,5 +130,9 @@ class MainActivity : BaseActivity(), MainContract.View {
     fun onFavouriteClicked() {
         logger.log(CategoryEvent("favouriteCategory"))
         presenter.selectCategory(Category.FAVOURITE_ID)
+    }
+
+    companion object {
+        private const val SHAKE_TUTORIAL_DLG_TAG = "shake_tutorial_dlg_tag"
     }
 }

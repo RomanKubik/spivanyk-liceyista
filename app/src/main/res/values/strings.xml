@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Spivanyk Licejista</string>
+    <string name="app_name">Songer</string>
     <string name="ttl_last_played">Last played</string>
     <string name="dsc_last_played">Last 100 played songs</string>
     <string name="ttl_bonfire_songs">Bonfire songs</string>
@@ -38,4 +38,6 @@
     <string name="add_song">Add song</string>
     <string name="settings_preferred_instrument_ttl">Preferred instrument</string>
     <string name="settings_display_chords_msg">Display chords with song</string>
+    <string name="got_it">Got it</string>
+    <string name="tutorial_shake_phone">Shake your phone to get random song from songer</string>
 </resources>
