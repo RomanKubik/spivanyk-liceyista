@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Співаник ліцеїста</string>
+    <string name="app_name">Співаник</string>
     <string name="ttl_last_played">Останні проспівані</string>
     <string name="dsc_last_played">100 останніх проспіваних пісень</string>
     <string name="ttl_bonfire_songs">При ватрі</string>
@@ -38,4 +38,6 @@
     <string name="add_song">Добавити пісню</string>
     <string name="settings_preferred_instrument_ttl">Обраний інструмент</string>
     <string name="settings_display_chords_msg">Показувати акорди із піснею</string>
+    <string name="got_it">Зрозуміло</string>
+    <string name="tutorial_shake_phone">Встряхни телефоном, щоб побачити випадкову пісню.</string>
 </resources>

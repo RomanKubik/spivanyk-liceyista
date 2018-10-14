@@ -11,4 +11,7 @@ public interface Preferences {
     Completable setChordsVisible(boolean visible);
 
     Single<String> selectedInstrument();
+
+    Single<Boolean> isShakeTutorialShown();
+    Completable setShakeTutorialShown(boolean shown);
 }
