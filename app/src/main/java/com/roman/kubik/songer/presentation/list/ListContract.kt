@@ -17,9 +17,10 @@ interface ListContract {
     }
 
     interface Presenter {
+        fun showSong(song: Song)
         fun fetchPreferences()
         fun fetchSongByCategory(categoryId: Int)
-        fun filter(byTitle: String)
+        fun filter(query: String)
         fun destroy()
     }
 }

@@ -23,4 +23,28 @@ public class PreferencesInteractor {
     public Single<String> selectedInstrument() {
         return preferences.selectedInstrument();
     }
+
+    public Single<Boolean> isShakeTutorialShown() {
+        return preferences.isShakeTutorialShown();
+    }
+
+    public Completable setShakeTutorialShown() {
+        return preferences.setShakeTutorialShown(true);
+    }
+
+    public Single<Boolean> isAddSongTutorialShown() {
+        return preferences.isAddSongTutorialShown();
+    }
+
+    public Completable setAddSongTutorialShown() {
+        return preferences.setAddSongTutorialShown(true);
+    }
+
+    public Single<Boolean> isMarkChordsTutorialShown() {
+        return preferences.isMarkChordsTutorialShown();
+    }
+
+    public Completable setMarkChordsTutorialShown() {
+        return preferences.setMarkChordsTutorialShown(true);
+    }
 }

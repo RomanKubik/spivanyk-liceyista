@@ -7,12 +7,10 @@ import com.roman.kubik.songer.domain.preferences.Preferences;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
-import io.reactivex.subjects.PublishSubject;
 
 public class PreferencesImpl implements Preferences {
 
     private SharedPreferences sharedPreferences;
-    private PublishSubject<String> preferenceKey = PublishSubject.create();
 
     public PreferencesImpl(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
@@ -31,5 +29,35 @@ public class PreferencesImpl implements Preferences {
     @Override
     public Single<String> selectedInstrument() {
         return Single.just(sharedPreferences.getString(Keys.SELECTED_INSTRUMENT, Instruments.GUITAR));
+    }
+
+    @Override
+    public Single<Boolean> isShakeTutorialShown() {
+        return Single.just(sharedPreferences.getBoolean(Keys.TUTORIAL_SHAKE, false));
+    }
+
+    @Override
+    public Completable setShakeTutorialShown(boolean shown) {
+        return Completable.fromAction(sharedPreferences.edit().putBoolean(Keys.TUTORIAL_SHAKE, shown)::commit);
+    }
+
+    @Override
+    public Single<Boolean> isAddSongTutorialShown() {
+        return Single.just(sharedPreferences.getBoolean(Keys.TUTORIAL_ADD_SONG, false));
+    }
+
+    @Override
+    public Completable setAddSongTutorialShown(boolean shown) {
+        return Completable.fromAction(sharedPreferences.edit().putBoolean(Keys.TUTORIAL_ADD_SONG, shown)::commit);
+    }
+
+    @Override
+    public Single<Boolean> isMarkChordsTutorialShown() {
+        return Single.just(sharedPreferences.getBoolean(Keys.TUTORIAL_MARK_CHORDS, false));
+    }
+
+    @Override
+    public Completable setMarkChordsTutorialShown(boolean shown) {
+        return Completable.fromAction(sharedPreferences.edit().putBoolean(Keys.TUTORIAL_MARK_CHORDS, shown)::commit);
     }
 }

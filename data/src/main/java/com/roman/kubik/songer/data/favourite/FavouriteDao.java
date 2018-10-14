@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
+import com.roman.kubik.songer.data.song.SongEntity;
 import com.roman.kubik.songer.domain.favourite.Favourite;
 import com.roman.kubik.songer.domain.song.Song;
 
@@ -19,8 +20,11 @@ import io.reactivex.Single;
 @Dao
 public interface FavouriteDao {
 
-    @Query("SELECT * FROM favourite")
-    Single<List<FavouriteEntity>> getAll();
+    @Query("SELECT * FROM favourite INNER JOIN song ON favourite.song_id = song.id ORDER BY song.title")
+    Single<List<SongEntity>> getAll();
+
+    @Query("SELECT * FROM favourite INNER JOIN song ON song.id = favourite.song_id WHERE song.title LIKE :query OR song.lyrics LIKE :query ORDER BY song.title")
+    Single<List<SongEntity>> search(String query);
 
     @Insert
     void add(FavouriteEntity favouriteEntity);

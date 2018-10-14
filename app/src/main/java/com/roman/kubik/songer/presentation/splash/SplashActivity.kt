@@ -2,11 +2,8 @@ package com.roman.kubik.songer.presentation.splash
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-
 import com.roman.kubik.songer.data.database.DatabaseCopyHelper
-import com.roman.kubik.songer.presentation.Navigate
-
-import java.io.IOException
+import com.roman.kubik.songer.navigation.NavigationServiceImpl
 
 /**
  * Launcher activity
@@ -19,9 +16,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         try {
             DatabaseCopyHelper(this).createDataBase()
-            Navigate.toMainActivity(this)
-        } catch (ignored: IOException) {
+            NavigationServiceImpl(this).toMainActivity()
+        } finally {
+            finish()
         }
-        finish()
     }
 }

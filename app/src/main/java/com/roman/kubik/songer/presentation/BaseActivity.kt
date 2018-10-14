@@ -1,9 +1,13 @@
 package com.roman.kubik.songer.presentation
 
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.ViewGroup
 import butterknife.ButterKnife
+import com.roman.kubik.songer.general.android.SpivanykApplication.Companion.component
+import com.roman.kubik.songer.general.di.ActivityComponent
+import com.roman.kubik.songer.general.di.ActivityModule
 
 /**
  * Base activity for all application activities
@@ -11,6 +15,12 @@ import butterknife.ButterKnife
  */
 
 abstract class BaseActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        injectActivity(component.getActivityComponent(ActivityModule(this)))
+
+    }
 
     override fun setContentView(layoutResID: Int) {
         super.setContentView(layoutResID)
@@ -26,4 +36,6 @@ abstract class BaseActivity : AppCompatActivity() {
         super.setContentView(view, params)
         ButterKnife.bind(this)
     }
+
+    abstract fun injectActivity(activityComponent: ActivityComponent)
 }

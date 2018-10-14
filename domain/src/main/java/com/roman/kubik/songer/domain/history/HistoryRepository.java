@@ -11,5 +11,7 @@ public interface HistoryRepository {
 
     Single<List<Song>> getLastSongs();
 
+    Single<List<Song>> search(String query);
+
     Completable addSongToHistory(Song song);
 }

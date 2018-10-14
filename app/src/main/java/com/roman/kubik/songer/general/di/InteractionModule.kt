@@ -2,32 +2,27 @@ package com.roman.kubik.songer.general.di
 
 import android.content.Context
 import android.preference.PreferenceManager
-import com.roman.kubik.songer.data.category.CategoryDao
-import com.roman.kubik.songer.data.category.CategoryModelMapper
-import com.roman.kubik.songer.data.category.CategoryRepositoryImpl
 import com.roman.kubik.songer.data.chord.ChordRepositoryFactoryImpl
-import com.roman.kubik.songer.data.chord.GuitarChordRepository
-import com.roman.kubik.songer.data.favourite.FavouriteDao
-import com.roman.kubik.songer.data.favourite.FavouriteRepositoryImpl
-import com.roman.kubik.songer.data.history.HistoryRepositoryImpl
 import com.roman.kubik.songer.data.logger.FirebaseLogger
 import com.roman.kubik.songer.data.preferences.PreferencesImpl
-import com.roman.kubik.songer.data.song.SongDao
-import com.roman.kubik.songer.data.song.SongModelMapper
-import com.roman.kubik.songer.data.song.SongRepositoryImpl
 import com.roman.kubik.songer.domain.category.CategoryInteractor
+import com.roman.kubik.songer.domain.category.CategoryRepository
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
+import com.roman.kubik.songer.domain.favourite.FavouriteRepository
 import com.roman.kubik.songer.domain.history.HistoryInteractor
+import com.roman.kubik.songer.domain.history.HistoryRepository
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
+import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
+import com.roman.kubik.songer.domain.shaker.ShakeDetector
+import com.roman.kubik.songer.domain.shaker.ShakeInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
+import com.roman.kubik.songer.domain.song.SongRepository
 import com.roman.kubik.songer.domain.utils.MarkedChordsRecognizer
-
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Created by kubik on 1/20/18.
@@ -38,20 +33,20 @@ class InteractionModule {
 
     @Provides
     @Singleton
-    internal fun getSongInteractor(songDao: SongDao, songModelMapper: SongModelMapper): SongInteractor {
-        return SongInteractor(SongRepositoryImpl(songDao, songModelMapper))
+    internal fun getSongInteractor(songRepository: SongRepository, favouriteRepository: FavouriteRepository, historyRepository: HistoryRepository): SongInteractor {
+        return SongInteractor(songRepository, favouriteRepository, historyRepository)
     }
 
     @Provides
     @Singleton
-    internal fun getCategoryInteractor(categoryDao: CategoryDao, categoryModelMapper: CategoryModelMapper): CategoryInteractor {
-        return CategoryInteractor(CategoryRepositoryImpl(categoryDao, categoryModelMapper))
+    internal fun getCategoryInteractor(categoryRepository: CategoryRepository): CategoryInteractor {
+        return CategoryInteractor(categoryRepository)
     }
 
     @Provides
     @Singleton
-    internal fun getFavouriteInteractor(favouriteDao: FavouriteDao, songInteractor: SongInteractor): FavouriteInteractor {
-        return FavouriteInteractor(FavouriteRepositoryImpl(favouriteDao, songInteractor))
+    internal fun getFavouriteInteractor(favouriteRepository: FavouriteRepository): FavouriteInteractor {
+        return FavouriteInteractor(favouriteRepository)
     }
 
     @Provides
@@ -68,12 +63,16 @@ class InteractionModule {
 
     @Provides
     @Singleton
-    internal fun getHistoryInteractor(historyRepositoryImpl: HistoryRepositoryImpl): HistoryInteractor {
-        return HistoryInteractor(historyRepositoryImpl)
+    internal fun getHistoryInteractor(historyRepository: HistoryRepository): HistoryInteractor {
+        return HistoryInteractor(historyRepository)
     }
 
     @Provides
     @Singleton
     internal fun getLoggerInteractor(firebaseLogger: FirebaseLogger): LoggerInteractor = LoggerInteractor(firebaseLogger)
+
+    @Provides
+    @Singleton
+    internal fun getShakerInteractor(shakeDetector: ShakeDetector) = ShakeInteractor(shakeDetector)
 
 }

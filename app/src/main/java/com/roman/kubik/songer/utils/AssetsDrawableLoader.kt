@@ -11,7 +11,7 @@ class AssetsDrawableLoader @Inject constructor(val context: Context) {
         // load image
         return try {
             // get input stream
-            val ims = context.assets.open(path)
+            val ims = context.assets.open(path!!)
             // load image as Drawable
             Drawable.createFromStream(ims, null)
         } catch (ex: Exception) {

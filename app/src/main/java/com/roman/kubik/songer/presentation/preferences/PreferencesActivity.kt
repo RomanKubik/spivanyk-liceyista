@@ -3,7 +3,7 @@ package com.roman.kubik.songer.presentation.preferences
 import android.os.Bundle
 import android.preference.PreferenceFragment
 import com.roman.kubik.songer.R
-import com.roman.kubik.songer.general.android.SpivanykApplication.Companion.component
+import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
 import com.roman.kubik.songer.presentation.preferences.di.PreferencesModule
 import kotlinx.android.synthetic.main.activity_preferences.*
@@ -20,11 +20,14 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferences)
-        component.preferencesComponent(PreferencesModule(this)).inject(this)
         fragmentManager?.beginTransaction()
                 ?.replace(R.id.preferencesContainer, AppPreferences())
                 ?.commit()
         init()
+    }
+
+    override fun injectActivity(activityComponent: ActivityComponent) {
+        activityComponent.preferencesComponent(PreferencesModule(this)).inject(this)
     }
 
     override fun onDestroy() {

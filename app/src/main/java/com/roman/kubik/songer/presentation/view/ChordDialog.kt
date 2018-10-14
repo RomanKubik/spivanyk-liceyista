@@ -16,19 +16,19 @@ class ChordDialog : Dialog {
     private val chords: List<Chord>
     private var currentPosition: Int = 0
 
-    constructor(context: Context?, chords: List<Chord>, assetsDrawableLoader: AssetsDrawableLoader) : super(context) {
+    constructor(context: Context, chords: List<Chord>, assetsDrawableLoader: AssetsDrawableLoader) : super(context) {
         this.chords = chords
         this.assetsDrawableLoader = assetsDrawableLoader
         init()
     }
 
-    constructor(context: Context?, themeResId: Int, chords: List<Chord>, assetsDrawableLoader: AssetsDrawableLoader) : super(context, themeResId) {
+    constructor(context: Context, themeResId: Int, chords: List<Chord>, assetsDrawableLoader: AssetsDrawableLoader) : super(context, themeResId) {
         this.chords = chords
         init()
         this.assetsDrawableLoader = assetsDrawableLoader
     }
 
-    constructor(context: Context?, cancelable: Boolean, cancelListener: DialogInterface.OnCancelListener?, chords: List<Chord>, assetsDrawableLoader: AssetsDrawableLoader) : super(context, cancelable, cancelListener) {
+    constructor(context: Context, cancelable: Boolean, cancelListener: DialogInterface.OnCancelListener?, chords: List<Chord>, assetsDrawableLoader: AssetsDrawableLoader) : super(context, cancelable, cancelListener) {
         this.chords = chords
         init()
         this.assetsDrawableLoader = assetsDrawableLoader

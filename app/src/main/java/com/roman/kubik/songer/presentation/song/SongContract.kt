@@ -19,8 +19,6 @@ interface SongContract {
         fun isFavouriteSong(isFavourite: Boolean)
         fun setChordsVisibility(visible: Boolean)
         fun showChord(chord: String)
-        fun share(type: String, title: String, lyrics: String)
-        fun edit(song: Song)
         fun showProgress(show: Boolean)
         fun showError(errorMessage: String)
     }
@@ -33,6 +31,6 @@ interface SongContract {
         fun shareSong()
         fun edit()
         fun showChords()
-        fun detroy()
+        fun destroy()
     }
 }

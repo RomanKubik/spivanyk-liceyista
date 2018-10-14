@@ -1,10 +1,7 @@
 package com.roman.kubik.songer.presentation.list
 
-import com.annimon.stream.Collectors
-import com.annimon.stream.Stream
-import com.roman.kubik.songer.Constants
-import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
-import com.roman.kubik.songer.domain.history.HistoryInteractor
+import com.roman.kubik.songer.domain.category.Category
+import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.domain.song.SongInteractor
@@ -22,13 +19,17 @@ import javax.inject.Inject
 @ActivityScope
 class ListPresenter @Inject
 constructor(private val view: ListContract.View,
+            private val navigationInteractor: NavigationInteractor,
             private val songInteractor: SongInteractor,
-            private val historyInteractor: HistoryInteractor,
-            private val favouriteInteractor: FavouriteInteractor,
             private val preferencesInteractor: PreferencesInteractor,
             private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
 
     private var songs = mutableListOf<Song>()
+    private var categoryId = Category.ALL_ID
+
+    override fun showSong(song: Song) {
+        navigationInteractor.toSongActivity(song)
+    }
 
     override fun fetchPreferences() {
         compositeDisposable.add(
@@ -41,68 +42,29 @@ constructor(private val view: ListContract.View,
     }
 
     override fun fetchSongByCategory(categoryId: Int) {
+        this.categoryId = categoryId
         view.showProgress(true)
-        when (categoryId) {
-            Constants.Category.ALL_ID -> fetchAll()
-            Constants.Category.LAST_ID -> fetchLast()
-            Constants.Category.FAVOURITE_ID -> fetchFavourite()
-            else -> fetchByCategoryId(categoryId)
-        }
-
-    }
-
-    override fun filter(byTitle: String) {
-        val title = byTitle.toLowerCase()
-        view.onSongsFetched(Stream.of(songs)
-                .filter({ s -> s.title.toLowerCase().contains(title) })
-                .collect(Collectors.toList()))
-    }
-
-    override fun destroy() {
-        compositeDisposable.clear()
-    }
-
-    private fun fetchAll() {
-        compositeDisposable.add(
-                songInteractor.all
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doFinally { view.showProgress(false) }
-                        .doOnSuccess({ s -> songs.addAll(s) })
-                        .subscribe(view::onSongsFetched
-                        ) { t -> view.showError(t.message) })
-    }
-
-    private fun fetchLast() {
-        compositeDisposable.add(
-                historyInteractor.lastPlayed
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doFinally { view.showProgress(false) }
-                        .doOnSuccess({ s -> songs.addAll(s) })
-                        .subscribe(view::onSongsFetched
-                        ) { t -> view.showError(t.message) })
-    }
-
-    private fun fetchFavourite() {
-        compositeDisposable.add(
-                favouriteInteractor.all
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doFinally { view.showProgress(false) }
-                        .doOnSuccess({ s -> songs.addAll(s) })
-                        .subscribe(view::onSongsFetched
-                        ) { t -> view.showError(t.message) })
-    }
-
-    private fun fetchByCategoryId(categoryId: Int) {
         compositeDisposable.add(
                 songInteractor.getAllByCategory(categoryId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doFinally { view.showProgress(false) }
-                        .doOnSuccess({ s -> songs.addAll(s) })
+                        .doOnSuccess { s -> songs.addAll(s) }
                         .subscribe(view::onSongsFetched
                         ) { t -> view.showError(t.message) })
+
+    }
+
+    override fun filter(query: String) {
+        compositeDisposable.add(
+                songInteractor.search(query, categoryId)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(view::onSongsFetched
+                        ) { t -> view.showError(t.message) })
+    }
+
+    override fun destroy() {
+        compositeDisposable.clear()
     }
 }
