@@ -10,6 +10,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by kubik on 1/14/18.
@@ -48,4 +49,12 @@ public class ChordInteractor {
                 .subscribe(i -> repository = chordRepositoryFactory.getChordRepository(i), Throwable::printStackTrace);
     }
 
+    public Single<Song> transposeUp(Song song) {
+        
+        return Single.error(new NotImplementedException());
+    }
+
+    public Single<Song> transposeDown(Song song) {
+        return Single.error(new NotImplementedException());
+    }
 }

@@ -99,6 +99,25 @@ constructor(private val view: SongContract.View,
         compositeDisposable.clear()
     }
 
+    override fun transposeUp() {
+        compositeDisposable.add(chordInteractor.transposeUp(song)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(this::fetchChords)
+                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) })
+        { t -> view.showError(t.message!!) })
+    }
+
+    override fun transposeDown() {
+        compositeDisposable.add(chordInteractor.transposeDown(song)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess(this::fetchChords)
+                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) })
+                { t -> view.showError(t.message!!) })
+    }
+
+
     private fun formatLyrics(lyrics: String): CharSequence {
         return if (showChords)
             lyricsFormattingInteractor.createChords(lyrics, view::showChord, chordColor, backgroundColor)

@@ -90,4 +90,16 @@
         <item name="android:layout_height">@dimen/view_size_48</item>
     </style>
 
+    <style name="Clickable" parent="AppTheme">
+        <item name="android:clickable">true</item>
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
+
+    <style name="TranspositionButton" parent="Clickable">
+        <item name="android:padding">@dimen/activity_vertical_margin</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

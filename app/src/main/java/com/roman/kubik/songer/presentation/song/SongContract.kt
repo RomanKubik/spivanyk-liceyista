@@ -32,5 +32,7 @@ interface SongContract {
         fun edit()
         fun showChords()
         fun destroy()
+        fun transposeUp()
+        fun transposeDown()
     }
 }

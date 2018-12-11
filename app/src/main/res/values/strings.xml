@@ -42,4 +42,5 @@
     <string name="tutorial_add_song">Tap on this icon to add new song to your songer</string>
     <string name="tutorial_shake_phone">Shake your phone to get random song from songer</string>
     <string name="tutorial_mark_chords">Tap on this icon to mark chords automatically with super powerful algorithm</string>
+    <string name="settings_tonality">Tonality</string>
 </resources>

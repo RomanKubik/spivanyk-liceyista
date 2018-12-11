@@ -21,4 +21,9 @@
         android:checkable="true"
         android:title="@string/settings_show_chords_ttl"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/app_bar_transposition"
+        android:title="@string/settings_tonality"
+        app:showAsAction="never" />
 </menu>

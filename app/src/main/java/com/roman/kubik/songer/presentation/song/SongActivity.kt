@@ -10,7 +10,10 @@ import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
+import butterknife.OnClick
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
@@ -69,6 +72,7 @@ class SongActivity : BaseActivity(), SongContract.View {
             R.id.app_bar_share -> presenter.shareSong()
             R.id.app_bar_edit -> presenter.edit()
             R.id.app_bar_show_chords -> presenter.showChords()
+            R.id.app_bar_transposition -> displayTonalityView()
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
@@ -138,5 +142,18 @@ class SongActivity : BaseActivity(), SongContract.View {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
+    private fun displayTonalityView() {
+        transpositionContainer.visibility =
+                if (transpositionContainer.visibility == VISIBLE) GONE else VISIBLE
+    }
+
+    @OnClick(R.id.transpositionPlus)
+    fun transpositionPlusClicked() = presenter.transposeUp()
+
+
+    @OnClick(R.id.transpositionMinus)
+    fun transpositionMinusClicked() = presenter.transposeDown()
+
 
 }
