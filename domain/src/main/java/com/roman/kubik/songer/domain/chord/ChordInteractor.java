@@ -2,6 +2,8 @@ package com.roman.kubik.songer.domain.chord;
 
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor;
 import com.roman.kubik.songer.domain.song.Song;
+import com.roman.kubik.songer.domain.song.SongRepository;
+import com.roman.kubik.songer.domain.utils.ChordsTransposer;
 import com.roman.kubik.songer.domain.utils.MarkedChordsRecognizer;
 
 import java.util.ArrayList;
@@ -10,7 +12,6 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by kubik on 1/14/18.
@@ -19,16 +20,20 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class ChordInteractor {
 
     private ChordRepository repository;
-    private ChordRepositoryFactory chordRepositoryFactory;
-    private PreferencesInteractor preferencesInteractor;
-    private MarkedChordsRecognizer markedChordsRecognizer;
+    private final ChordRepositoryFactory chordRepositoryFactory;
+    private final PreferencesInteractor preferencesInteractor;
+    private final MarkedChordsRecognizer markedChordsRecognizer;
+    private final ChordsTransposer chordsTransposer;
+    private final SongRepository songRepository;
 
     public ChordInteractor(ChordRepositoryFactory chordRepositoryFactory,
                            PreferencesInteractor preferencesInteractor,
-                           MarkedChordsRecognizer markedChordsRecognizer) {
+                           MarkedChordsRecognizer markedChordsRecognizer, ChordsTransposer chordsTransposer, SongRepository songRepository) {
         this.chordRepositoryFactory = chordRepositoryFactory;
         this.preferencesInteractor = preferencesInteractor;
         this.markedChordsRecognizer = markedChordsRecognizer;
+        this.chordsTransposer = chordsTransposer;
+        this.songRepository = songRepository;
         updateChordRepository();
     }
 
@@ -50,11 +55,12 @@ public class ChordInteractor {
     }
 
     public Single<Song> transposeUp(Song song) {
-        
-        return Single.error(new NotImplementedException());
+        return Single.fromCallable(() -> chordsTransposer.transposeUp(song))
+                .doOnSuccess(s -> songRepository.insertOrUpdate(song).subscribe());
     }
 
     public Single<Song> transposeDown(Song song) {
-        return Single.error(new NotImplementedException());
+        return Single.fromCallable(() -> chordsTransposer.transposeDown(song))
+                .doOnSuccess(s -> songRepository.insertOrUpdate(song).subscribe());
     }
 }

@@ -35,6 +35,7 @@ import javax.inject.Inject
 
 class SongActivity : BaseActivity(), SongContract.View {
 
+    private var menu: Menu? = null
     private lateinit var bookmarkItem: MenuItem
     private lateinit var showChordsItem: MenuItem
     private lateinit var chordDialog: ChordDialog
@@ -59,6 +60,7 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        this.menu = menu
         menuInflater.inflate(R.menu.menu_song, menu)
         bookmarkItem = menu?.findItem(R.id.app_bar_bookmark)!!
         showChordsItem = menu.findItem(R.id.app_bar_show_chords)
@@ -119,6 +121,7 @@ class SongActivity : BaseActivity(), SongContract.View {
         chordsList.visibility = if (visible) View.VISIBLE else View.GONE
         chords.visibility = if (visible) View.VISIBLE else View.GONE
         presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
+        menu?.findItem(R.id.app_bar_transposition)?.isVisible = visible
     }
 
     override fun showChord(chord: String) {

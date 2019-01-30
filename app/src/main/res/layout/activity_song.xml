@@ -176,32 +176,44 @@
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:id="@+id/transpositionContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:gravity="end"
-        android:orientation="horizontal"
         android:visibility="gone"
+        app:cardBackgroundColor="@color/colorPrimary"
         app:layout_anchor="@+id/appbar"
         app:layout_anchorGravity="bottom|end"
         tools:visibility="visible">
 
-        <TextView
-            android:id="@+id/transpositionPlus"
-            style="@style/TranspositionButton"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/transpositionMinus"
-            style="@style/TranspositionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-" />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/transpositionMinus"
+                style="@style/TranspositionButton"
+                android:src="@drawable/ic_arrow_downward"
+                android:contentDescription="@string/downward" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@color/darkish_grey"
+                android:layout_marginTop="@dimen/spacing_4"
+                android:layout_marginBottom="@dimen/spacing_4"/>
+
+            <ImageView
+                android:id="@+id/transpositionPlus"
+                style="@style/TranspositionButton"
+                android:src="@drawable/ic_arrow_upward"
+                android:contentDescription="@string/upward" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 </android.support.design.widget.CoordinatorLayout>
