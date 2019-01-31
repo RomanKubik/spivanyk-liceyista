@@ -45,4 +45,5 @@
     <string name="settings_tonality">Tonality</string>
     <string name="downward">Downward</string>
     <string name="upward">Upward</string>
+    <string name="song_details_transpose_error">Can\'t transpose chords. Try to edit chords marks</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.presentation.song
 
+import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.CategoryInteractor
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
@@ -104,8 +105,8 @@ constructor(private val view: SongContract.View,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(this::fetchChords)
-                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) })
-        { t -> view.showError(t.message!!) })
+                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
+
     }
 
     override fun transposeDown() {
@@ -113,10 +114,10 @@ constructor(private val view: SongContract.View,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(this::fetchChords)
-                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) })
-                { t -> view.showError(t.message!!) })
+                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
     }
 
+    private fun showTransposeChordError(throwable: Throwable) = view.showError(R.string.song_details_transpose_error)
 
     private fun formatLyrics(lyrics: String): CharSequence {
         return if (showChords)

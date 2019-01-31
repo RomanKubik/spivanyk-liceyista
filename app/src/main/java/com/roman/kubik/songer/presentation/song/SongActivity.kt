@@ -135,6 +135,10 @@ class SongActivity : BaseActivity(), SongContract.View {
         Toast.makeText(this, "showError: $errorMessage", Toast.LENGTH_SHORT).show()
     }
 
+    override fun showError(id: Int) {
+        Toast.makeText(this, id, Toast.LENGTH_SHORT).show()
+    }
+
     private fun init() {
         presenter.setChordColors(Color.BLACK, ContextCompat.getColor(this, R.color.transparent_grey))
         lyrics.movementMethod = LinkMovementMethod.getInstance()

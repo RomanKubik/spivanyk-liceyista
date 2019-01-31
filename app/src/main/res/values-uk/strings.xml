@@ -45,4 +45,5 @@
     <string name="settings_tonality">Тональність</string>
     <string name="downward">Спустити</string>
     <string name="upward">Підняти</string>
+    <string name="song_details_transpose_error">Неможливо змінити тональність. Спробуйте відредагувати маркування акордів</string>
 </resources>
