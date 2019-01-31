@@ -5,11 +5,9 @@ import android.support.v4.app.FragmentActivity
 
 fun FragmentActivity.hasOpenDialog(): Boolean {
     val fragments = this.supportFragmentManager.fragments
-    if (fragments != null) {
-        for (fragment in fragments) {
-            if (fragment is DialogFragment) {
-                return true
-            }
+    for (fragment in fragments) {
+        if (fragment is DialogFragment) {
+            return true
         }
     }
 

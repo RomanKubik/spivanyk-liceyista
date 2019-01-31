@@ -13,12 +13,12 @@ import com.roman.kubik.songer.domain.favourite.FavouriteRepository
 import com.roman.kubik.songer.domain.history.HistoryInteractor
 import com.roman.kubik.songer.domain.history.HistoryRepository
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
-import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.shaker.ShakeDetector
 import com.roman.kubik.songer.domain.shaker.ShakeInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.domain.song.SongRepository
+import com.roman.kubik.songer.domain.utils.ChordsTransposer
 import com.roman.kubik.songer.domain.utils.MarkedChordsRecognizer
 import dagger.Module
 import dagger.Provides
@@ -57,8 +57,8 @@ class InteractionModule {
 
     @Provides
     @Singleton
-    internal fun getChordInteractor(chordRepositoryFactoryImpl: ChordRepositoryFactoryImpl, preferencesInteractor: PreferencesInteractor, markedChordsRecognizer: MarkedChordsRecognizer): ChordInteractor {
-        return ChordInteractor(chordRepositoryFactoryImpl, preferencesInteractor, markedChordsRecognizer)
+    internal fun getChordInteractor(chordRepositoryFactoryImpl: ChordRepositoryFactoryImpl, preferencesInteractor: PreferencesInteractor, markedChordsRecognizer: MarkedChordsRecognizer, chordsTransposer: ChordsTransposer, songRepository: SongRepository): ChordInteractor {
+        return ChordInteractor(chordRepositoryFactoryImpl, preferencesInteractor, markedChordsRecognizer, chordsTransposer, songRepository)
     }
 
     @Provides

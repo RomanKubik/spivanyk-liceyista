@@ -21,6 +21,7 @@ interface SongContract {
         fun showChord(chord: String)
         fun showProgress(show: Boolean)
         fun showError(errorMessage: String)
+        fun showError(id: Int)
     }
 
     interface Presenter {
@@ -32,5 +33,7 @@ interface SongContract {
         fun edit()
         fun showChords()
         fun destroy()
+        fun transposeUp()
+        fun transposeDown()
     }
 }
