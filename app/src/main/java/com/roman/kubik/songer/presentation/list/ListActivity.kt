@@ -55,8 +55,8 @@ class ListActivity : BaseActivity(), ListContract.View {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_song_list, menu)
         val menuItem = menu?.findItem(R.id.app_bar_search)
-        val searchView = menuItem?.actionView as SearchView
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        val searchView = if (menuItem?.actionView != null) menuItem.actionView as SearchView else null
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 presenter.filter(query!!)
                 return true
