@@ -1,6 +1,6 @@
 package com.roman.kubik.songer.presentation.song
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import com.roman.kubik.songer.utils.AssetsDrawableLoader
 import javax.inject.Inject
 
 class ChordsListAdapter @Inject constructor(private val assetsDrawableLoader: AssetsDrawableLoader)
-    : RecyclerView.Adapter<ChordsListAdapter.ChordHolder>() {
+    : androidx.recyclerview.widget.RecyclerView.Adapter<ChordsListAdapter.ChordHolder>() {
 
     private val chords = mutableListOf<Chord>()
     var chordClickListener: Consumer<Chord>? = null
@@ -44,7 +44,7 @@ class ChordsListAdapter @Inject constructor(private val assetsDrawableLoader: As
         notifyDataSetChanged()
     }
 
-    class ChordHolder(itemView: View, private val assetsDrawableLoader: AssetsDrawableLoader) : RecyclerView.ViewHolder(itemView) {
+    class ChordHolder(itemView: View, private val assetsDrawableLoader: AssetsDrawableLoader) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         @BindView(R.id.chordName)
         lateinit var chordName: TextView

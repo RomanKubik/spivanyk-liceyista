@@ -1,7 +1,7 @@
 package com.roman.kubik.songer.presentation.list
 
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class SongsAdapter @Inject
 constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
-    : RecyclerView.Adapter<SongsAdapter.SongHolder>() {
+    : androidx.recyclerview.widget.RecyclerView.Adapter<SongsAdapter.SongHolder>() {
 
     private var onClickListener: Consumer<Song>? = null
 
@@ -67,7 +67,7 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
         }
     }
 
-    inner class SongHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SongHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         private var tvTitle: TextView = itemView.findViewById(R.id.title)
         private var tvLyrics: TextView = itemView.findViewById(R.id.lyrics)

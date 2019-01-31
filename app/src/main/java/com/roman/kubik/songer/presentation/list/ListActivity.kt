@@ -1,9 +1,9 @@
 package com.roman.kubik.songer.presentation.list
 
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.SearchView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.appcompat.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -100,7 +100,7 @@ class ListActivity : BaseActivity(), ListContract.View {
 
     private fun init(categoryId: Int) {
         songsAdapter.setOnClickListener(Consumer { presenter.showSong(it) })
-        songList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        songList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         songList.adapter = songsAdapter
         addDividers()
         setSupportActionBar(toolbar)
@@ -109,7 +109,7 @@ class ListActivity : BaseActivity(), ListContract.View {
     }
 
     private fun addDividers() {
-        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+        val dividerItemDecoration = androidx.recyclerview.widget.DividerItemDecoration(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL)
         songList.addItemDecoration(dividerItemDecoration)
     }
 

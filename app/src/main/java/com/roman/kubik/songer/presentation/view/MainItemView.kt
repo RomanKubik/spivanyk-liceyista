@@ -1,7 +1,7 @@
 package com.roman.kubik.songer.presentation.view
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.View
 import com.roman.kubik.songer.R
