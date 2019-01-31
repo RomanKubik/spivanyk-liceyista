@@ -5,7 +5,7 @@ dependencies {
     implementation libs.rxJava
     implementation libs.stream
     implementation "javax.inject:javax.inject:1@jar"
-    implementation "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
+    implementation "androidx.annotation:annotation:1.0.1"
     testImplementation 'junit:junit:4.12'
 }
 

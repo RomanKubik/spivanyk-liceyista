@@ -1,7 +1,7 @@
 package com.roman.kubik.songer.data.database;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
 import com.roman.kubik.songer.data.category.CategoryDao;
 import com.roman.kubik.songer.data.category.CategoryEntity;
