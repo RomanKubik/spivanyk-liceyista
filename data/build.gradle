@@ -51,5 +51,3 @@ dependencies {
 
     implementation "javax.inject:javax.inject:1@jar"
 }
-
-apply plugin: 'com.google.gms.google-services'
