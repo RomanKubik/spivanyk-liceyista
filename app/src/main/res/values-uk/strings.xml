@@ -42,4 +42,8 @@
     <string name="tutorial_add_song">Клікни по такій іконці, щоб добавити нову пісню до свого співаника</string>
     <string name="tutorial_shake_phone">Встряхни телефоном, щоб побачити випадкову пісню.</string>
     <string name="tutorial_mark_chords">Клікни по такій іконці, щоб автоматично промаркувати акорди у пісні, використовуючи супер потужний алгоритм</string>
+    <string name="settings_tonality">Тональність</string>
+    <string name="downward">Спустити</string>
+    <string name="upward">Підняти</string>
+    <string name="song_details_transpose_error">Неможливо змінити тональність. Спробуйте відредагувати маркування акордів</string>
 </resources>

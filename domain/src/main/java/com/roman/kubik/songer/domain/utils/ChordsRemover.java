@@ -9,8 +9,8 @@ import javax.inject.Inject;
 
 public class ChordsRemover implements LyricsFormatter {
 
-    private static final Pattern bracketsPattern = Pattern.compile("(<\\S+>)");
-    private static final Pattern emptyLinePattern = Pattern.compile("(\\n\\s+\\n)");
+    private static final Pattern bracketsPattern = Pattern.compile("(<\\S{1,4}>)");
+    private static final Pattern emptyLinePattern = Pattern.compile("(\\n\\W+\\n)");
 
     @Inject
     public ChordsRemover() {
