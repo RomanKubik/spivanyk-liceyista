@@ -1,20 +1,17 @@
 package com.roman.kubik.songer.general.di
 
-import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.room.Room
-import androidx.room.migration.Migration
 import android.content.Context
-
+import androidx.room.Room
 import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.data.category.CategoryModelMapper
 import com.roman.kubik.songer.data.database.AppDatabase
+import com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_1_2
+import com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_2_3
 import com.roman.kubik.songer.data.favourite.FavouriteModelMapper
 import com.roman.kubik.songer.data.song.SongModelMapper
-
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Database module
@@ -41,10 +38,7 @@ class DatabaseModule {
     @Singleton
     internal fun getAppDatabase(context: Context) =
             Room.databaseBuilder(context, AppDatabase::class.java, Constants.APP_DB_FILE_NAME)
-                    .addMigrations(object : Migration(1, 2) {
-                        override fun migrate(database: SupportSQLiteDatabase) {
-                        }
-                    })
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
                     .build()
 
     @Provides

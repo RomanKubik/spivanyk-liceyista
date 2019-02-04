@@ -1,16 +1,16 @@
 package com.roman.kubik.songer.data.favourite;
 
+import com.roman.kubik.songer.data.song.SongEntity;
+
+import java.util.UUID;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.roman.kubik.songer.data.song.SongEntity;
-
-import java.util.UUID;
+import static androidx.room.ForeignKey.CASCADE;
 
 /**
  * Created by kubik on 1/20/18.
@@ -19,7 +19,7 @@ import java.util.UUID;
 @Entity(tableName = "favourite",
         foreignKeys = @ForeignKey(entity = SongEntity.class,
                 childColumns = "song_id",
-                parentColumns = "id"))
+                parentColumns = "id", onDelete = CASCADE))
 public class FavouriteEntity {
 
     @PrimaryKey

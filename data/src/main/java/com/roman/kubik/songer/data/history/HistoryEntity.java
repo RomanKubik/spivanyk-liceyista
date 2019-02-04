@@ -11,10 +11,12 @@ import com.roman.kubik.songer.data.song.SongEntity;
 
 import java.util.UUID;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 @Entity(tableName = "history",
         foreignKeys = @ForeignKey(entity = SongEntity.class,
                 childColumns = "song_id",
-                parentColumns = "id"))
+                parentColumns = "id", onDelete = CASCADE))
 public class HistoryEntity {
 
     @PrimaryKey
