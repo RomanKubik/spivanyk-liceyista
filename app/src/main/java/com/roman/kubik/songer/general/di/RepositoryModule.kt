@@ -3,6 +3,7 @@ package com.roman.kubik.songer.general.di
 import com.roman.kubik.songer.data.category.CategoryDao
 import com.roman.kubik.songer.data.category.CategoryModelMapper
 import com.roman.kubik.songer.data.category.CategoryRepositoryImpl
+import com.roman.kubik.songer.data.deletion.DeletionRepositoryImpl
 import com.roman.kubik.songer.data.favourite.FavouriteDao
 import com.roman.kubik.songer.data.favourite.FavouriteRepositoryImpl
 import com.roman.kubik.songer.data.history.HistoryDao
@@ -11,6 +12,7 @@ import com.roman.kubik.songer.data.song.SongDao
 import com.roman.kubik.songer.data.song.SongModelMapper
 import com.roman.kubik.songer.data.song.SongRepositoryImpl
 import com.roman.kubik.songer.domain.category.CategoryRepository
+import com.roman.kubik.songer.domain.deletion.DeletionRepository
 import com.roman.kubik.songer.domain.favourite.FavouriteRepository
 import com.roman.kubik.songer.domain.history.HistoryRepository
 import com.roman.kubik.songer.domain.song.SongRepository
@@ -19,7 +21,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ReposirtoryModule {
+class RepositoryModule {
 
     @Provides
     @Singleton
@@ -36,5 +38,9 @@ class ReposirtoryModule {
     @Provides
     @Singleton
     fun getHistoryRepository(historyDao: HistoryDao, songModelMapper: SongModelMapper): HistoryRepository = HistoryRepositoryImpl(historyDao, songModelMapper)
+
+    @Provides
+    @Singleton
+    fun getDeletionRepository(repository: DeletionRepositoryImpl): DeletionRepository = repository
 
 }

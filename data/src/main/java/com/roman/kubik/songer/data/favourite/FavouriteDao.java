@@ -17,10 +17,10 @@ import io.reactivex.Single;
 @Dao
 public interface FavouriteDao {
 
-    @Query("SELECT * FROM favourite INNER JOIN song ON favourite.song_id = song.id ORDER BY song.title")
+    @Query("SELECT * FROM favourite INNER JOIN song ON favourite.song_id = song.id LEFT JOIN deletion ON song.id == deletion.song_id WHERE deletion.song_id IS NULL ORDER BY song.title")
     Single<List<SongEntity>> getAll();
 
-    @Query("SELECT * FROM favourite INNER JOIN song ON song.id = favourite.song_id WHERE song.title LIKE :query OR song.lyrics LIKE :query ORDER BY song.title")
+    @Query("SELECT * FROM favourite INNER JOIN song ON song.id = favourite.song_id LEFT JOIN deletion ON song.id == deletion.song_id WHERE deletion.song_id IS NULL AND (song.title LIKE :query OR song.lyrics LIKE :query) ORDER BY song.title")
     Single<List<SongEntity>> search(String query);
 
     @Insert

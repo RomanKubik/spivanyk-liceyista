@@ -21,25 +21,25 @@ import io.reactivex.Single;
 @Dao
 public interface SongDao {
 
-    @Query("SELECT * FROM song ORDER BY song.title")
+    @Query("SELECT song.id, song.category_id, song.lyrics, song.title  FROM song LEFT JOIN deletion ON song.id == deletion.song_id WHERE deletion.song_id IS NULL ORDER BY song.title")
     Single<List<SongEntity>> getAll();
 
-    @Query("SELECT * FROM song WHERE song.category_id = :categoryId ORDER BY song.title")
+    @Query("SELECT song.id, song.category_id, song.lyrics, song.title FROM song LEFT JOIN deletion ON deletion.song_id == song.id WHERE deletion.song_id IS NULL AND song.category_id = :categoryId ORDER BY song.title")
     Single<List<SongEntity>> getAllByCategory(int categoryId);
 
-    @Query("SELECT * FROM song WHERE song.title LIKE :query OR song.lyrics LIKE :query ORDER BY song.title")
+    @Query("SELECT song.id, song.category_id, song.lyrics, song.title FROM song LEFT JOIN deletion ON deletion.song_id == song.id WHERE deletion.song_id IS NULL AND (song.title LIKE :query OR song.lyrics LIKE :query) ORDER BY song.title")
     Single<List<SongEntity>> search(String query);
 
-    @Query("SELECT * FROM song WHERE (song.title LIKE :query OR song.lyrics LIKE :query) AND song.category_id = :categoryId ORDER BY song.title")
+    @Query("SELECT song.id, song.category_id, song.lyrics, song.title FROM song LEFT JOIN deletion ON deletion.song_id == song.id WHERE deletion.song_id IS NULL AND (song.title LIKE :query OR song.lyrics LIKE :query) AND song.category_id = :categoryId ORDER BY song.title")
     Single<List<SongEntity>> search(String query, @Category.CategoryId int categoryId);
 
     @Query("SELECT * FROM song WHERE song.id = :id LIMIT 1")
     Maybe<SongEntity> getById(int id);
 
-    @Query("SELECT count(id) FROM song")
+    @Query("SELECT count(song.id) FROM song LEFT JOIN deletion ON song.id == deletion.song_id WHERE deletion.song_id IS NULL")
     Single<Integer> getCount();
 
-    @Query("SELECT count(id) FROM song WHERE song.category_id = :categoryId")
+    @Query("SELECT count(song.id) FROM song LEFT JOIN deletion ON song.id == deletion.song_id WHERE deletion.song_id IS NULL AND song.category_id = :categoryId")
     Single<Integer> getCountByCategoryId(int categoryId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
