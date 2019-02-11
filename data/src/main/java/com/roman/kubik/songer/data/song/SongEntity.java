@@ -6,7 +6,6 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.roman.kubik.songer.data.category.CategoryEntity;
 

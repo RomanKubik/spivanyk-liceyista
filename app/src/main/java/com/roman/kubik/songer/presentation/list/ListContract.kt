@@ -14,13 +14,18 @@ interface ListContract {
         fun showError(errorMessage: String?)
         fun onPreferencesFetched(showChords: Boolean)
         fun onSongsFetched(songList: List<Song>)
+        fun onSongRemoved(song: Song)
+        fun showDeletionTutorialDialog()
     }
 
     interface Presenter {
         fun showSong(song: Song)
+        fun deleteSong(song: Song)
+        fun undoDeletion()
         fun fetchPreferences()
         fun fetchSongByCategory(categoryId: Int)
         fun filter(query: String)
         fun destroy()
+        fun onTutorialDialogShowed()
     }
 }

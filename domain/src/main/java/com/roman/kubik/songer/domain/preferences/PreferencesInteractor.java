@@ -47,4 +47,12 @@ public class PreferencesInteractor {
     public Completable setMarkChordsTutorialShown() {
         return preferences.setMarkChordsTutorialShown(true);
     }
+
+    public Single<Boolean> isDeleteTutorialShown() {
+        return preferences.isDeleteTutorialShown();
+    }
+
+    public Completable setDeleteTutorialShown() {
+        return preferences.setDeleteTutorialShown(true);
+    }
 }

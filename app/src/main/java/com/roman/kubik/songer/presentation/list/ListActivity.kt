@@ -8,7 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.RecyclerView
 import com.annimon.stream.function.Consumer
+import com.google.android.material.snackbar.Snackbar
 import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.Category
@@ -16,6 +19,9 @@ import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
 import com.roman.kubik.songer.presentation.list.di.ListModule
+import com.roman.kubik.songer.presentation.main.MainActivity
+import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
+import com.roman.kubik.songer.presentation.tutorial.TutorialType
 import com.roman.kubik.songer.utils.CategoryTitleMapper
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
@@ -26,7 +32,7 @@ import javax.inject.Inject
  * Created by kubik on 1/14/18.
  */
 
-class ListActivity : BaseActivity(), ListContract.View {
+class ListActivity : BaseActivity(), ListContract.View, SongsAdapter.OnItemClickListener {
 
     @Inject
     lateinit var presenter: ListContract.Presenter
@@ -40,7 +46,6 @@ class ListActivity : BaseActivity(), ListContract.View {
         setContentView(R.layout.activity_list)
         val categoryId = intent.getIntExtra(Constants.Extras.CATEGORY_ID, Category.ALL_ID)
         init(categoryId)
-        presenter.fetchSongByCategory(categoryId)
     }
 
     override fun injectActivity(activityComponent: ActivityComponent) {
@@ -48,6 +53,8 @@ class ListActivity : BaseActivity(), ListContract.View {
     }
 
     override fun onStart() {
+        val categoryId = intent.getIntExtra(Constants.Extras.CATEGORY_ID, Category.ALL_ID)
+        presenter.fetchSongByCategory(categoryId)
         presenter.fetchPreferences()
         super.onStart()
     }
@@ -98,9 +105,37 @@ class ListActivity : BaseActivity(), ListContract.View {
         songsAdapter.setSongList(songList)
     }
 
+    override fun onSongRemoved(song: Song) {
+        val snackbar = Snackbar.make(progressBar, getString(R.string.song_was_deleted, song.title), Snackbar.LENGTH_LONG)
+        snackbar.setAction(R.string.undo) { presenter.undoDeletion() }
+        snackbar.show()
+    }
+
+    override fun showDeletionTutorialDialog() {
+        val dialog = TutorialDialog.getInstance(TutorialType.TYPE_DELETE_SONG)
+        dialog.show(supportFragmentManager, null)
+        presenter.onTutorialDialogShowed()
+    }
+
+    override fun onItemClicked(song: Song) {
+        presenter.showSong(song)
+    }
+
+    override fun onItemLongClicked(song: Song) {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.ttl_remove_song)
+                .setMessage(R.string.msg_remove_song)
+                .setPositiveButton(R.string.remove) { _, _ ->
+                    presenter.deleteSong(song)
+                }
+                .setNegativeButton(R.string.discard) { _, _ ->
+                }
+                .show()
+    }
+
     private fun init(categoryId: Int) {
-        songsAdapter.setOnClickListener(Consumer { presenter.showSong(it) })
-        songList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
+        songsAdapter.setOnClickListener(this)
+        songList.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         songList.adapter = songsAdapter
         addDividers()
         setSupportActionBar(toolbar)
@@ -109,7 +144,7 @@ class ListActivity : BaseActivity(), ListContract.View {
     }
 
     private fun addDividers() {
-        val dividerItemDecoration = androidx.recyclerview.widget.DividerItemDecoration(this, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL)
+        val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         songList.addItemDecoration(dividerItemDecoration)
     }
 

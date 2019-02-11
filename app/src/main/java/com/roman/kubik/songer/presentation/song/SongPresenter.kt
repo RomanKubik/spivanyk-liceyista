@@ -105,7 +105,7 @@ constructor(private val view: SongContract.View,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(this::fetchChords)
-                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
+                .subscribe({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
 
     }
 
@@ -114,9 +114,9 @@ constructor(private val view: SongContract.View,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(this::fetchChords)
-                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
+                .subscribe({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
     }
-
+    
     private fun showTransposeChordError(throwable: Throwable) = view.showError(R.string.song_details_transpose_error)
 
     private fun formatLyrics(lyrics: String): CharSequence {

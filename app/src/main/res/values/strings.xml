@@ -42,8 +42,14 @@
     <string name="tutorial_add_song">Tap on this icon to add new song to your songer</string>
     <string name="tutorial_shake_phone">Shake your phone to get random song from songer</string>
     <string name="tutorial_mark_chords">Tap on this icon to mark chords automatically with super powerful algorithm</string>
+    <string name="tutorial_delete_song">Long press on song to delete it from your songer. You can always restore factory database with all your previously added song in settings.</string>
     <string name="settings_tonality">Tonality</string>
     <string name="downward">Downward</string>
     <string name="upward">Upward</string>
     <string name="song_details_transpose_error">Can\'t transpose chords. Try to edit chords marks</string>
+    <string name="remove">Remove</string>
+    <string name="ttl_remove_song">Remove song</string>
+    <string name="msg_remove_song">Are you sure you want to remove this song from you Songer?</string>
+    <string name="undo">Undo</string>
+    <string name="song_was_deleted">Song %s was deleted</string>
 </resources>

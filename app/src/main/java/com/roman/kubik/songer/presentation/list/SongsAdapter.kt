@@ -1,11 +1,11 @@
 package com.roman.kubik.songer.presentation.list
 
 import android.graphics.Color
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.formatting.LyricsFormattingInteractor
@@ -21,7 +21,7 @@ class SongsAdapter @Inject
 constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
     : androidx.recyclerview.widget.RecyclerView.Adapter<SongsAdapter.SongHolder>() {
 
-    private var onClickListener: Consumer<Song>? = null
+    private var onClickListener: OnItemClickListener? = null
 
     private val songList = mutableListOf<Song>()
 
@@ -34,9 +34,9 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
 
     override fun onBindViewHolder(holder: SongHolder, position: Int) {
         holder.setItem(songList[position])
-        holder.setOnItemClickListener(View.OnClickListener {
-            onClickListener?.accept(songList[holder.adapterPosition])
-        })
+        if (onClickListener != null) {
+            holder.setOnItemClickListener(onClickListener!!)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -48,37 +48,39 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
         notifyDataSetChanged()
     }
 
-    fun setOnClickListener(onClickListener: Consumer<Song>?) {
+    fun setOnClickListener(onClickListener: OnItemClickListener) {
         this.onClickListener = onClickListener
     }
 
     fun setSongList(songList: List<Song>?) {
-        this.songList.clear()
-        if (songList != null)
-            this.songList.addAll(songList)
-        notifyDataSetChanged()
-    }
-
-    fun addSongList(songList: List<Song>?) {
         if (songList != null) {
-            val positionStart = this.songList.size
+            val diffResult = DiffUtil.calculateDiff(SongsDiffCallback(this.songList, songList))
+            this.songList.clear()
             this.songList.addAll(songList)
-            notifyItemRangeInserted(positionStart, songList.size)
+            diffResult.dispatchUpdatesTo(this)
         }
     }
 
     inner class SongHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
+        private lateinit var song: Song
         private var tvTitle: TextView = itemView.findViewById(R.id.title)
         private var tvLyrics: TextView = itemView.findViewById(R.id.lyrics)
 
         fun setItem(song: Song) {
+            this.song = song
             tvTitle.text = song.title
             tvLyrics.text = getLyrics(song.lyrics)
         }
 
-        fun setOnItemClickListener(onClickListener: View.OnClickListener) {
-            tvTitle.rootView.setOnClickListener(onClickListener)
+        fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+            tvTitle.rootView.setOnClickListener{
+                onItemClickListener.onItemClicked(song)
+            }
+            tvTitle.rootView.setOnLongClickListener {
+                onItemClickListener.onItemLongClicked(song)
+                true
+            }
         }
 
         private fun getLyrics(lyrics: String): CharSequence {
@@ -87,5 +89,10 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
             else
                 lyricsFormattingInteractor.removeChords(lyrics)
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClicked(song: Song)
+        fun onItemLongClicked(song: Song)
     }
 }
