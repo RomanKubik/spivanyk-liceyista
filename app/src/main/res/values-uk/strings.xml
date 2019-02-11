@@ -46,4 +46,7 @@
     <string name="downward">Спустити</string>
     <string name="upward">Підняти</string>
     <string name="song_details_transpose_error">Неможливо змінити тональність. Спробуйте відредагувати маркування акордів</string>
+    <string name="remove">Видалити</string>
+    <string name="ttl_remove_song">Видалити пісню</string>
+    <string name="msg_remove_song">Чи ти впевнений, що хочеш видалити цю пісню зі свого співаника?</string>
 </resources>

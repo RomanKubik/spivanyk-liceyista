@@ -56,8 +56,4 @@ class DatabaseModule {
     @Provides
     @Singleton
     internal fun getHistoryDao(appDatabase: AppDatabase) = appDatabase.historyDao()
-
-    @Provides
-    @Singleton
-    internal fun getDeletionDao(appDatabase: AppDatabase) = appDatabase.deletionDao()
 }

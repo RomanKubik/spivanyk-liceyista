@@ -3,7 +3,6 @@ package com.roman.kubik.songer.presentation.song
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.CategoryInteractor
 import com.roman.kubik.songer.domain.chord.ChordInteractor
-import com.roman.kubik.songer.domain.deletion.DeletionInteractor
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
 import com.roman.kubik.songer.domain.formatting.LyricsFormattingInteractor
 import com.roman.kubik.songer.domain.history.HistoryInteractor
@@ -30,8 +29,7 @@ constructor(private val view: SongContract.View,
             private val preferencesInteractor: PreferencesInteractor,
             private val lyricsFormattingInteractor: LyricsFormattingInteractor,
             private val historyInteractor: HistoryInteractor,
-            private val compositeDisposable: CompositeDisposable,
-            private val deletionInteractor: DeletionInteractor) : SongContract.Presenter {
+            private val compositeDisposable: CompositeDisposable) : SongContract.Presenter {
 
     private lateinit var song: Song
 
@@ -107,7 +105,7 @@ constructor(private val view: SongContract.View,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(this::fetchChords)
-                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
+                .subscribe({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
 
     }
 
@@ -116,7 +114,16 @@ constructor(private val view: SongContract.View,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess(this::fetchChords)
-                .subscribe ({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
+                .subscribe({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
+    }
+
+    override fun removeSong() {
+        compositeDisposable.add(songInteractor
+                .deleteSong(song)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({}, {view.showError(it.message!!)}))
+
     }
 
     private fun showTransposeChordError(throwable: Throwable) = view.showError(R.string.song_details_transpose_error)

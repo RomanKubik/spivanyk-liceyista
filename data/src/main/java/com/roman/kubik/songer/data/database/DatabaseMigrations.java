@@ -42,18 +42,6 @@ public final class DatabaseMigrations {
                     ");");
             database.execSQL("INSERT INTO `favourite` SELECT * FROM `_favourite_old`;");
             database.execSQL("DROP TABLE `_favourite_old`;");
-
-            // Mark deleted song
-            database.execSQL("CREATE TABLE `deletion`\n" +
-                    "(\n" +
-                    "`id` INTEGER NOT NULL PRIMARY KEY,\n" +
-                    "`song_id` INTEGER NOT NULL,\n" +
-                    "`timestamp` INTEGER NOT NULL,\n" +
-                    "CONSTRAINT `fk_song`\n" +
-                    "FOREIGN KEY (`song_id`)\n" +
-                    "REFERENCES song(`id`)\n" +
-                    "ON DELETE CASCADE" +
-                    ");");
         }
     };
 

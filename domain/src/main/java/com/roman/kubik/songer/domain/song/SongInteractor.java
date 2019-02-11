@@ -8,10 +8,14 @@ import com.roman.kubik.songer.domain.utils.TextUtils;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
 import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by kubik on 1/14/18.
@@ -19,13 +23,13 @@ import io.reactivex.Single;
 
 public class SongInteractor {
 
-    private final Random random = new Random();
     private final SongRepository songRepository;
     private final FavouriteRepository favouriteRepository;
     private final HistoryRepository historyRepository;
+    private Song deletion;
 
     public SongInteractor(SongRepository songRepository, FavouriteRepository favouriteRepository,
-            final HistoryRepository historyRepository) {
+                          final HistoryRepository historyRepository) {
         this.songRepository = songRepository;
         this.favouriteRepository = favouriteRepository;
         this.historyRepository = historyRepository;
@@ -88,11 +92,15 @@ public class SongInteractor {
     }
 
     public Completable deleteSong(Song song) {
+        deletion = song;
         return songRepository.delete(song);
     }
 
-    public Single<Song> getRandomSong() {
-        return songRepository.getAll()
-                .map(l -> l.get(random.nextInt(l.size())));
+    public Completable undoDeletion() {
+        if (deletion != null){
+            return songRepository.insertOrUpdate(deletion).doOnComplete(() -> deletion = null);
+        }
+        return Completable.complete();
     }
+
 }

@@ -26,4 +26,8 @@
         android:id="@+id/app_bar_transposition"
         android:title="@string/settings_tonality"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/app_bar_remove"
+        android:title="@string/remove"
+        app:showAsAction="never"/>
 </menu>
