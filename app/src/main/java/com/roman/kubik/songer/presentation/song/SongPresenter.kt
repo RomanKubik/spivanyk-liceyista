@@ -116,16 +116,7 @@ constructor(private val view: SongContract.View,
                 .doOnSuccess(this::fetchChords)
                 .subscribe({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
     }
-
-    override fun removeSong() {
-        compositeDisposable.add(songInteractor
-                .deleteSong(song)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({}, {view.showError(it.message!!)}))
-
-    }
-
+    
     private fun showTransposeChordError(throwable: Throwable) = view.showError(R.string.song_details_transpose_error)
 
     private fun formatLyrics(lyrics: String): CharSequence {

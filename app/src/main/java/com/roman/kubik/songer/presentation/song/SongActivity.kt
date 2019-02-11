@@ -75,7 +75,6 @@ class SongActivity : BaseActivity(), SongContract.View {
             R.id.app_bar_edit -> presenter.edit()
             R.id.app_bar_show_chords -> presenter.showChords()
             R.id.app_bar_transposition -> displayTonalityView()
-            R.id.app_bar_remove -> displayRemoveDialog()
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
@@ -154,18 +153,6 @@ class SongActivity : BaseActivity(), SongContract.View {
     private fun displayTonalityView() {
         transpositionContainer.visibility =
                 if (transpositionContainer.visibility == VISIBLE) GONE else VISIBLE
-    }
-
-    private fun displayRemoveDialog() {
-        AlertDialog.Builder(this)
-                .setTitle(R.string.ttl_remove_song)
-                .setMessage(R.string.msg_remove_song)
-                .setPositiveButton(R.string.remove) { _, _ ->
-                    presenter.removeSong()
-                }
-                .setNegativeButton(R.string.discard) { _, _ ->
-                }
-                .show()
     }
 
     @OnClick(R.id.transpositionPlus)

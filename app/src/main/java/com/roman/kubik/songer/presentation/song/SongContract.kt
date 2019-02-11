@@ -35,6 +35,5 @@ interface SongContract {
         fun destroy()
         fun transposeUp()
         fun transposeDown()
-        fun removeSong()
     }
 }
