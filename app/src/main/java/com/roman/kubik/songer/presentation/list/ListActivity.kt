@@ -8,8 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.annimon.stream.function.Consumer
+import com.google.android.material.snackbar.Snackbar
 import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.Category
@@ -27,7 +29,7 @@ import javax.inject.Inject
  * Created by kubik on 1/14/18.
  */
 
-class ListActivity : BaseActivity(), ListContract.View {
+class ListActivity : BaseActivity(), ListContract.View, SongsAdapter.OnItemClickListener {
 
     @Inject
     lateinit var presenter: ListContract.Presenter
@@ -41,7 +43,6 @@ class ListActivity : BaseActivity(), ListContract.View {
         setContentView(R.layout.activity_list)
         val categoryId = intent.getIntExtra(Constants.Extras.CATEGORY_ID, Category.ALL_ID)
         init(categoryId)
-        presenter.fetchSongByCategory(categoryId)
     }
 
     override fun injectActivity(activityComponent: ActivityComponent) {
@@ -49,6 +50,8 @@ class ListActivity : BaseActivity(), ListContract.View {
     }
 
     override fun onStart() {
+        val categoryId = intent.getIntExtra(Constants.Extras.CATEGORY_ID, Category.ALL_ID)
+        presenter.fetchSongByCategory(categoryId)
         presenter.fetchPreferences()
         super.onStart()
     }
@@ -99,8 +102,30 @@ class ListActivity : BaseActivity(), ListContract.View {
         songsAdapter.setSongList(songList)
     }
 
+    override fun onSongRemoved(song: Song) {
+        val snackbar = Snackbar.make(progressBar, "Song ${song.title} was removed", Snackbar.LENGTH_LONG)
+        snackbar.setAction("Undo") { presenter.undoDeletion() }
+        snackbar.show()
+    }
+
+    override fun onItemClicked(song: Song) {
+        presenter.showSong(song)
+    }
+
+    override fun onItemLongClicked(song: Song) {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.ttl_remove_song)
+                .setMessage(R.string.msg_remove_song)
+                .setPositiveButton(R.string.remove) { _, _ ->
+                    presenter.deleteSong(song)
+                }
+                .setNegativeButton(R.string.discard) { _, _ ->
+                }
+                .show()
+    }
+
     private fun init(categoryId: Int) {
-        songsAdapter.setOnClickListener(Consumer { presenter.showSong(it) })
+        songsAdapter.setOnClickListener(this)
         songList.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         songList.adapter = songsAdapter
         addDividers()
