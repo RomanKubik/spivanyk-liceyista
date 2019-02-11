@@ -15,6 +15,7 @@ interface ListContract {
         fun onPreferencesFetched(showChords: Boolean)
         fun onSongsFetched(songList: List<Song>)
         fun onSongRemoved(song: Song)
+        fun showDeletionTutorialDialog()
     }
 
     interface Presenter {
@@ -25,5 +26,6 @@ interface ListContract {
         fun fetchSongByCategory(categoryId: Int)
         fun filter(query: String)
         fun destroy()
+        fun onTutorialDialogShowed()
     }
 }

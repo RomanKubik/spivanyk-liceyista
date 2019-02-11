@@ -51,13 +51,18 @@ constructor(private val view: ListContract.View,
     }
 
     override fun fetchPreferences() {
-        compositeDisposable.add(
+        compositeDisposable.addAll(
                 preferencesInteractor
                         .isChordsVisible
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::onPreferencesFetched
-                        ) { t -> view.showError(t.message) })
+                        ) { t -> view.showError(t.message) },
+                preferencesInteractor
+                        .isDeleteTutorialShown
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe( { if (!it) view.showDeletionTutorialDialog()}) {})
     }
 
     override fun fetchSongByCategory(categoryId: Int) {
@@ -84,6 +89,14 @@ constructor(private val view: ListContract.View,
 
     override fun destroy() {
         compositeDisposable.clear()
+    }
+
+    override fun onTutorialDialogShowed() {
+        compositeDisposable.add(
+                preferencesInteractor.setDeleteTutorialShown()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe())
     }
 
     private fun onSongsFetched(songs: List<Song>) {

@@ -18,4 +18,6 @@ public interface Preferences {
     Completable setAddSongTutorialShown(boolean shown);
     Single<Boolean> isMarkChordsTutorialShown();
     Completable setMarkChordsTutorialShown(boolean shown);
+    Single<Boolean> isDeleteTutorialShown();
+    Completable setDeleteTutorialShown(boolean shown);
 }

@@ -19,6 +19,9 @@ import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
 import com.roman.kubik.songer.presentation.list.di.ListModule
+import com.roman.kubik.songer.presentation.main.MainActivity
+import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
+import com.roman.kubik.songer.presentation.tutorial.TutorialType
 import com.roman.kubik.songer.utils.CategoryTitleMapper
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
@@ -103,9 +106,15 @@ class ListActivity : BaseActivity(), ListContract.View, SongsAdapter.OnItemClick
     }
 
     override fun onSongRemoved(song: Song) {
-        val snackbar = Snackbar.make(progressBar, "Song ${song.title} was removed", Snackbar.LENGTH_LONG)
-        snackbar.setAction("Undo") { presenter.undoDeletion() }
+        val snackbar = Snackbar.make(progressBar, getString(R.string.song_was_deleted, song.title), Snackbar.LENGTH_LONG)
+        snackbar.setAction(R.string.undo) { presenter.undoDeletion() }
         snackbar.show()
+    }
+
+    override fun showDeletionTutorialDialog() {
+        val dialog = TutorialDialog.getInstance(TutorialType.TYPE_DELETE_SONG)
+        dialog.show(supportFragmentManager, null)
+        presenter.onTutorialDialogShowed()
     }
 
     override fun onItemClicked(song: Song) {
