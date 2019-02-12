@@ -7,6 +7,7 @@ import com.roman.kubik.songer.data.category.CategoryModelMapper
 import com.roman.kubik.songer.data.database.AppDatabase
 import com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_1_2
 import com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_2_3
+import com.roman.kubik.songer.data.database.DatabaseProvider
 import com.roman.kubik.songer.data.favourite.FavouriteModelMapper
 import com.roman.kubik.songer.data.song.SongModelMapper
 import dagger.Module
@@ -35,11 +36,7 @@ class DatabaseModule {
     internal fun getFavouriteModelMapper() = FavouriteModelMapper()
 
     @Provides
-    @Singleton
-    internal fun getAppDatabase(context: Context) =
-            Room.databaseBuilder(context, AppDatabase::class.java, Constants.APP_DB_FILE_NAME)
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-                    .build()
+    internal fun getAppDatabase(context: Context) = DatabaseProvider.getAppDatabase(context)
 
     @Provides
     @Singleton

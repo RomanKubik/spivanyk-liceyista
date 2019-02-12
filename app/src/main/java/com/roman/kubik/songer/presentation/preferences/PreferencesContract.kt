@@ -9,5 +9,6 @@ interface PreferencesContract {
 
     interface Presenter {
         fun destroy()
+        fun reset()
     }
 }

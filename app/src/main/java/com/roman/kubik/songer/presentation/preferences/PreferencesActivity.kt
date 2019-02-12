@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.presentation.preferences
 
 import android.os.Bundle
+import android.preference.Preference
 import android.preference.PreferenceFragment
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.general.di.ActivityComponent
@@ -16,12 +17,13 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
 
     @Inject
     lateinit var presenter: PreferencesContract.Presenter
+    private val preferences = AppPreferences()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferences)
         fragmentManager?.beginTransaction()
-                ?.replace(R.id.preferencesContainer, AppPreferences())
+                ?.replace(R.id.preferencesContainer, preferences)
                 ?.commit()
         init()
     }
@@ -38,6 +40,9 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     private fun init() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.settings)
+        preferences.addResetClickListener{
+            presenter.reset()
+        }
     }
 
 
@@ -46,6 +51,14 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             addPreferencesFromResource(R.xml.app_preferences)
+        }
+
+        fun addResetClickListener(function: () -> Unit) {
+            val myPref = findPreference("factory_reset")
+            myPref?.setOnPreferenceClickListener{
+                function.invoke()
+                true
+            }
         }
     }
 
