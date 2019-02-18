@@ -3,6 +3,7 @@ package com.roman.kubik.songer.general.di
 import android.content.Context
 import com.roman.kubik.songer.data.category.CategoryModelMapper
 import com.roman.kubik.songer.data.database.AppDatabase
+import com.roman.kubik.songer.data.database.DatabaseManager
 import com.roman.kubik.songer.data.database.DatabaseManagerImpl
 import com.roman.kubik.songer.data.favourite.FavouriteModelMapper
 import com.roman.kubik.songer.data.song.SongModelMapper
@@ -53,5 +54,5 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    internal fun getDatabaseManager(databaseManagerImpl: DatabaseManagerImpl) = databaseManagerImpl
+    internal fun getDatabaseManager(databaseManagerImpl: DatabaseManagerImpl): DatabaseManager = databaseManagerImpl
 }
