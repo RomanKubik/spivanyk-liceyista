@@ -3,7 +3,6 @@ package com.roman.kubik.songer.navigation
 import android.app.Activity
 import android.content.Intent
 import com.roman.kubik.songer.Constants
-
 import com.roman.kubik.songer.domain.navigation.NavigationService
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.presentation.edit.EditSongActivity
@@ -11,6 +10,7 @@ import com.roman.kubik.songer.presentation.list.ListActivity
 import com.roman.kubik.songer.presentation.main.MainActivity
 import com.roman.kubik.songer.presentation.preferences.PreferencesActivity
 import com.roman.kubik.songer.presentation.song.SongActivity
+
 
 class NavigationServiceImpl(private val activity: Activity) : NavigationService {
 
@@ -57,4 +57,7 @@ class NavigationServiceImpl(private val activity: Activity) : NavigationService 
         activity.startActivity(intent)
     }
 
+    override fun restart() {
+        System.exit(0)
+    }
 }

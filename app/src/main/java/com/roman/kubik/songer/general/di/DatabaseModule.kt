@@ -1,12 +1,10 @@
 package com.roman.kubik.songer.general.di
 
 import android.content.Context
-import androidx.room.Room
-import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.data.category.CategoryModelMapper
 import com.roman.kubik.songer.data.database.AppDatabase
-import com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_1_2
-import com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_2_3
+import com.roman.kubik.songer.data.database.DatabaseManager
+import com.roman.kubik.songer.data.database.DatabaseManagerImpl
 import com.roman.kubik.songer.data.favourite.FavouriteModelMapper
 import com.roman.kubik.songer.data.song.SongModelMapper
 import dagger.Module
@@ -36,10 +34,7 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    internal fun getAppDatabase(context: Context) =
-            Room.databaseBuilder(context, AppDatabase::class.java, Constants.APP_DB_FILE_NAME)
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
-                    .build()
+    internal fun getAppDatabase(context: Context) = DatabaseManagerImpl.generateAppDatabase(context)
 
     @Provides
     @Singleton
@@ -56,4 +51,8 @@ class DatabaseModule {
     @Provides
     @Singleton
     internal fun getHistoryDao(appDatabase: AppDatabase) = appDatabase.historyDao()
+
+    @Provides
+    @Singleton
+    internal fun getDatabaseManager(databaseManagerImpl: DatabaseManagerImpl): DatabaseManager = databaseManagerImpl
 }
