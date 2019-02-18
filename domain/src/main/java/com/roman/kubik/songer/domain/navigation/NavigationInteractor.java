@@ -53,4 +53,8 @@ public class NavigationInteractor {
     public void toShareText(Song song) {
         navigationService.toShareText(song.getTitle(), song.getLyrics());
     }
+
+    public void restart() {
+        navigationService.restart();
+    }
 }

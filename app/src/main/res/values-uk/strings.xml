@@ -52,4 +52,9 @@
     <string name="msg_remove_song">Чи ти впевнений, що хочеш видалити цю пісню зі свого співаника?</string>
     <string name="undo">Повернути</string>
     <string name="song_was_deleted">Пісню %s було видалено</string>
+    <string name="ttl_factory_reset">Заводські установки</string>
+    <string name="msg_factory_reset_short">Скинути базу даних до заводських установок</string>
+    <string name="msg_factory_reset_long">Базу даних буде відновлено до заводських установок. Усі попередньо додані пісні будуть збережені. Після відновлення додаток буде перезавантажено</string>
+    <string name="msg_factory_reset_error">Не вдалося скинути базу даних. Будь ласка, підіть у \"Налаштування\" і почистіть дані. Усі попередньо додані пісні будуть видалені.</string>
+    <string name="reset">Скинути</string>
 </resources>

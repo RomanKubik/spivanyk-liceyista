@@ -22,7 +22,7 @@ public class DatabaseCopyHelper extends SQLiteOpenHelper {
     private static final String TAG = DatabaseCopyHelper.class.getSimpleName();
     private static final int DB_VERSION = 1;
     private static String DB_PATH = "";
-    private static String DB_NAME = "spivanyk.db";
+    private static String DB_NAME = DatabaseManager.DB_NAME;
     private final Context context;
 
     @Inject

@@ -52,4 +52,9 @@
     <string name="msg_remove_song">Are you sure you want to remove this song from you Songer?</string>
     <string name="undo">Undo</string>
     <string name="song_was_deleted">Song %s was deleted</string>
+    <string name="ttl_factory_reset">Factory reset</string>
+    <string name="msg_factory_reset_short">Reset database to factory configurations</string>
+    <string name="msg_factory_reset_long">Reset database to factory configurations. All previously added songs will be saved. After reset app will be relaunched.</string>
+    <string name="msg_factory_reset_error">Can\'t reset database. Please go to \"Settings\" and clear storage manually. All previously added songs will be deleted.</string>
+    <string name="reset">Reset</string>
 </resources>

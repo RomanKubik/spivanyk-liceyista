@@ -5,7 +5,9 @@ package com.roman.kubik.songer.presentation.preferences
  */
 
 interface PreferencesContract {
-    interface View
+    interface View {
+        fun showResetError()
+    }
 
     interface Presenter {
         fun destroy()

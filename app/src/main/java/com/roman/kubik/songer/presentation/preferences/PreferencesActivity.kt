@@ -1,8 +1,8 @@
 package com.roman.kubik.songer.presentation.preferences
 
 import android.os.Bundle
-import android.preference.Preference
-import android.preference.PreferenceFragment
+import androidx.appcompat.app.AlertDialog
+import androidx.preference.PreferenceFragmentCompat
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
@@ -22,10 +22,15 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferences)
-        fragmentManager?.beginTransaction()
+        supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.preferencesContainer, preferences)
                 ?.commit()
         init()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        preferences.addResetClickListener(this::showResetDialog)
     }
 
     override fun injectActivity(activityComponent: ActivityComponent) {
@@ -37,20 +42,31 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
         super.onDestroy()
     }
 
+    override fun showResetError() {
+
+    }
+
     private fun init() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.settings)
-        preferences.addResetClickListener{
-            presenter.reset()
-        }
+    }
+
+    private fun showResetDialog() {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.ttl_factory_reset)
+                .setMessage(R.string.msg_factory_reset_long)
+                .setPositiveButton(R.string.reset) { _, _ ->
+                    presenter.reset()
+                }
+                .setNegativeButton(R.string.discard) { _, _ ->
+                }
+                .show()
     }
 
 
-    class AppPreferences : PreferenceFragment() {
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            addPreferencesFromResource(R.xml.app_preferences)
+    class AppPreferences : PreferenceFragmentCompat() {
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.app_preferences, rootKey)
         }
 
         fun addResetClickListener(function: () -> Unit) {
