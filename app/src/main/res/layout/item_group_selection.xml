@@ -6,7 +6,7 @@
     android:layout_height="@dimen/view_size_72"
     android:background="?selectableItemBackground">
 
-    <ImageView
+    <com.roman.kubik.songer.presentation.view.CircleMaterialIconView
         android:id="@+id/imageView"
         android:layout_width="@dimen/view_size_40"
         android:layout_height="@dimen/view_size_40"
