@@ -2,7 +2,7 @@ package com.roman.kubik.songer.presentation.edit
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View

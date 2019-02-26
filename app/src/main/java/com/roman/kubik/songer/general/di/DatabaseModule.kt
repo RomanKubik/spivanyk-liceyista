@@ -1,20 +1,15 @@
 package com.roman.kubik.songer.general.di
 
-import android.arch.persistence.db.SupportSQLiteDatabase
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.migration.Migration
 import android.content.Context
-
-import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.data.category.CategoryModelMapper
 import com.roman.kubik.songer.data.database.AppDatabase
+import com.roman.kubik.songer.data.database.DatabaseManager
+import com.roman.kubik.songer.data.database.DatabaseManagerImpl
 import com.roman.kubik.songer.data.favourite.FavouriteModelMapper
 import com.roman.kubik.songer.data.song.SongModelMapper
-
-import javax.inject.Singleton
-
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 /**
  * Database module
@@ -39,13 +34,7 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    internal fun getAppDatabase(context: Context) =
-            Room.databaseBuilder(context, AppDatabase::class.java, Constants.APP_DB_FILE_NAME)
-                    .addMigrations(object : Migration(1, 2) {
-                        override fun migrate(database: SupportSQLiteDatabase) {
-                        }
-                    })
-                    .build()
+    internal fun getAppDatabase(context: Context) = DatabaseManagerImpl.generateAppDatabase(context)
 
     @Provides
     @Singleton
@@ -63,4 +52,7 @@ class DatabaseModule {
     @Singleton
     internal fun getHistoryDao(appDatabase: AppDatabase) = appDatabase.historyDao()
 
+    @Provides
+    @Singleton
+    internal fun getDatabaseManager(databaseManagerImpl: DatabaseManagerImpl): DatabaseManager = databaseManagerImpl
 }

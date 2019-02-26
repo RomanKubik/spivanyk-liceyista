@@ -5,8 +5,8 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.style.ClickableSpan
-import android.util.Log
 import android.view.View
+import androidx.annotation.VisibleForTesting
 import com.roman.kubik.songer.domain.formatting.ChordsMarker
 import com.roman.kubik.songer.domain.formatting.OnChordClickListener
 import java.util.regex.Pattern
@@ -28,7 +28,8 @@ class SpannableStringChordsCreator @Inject constructor() : ChordsMarker {
         return attachClickableSpan(spannableString, clickListener, selections, textColor, backgroundColor)
     }
 
-    private fun findSelections(text: String): List<IntRange> {
+    @VisibleForTesting
+    fun findSelections(text: String): List<IntRange> {
         val selectionsList = mutableListOf<IntRange>()
         val matcher = bracketsPattern.matcher(text)
         while (matcher.find()) {

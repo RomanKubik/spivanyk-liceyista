@@ -1,16 +1,13 @@
 package com.roman.kubik.songer.data.favourite;
 
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.Query;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.Query;
 
 import com.roman.kubik.songer.data.song.SongEntity;
-import com.roman.kubik.songer.domain.favourite.Favourite;
-import com.roman.kubik.songer.domain.song.Song;
 
 import java.util.List;
 
-import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**

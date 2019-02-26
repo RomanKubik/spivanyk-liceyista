@@ -19,7 +19,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ReposirtoryModule {
+class RepositoryModule {
 
     @Provides
     @Singleton

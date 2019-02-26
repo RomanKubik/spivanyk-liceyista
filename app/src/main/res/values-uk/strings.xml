@@ -42,8 +42,19 @@
     <string name="tutorial_add_song">Клікни по такій іконці, щоб добавити нову пісню до свого співаника</string>
     <string name="tutorial_shake_phone">Встряхни телефоном, щоб побачити випадкову пісню.</string>
     <string name="tutorial_mark_chords">Клікни по такій іконці, щоб автоматично промаркувати акорди у пісні, використовуючи супер потужний алгоритм</string>
+    <string name="tutorial_delete_song">Довго потисни на пісню, щоб видалити її зі свого співаника. Ти завжди зможеш відновити заводську базу пісень зі всіма попередньо доданими тобою піснями у налаштуваннях.</string>
     <string name="settings_tonality">Тональність</string>
     <string name="downward">Спустити</string>
     <string name="upward">Підняти</string>
     <string name="song_details_transpose_error">Неможливо змінити тональність. Спробуйте відредагувати маркування акордів</string>
+    <string name="remove">Видалити</string>
+    <string name="ttl_remove_song">Видалити пісню</string>
+    <string name="msg_remove_song">Чи ти впевнений, що хочеш видалити цю пісню зі свого співаника?</string>
+    <string name="undo">Повернути</string>
+    <string name="song_was_deleted">Пісню %s було видалено</string>
+    <string name="ttl_factory_reset">Заводські установки</string>
+    <string name="msg_factory_reset_short">Скинути базу даних до заводських установок</string>
+    <string name="msg_factory_reset_long">Базу даних буде відновлено до заводських установок. Усі попередньо додані пісні будуть збережені. Після відновлення додаток буде перезавантажено</string>
+    <string name="msg_factory_reset_error">Не вдалося скинути базу даних. Будь ласка, підіть у \"Налаштування\" і почистіть дані. Усі попередньо додані пісні будуть видалені.</string>
+    <string name="reset">Скинути</string>
 </resources>

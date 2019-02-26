@@ -24,21 +24,45 @@ constructor(private val view: ListContract.View,
             private val preferencesInteractor: PreferencesInteractor,
             private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
 
-    private var songs = mutableListOf<Song>()
+    private var songs: List<Song> = ArrayList()
     private var categoryId = Category.ALL_ID
 
     override fun showSong(song: Song) {
         navigationInteractor.toSongActivity(song)
     }
 
+    override fun deleteSong(song: Song) {
+        compositeDisposable.add(songInteractor
+                .deleteSong(song)
+                .andThen(songInteractor.getAllByCategory(categoryId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess { view.onSongRemoved(song) }
+                .subscribe(this::onSongsFetched) { view.showError(it.message) })
+    }
+
+    override fun undoDeletion() {
+        compositeDisposable.add(songInteractor
+                .undoDeletion()
+                .andThen(songInteractor.getAllByCategory(categoryId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::onSongsFetched) { view.showError(it.message) })
+    }
+
     override fun fetchPreferences() {
-        compositeDisposable.add(
+        compositeDisposable.addAll(
                 preferencesInteractor
                         .isChordsVisible
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::onPreferencesFetched
-                        ) { t -> view.showError(t.message) })
+                        ) { t -> view.showError(t.message) },
+                preferencesInteractor
+                        .isDeleteTutorialShown
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe( { if (!it) view.showDeletionTutorialDialog()}) {})
     }
 
     override fun fetchSongByCategory(categoryId: Int) {
@@ -49,8 +73,7 @@ constructor(private val view: ListContract.View,
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doFinally { view.showProgress(false) }
-                        .doOnSuccess { s -> songs.addAll(s) }
-                        .subscribe(view::onSongsFetched
+                        .subscribe(this::onSongsFetched
                         ) { t -> view.showError(t.message) })
 
     }
@@ -66,5 +89,20 @@ constructor(private val view: ListContract.View,
 
     override fun destroy() {
         compositeDisposable.clear()
+    }
+
+    override fun onTutorialDialogShowed() {
+        compositeDisposable.add(
+                preferencesInteractor.setDeleteTutorialShown()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe())
+    }
+
+    private fun onSongsFetched(songs: List<Song>) {
+        if (songs != this.songs) {
+            this.songs = songs
+            view.onSongsFetched(songs)
+        }
     }
 }
