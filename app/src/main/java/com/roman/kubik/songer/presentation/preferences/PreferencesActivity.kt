@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.PreferenceFragmentCompat
+import butterknife.OnClick
 import com.google.firebase.auth.FirebaseAuth
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.user.User
@@ -35,7 +36,6 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     override fun onStart() {
         super.onStart()
         preferences.addResetClickListener(this::showResetDialog)
-        preferences.addSignInClickListener(presenter::signIn)
     }
 
     override fun injectActivity(activityComponent: ActivityComponent) {
@@ -48,9 +48,12 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == PreferencesContract.CODE_SIGN_IN && resultCode == Activity.RESULT_OK) {
-//            val user = FirebaseAuth.getInstance().currentUser
-//            presenter.onProfileUpdated()
+        if (requestCode == PreferencesContract.CODE_SIGN_IN) {
+            if (resultCode == Activity.RESULT_OK) {
+                presenter.onProfileUpdated()
+            } else {
+
+            }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
@@ -59,9 +62,15 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
 
     }
 
+    @OnClick(R.id.sectionProfile)
+    fun onProfileClicked() {
+        presenter.signIn()
+    }
+
     private fun init() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = getString(R.string.settings)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun showResetDialog() {
@@ -88,18 +97,6 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
                 function.invoke()
                 true
             }
-        }
-
-        fun addSignInClickListener(function: () -> Unit) {
-            val myPref = findPreference("sign_in")
-            myPref?.setOnPreferenceClickListener{
-                function.invoke()
-                true
-            }
-        }
-
-        fun updateProfileSection(user: User) {
-
         }
     }
 

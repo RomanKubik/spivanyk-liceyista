@@ -13,6 +13,7 @@ interface PreferencesContract {
         fun destroy()
         fun reset()
         fun signIn()
+        fun onProfileUpdated()
     }
 
     companion object {

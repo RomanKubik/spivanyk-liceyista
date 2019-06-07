@@ -14,11 +14,8 @@
         android:summary="%s"
         android:title="@string/settings_preferred_instrument_ttl" />
     <Preference
-        android:title="@string/ttl_factory_reset"
+        android:key="factory_reset"
         android:summary="@string/msg_factory_reset_short"
-        android:key="factory_reset"/>
-    <Preference
-        android:title="Sign in with google"
-        android:summary="You can sign in to share your favourite song with community"
-        android:key="sign_in"/>
+        android:title="@string/ttl_factory_reset" />
+
 </PreferenceScreen>

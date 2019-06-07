@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import com.roman.kubik.songer.data.database.DatabaseManager
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
+import com.roman.kubik.songer.domain.user.UserInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,7 +17,8 @@ import javax.inject.Inject
 class PreferencesPresenter @Inject constructor(private val view: PreferencesContract.View,
                                                private val chordInteractor: ChordInteractor,
                                                private val navigationInteractor: NavigationInteractor,
-                                               private val databaseManager: DatabaseManager)
+                                               private val databaseManager: DatabaseManager,
+                                               private val userInteractor: UserInteractor)
     : PreferencesContract.Presenter {
 
     override fun destroy() {
@@ -36,5 +38,9 @@ class PreferencesPresenter @Inject constructor(private val view: PreferencesCont
 
     override fun signIn() {
         navigationInteractor.toSignIn(PreferencesContract.CODE_SIGN_IN)
+    }
+
+    override fun onProfileUpdated() {
+        userInteractor.refreshUser()
     }
 }
