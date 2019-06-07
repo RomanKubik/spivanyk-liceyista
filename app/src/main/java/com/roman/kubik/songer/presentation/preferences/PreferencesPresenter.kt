@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.presentation.preferences
 
+import android.annotation.SuppressLint
 import com.roman.kubik.songer.data.database.DatabaseManager
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
@@ -22,13 +23,18 @@ class PreferencesPresenter @Inject constructor(private val view: PreferencesCont
         chordInteractor.updateChordRepository()
     }
 
+    @SuppressLint("CheckResult")
     override fun reset() {
-        val d = databaseManager.reset()
+        databaseManager.reset()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError{
                     view.showResetError()
                 }
                 .subscribe(navigationInteractor::restart)
+    }
+
+    override fun signIn() {
+        navigationInteractor.toSignIn(PreferencesContract.CODE_SIGN_IN)
     }
 }

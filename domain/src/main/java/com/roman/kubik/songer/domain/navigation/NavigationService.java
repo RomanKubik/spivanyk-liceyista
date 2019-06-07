@@ -19,4 +19,6 @@ public interface NavigationService {
     void toShareText(String title, String text);
 
     void restart();
+
+    void toSignIn(int requestCode);
 }

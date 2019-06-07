@@ -10,6 +10,10 @@ import com.roman.kubik.songer.presentation.list.ListActivity
 import com.roman.kubik.songer.presentation.main.MainActivity
 import com.roman.kubik.songer.presentation.preferences.PreferencesActivity
 import com.roman.kubik.songer.presentation.song.SongActivity
+import com.firebase.ui.auth.AuthUI
+import java.util.Arrays.asList
+
+
 
 
 class NavigationServiceImpl(private val activity: Activity) : NavigationService {
@@ -59,5 +63,18 @@ class NavigationServiceImpl(private val activity: Activity) : NavigationService 
 
     override fun restart() {
         System.exit(0)
+    }
+
+    override fun toSignIn(requestCode: Int) {
+        val providers = asList(
+                AuthUI.IdpConfig.GoogleBuilder().build())
+
+        activity.startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .build(),
+                requestCode)
+
     }
 }

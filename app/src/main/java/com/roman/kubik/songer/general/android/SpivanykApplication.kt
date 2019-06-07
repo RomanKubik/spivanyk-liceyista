@@ -1,13 +1,12 @@
 package com.roman.kubik.songer.general.android
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
+import com.crashlytics.android.Crashlytics
+import com.roman.kubik.songer.BuildConfig
 import com.roman.kubik.songer.general.di.ApplicationComponent
 import com.roman.kubik.songer.general.di.ApplicationModule
 import com.roman.kubik.songer.general.di.DaggerApplicationComponent
-import com.crashlytics.android.Crashlytics
-import com.roman.kubik.songer.BuildConfig
 import io.fabric.sdk.android.Fabric
-
 
 
 /**
@@ -15,7 +14,7 @@ import io.fabric.sdk.android.Fabric
  * Created by kubik on 1/14/18.
  */
 
-class SpivanykApplication : Application() {
+class SpivanykApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
@@ -29,7 +28,7 @@ class SpivanykApplication : Application() {
     }
 
     private fun initializeDi() {
-        SpivanykApplication.component = DaggerApplicationComponent
+        component = DaggerApplicationComponent
                 .builder()
                 .applicationModule(ApplicationModule(applicationContext))
                 .build()

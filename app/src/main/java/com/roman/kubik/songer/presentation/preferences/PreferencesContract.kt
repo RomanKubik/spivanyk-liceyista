@@ -12,5 +12,10 @@ interface PreferencesContract {
     interface Presenter {
         fun destroy()
         fun reset()
+        fun signIn()
+    }
+
+    companion object {
+        const val CODE_SIGN_IN = 1
     }
 }
