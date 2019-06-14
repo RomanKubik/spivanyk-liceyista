@@ -10,10 +10,12 @@ import com.roman.kubik.songer.data.history.HistoryRepositoryImpl
 import com.roman.kubik.songer.data.song.SongDao
 import com.roman.kubik.songer.data.song.SongModelMapper
 import com.roman.kubik.songer.data.song.SongRepositoryImpl
+import com.roman.kubik.songer.data.user.UserRepositoryImpl
 import com.roman.kubik.songer.domain.category.CategoryRepository
 import com.roman.kubik.songer.domain.favourite.FavouriteRepository
 import com.roman.kubik.songer.domain.history.HistoryRepository
 import com.roman.kubik.songer.domain.song.SongRepository
+import com.roman.kubik.songer.domain.user.UserRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -37,4 +39,7 @@ class RepositoryModule {
     @Singleton
     fun getHistoryRepository(historyDao: HistoryDao, songModelMapper: SongModelMapper): HistoryRepository = HistoryRepositoryImpl(historyDao, songModelMapper)
 
+    @Provides
+    @Singleton
+    fun getUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository = userRepositoryImpl
 }

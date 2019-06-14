@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.PreferenceFragmentCompat
 import butterknife.OnClick
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.user.User
@@ -60,6 +62,21 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
 
     override fun showResetError() {
 
+    }
+
+    override fun showUser(user: User) {
+        if (user.email.isNullOrEmpty()) {
+            profileTitle.setText(R.string.preferences_sign_in_title)
+            profileDescription.setText(R.string.preferences_sign_in_description)
+        } else {
+            profileTitle.setText(R.string.preferences_you_are_signed_in)
+            profileDescription.text = user.email
+        }
+        Glide.with(this)
+                .load(user.picturePath)
+                .apply(RequestOptions.circleCropTransform())
+                .error(R.drawable.ic_person)
+                .into(profileImage)
     }
 
     @OnClick(R.id.sectionProfile)

@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.general.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.roman.kubik.songer.data.chord.ChordRepositoryFactoryImpl
 import com.roman.kubik.songer.data.logger.FirebaseLogger
@@ -51,8 +52,8 @@ class InteractionModule {
 
     @Provides
     @Singleton
-    internal fun getPreferencesInteractor(context: Context): PreferencesInteractor {
-        return PreferencesInteractor(PreferencesImpl(PreferenceManager.getDefaultSharedPreferences(context.applicationContext)))
+    internal fun getPreferencesInteractor(sharedPreferences: SharedPreferences): PreferencesInteractor {
+        return PreferencesInteractor(PreferencesImpl(sharedPreferences))
     }
 
     @Provides

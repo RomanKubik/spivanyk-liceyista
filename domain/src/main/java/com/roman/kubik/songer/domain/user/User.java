@@ -7,15 +7,15 @@ public class User {
     private String id;
     private String email;
     private String fullName;
-    private boolean isChordsVisible;
-    private String selectedInstrument;
+    private String picturePath;
+    private UserPreferences userPreferences;
 
-    public User(String id, String email, String fullName, boolean isChordsVisible, String selectedInstrument) {
+    public User(String id, String email, String fullName, String picturePath, UserPreferences userPreferences) {
         this.id = id;
         this.email = email;
         this.fullName = fullName;
-        this.isChordsVisible = isChordsVisible;
-        this.selectedInstrument = selectedInstrument;
+        this.picturePath = picturePath;
+        this.userPreferences = userPreferences;
     }
 
     public User() {
@@ -45,20 +45,20 @@ public class User {
         this.fullName = fullName;
     }
 
-    public boolean isChordsVisible() {
-        return isChordsVisible;
+    public String getPicturePath() {
+        return picturePath;
     }
 
-    public void setChordsVisible(boolean chordsVisible) {
-        isChordsVisible = chordsVisible;
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
-    public String getSelectedInstrument() {
-        return selectedInstrument;
+    public UserPreferences getUserPreferences() {
+        return userPreferences;
     }
 
-    public void setSelectedInstrument(String selectedInstrument) {
-        this.selectedInstrument = selectedInstrument;
+    public void setUserPreferences(UserPreferences userPreferences) {
+        this.userPreferences = userPreferences;
     }
 
     @Override
@@ -66,11 +66,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id);
+        return Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, fullName, isChordsVisible, selectedInstrument);
+        return Objects.hash(id, email, fullName, userPreferences);
     }
 }

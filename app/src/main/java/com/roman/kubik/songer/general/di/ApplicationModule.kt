@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.general.di
 
 import android.content.Context
+import android.preference.PreferenceManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.roman.kubik.songer.data.shaker.ShakeDetectorImpl
 import com.roman.kubik.songer.domain.shaker.ShakeDetector
@@ -32,4 +33,8 @@ class ApplicationModule(private val applicationContext: Context) {
     @Provides
     @Singleton
     fun getShackerDetector(context: Context): ShakeDetector = ShakeDetectorImpl(context)
+
+    @Provides
+    @Singleton
+    fun getSharedPregferences(context: Context) = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
 }

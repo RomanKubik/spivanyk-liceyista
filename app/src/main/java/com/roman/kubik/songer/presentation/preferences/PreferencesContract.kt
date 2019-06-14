@@ -1,5 +1,7 @@
 package com.roman.kubik.songer.presentation.preferences
 
+import com.roman.kubik.songer.domain.user.User
+
 /**
  * Created by kubik on 3/10/18.
  */
@@ -7,6 +9,7 @@ package com.roman.kubik.songer.presentation.preferences
 interface PreferencesContract {
     interface View {
         fun showResetError()
+        fun showUser(user: User)
     }
 
     interface Presenter {

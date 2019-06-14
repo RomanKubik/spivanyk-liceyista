@@ -14,16 +14,20 @@ public class UserInteractor {
     @Inject
     public UserInteractor(UserRepository userRepository) {
         this.userRepository = userRepository;
+        refreshUser();
         
     }
 
     public Observable<User> getUser() {
-        return userSubject;
+        return userRepository.getUser();
     }
 
     public void refreshUser() {
         userRepository.refreshUser();
     }
 
+    public void logOut() {
+        userRepository.logOut();
+    }
 
 }
