@@ -29,9 +29,9 @@
                 android:id="@+id/lastCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
+                app:description="@string/dsc_last_played"
                 app:image="@drawable/ic_history"
-                app:title="@string/ttl_last_played"
-                app:description="@string/dsc_last_played"/>
+                app:title="@string/ttl_last_played" />
 
             <View style="@style/AppTheme.Separator" />
 
@@ -75,9 +75,9 @@
                 android:id="@+id/surpriseCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
+                app:description="@string/dsc_surprise_me"
                 app:image="@drawable/ic_shocked"
-                app:title="@string/ttl_surprise_me"
-                app:description="@string/dsc_surprise_me"/>
+                app:title="@string/ttl_surprise_me" />
 
             <View style="@style/AppTheme.Separator" />
 
@@ -87,6 +87,17 @@
                 android:layout_height="@dimen/view_size_72"
                 app:image="@drawable/ic_books"
                 app:title="@string/ttl_all_songs" />
+
+            <View style="@style/AppTheme.Separator" />
+
+
+            <com.roman.kubik.songer.presentation.view.MainItemView
+                android:id="@+id/webCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_web"
+                app:title="@string/ttl_web"
+                app:description="@string/dsc_web"/>
 
             <View style="@style/AppTheme.Separator" />
 

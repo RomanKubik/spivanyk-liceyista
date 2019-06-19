@@ -37,6 +37,8 @@ public class SongInteractor {
 
     public Single<List<Song>> getAllByCategory(@Category.CategoryId int categoryId) {
         switch (categoryId) {
+            case Category.WEB_ID:
+                return songRepository.getAllFromWeb();
             case Category.FAVOURITE_ID:
                 return favouriteRepository.getAll();
             case Category.LAST_ID:
@@ -54,6 +56,8 @@ public class SongInteractor {
 
     public Single<List<Song>> search(String query, @Category.CategoryId int categoryId) {
         switch (categoryId) {
+            case Category.WEB_ID:
+                return songRepository.searchInWeb(query);
             case Category.FAVOURITE_ID:
                 return favouriteRepository.search(query);
             case Category.LAST_ID:

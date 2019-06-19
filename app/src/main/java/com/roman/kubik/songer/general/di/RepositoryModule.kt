@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.general.di
 
+import com.google.firebase.firestore.FirebaseFirestore
 import com.roman.kubik.songer.data.category.CategoryDao
 import com.roman.kubik.songer.data.category.CategoryModelMapper
 import com.roman.kubik.songer.data.category.CategoryRepositoryImpl
@@ -25,7 +26,7 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun getSongRepository(songDao: SongDao, songModelMapper: SongModelMapper): SongRepository = SongRepositoryImpl(songDao, songModelMapper)
+    fun getSongRepository(songDao: SongDao, songModelMapper: SongModelMapper, firebaseDatabase: FirebaseFirestore): SongRepository = SongRepositoryImpl(songDao, songModelMapper, firebaseDatabase)
 
     @Provides
     @Singleton

@@ -9,6 +9,7 @@ class CategoryTitleMapper @Inject constructor(private val context: Context){
 
     fun getCategoryTitle(categoryId: Int) : String {
         when (categoryId) {
+            Category.WEB_ID -> return context.getString(R.string.ttl_web)
             Category.FAVOURITE_ID -> return context.getString(R.string.ttl_favourite)
             Category.ALL_ID -> return context.getString(R.string.ttl_all_songs)
             Category.ABROAD_ID -> return context.getString(R.string.ttl_abroad_songs)

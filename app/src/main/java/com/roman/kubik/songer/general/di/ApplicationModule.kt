@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
+import com.google.firebase.firestore.FirebaseFirestore
 import com.roman.kubik.songer.data.shaker.ShakeDetectorImpl
 import com.roman.kubik.songer.domain.shaker.ShakeDetector
 import dagger.Module
@@ -43,4 +44,8 @@ class ApplicationModule(private val applicationContext: Context) {
     @Provides
     @Singleton
     fun getGson() = Gson()
+
+    @Provides
+    @Singleton
+    fun getFirebaseFirestore() = FirebaseFirestore.getInstance()
 }

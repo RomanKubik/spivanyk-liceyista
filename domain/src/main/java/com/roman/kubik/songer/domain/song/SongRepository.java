@@ -21,6 +21,10 @@ public interface SongRepository {
 
     Single<List<Song>> search(String query, @Category.CategoryId int categoryId);
 
+    Single<List<Song>> getAllFromWeb();
+
+    Single<List<Song>> searchInWeb(String query);
+
     Maybe<Song> getById(int id);
 
     Single<Integer> getCount();

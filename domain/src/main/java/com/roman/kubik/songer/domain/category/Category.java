@@ -12,7 +12,9 @@ import java.lang.annotation.RetentionPolicy;
 
 public class Category {
 
-    public static final int FAVOURITE_ID = -2,
+    public static final int
+            WEB_ID = -3,
+            FAVOURITE_ID = -2,
             ALL_ID = -1,
             LAST_ID = 0,
             PATRIOTIC_ID = 1,
@@ -20,7 +22,7 @@ public class Category {
             ABROAD_ID = 3,
             USERS_ID = 4;
 
-    @IntDef({FAVOURITE_ID, ALL_ID, LAST_ID, PATRIOTIC_ID, BONFIRE_ID, ABROAD_ID, USERS_ID})
+    @IntDef({WEB_ID, FAVOURITE_ID, ALL_ID, LAST_ID, PATRIOTIC_ID, BONFIRE_ID, ABROAD_ID, USERS_ID})
     @Retention(RetentionPolicy.SOURCE)
     public @interface CategoryId {
     }
