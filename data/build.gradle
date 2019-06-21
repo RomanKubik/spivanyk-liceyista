@@ -49,9 +49,7 @@ dependencies {
     // Firebase
     implementation "com.google.firebase:firebase-core:$rootProject.firebase"
     api 'com.google.firebase:firebase-auth:19.1.0'
-    api ('com.firebaseui:firebase-ui-auth:4.3.1') {
-        exclude group: 'com.google.firebase', module: 'firebase-auth'
-    }
+    api 'com.firebaseui:firebase-ui-auth:5.0.0'
     api 'com.google.firebase:firebase-firestore:21.2.0'
 
     // Json

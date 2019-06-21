@@ -71,7 +71,7 @@ public class SongRepositoryImpl implements SongRepository {
 
     @Override
     public Single<List<Song>> getAllFromWeb() {
-        firebaseFirestore.collection("songs").get().addOnCompleteListener(task -> {
+        firebaseFirestore.collection("meta").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Log.d("MyTag", "getAllFromWeb: " + document.getId());
