@@ -33,10 +33,7 @@
                 app:title="@string/ttl_last_played"
                 app:description="@string/dsc_last_played"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey" />
+            <View style="@style/AppTheme.Separator" />
 
             <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/patrioticCategory"
@@ -45,10 +42,7 @@
                 app:image="@drawable/ic_flag_on_pole"
                 app:title="@string/ttl_patriotic" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey" />
+            <View style="@style/AppTheme.Separator" />
 
             <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/bonfireCategory"
@@ -57,10 +51,7 @@
                 app:image="@drawable/ic_campfire"
                 app:title="@string/ttl_bonfire_songs" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey" />
+            <View style="@style/AppTheme.Separator" />
 
             <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/abroadCategory"
@@ -69,10 +60,7 @@
                 app:image="@drawable/ic_abroad"
                 app:title="@string/ttl_abroad_songs" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey" />
+            <View style="@style/AppTheme.Separator" />
 
             <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/surpriseCategory"
@@ -82,10 +70,7 @@
                 app:title="@string/ttl_surprise_me"
                 app:description="@string/dsc_surprise_me"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey" />
+            <View style="@style/AppTheme.Separator" />
 
             <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/allCategory"
@@ -93,10 +78,8 @@
                 android:layout_height="@dimen/view_size_72"
                 app:image="@drawable/ic_books"
                 app:title="@string/ttl_all_songs" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey" />
+
+            <View style="@style/AppTheme.Separator" />
 
             <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/favouriteCategory"

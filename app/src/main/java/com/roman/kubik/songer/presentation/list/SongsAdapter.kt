@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.songer.R
@@ -85,7 +86,7 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
 
         private fun getLyrics(lyrics: String): CharSequence {
             return if (showChords)
-                lyricsFormattingInteractor.createChords(lyrics, null, Color.BLACK, Color.TRANSPARENT)
+                lyricsFormattingInteractor.createChords(lyrics, null, ContextCompat.getColor(tvTitle.context, R.color.colorTextPrimary), Color.TRANSPARENT)
             else
                 lyricsFormattingInteractor.removeChords(lyrics)
         }

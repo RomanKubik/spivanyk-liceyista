@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/app_bar_bookmark"
-        android:icon="@drawable/ic_bookmark_border_black_24dp"
+        android:icon="@drawable/ic_bookmark_border"
         android:title="@string/bookmark"
         app:showAsAction="ifRoom|collapseActionView" />
     <item
         android:id="@+id/app_bar_share"
-        android:icon="@drawable/ic_share_black_24dp"
+        android:icon="@drawable/ic_share"
         android:title="@string/share"
         app:showAsAction="ifRoom|collapseActionView" />
     <item
         android:id="@+id/app_bar_edit"
-        android:icon="@drawable/ic_edit_black_24dp"
+        android:icon="@drawable/ic_edit"
         android:title="@string/edit"
         app:showAsAction="ifRoom|collapseActionView" />
     <item

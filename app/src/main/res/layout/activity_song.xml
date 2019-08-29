@@ -113,13 +113,11 @@
                 tools:text="TextView" />
 
             <View
+                style="@style/AppTheme.Separator"
                 android:id="@+id/bottomSeparator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
                 android:layout_marginStart="@dimen/spacing_16"
                 android:layout_marginLeft="@dimen/spacing_16"
                 android:layout_marginTop="@dimen/spacing_24"
-                android:background="@color/grey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lyrics" />
@@ -202,9 +200,7 @@
                 android:contentDescription="@string/downward" />
 
             <View
-                android:layout_width="0.5dp"
-                android:layout_height="match_parent"
-                android:background="@color/darkish_grey"
+                style="@style/AppTheme.Separator.Vertical"
                 android:layout_marginTop="@dimen/spacing_4"
                 android:layout_marginBottom="@dimen/spacing_4"/>
 
