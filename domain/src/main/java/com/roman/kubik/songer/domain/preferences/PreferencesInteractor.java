@@ -1,58 +1,71 @@
 package com.roman.kubik.songer.domain.preferences;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
+@Singleton
 public class PreferencesInteractor {
 
-    private Preferences preferences;
+    private PreferencesService preferencesService;
 
-    public PreferencesInteractor(Preferences preferences) {
-        this.preferences = preferences;
+    @Inject
+    public PreferencesInteractor(PreferencesService preferencesService) {
+        this.preferencesService = preferencesService;
+    }
+
+    public Single<Preferences> getPreferences() {
+        return preferencesService.getPreferences();
+    }
+
+    public Completable updatePreferences(Preferences preferences) {
+        return preferencesService.updatePreferences(preferences);
     }
 
     public Single<Boolean> isChordsVisible() {
-        return preferences.isChordsVisible();
+        return preferencesService.isChordsVisible();
     }
 
     public Completable switchChordsVisibility() {
-        return preferences.isChordsVisible()
-                .flatMapCompletable(visible -> preferences.setChordsVisible(!visible));
+        return preferencesService.isChordsVisible()
+                .flatMapCompletable(visible -> preferencesService.setChordsVisible(!visible));
     }
 
     public Single<String> selectedInstrument() {
-        return preferences.selectedInstrument();
+        return preferencesService.selectedInstrument();
     }
 
     public Single<Boolean> isShakeTutorialShown() {
-        return preferences.isShakeTutorialShown();
+        return preferencesService.isShakeTutorialShown();
     }
 
     public Completable setShakeTutorialShown() {
-        return preferences.setShakeTutorialShown(true);
+        return preferencesService.setShakeTutorialShown(true);
     }
 
     public Single<Boolean> isAddSongTutorialShown() {
-        return preferences.isAddSongTutorialShown();
+        return preferencesService.isAddSongTutorialShown();
     }
 
     public Completable setAddSongTutorialShown() {
-        return preferences.setAddSongTutorialShown(true);
+        return preferencesService.setAddSongTutorialShown(true);
     }
 
     public Single<Boolean> isMarkChordsTutorialShown() {
-        return preferences.isMarkChordsTutorialShown();
+        return preferencesService.isMarkChordsTutorialShown();
     }
 
     public Completable setMarkChordsTutorialShown() {
-        return preferences.setMarkChordsTutorialShown(true);
+        return preferencesService.setMarkChordsTutorialShown(true);
     }
 
     public Single<Boolean> isDeleteTutorialShown() {
-        return preferences.isDeleteTutorialShown();
+        return preferencesService.isDeleteTutorialShown();
     }
 
     public Completable setDeleteTutorialShown() {
-        return preferences.setDeleteTutorialShown(true);
+        return preferencesService.setDeleteTutorialShown(true);
     }
 }

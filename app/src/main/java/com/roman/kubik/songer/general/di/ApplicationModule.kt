@@ -3,6 +3,7 @@ package com.roman.kubik.songer.general.di
 import android.content.Context
 import android.preference.PreferenceManager
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.gson.Gson
 import com.roman.kubik.songer.data.shaker.ShakeDetectorImpl
 import com.roman.kubik.songer.domain.shaker.ShakeDetector
 import dagger.Module
@@ -37,4 +38,8 @@ class ApplicationModule(private val applicationContext: Context) {
     @Provides
     @Singleton
     fun getSharedPregferences(context: Context) = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+
+    @Provides
+    @Singleton
+    fun getGson() = Gson()
 }
