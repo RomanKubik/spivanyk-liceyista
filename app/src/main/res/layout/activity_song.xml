@@ -196,19 +196,19 @@
             <ImageView
                 android:id="@+id/transpositionMinus"
                 style="@style/TranspositionButton"
-                android:src="@drawable/ic_arrow_downward"
-                android:contentDescription="@string/downward" />
-
-            <View
-                style="@style/AppTheme.Separator.Vertical"
-                android:layout_marginTop="@dimen/spacing_4"
-                android:layout_marginBottom="@dimen/spacing_4"/>
+                android:contentDescription="@string/downward"
+                app:srcCompat="@drawable/ic_arrow_downward" />
 
             <ImageView
                 android:id="@+id/transpositionPlus"
                 style="@style/TranspositionButton"
-                android:src="@drawable/ic_arrow_upward"
-                android:contentDescription="@string/upward" />
+                android:contentDescription="@string/upward"
+                app:srcCompat="@drawable/ic_arrow_upward" />
+
+            <View
+                style="@style/AppTheme.Separator.Vertical"
+                android:layout_marginTop="@dimen/spacing_4"
+                android:layout_marginBottom="@dimen/spacing_4" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
