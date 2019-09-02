@@ -61,7 +61,8 @@ constructor(private val view: SongContract.View,
     override fun fetchPreferences() {
         compositeDisposable.add(
                 preferencesInteractor
-                        .isChordsVisible
+                        .preferences
+                        .map { it.isChordsVisible }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSuccess { s -> showChords = s }

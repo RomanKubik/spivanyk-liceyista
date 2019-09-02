@@ -1,12 +1,14 @@
 package com.roman.kubik.songer.data.preferences.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.roman.kubik.songer.domain.chord.Instruments;
 
 public class PreferencesModel {
     @SerializedName("isChordsVisible")
-    private boolean isChordsVisible = false;
+    private boolean isChordsVisible = true;
     @SerializedName("selectedInstrument")
-    private String selectedInstrument;
+    @Instruments.Instrument
+    private String selectedInstrument = Instruments.GUITAR;
     @SerializedName("tutorialPreferences")
     private TutorialPreferencesModel tutorialPreferences = new TutorialPreferencesModel();
 
@@ -27,11 +29,12 @@ public class PreferencesModel {
         isChordsVisible = chordsVisible;
     }
 
+    @Instruments.Instrument
     public String getSelectedInstrument() {
         return selectedInstrument;
     }
 
-    public void setSelectedInstrument(String selectedInstrument) {
+    public void setSelectedInstrument(@Instruments.Instrument String selectedInstrument) {
         this.selectedInstrument = selectedInstrument;
     }
 

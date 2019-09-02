@@ -39,13 +39,12 @@
             android:name=".presentation.song.SongActivity"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".presentation.userPreferences.PreferencesActivity"
+            android:name=".presentation.preferences.PreferencesActivity"
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".presentation.edit.EditSongActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".presentation.preferences.PreferencesActivity" />
 
     </application>
 

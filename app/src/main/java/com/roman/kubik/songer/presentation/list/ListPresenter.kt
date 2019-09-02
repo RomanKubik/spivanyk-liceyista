@@ -2,6 +2,7 @@ package com.roman.kubik.songer.presentation.list
 
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
+import com.roman.kubik.songer.domain.preferences.Preferences
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.domain.song.SongInteractor
@@ -51,19 +52,19 @@ constructor(private val view: ListContract.View,
     }
 
     override fun fetchPreferences() {
-        compositeDisposable.addAll(
+        compositeDisposable.add(
                 preferencesInteractor
-                        .isChordsVisible
+                        .preferences
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSuccess { if (!isDeleteShown(it)) view.showDeletionTutorialDialog() }
+                        .map { it.isChordsVisible }
                         .subscribe(view::onPreferencesFetched
-                        ) { t -> view.showError(t.message) },
-                preferencesInteractor
-                        .isDeleteTutorialShown
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe( { if (!it) view.showDeletionTutorialDialog()}) {})
+                        ) { t -> view.showError(t.message) })
     }
+
+    private fun isDeleteShown(preferences: Preferences)
+            = preferences.tutorialPreferences.isDeleteShown
 
     override fun fetchSongByCategory(categoryId: Int) {
         this.categoryId = categoryId

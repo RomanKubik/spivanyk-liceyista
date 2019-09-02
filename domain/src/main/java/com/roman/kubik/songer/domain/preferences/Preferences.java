@@ -1,14 +1,17 @@
 package com.roman.kubik.songer.domain.preferences;
 
+import com.roman.kubik.songer.domain.chord.Instruments;
+
 public class Preferences {
-    private boolean isChordsVisible = false;
-    private String selectedInstrument;
+    private boolean isChordsVisible = true;
+    @Instruments.Instrument
+    private String selectedInstrument = Instruments.GUITAR;
     private TutorialPreferences tutorialPreferences = new TutorialPreferences();
 
     public Preferences() {
     }
 
-    public Preferences(boolean isChordsVisible, String selectedInstrument, TutorialPreferences tutorialPreferences) {
+    public Preferences(boolean isChordsVisible, @Instruments.Instrument String selectedInstrument, TutorialPreferences tutorialPreferences) {
         this.isChordsVisible = isChordsVisible;
         this.selectedInstrument = selectedInstrument;
         this.tutorialPreferences = tutorialPreferences;
@@ -22,11 +25,12 @@ public class Preferences {
         isChordsVisible = chordsVisible;
     }
 
+    @Instruments.Instrument
     public String getSelectedInstrument() {
         return selectedInstrument;
     }
 
-    public void setSelectedInstrument(String selectedInstrument) {
+    public void setSelectedInstrument(@Instruments.Instrument String selectedInstrument) {
         this.selectedInstrument = selectedInstrument;
     }
 

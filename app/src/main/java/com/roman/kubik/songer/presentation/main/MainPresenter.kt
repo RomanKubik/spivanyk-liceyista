@@ -43,7 +43,8 @@ constructor(private val view: MainContract.View,
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setFavouriteCount, view::showError),
-                preferencesInteractor.isAddSongTutorialShown
+                preferencesInteractor.preferences
+                        .map { it.tutorialPreferences.isAddSongShown }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
@@ -68,8 +69,8 @@ constructor(private val view: MainContract.View,
             TutorialType.TYPE_ADD_SONG -> {
                 compositeDisposable.addAll(
                         preferencesInteractor.setAddSongTutorialShown()
-                                .subscribe(),
-                        preferencesInteractor.isShakeTutorialShown
+                                .andThen(preferencesInteractor.preferences)
+                                .map { it.tutorialPreferences.isShakeShown }
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({

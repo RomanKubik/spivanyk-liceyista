@@ -24,48 +24,33 @@ public class PreferencesInteractor {
         return preferencesService.updatePreferences(preferences);
     }
 
-    public Single<Boolean> isChordsVisible() {
-        return preferencesService.isChordsVisible();
-    }
-
     public Completable switchChordsVisibility() {
-        return preferencesService.isChordsVisible()
-                .flatMapCompletable(visible -> preferencesService.setChordsVisible(!visible));
-    }
-
-    public Single<String> selectedInstrument() {
-        return preferencesService.selectedInstrument();
-    }
-
-    public Single<Boolean> isShakeTutorialShown() {
-        return preferencesService.isShakeTutorialShown();
+        return preferencesService.getPreferences()
+                .doOnSuccess(p -> p.setChordsVisible(!p.isChordsVisible()))
+                .flatMapCompletable(this::updatePreferences);
     }
 
     public Completable setShakeTutorialShown() {
-        return preferencesService.setShakeTutorialShown(true);
-    }
-
-    public Single<Boolean> isAddSongTutorialShown() {
-        return preferencesService.isAddSongTutorialShown();
+        return preferencesService.getPreferences()
+                .doOnSuccess(p -> p.getTutorialPreferences().setShakeShown(true))
+                .flatMapCompletable(this::updatePreferences);
     }
 
     public Completable setAddSongTutorialShown() {
-        return preferencesService.setAddSongTutorialShown(true);
-    }
-
-    public Single<Boolean> isMarkChordsTutorialShown() {
-        return preferencesService.isMarkChordsTutorialShown();
+        return preferencesService.getPreferences()
+                .doOnSuccess(p -> p.getTutorialPreferences().setAddSongShown(true))
+                .flatMapCompletable(this::updatePreferences);
     }
 
     public Completable setMarkChordsTutorialShown() {
-        return preferencesService.setMarkChordsTutorialShown(true);
-    }
-
-    public Single<Boolean> isDeleteTutorialShown() {
-        return preferencesService.isDeleteTutorialShown();
+        return preferencesService.getPreferences()
+                .doOnSuccess(p -> p.getTutorialPreferences().setMarkChordsShown(true))
+                .flatMapCompletable(this::updatePreferences);
     }
 
     public Completable setDeleteTutorialShown() {
-        return preferencesService.setDeleteTutorialShown(true);
+        return preferencesService.getPreferences()
+                .doOnSuccess(p -> p.getTutorialPreferences().setDeleteShown(true))
+                .flatMapCompletable(this::updatePreferences);
     }
 }
