@@ -1,19 +1,44 @@
 package com.roman.kubik.songer.domain.preferences;
 
-import com.roman.kubik.songer.domain.chord.Instruments;
+import androidx.annotation.StringDef;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 public class Preferences {
+    public static final String GUITAR = "guitar";
+    public static final String UKULELE = "ukulele";
+
+    public static final String THEME_LIGHT = "light";
+    public static final String THEME_DARK = "dark";
+    public static final String THEME_SYSTEM_DEFAULT = "system_default";
+    public static final String THEME_SET_BY_BATTERY = "set_by_battery";
+
+    @Retention(RetentionPolicy.SOURCE)
+    @StringDef({GUITAR, UKULELE})
+    public @interface Instrument {
+    }
+
+    @Retention(RetentionPolicy.SOURCE)
+    @StringDef({THEME_LIGHT, THEME_DARK, THEME_SYSTEM_DEFAULT, THEME_SET_BY_BATTERY})
+    public @interface Theme {
+    }
+
     private boolean isChordsVisible = true;
-    @Instruments.Instrument
-    private String selectedInstrument = Instruments.GUITAR;
+    @Instrument
+    private String selectedInstrument = GUITAR;
+    @Theme
+    private String selectedTheme;
     private TutorialPreferences tutorialPreferences = new TutorialPreferences();
 
     public Preferences() {
     }
 
-    public Preferences(boolean isChordsVisible, @Instruments.Instrument String selectedInstrument, TutorialPreferences tutorialPreferences) {
+    public Preferences(boolean isChordsVisible, @Instrument String selectedInstrument,
+                       @Theme String selectedTheme, TutorialPreferences tutorialPreferences) {
         this.isChordsVisible = isChordsVisible;
         this.selectedInstrument = selectedInstrument;
+        this.selectedTheme = selectedTheme;
         this.tutorialPreferences = tutorialPreferences;
     }
 
@@ -25,13 +50,22 @@ public class Preferences {
         isChordsVisible = chordsVisible;
     }
 
-    @Instruments.Instrument
+    @Instrument
     public String getSelectedInstrument() {
         return selectedInstrument;
     }
 
-    public void setSelectedInstrument(@Instruments.Instrument String selectedInstrument) {
+    public void setSelectedInstrument(@Instrument String selectedInstrument) {
         this.selectedInstrument = selectedInstrument;
+    }
+
+    @Theme
+    public String getSelectedTheme() {
+        return selectedTheme;
+    }
+
+    public void setSelectedTheme(@Theme String selectedTheme) {
+        this.selectedTheme = selectedTheme;
     }
 
     public TutorialPreferences getTutorialPreferences() {

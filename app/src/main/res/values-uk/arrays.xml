@@ -4,4 +4,10 @@
         <item>Гітара</item>
         <item>Укулеле</item>
     </string-array>
+
+    <string-array name="theme_name">
+        <item>Світла</item>
+        <item>Темна</item>
+        <item>Відповідно до рівня заряду</item>
+    </string-array>
 </resources>

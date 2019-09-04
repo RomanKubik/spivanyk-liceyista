@@ -3,6 +3,8 @@ package com.roman.kubik.songer.presentation.preferences
 import com.roman.kubik.songer.data.database.DatabaseManager
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
+import com.roman.kubik.songer.domain.preferences.Preferences
+import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.user.User
 import com.roman.kubik.songer.domain.user.UserInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
@@ -16,6 +18,7 @@ import javax.inject.Inject
  */
 @ActivityScope
 class PreferencesPresenter @Inject constructor(private val view: PreferencesContract.View,
+                                               private val preferencesInteractor: PreferencesInteractor,
                                                private val chordInteractor: ChordInteractor,
                                                private val navigationInteractor: NavigationInteractor,
                                                private val databaseManager: DatabaseManager,
@@ -33,8 +36,9 @@ class PreferencesPresenter @Inject constructor(private val view: PreferencesCont
                 .subscribe(view::showUser))
     }
 
-    override fun destroy() {
-        cd.dispose()
+    override fun destroy(preferences: Preferences) {
+        cd.add(preferencesInteractor.updatePreferences(preferences)
+                .subscribe({ cd.dispose() }, {}))
         chordInteractor.updateChordRepository()
         userInteractor.refreshUser()
     }
@@ -43,7 +47,7 @@ class PreferencesPresenter @Inject constructor(private val view: PreferencesCont
         cd.add(databaseManager.reset()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnError{
+                .doOnError {
                     view.showResetError()
                 }
                 .subscribe(navigationInteractor::restart))

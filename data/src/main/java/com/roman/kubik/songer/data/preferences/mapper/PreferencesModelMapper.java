@@ -18,14 +18,22 @@ public class PreferencesModelMapper implements EntityModelMapper<PreferencesMode
     @Override
     public Preferences fromEntity(PreferencesModel from) {
         return from != null
-                ? new Preferences(from.isChordsVisible(), from.getSelectedInstrument(), tutorialMapper.fromEntity(from.getTutorialPreferences()))
+                ?
+                new Preferences(from.isChordsVisible(),
+                        from.getSelectedInstrument(),
+                        from.getSelectedTheme(),
+                        tutorialMapper.fromEntity(from.getTutorialPreferences()))
                 : new Preferences();
     }
 
     @Override
     public PreferencesModel toEntity(Preferences from) {
         return from != null
-                ? new PreferencesModel(from.isChordsVisible(), from.getSelectedInstrument(), tutorialMapper.toEntity(from.getTutorialPreferences()))
+                ?
+                new PreferencesModel(from.isChordsVisible(),
+                        from.getSelectedInstrument(),
+                        from.getSelectedTheme(),
+                        tutorialMapper.toEntity(from.getTutorialPreferences()))
                 : new PreferencesModel();
     }
 }

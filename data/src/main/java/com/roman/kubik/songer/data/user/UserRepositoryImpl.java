@@ -7,7 +7,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.roman.kubik.songer.data.preferences.Keys;
-import com.roman.kubik.songer.domain.chord.Instruments;
+import com.roman.kubik.songer.domain.preferences.Preferences;
 import com.roman.kubik.songer.domain.user.User;
 import com.roman.kubik.songer.domain.user.UserPreferences;
 import com.roman.kubik.songer.domain.user.UserRepository;
@@ -60,8 +60,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     private UserPreferences getUserPreferences() {
         UserPreferences userPreferences = new UserPreferences();
-        userPreferences.setChordsVisible(sharedPreferences.getBoolean(Keys.SHOW_CHORDS, true));
-        userPreferences.setSelectedInstrument(sharedPreferences.getString(Keys.SELECTED_INSTRUMENT, Instruments.GUITAR));
+//        userPreferences.setChordsVisible(sharedPreferences.getBoolean(Keys.SHOW_CHORDS, true));
+//        userPreferences.setSelectedInstrument(sharedPreferences.getString(Keys.SELECTED_INSTRUMENT, Preferences.GUITAR));
         return userPreferences;
     }
 }

@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.roman.kubik.songer.data.preferences.mapper.PreferencesModelMapper;
 import com.roman.kubik.songer.data.preferences.model.PreferencesModel;
-import com.roman.kubik.songer.domain.chord.Instruments;
 import com.roman.kubik.songer.domain.preferences.Preferences;
 import com.roman.kubik.songer.domain.preferences.PreferencesService;
 

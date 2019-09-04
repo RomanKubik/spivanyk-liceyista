@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.presentation.preferences
 
+import com.roman.kubik.songer.domain.preferences.Preferences
 import com.roman.kubik.songer.domain.user.User
 
 /**
@@ -13,7 +14,7 @@ interface PreferencesContract {
     }
 
     interface Presenter {
-        fun destroy()
+        fun destroy(preferences: Preferences)
         fun reset()
         fun signIn()
         fun onProfileUpdated()

@@ -13,6 +13,13 @@
         android:key="selected_instrument"
         android:summary="%s"
         android:title="@string/settings_preferred_instrument_ttl" />
+    <ListPreference
+        android:defaultValue="guitar"
+        android:entries="@array/theme_name"
+        android:entryValues="@array/theme_key"
+        android:key="selected_theme"
+        android:summary="%s"
+        android:title="@string/settings_preferred_instrument_ttl" />
     <Preference
         android:key="factory_reset"
         android:summary="@string/msg_factory_reset_short"

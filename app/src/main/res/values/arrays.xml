@@ -8,4 +8,15 @@
         <item>Guitar</item>
         <item>Ukulele</item>
     </string-array>
+
+    <string-array name="theme_key">
+        <item>light</item>
+        <item>dark</item>
+        <item>set_by_battery</item>
+    </string-array>
+    <string-array name="theme_name">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Set by battery</item>
+    </string-array>
 </resources>

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceFragmentCompat
 import butterknife.OnClick
 import com.bumptech.glide.Glide
@@ -29,9 +30,9 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_preferences)
-        supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.preferencesContainer, preferences)
-                ?.commit()
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.preferencesContainer, preferences)
+                .commit()
         init()
     }
 
@@ -45,7 +46,7 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     }
 
     override fun onDestroy() {
-        presenter.destroy()
+//        presenter.destroy()
         super.onDestroy()
     }
 
