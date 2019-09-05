@@ -37,10 +37,21 @@ class PreferencesPresenter @Inject constructor(private val view: PreferencesCont
     }
 
     override fun destroy(preferences: Preferences) {
-        cd.add(preferencesInteractor.updatePreferences(preferences)
+        cd.add(preferencesInteractor
+                .preferences
+                .map {
+                    it.isChordsVisible = preferences.isChordsVisible
+                    it.selectedInstrument = preferences.selectedInstrument
+                    it.selectedTheme = preferences.selectedTheme
+                    return@map it
+                }
+                .flatMapCompletable(preferencesInteractor::updatePreferences)
+                .doOnComplete {
+                    chordInteractor.updateChordRepository()
+                    userInteractor.refreshUser()
+                }
                 .subscribe({ cd.dispose() }, {}))
-        chordInteractor.updateChordRepository()
-        userInteractor.refreshUser()
+
     }
 
     override fun reset() {

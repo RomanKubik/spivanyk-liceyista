@@ -2,15 +2,21 @@ package com.roman.kubik.songer.presentation.preferences
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.*
+import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.TwoStatePreference
 import butterknife.OnClick
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.roman.kubik.songer.BuildConfig
 import com.roman.kubik.songer.R
+import com.roman.kubik.songer.domain.preferences.Preferences
 import com.roman.kubik.songer.domain.user.User
 import com.roman.kubik.songer.general.di.ActivityComponent
 import com.roman.kubik.songer.presentation.BaseActivity
@@ -46,7 +52,7 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     }
 
     override fun onDestroy() {
-//        presenter.destroy()
+        presenter.destroy(generatePreferences())
         super.onDestroy()
     }
 
@@ -66,18 +72,18 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     }
 
     override fun showUser(user: User) {
-        if (user.email.isNullOrEmpty()) {
-            profileTitle.setText(R.string.preferences_sign_in_title)
-            profileDescription.setText(R.string.preferences_sign_in_description)
-        } else {
-            profileTitle.setText(R.string.preferences_you_are_signed_in)
-            profileDescription.text = user.email
-        }
-        Glide.with(this)
-                .load(user.picturePath)
-                .apply(RequestOptions.circleCropTransform())
-                .error(R.drawable.ic_person)
-                .into(profileImage)
+//        if (user.email.isNullOrEmpty()) {
+//            profileTitle.setText(R.string.preferences_sign_in_title)
+//            profileDescription.setText(R.string.preferences_sign_in_description)
+//        } else {
+//            profileTitle.setText(R.string.preferences_you_are_signed_in)
+//            profileDescription.text = user.email
+//        }
+//        Glide.with(this)
+//                .load(user.picturePath)
+//                .apply(RequestOptions.circleCropTransform())
+//                .error(R.drawable.ic_person)
+//                .into(profileImage)
     }
 
     @OnClick(R.id.sectionProfile)
@@ -103,14 +109,31 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
                 .show()
     }
 
+    private fun generatePreferences(): Preferences {
+        val pref = Preferences()
+        pref.isChordsVisible = (preferences.findPreference(getString(R.string.id_chord_visible)) as TwoStatePreference).isChecked
+        pref.selectedInstrument = (preferences.findPreference(getString(R.string.id_selected_instrument)) as ListPreference).value
+        pref.selectedTheme = (preferences.findPreference(getString(R.string.id_selected_theme)) as ListPreference).value
+        return pref
+    }
+
 
     class AppPreferences : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.app_preferences, rootKey)
+            findPreference(getString(R.string.id_selected_theme)).setOnPreferenceChangeListener { _, newValue ->
+                val nightMode: Int = when (newValue) {
+                    resources.getStringArray(R.array.theme_key)[0] -> MODE_NIGHT_NO
+                    resources.getStringArray(R.array.theme_key)[1] -> MODE_NIGHT_YES
+                    else -> if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) MODE_NIGHT_FOLLOW_SYSTEM else MODE_NIGHT_AUTO_BATTERY
+                }
+                setDefaultNightMode(nightMode)
+                true
+            }
         }
 
         fun addResetClickListener(function: () -> Unit) {
-            val myPref = findPreference("factory_reset")
+            val myPref = findPreference(getString(R.string.id_factory_reset))
             myPref?.setOnPreferenceClickListener{
                 function.invoke()
                 true

@@ -14,7 +14,7 @@
         android:summary="%s"
         android:title="@string/settings_preferred_instrument_ttl" />
     <ListPreference
-        android:defaultValue="set_by_battery"
+        android:defaultValue="system_default"
         android:entries="@array/theme_name"
         android:entryValues="@array/theme_key"
         android:key="@string/id_selected_theme"
