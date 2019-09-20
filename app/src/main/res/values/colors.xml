@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/extra_light_grey</color>
-    <color name="colorPrimaryDark">@color/light_grey</color>
+    <color name="colorPrimary">#f8f8f8</color>
+    <color name="colorPrimaryDark">#f4f4f4</color>
     <color name="colorAccent">@color/olive_green</color>
+    <color name="colorBackground">#f8f8f8</color>
+    <color name="colorOnPrimary">#d9d9d9</color>
+    <color name="colorTextPrimary">@android:color/black</color>
+    <color name="colorTextSecondary">#777777</color>
 
     <color name="hot_pink">#e8198b</color>
     <color name="olive_green">#417505</color>
@@ -10,14 +14,9 @@
     <color name="aqua_marine">#50e3c2</color>
     <color name="darkish_grey">#9b9b9b</color>
     <color name="just_purple">#bd10e0</color>
-    
-    <color name="transparent_grey">#379b9b9b</color>
-    <color name="transparent_black">#cf000000</color>
+    <color name="book_marked_category">#777777</color>
 
-    <color name="olive_green_20">#37417505</color>
+    <color name="tutorial_background">#cf000000</color>
+    <color name="tutorial_on_background">#d9d9d9</color>
 
-    <color name="extra_light_grey">#f8f8f8</color>
-    <color name="light_grey">#f4f4f4</color>
-    <color name="grey">#d9d9d9</color>
-    <color name="dark_grey">#777777</color>
 </resources>

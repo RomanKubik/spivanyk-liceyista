@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.domain.chord;
 
+import com.roman.kubik.songer.domain.preferences.Preferences;
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor;
 import com.roman.kubik.songer.domain.song.Song;
 import com.roman.kubik.songer.domain.song.SongRepository;
@@ -50,7 +51,8 @@ public class ChordInteractor {
     }
 
     public void updateChordRepository() {
-        Disposable disposable = preferencesInteractor.selectedInstrument()
+        Disposable disposable = preferencesInteractor.getPreferences()
+                .map(Preferences::getSelectedInstrument)
                 .subscribe(i -> repository = chordRepositoryFactory.getChordRepository(i), Throwable::printStackTrace);
     }
 

@@ -1,24 +1,27 @@
 package com.roman.kubik.songer.presentation.splash
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.roman.kubik.songer.data.database.DatabaseCopyHelper
-import com.roman.kubik.songer.navigation.NavigationServiceImpl
+import com.roman.kubik.songer.general.di.ActivityComponent
+import com.roman.kubik.songer.presentation.BaseActivity
+import com.roman.kubik.songer.presentation.splash.di.SplashModule
+import javax.inject.Inject
 
 /**
  * Launcher activity
  * Created by kubik on 1/14/18.
  */
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity(), SplashContract.View {
+
+    @Inject
+    lateinit var presenter: SplashContract.Presenter
+
+    override fun injectActivity(activityComponent: ActivityComponent) {
+        activityComponent.splashComponent(SplashModule(this)).inject(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        try {
-            DatabaseCopyHelper(this).createDataBase()
-            NavigationServiceImpl(this).toMainActivity()
-        } finally {
-            finish()
-        }
+        presenter.onCreate()
     }
 }

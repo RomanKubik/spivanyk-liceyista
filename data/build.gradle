@@ -50,5 +50,8 @@ dependencies {
     implementation "com.google.firebase:firebase-core:$rootProject.firebase"
     api 'com.firebaseui:firebase-ui-auth:4.3.1'
 
+    // Json
+    api 'com.google.code.gson:gson:2.8.5'
+
     implementation "javax.inject:javax.inject:1@jar"
 }

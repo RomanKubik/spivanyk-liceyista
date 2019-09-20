@@ -45,6 +45,11 @@ public class DatabaseManagerImpl implements DatabaseManager {
                 });
     }
 
+    @Override
+    public Completable createDatabase() {
+        return Completable.fromAction(databaseCopyHelper::createDataBase);
+    }
+
     public static AppDatabase generateAppDatabase(Context context) {
         return Room.databaseBuilder(context, AppDatabase.class, DB_NAME)
                 .addMigrations(MIGRATION_1_2, MIGRATION_2_3)

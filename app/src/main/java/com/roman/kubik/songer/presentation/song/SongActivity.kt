@@ -2,7 +2,6 @@ package com.roman.kubik.songer.presentation.song
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import android.text.method.LinkMovementMethod
@@ -12,7 +11,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.ColorUtils
 import butterknife.OnClick
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.songer.Constants
@@ -108,7 +107,7 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     override fun isFavouriteSong(isFavourite: Boolean) {
-        bookmarkItem.setIcon(if (isFavourite) R.drawable.ic_bookmark_black_24dp else R.drawable.ic_bookmark_border_black_24dp)
+        bookmarkItem.setIcon(if (isFavourite) R.drawable.ic_bookmark else R.drawable.ic_bookmark_border)
     }
 
     override fun setSongChords(chords: List<Chord>) {
@@ -140,7 +139,11 @@ class SongActivity : BaseActivity(), SongContract.View {
     }
 
     private fun init() {
-        presenter.setChordColors(Color.BLACK, ContextCompat.getColor(this, R.color.transparent_grey))
+        val chordTextColor = ContextCompat.getColor(this, R.color.colorTextPrimary)
+        val chordBackground = ColorUtils.setAlphaComponent(
+                ContextCompat.getColor(this, R.color.colorOnPrimary),
+                resources.getInteger(R.integer.onPrimaryAlpha))
+        presenter.setChordColors(chordTextColor, chordBackground)
         lyrics.movementMethod = LinkMovementMethod.getInstance()
         chordsAdapter.chordClickListener = Consumer { showChord(it.name) }
         chordsList.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)

@@ -12,14 +12,16 @@ import com.roman.kubik.songer.presentation.preferences.PreferencesActivity
 import com.roman.kubik.songer.presentation.song.SongActivity
 import com.firebase.ui.auth.AuthUI
 import java.util.Arrays.asList
-
-
+import kotlin.system.exitProcess
 
 
 class NavigationServiceImpl(private val activity: Activity) : NavigationService {
 
     override fun toMainActivity() {
-        activity.startActivity(Intent(activity, MainActivity::class.java))
+        val intent = Intent(activity, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        activity.startActivity(intent)
+        activity.finish()
     }
 
     override fun toListActivity(categoryId: Int) {
@@ -62,7 +64,7 @@ class NavigationServiceImpl(private val activity: Activity) : NavigationService 
     }
 
     override fun restart() {
-        System.exit(0)
+        exitProcess(0)
     }
 
     override fun toSignIn(requestCode: Int) {

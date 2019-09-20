@@ -37,6 +37,7 @@
     <string name="settings">Налаштування</string>
     <string name="add_song">Добавити пісню</string>
     <string name="settings_preferred_instrument_ttl">Обраний інструмент</string>
+    <string name="settings_preferred_theme_ttl">Тема</string>
     <string name="settings_display_chords_msg">Показувати акорди із піснею</string>
     <string name="got_it">Зрозуміло</string>
     <string name="tutorial_add_song">Клікни по такій іконці, щоб добавити нову пісню до свого співаника</string>

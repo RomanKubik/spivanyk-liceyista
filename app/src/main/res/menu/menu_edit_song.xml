@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/app_bar_recognize"
-        android:icon="@drawable/ic_transform_black_24dp"
+        android:icon="@drawable/ic_transform"
         android:title="@string/auto_recognize"
         app:showAsAction="ifRoom|collapseActionView" />
 
     <item
         android:id="@+id/app_bar_save"
-        android:icon="@drawable/ic_save_black_24dp"
+        android:icon="@drawable/ic_save"
         android:title="@string/save"
         app:showAsAction="ifRoom|collapseActionView" />
 </menu>

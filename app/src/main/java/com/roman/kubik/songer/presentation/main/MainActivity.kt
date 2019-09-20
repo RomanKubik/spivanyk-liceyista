@@ -28,6 +28,7 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        presenter.onCreated()
         setContentView(R.layout.activity_main)
         init()
     }

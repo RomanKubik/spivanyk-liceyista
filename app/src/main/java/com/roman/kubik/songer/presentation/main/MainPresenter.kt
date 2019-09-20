@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.presentation.main
 
+import androidx.appcompat.app.AppCompatDelegate
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
@@ -7,6 +8,7 @@ import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
 import com.roman.kubik.songer.presentation.tutorial.TutorialType
+import com.roman.kubik.songer.utils.PreferenceThemeMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -19,7 +21,21 @@ constructor(private val view: MainContract.View,
             private val songInteractor: SongInteractor,
             private val favouriteInteractor: FavouriteInteractor,
             private val preferencesInteractor: PreferencesInteractor,
+            private val preferenceThemeMapper: PreferenceThemeMapper,
             private val compositeDisposable: CompositeDisposable) : MainContract.Presenter {
+
+    override fun onCreated() {
+        compositeDisposable.add(
+                        preferencesInteractor
+                                .preferences
+                                .map { it.selectedTheme }
+                                .map(preferenceThemeMapper::mapThemePreference)
+                                .onErrorReturnItem(preferenceThemeMapper.getDefaultTheme())
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(AppCompatDelegate::setDefaultNightMode, view::showError)
+        )
+    }
 
     override fun requestData() {
         compositeDisposable.addAll(
@@ -43,7 +59,8 @@ constructor(private val view: MainContract.View,
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(view::setFavouriteCount, view::showError),
-                preferencesInteractor.isAddSongTutorialShown
+                preferencesInteractor.preferences
+                        .map { it.tutorialPreferences.isAddSongShown }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
@@ -66,10 +83,10 @@ constructor(private val view: MainContract.View,
     override fun tutorialShown(type: TutorialType) {
         when (type) {
             TutorialType.TYPE_ADD_SONG -> {
-                compositeDisposable.addAll(
+                compositeDisposable.add(
                         preferencesInteractor.setAddSongTutorialShown()
-                                .subscribe(),
-                        preferencesInteractor.isShakeTutorialShown
+                                .andThen(preferencesInteractor.preferences)
+                                .map { it.tutorialPreferences.isShakeShown }
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe({
@@ -80,7 +97,11 @@ constructor(private val view: MainContract.View,
                                 }, view::showError)
                 )
             }
-            TutorialType.TYPE_SHAKE -> compositeDisposable.add(preferencesInteractor.setShakeTutorialShown().subscribe())
+            TutorialType.TYPE_SHAKE -> compositeDisposable.add(
+                    preferencesInteractor.setShakeTutorialShown()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe())
             else -> {
             }
         }
