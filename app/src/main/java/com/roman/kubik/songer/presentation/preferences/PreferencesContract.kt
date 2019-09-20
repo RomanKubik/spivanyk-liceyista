@@ -16,6 +16,7 @@ interface PreferencesContract {
     interface Presenter {
         fun destroy(preferences: Preferences)
         fun reset()
+        fun setTheme(themeMode: String)
         fun signIn()
         fun onProfileUpdated()
     }

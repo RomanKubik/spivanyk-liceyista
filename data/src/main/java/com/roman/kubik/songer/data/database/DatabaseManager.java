@@ -7,4 +7,6 @@ public interface DatabaseManager {
     String DB_NAME = "spivanyk.db";
 
     Completable reset();
+
+    Completable createDatabase();
 }

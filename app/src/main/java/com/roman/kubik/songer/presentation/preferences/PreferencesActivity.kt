@@ -2,19 +2,12 @@ package com.roman.kubik.songer.presentation.preferences
 
 import android.app.Activity
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.TwoStatePreference
 import butterknife.OnClick
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.roman.kubik.songer.BuildConfig
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.preferences.Preferences
 import com.roman.kubik.songer.domain.user.User
@@ -45,6 +38,7 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     override fun onStart() {
         super.onStart()
         preferences.addResetClickListener(this::showResetDialog)
+        preferences.addThemeChangeListener(presenter::setTheme)
     }
 
     override fun injectActivity(activityComponent: ActivityComponent) {
@@ -121,24 +115,23 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
     class AppPreferences : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.app_preferences, rootKey)
-            findPreference(getString(R.string.id_selected_theme)).setOnPreferenceChangeListener { _, newValue ->
-                val nightMode: Int = when (newValue) {
-                    resources.getStringArray(R.array.theme_key)[0] -> MODE_NIGHT_NO
-                    resources.getStringArray(R.array.theme_key)[1] -> MODE_NIGHT_YES
-                    else -> if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) MODE_NIGHT_FOLLOW_SYSTEM else MODE_NIGHT_AUTO_BATTERY
-                }
-                setDefaultNightMode(nightMode)
-                true
-            }
         }
 
         fun addResetClickListener(function: () -> Unit) {
             val myPref = findPreference(getString(R.string.id_factory_reset))
-            myPref?.setOnPreferenceClickListener{
+            myPref?.setOnPreferenceClickListener {
                 function.invoke()
                 true
             }
         }
-    }
 
+        fun addThemeChangeListener(function: (nightMode: String) -> Unit) {
+            findPreference(getString(R.string.id_selected_theme))
+                    .setOnPreferenceChangeListener { _, newValue ->
+                        function.invoke(newValue as @kotlin.ParameterName(name = "nightMode") String)
+                        true
+                    }
+        }
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.presentation.preferences
 
+import androidx.appcompat.app.AppCompatDelegate
 import com.roman.kubik.songer.data.database.DatabaseManager
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
@@ -8,6 +9,7 @@ import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
 import com.roman.kubik.songer.domain.user.User
 import com.roman.kubik.songer.domain.user.UserInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
+import com.roman.kubik.songer.utils.PreferenceThemeMapper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -23,6 +25,7 @@ class PreferencesPresenter @Inject constructor(private val view: PreferencesCont
                                                private val navigationInteractor: NavigationInteractor,
                                                private val databaseManager: DatabaseManager,
                                                private val userInteractor: UserInteractor,
+                                               private val preferenceThemeMapper: PreferenceThemeMapper,
                                                private val cd: CompositeDisposable)
     : PreferencesContract.Presenter {
 
@@ -62,6 +65,10 @@ class PreferencesPresenter @Inject constructor(private val view: PreferencesCont
                     view.showResetError()
                 }
                 .subscribe(navigationInteractor::restart))
+    }
+
+    override fun setTheme(themeMode: String) {
+        AppCompatDelegate.setDefaultNightMode(preferenceThemeMapper.mapThemePreference(themeMode))
     }
 
     override fun signIn() {

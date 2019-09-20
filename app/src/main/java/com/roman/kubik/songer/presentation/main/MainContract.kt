@@ -16,6 +16,7 @@ interface MainContract {
     }
 
     interface Presenter {
+        fun onCreated()
         fun requestData()
         fun requestRandom()
         fun selectCategory(@Category.CategoryId categoryId: Int)

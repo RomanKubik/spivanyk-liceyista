@@ -10,6 +10,7 @@
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
         <item name="toolbarStyle">@style/AppTheme.Toolbar</item>
+        <item name="alertDialogTheme">@style/AppTheme.AlertDialogTheme</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/use_light_status</item>
     </style>
 
@@ -29,6 +30,20 @@
     <style name="TextAppearance.AppTheme.ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize" tools:ignore="SpUsage">20dp</item>
         <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <style name="AppTheme.AlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme.Separator" parent="">
