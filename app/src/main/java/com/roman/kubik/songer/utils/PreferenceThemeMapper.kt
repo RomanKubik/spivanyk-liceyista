@@ -13,7 +13,10 @@ class PreferenceThemeMapper @Inject constructor(private val context: Context)  {
         return when(theme) {
             resources.getStringArray(R.array.theme_key)[0] -> AppCompatDelegate.MODE_NIGHT_NO
             resources.getStringArray(R.array.theme_key)[1] -> AppCompatDelegate.MODE_NIGHT_YES
-            else -> if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM else AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
+            else -> getDefaultTheme()
         }
     }
+
+    fun getDefaultTheme()
+            = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM else AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
 }

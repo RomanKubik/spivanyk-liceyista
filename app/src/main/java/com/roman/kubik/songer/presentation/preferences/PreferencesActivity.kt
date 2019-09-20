@@ -3,6 +3,7 @@ package com.roman.kubik.songer.presentation.preferences
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
@@ -59,6 +60,13 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> this.onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showResetError() {

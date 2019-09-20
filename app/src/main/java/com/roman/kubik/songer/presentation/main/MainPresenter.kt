@@ -30,6 +30,7 @@ constructor(private val view: MainContract.View,
                                 .preferences
                                 .map { it.selectedTheme }
                                 .map(preferenceThemeMapper::mapThemePreference)
+                                .onErrorReturnItem(preferenceThemeMapper.getDefaultTheme())
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(AppCompatDelegate::setDefaultNightMode, view::showError)
@@ -82,7 +83,7 @@ constructor(private val view: MainContract.View,
     override fun tutorialShown(type: TutorialType) {
         when (type) {
             TutorialType.TYPE_ADD_SONG -> {
-                compositeDisposable.addAll(
+                compositeDisposable.add(
                         preferencesInteractor.setAddSongTutorialShown()
                                 .andThen(preferencesInteractor.preferences)
                                 .map { it.tutorialPreferences.isShakeShown }
@@ -96,7 +97,11 @@ constructor(private val view: MainContract.View,
                                 }, view::showError)
                 )
             }
-            TutorialType.TYPE_SHAKE -> compositeDisposable.add(preferencesInteractor.setShakeTutorialShown().subscribe())
+            TutorialType.TYPE_SHAKE -> compositeDisposable.add(
+                    preferencesInteractor.setShakeTutorialShown()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe())
             else -> {
             }
         }

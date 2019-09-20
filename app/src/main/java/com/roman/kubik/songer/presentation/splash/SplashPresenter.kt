@@ -3,7 +3,6 @@ package com.roman.kubik.songer.presentation.splash
 import com.roman.kubik.songer.data.database.DatabaseManager
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
-import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -17,7 +16,7 @@ class SplashPresenter @Inject constructor(private val databaseManager: DatabaseM
 
     override fun onCreate() {
         cd.add(
-                Completable.fromCallable { databaseManager.createDatabase() }
+                databaseManager.createDatabase()
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({

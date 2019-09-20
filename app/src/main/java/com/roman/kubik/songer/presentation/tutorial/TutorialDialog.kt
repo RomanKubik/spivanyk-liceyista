@@ -19,7 +19,7 @@ class TutorialDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_FRAME, android.R.style.Theme_Holo_Light)
+        setStyle(STYLE_NO_FRAME, R.style.Theme_AppCompat)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
