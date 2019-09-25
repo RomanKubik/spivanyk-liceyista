@@ -3,19 +3,48 @@
     <string name="ttl_last_played">Останні проспівані</string>
     <string name="dsc_last_played">100 останніх проспіваних пісень</string>
     <string name="ttl_bonfire_songs">При ватрі</string>
-    <string formatted="false" name="dsc_bonfire_songs">%d приватрених пісень</string>
+    <plurals name="dsc_bonfire_songs">
+        <item quantity="one">%d приватрена пісня</item>
+        <item quantity="few">%d приватрені пісні</item>
+        <item quantity="many">%d приватрених пісень</item>
+        <item quantity="other">%d приватрених пісень</item>
+    </plurals>
     <string name="ttl_abroad_songs">Цікаве закордонне</string>
-    <string formatted="false" name="dsc_abroad_songs">%d закордонних пісень</string>
-    <string name="ttl_surprise_me">Здивуй мене</string>
-    <string formatted="false" name="dsc_surprise_me">Пісня зі співанику вибрана навмання</string>
+    <plurals name="dsc_abroad_songs">
+        <item quantity="one">%d закордонна пісня</item>
+        <item quantity="few">%d закордонні пісні</item>
+        <item quantity="many">%d закордонних пісень</item>
+        <item quantity="other">%d закордонних пісень</item>
+    </plurals>    <string name="ttl_surprise_me">Здивуй мене</string>
+    <string formatted="false" name="dsc_surprise_me">Пісня зі співаника вибрана навмання</string>
     <string name="ttl_all_songs">Усі пісні</string>
-    <string formatted="false" name="dsc_all_songs">Усі-усі %d пісень</string>
+    <plurals name="dsc_all_songs">
+        <item quantity="one">У тебе аж %d пісня</item>
+        <item quantity="few">Усі-усі %d пісні</item>
+        <item quantity="many">Усі-усі %d пісень</item>
+        <item quantity="other">Усі-усі %d пісень</item>
+    </plurals>
     <string name="ttl_patriotic">Патріотичні пісні</string>
-    <string formatted="false" name="dsc_patriotic">%d пісень патріотичного ліцеїста</string>
+    <plurals name="dsc_patriotic">
+        <item quantity="one">%d пісня патріотичного ліцеїста</item>
+        <item quantity="few">%d пісні патріотичного ліцеїста</item>
+        <item quantity="many">%d пісень патріотичного ліцеїста</item>
+        <item quantity="other">%d пісень патріотичного ліцеїста</item>
+    </plurals>
     <string name="ttl_favourite">Мої улюблені</string>
-    <string formatted="false" name="dsc_favourite">%d моїх улюблених пісень</string>
+    <plurals name="dsc_favourite">
+        <item quantity="one">%d моя улюблена пісня</item>
+        <item quantity="few">%d мої улюблені пісні</item>
+        <item quantity="many">%d моїх улюблених пісень</item>
+        <item quantity="other">%d моїх улюблених пісень</item>
+    </plurals>
     <string name="ttl_my_songs">Мої пісні</string>
-    <string formatted="false" name="dsc_my_songs">%d моїх пісень</string>
+    <plurals name="dsc_my_songs">
+        <item quantity="one">%d моя пісня</item>
+        <item quantity="few">%d мої пісні</item>
+        <item quantity="many">%d моїх пісень</item>
+        <item quantity="other">%d моїх пісень</item>
+    </plurals>
     <string name="share">Поділитися</string>
     <string name="bookmark">Вподобайка</string>
     <string name="chords">Акорди</string>

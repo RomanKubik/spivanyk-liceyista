@@ -14,6 +14,7 @@ import com.roman.kubik.songer.presentation.BaseActivity
 import com.roman.kubik.songer.presentation.main.di.MainModule
 import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
 import com.roman.kubik.songer.presentation.tutorial.TutorialType
+import com.roman.kubik.songer.utils.getPluralString
 import com.roman.kubik.songer.utils.hasOpenDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -56,27 +57,27 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
     }
 
     override fun setMySongsCount(count: Int) {
-        mySongsCategory.setDescription(getString(R.string.dsc_my_songs, count))
+        mySongsCategory.setDescription(getPluralString(R.plurals.dsc_my_songs, count))
     }
 
     override fun setPatrioticsCount(count: Int) {
-        patrioticCategory.setDescription(String.format(getString(R.string.dsc_patriotic), count))
+        patrioticCategory.setDescription(getPluralString(R.plurals.dsc_patriotic, count))
     }
 
     override fun setBonfiresCount(count: Int) {
-        bonfireCategory.setDescription(String.format(getString(R.string.dsc_bonfire_songs), count))
+        bonfireCategory.setDescription(getPluralString(R.plurals.dsc_bonfire_songs, count))
     }
 
     override fun setAbroadsCount(count: Int) {
-        abroadCategory.setDescription(String.format(getString(R.string.dsc_abroad_songs), count))
+        abroadCategory.setDescription(getPluralString(R.plurals.dsc_abroad_songs, count))
     }
 
     override fun setAllCount(count: Int) {
-        allCategory.setDescription(String.format(getString(R.string.dsc_all_songs), count))
+        allCategory.setDescription(getPluralString(R.plurals.dsc_all_songs, count))
     }
 
     override fun setFavouriteCount(count: Int) {
-        favouriteCategory.setDescription(String.format(getString(R.string.dsc_favourite), count))
+        favouriteCategory.setDescription(getPluralString(R.plurals.dsc_favourite, count))
     }
 
     override fun showTutorial(tutorialType: TutorialType) {

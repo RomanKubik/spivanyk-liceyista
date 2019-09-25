@@ -3,19 +3,38 @@
     <string name="ttl_last_played">Last played</string>
     <string name="dsc_last_played">Last 100 played songs</string>
     <string name="ttl_bonfire_songs">Bonfire songs</string>
-    <string formatted="false" name="dsc_bonfire_songs">%d bonfire songs</string>
+    <plurals name="dsc_bonfire_songs">
+        <item quantity="one">%d bonfire song</item>
+        <item quantity="other">%d bonfire songs</item>
+    </plurals>
     <string name="ttl_abroad_songs">Abroad songs</string>
-    <string formatted="false" name="dsc_abroad_songs">%d abroad songs</string>
+    <plurals name="dsc_abroad_songs">
+        <item quantity="one">%d abroad song</item>
+        <item quantity="other">%d abroad songs</item>
+    </plurals>
     <string name="ttl_surprise_me">Surprise me</string>
     <string formatted="false" name="dsc_surprise_me">Song randomly selected from singer</string>
     <string name="ttl_all_songs">All songs</string>
-    <string formatted="false" name="dsc_all_songs">All %d songs</string>
+    <plurals name="dsc_all_songs">
+        <item quantity="one">All %d song</item>
+        <item quantity="other">All %d songs</item>
+    </plurals>
     <string name="ttl_patriotic">Patriotic songs</string>
-    <string formatted="false" name="dsc_patriotic">%d patriotic songs</string>
+    <plurals name="dsc_patriotic">
+        <item quantity="one">%d patriotic song</item>
+        <item quantity="other">%d patriotic songs</item>
+    </plurals>
     <string name="ttl_favourite">Favourite songs</string>
-    <string formatted="false" name="dsc_favourite">%d favourite songs</string>
+    <plurals name="dsc_favourite">
+        <item quantity="one">%d favourite song</item>
+        <item quantity="other">%d favourite songs</item>
+    </plurals>
     <string name="ttl_my_songs">My songs</string>
-    <string formatted="false" name="dsc_my_songs">%d my songs</string>
+    <plurals name="dsc_my_songs">
+        <item quantity="zero">You will find your added songs here</item>
+        <item quantity="one">%d my song</item>
+        <item quantity="other">%d my songs</item>
+    </plurals>
     <string name="share">Share</string>
     <string name="bookmark">Bookmark</string>
     <string name="chords">Chords</string>
