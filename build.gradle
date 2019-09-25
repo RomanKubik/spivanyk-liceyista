@@ -40,8 +40,8 @@ allprojects {
 ext {
     minSdk = 16
     targetSdk = 28
-    appCode = 8
-    appName = "1.4.0"
+    appCode = 9
+    appName = "1.5.0"
     roomVersion = '2.0.0'
     butterKnife = '10.0.0'
     firebase = '16.0.9'
