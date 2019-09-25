@@ -1,11 +1,8 @@
 package com.roman.kubik.songer.data.history;
 
-import com.annimon.stream.Collectors;
-import com.annimon.stream.Stream;
 import com.roman.kubik.songer.data.song.SongModelMapper;
 import com.roman.kubik.songer.domain.history.HistoryRepository;
 import com.roman.kubik.songer.domain.song.Song;
-import com.roman.kubik.songer.domain.song.SongInteractor;
 
 import java.util.List;
 
@@ -28,17 +25,19 @@ public class HistoryRepositoryImpl implements HistoryRepository {
     @Override
     public Single<List<Song>> getLastSongs() {
         return historyDao.getHistory()
-                .map(l -> Stream.of(l)
-                        .map(mapper::fromEntity)
-                        .collect(Collectors.toList()));
+                .toObservable()
+                .flatMapIterable(l -> l)
+                .map(mapper::fromEntity)
+                .toList();
     }
 
     @Override
     public Single<List<Song>> search(final String query) {
         return historyDao.search("%" + query + "%")
-                .map(l -> Stream.of(l)
-                        .map(mapper::fromEntity)
-                        .collect(Collectors.toList()));
+                .toObservable()
+                .flatMapIterable(l -> l)
+                .map(mapper::fromEntity)
+                .toList();
     }
 
     @Override
