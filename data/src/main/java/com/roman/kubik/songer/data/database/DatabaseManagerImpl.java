@@ -14,6 +14,7 @@ import io.reactivex.Completable;
 
 import static com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_1_2;
 import static com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_2_3;
+import static com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_3_4;
 
 public class DatabaseManagerImpl implements DatabaseManager {
 
@@ -52,7 +53,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
     public static AppDatabase generateAppDatabase(Context context) {
         return Room.databaseBuilder(context, AppDatabase.class, DB_NAME)
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
                 .build();
     }
 

@@ -4,12 +4,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.roman.kubik.songer.data.song.SongEntity;
-
-import java.util.UUID;
 
 import static androidx.room.ForeignKey.CASCADE;
 
@@ -20,27 +17,20 @@ import static androidx.room.ForeignKey.CASCADE;
 public class HistoryEntity {
 
     @PrimaryKey
-    private int id;
     @ColumnInfo(name = "song_id")
     private int songId;
+    @ColumnInfo(name = "timestamp")
+    private long timestamp;
 
     @Ignore
     public HistoryEntity(int songId) {
-        this.id = UUID.randomUUID().hashCode();
         this.songId = songId;
+        this.timestamp = System.currentTimeMillis();
     }
 
-    public HistoryEntity(int id, int songId) {
-        this.id = id;
+    public HistoryEntity(int songId, long timestamp) {
         this.songId = songId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.timestamp = timestamp;
     }
 
     public int getSongId() {
@@ -49,5 +39,13 @@ public class HistoryEntity {
 
     public void setSongId(int songId) {
         this.songId = songId;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
