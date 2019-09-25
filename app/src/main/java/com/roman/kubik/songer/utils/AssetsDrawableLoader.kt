@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
-import java.io.IOException
+import com.roman.kubik.songer.R
 import javax.inject.Inject
 
-class AssetsDrawableLoader @Inject constructor(val context: Context) {
+class AssetsDrawableLoader constructor(val context: Context) {
 
 
     fun loadDrawable(path: String?): Drawable? {

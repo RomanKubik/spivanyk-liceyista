@@ -31,13 +31,13 @@ class PreferencesPresenter @Inject constructor(private val view: PreferencesCont
 
     private var user: User? = null
 
-    init {
-        cd.add(userInteractor.user
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { user = it }
-                .subscribe(view::showUser))
-    }
+//    init {
+//        cd.add(userInteractor.user
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .doOnNext { user = it }
+//                .subscribe(view::showUser))
+//    }
 
     override fun destroy(preferences: Preferences) {
         cd.add(preferencesInteractor
