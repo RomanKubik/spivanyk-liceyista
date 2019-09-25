@@ -14,6 +14,8 @@
     <string formatted="false" name="dsc_patriotic">%d пісень патріотичного ліцеїста</string>
     <string name="ttl_favourite">Мої улюблені</string>
     <string formatted="false" name="dsc_favourite">%d моїх улюблених пісень</string>
+    <string name="ttl_my_songs">Мої пісні</string>
+    <string formatted="false" name="dsc_my_songs">%d моїх пісень</string>
     <string name="share">Поділитися</string>
     <string name="bookmark">Вподобайка</string>
     <string name="chords">Акорди</string>

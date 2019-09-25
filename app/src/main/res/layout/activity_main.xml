@@ -36,6 +36,15 @@
             <View style="@style/AppTheme.Separator" />
 
             <com.roman.kubik.songer.presentation.view.MainItemView
+                android:id="@+id/mySongsCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_my_songs"
+                app:title="@string/ttl_my_songs" />
+
+            <View style="@style/AppTheme.Separator" />
+
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/patrioticCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"

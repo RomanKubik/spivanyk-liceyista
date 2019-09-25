@@ -55,6 +55,10 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
         return super.onOptionsItemSelected(item)
     }
 
+    override fun setMySongsCount(count: Int) {
+        mySongsCategory.setDescription(getString(R.string.dsc_my_songs, count))
+    }
+
     override fun setPatrioticsCount(count: Int) {
         patrioticCategory.setDescription(String.format(getString(R.string.dsc_patriotic), count))
     }
@@ -99,6 +103,12 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
     fun onLastClicked() {
         logger.log(CategoryEvent("lastCategory"))
         presenter.selectCategory(Category.LAST_ID)
+    }
+
+    @OnClick(R.id.mySongsCategory)
+    fun onMySongsClicked() {
+        logger.log(CategoryEvent("mySongsCategory"))
+        presenter.selectCategory(Category.USERS_ID)
     }
 
     @OnClick(R.id.patrioticCategory)

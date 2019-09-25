@@ -39,6 +39,10 @@ constructor(private val view: MainContract.View,
 
     override fun requestData() {
         compositeDisposable.addAll(
+                songInteractor.getCountByCategory(Category.USERS_ID)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(view::setMySongsCount, view::showError),
                 songInteractor.getCountByCategory(Category.PATRIOTIC_ID)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
