@@ -10,6 +10,8 @@ import com.roman.kubik.songer.presentation.preferences.di.PreferencesComponent
 import com.roman.kubik.songer.presentation.preferences.di.PreferencesModule
 import com.roman.kubik.songer.presentation.song.di.SongComponent
 import com.roman.kubik.songer.presentation.song.di.SongModule
+import com.roman.kubik.songer.presentation.splash.di.SplashComponent
+import com.roman.kubik.songer.presentation.splash.di.SplashModule
 import dagger.Subcomponent
 
 @Subcomponent(modules = [ActivityModule::class])
@@ -19,4 +21,5 @@ interface ActivityComponent {
     fun songComponent(songModule: SongModule): SongComponent
     fun preferencesComponent(preferencesModule: PreferencesModule): PreferencesComponent
     fun editSongComponent(editSongModule: EditSongModule): EditSongComponent
+    fun splashComponent(splashModule: SplashModule): SplashComponent
 }

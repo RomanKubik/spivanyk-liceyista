@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.presentation.list
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.annimon.stream.function.Consumer
 import com.google.android.material.snackbar.Snackbar
@@ -145,6 +147,7 @@ class ListActivity : BaseActivity(), ListContract.View, SongsAdapter.OnItemClick
 
     private fun addDividers() {
         val dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
+        dividerItemDecoration.setDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.colorOnPrimary)))
         songList.addItemDecoration(dividerItemDecoration)
     }
 

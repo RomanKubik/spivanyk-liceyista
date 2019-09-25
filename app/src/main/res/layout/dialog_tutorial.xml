@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@color/transparent_black">
+    tools:background="@color/tutorial_background">
 
     <ImageView
         android:id="@+id/actionImage"
@@ -34,7 +34,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:gravity="center"
-        android:textColor="@android:color/white"
+        android:textColor="@color/tutorial_on_background"
         android:textSize="@dimen/text_size_16"
         app:layout_constraintBottom_toTopOf="@+id/gotItButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +55,7 @@
         android:background="@drawable/btn_bg_tutorial"
         android:text="@string/got_it"
         android:textAllCaps="true"
-        android:textColor="@android:color/white"
+        android:textColor="@color/tutorial_on_background"
         android:textSize="@dimen/text_size_16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

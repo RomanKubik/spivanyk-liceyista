@@ -6,6 +6,7 @@ import com.roman.kubik.songer.presentation.tutorial.TutorialType
 interface MainContract {
 
     interface View {
+        fun setMySongsCount(count: Int)
         fun setPatrioticsCount(count: Int)
         fun setBonfiresCount(count: Int)
         fun setAbroadsCount(count: Int)
@@ -16,6 +17,7 @@ interface MainContract {
     }
 
     interface Presenter {
+        fun onCreated()
         fun requestData()
         fun requestRandom()
         fun selectCategory(@Category.CategoryId categoryId: Int)

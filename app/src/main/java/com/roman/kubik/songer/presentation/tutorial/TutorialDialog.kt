@@ -3,10 +3,10 @@ package com.roman.kubik.songer.presentation.tutorial
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
-import androidx.core.content.res.ResourcesCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import butterknife.ButterKnife
 import butterknife.OnClick
 import com.roman.kubik.songer.R
@@ -19,12 +19,12 @@ class TutorialDialog : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_FRAME, android.R.style.Theme_Holo_Light)
+        setStyle(STYLE_NO_FRAME, R.style.Theme_AppCompat)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog.window?.setBackgroundDrawable(
-                ColorDrawable(ResourcesCompat.getColor(resources, R.color.transparent_black, null)))
+        dialog?.window?.setBackgroundDrawable(
+                ColorDrawable(ContextCompat.getColor(context!!, R.color.tutorial_background)))
         return inflater.inflate(R.layout.dialog_tutorial, container, false)
     }
 

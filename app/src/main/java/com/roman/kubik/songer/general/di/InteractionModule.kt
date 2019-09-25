@@ -1,10 +1,8 @@
 package com.roman.kubik.songer.general.di
 
-import android.content.Context
-import android.preference.PreferenceManager
 import com.roman.kubik.songer.data.chord.ChordRepositoryFactoryImpl
 import com.roman.kubik.songer.data.logger.FirebaseLogger
-import com.roman.kubik.songer.data.preferences.PreferencesImpl
+import com.roman.kubik.songer.data.preferences.PreferencesServiceImpl
 import com.roman.kubik.songer.domain.category.CategoryInteractor
 import com.roman.kubik.songer.domain.category.CategoryRepository
 import com.roman.kubik.songer.domain.chord.ChordInteractor
@@ -47,12 +45,6 @@ class InteractionModule {
     @Singleton
     internal fun getFavouriteInteractor(favouriteRepository: FavouriteRepository): FavouriteInteractor {
         return FavouriteInteractor(favouriteRepository)
-    }
-
-    @Provides
-    @Singleton
-    internal fun getPreferencesInteractor(context: Context): PreferencesInteractor {
-        return PreferencesInteractor(PreferencesImpl(PreferenceManager.getDefaultSharedPreferences(context.applicationContext)))
     }
 
     @Provides

@@ -3,18 +3,26 @@
 
     <SwitchPreference
         android:defaultValue="true"
-        android:key="show_chords"
+        android:key="@string/id_chord_visible"
         android:summary="@string/settings_display_chords_msg"
         android:title="@string/settings_show_chords_ttl" />
     <ListPreference
         android:defaultValue="guitar"
         android:entries="@array/instrument_name"
         android:entryValues="@array/instrument_key"
-        android:key="selected_instrument"
+        android:key="@string/id_selected_instrument"
         android:summary="%s"
         android:title="@string/settings_preferred_instrument_ttl" />
+    <ListPreference
+        android:defaultValue="set_by_battery"
+        android:entries="@array/theme_name"
+        android:entryValues="@array/theme_key"
+        android:key="@string/id_selected_theme"
+        android:summary="%s"
+        android:title="@string/settings_preferred_theme_ttl" />
     <Preference
-        android:title="@string/ttl_factory_reset"
+        android:key="@string/id_factory_reset"
         android:summary="@string/msg_factory_reset_short"
-        android:key="factory_reset"/>
+        android:title="@string/ttl_factory_reset" />
+
 </PreferenceScreen>

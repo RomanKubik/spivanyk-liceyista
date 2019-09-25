@@ -57,4 +57,8 @@ public class NavigationInteractor {
     public void restart() {
         navigationService.restart();
     }
+
+    public void toSignIn(int requestCode) {
+        navigationService.toSignIn(requestCode);
+    }
 }

@@ -45,4 +45,23 @@ public final class DatabaseMigrations {
         }
     };
 
+    public static final Migration MIGRATION_3_4 = new Migration(3, 4) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            // Fix history table
+            database.execSQL("ALTER TABLE `history` RENAME TO `_history_old`;");
+            database.execSQL("CREATE TABLE `history`\n" +
+                    "(\n" +
+                    "`song_id` INTEGER NOT NULL PRIMARY KEY,\n" +
+                    "`timestamp` INTEGER NOT NULL DEFAULT 0,\n" +
+                    "CONSTRAINT `fk_song`\n" +
+                    "FOREIGN KEY (`song_id`)\n" +
+                    "REFERENCES song(`id`)\n" +
+                    "ON DELETE CASCADE" +
+                    ");");
+            database.execSQL("INSERT INTO `history` SELECT DISTINCT `song_id`, 0 FROM `_history_old`;");
+            database.execSQL("DROP TABLE `_history_old`;");
+        }
+    };
+
 }

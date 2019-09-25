@@ -3,17 +3,38 @@
     <string name="ttl_last_played">Last played</string>
     <string name="dsc_last_played">Last 100 played songs</string>
     <string name="ttl_bonfire_songs">Bonfire songs</string>
-    <string formatted="false" name="dsc_bonfire_songs">%d bonfire songs</string>
+    <plurals name="dsc_bonfire_songs">
+        <item quantity="one">%d bonfire song</item>
+        <item quantity="other">%d bonfire songs</item>
+    </plurals>
     <string name="ttl_abroad_songs">Abroad songs</string>
-    <string formatted="false" name="dsc_abroad_songs">%d abroad songs</string>
+    <plurals name="dsc_abroad_songs">
+        <item quantity="one">%d abroad song</item>
+        <item quantity="other">%d abroad songs</item>
+    </plurals>
     <string name="ttl_surprise_me">Surprise me</string>
     <string formatted="false" name="dsc_surprise_me">Song randomly selected from singer</string>
     <string name="ttl_all_songs">All songs</string>
-    <string formatted="false" name="dsc_all_songs">All %d songs</string>
+    <plurals name="dsc_all_songs">
+        <item quantity="one">All %d song</item>
+        <item quantity="other">All %d songs</item>
+    </plurals>
     <string name="ttl_patriotic">Patriotic songs</string>
-    <string formatted="false" name="dsc_patriotic">%d patriotic songs</string>
+    <plurals name="dsc_patriotic">
+        <item quantity="one">%d patriotic song</item>
+        <item quantity="other">%d patriotic songs</item>
+    </plurals>
     <string name="ttl_favourite">Favourite songs</string>
-    <string formatted="false" name="dsc_favourite">%d favourite songs</string>
+    <plurals name="dsc_favourite">
+        <item quantity="one">%d favourite song</item>
+        <item quantity="other">%d favourite songs</item>
+    </plurals>
+    <string name="ttl_my_songs">My songs</string>
+    <plurals name="dsc_my_songs">
+        <item quantity="zero">You will find your added songs here</item>
+        <item quantity="one">%d my song</item>
+        <item quantity="other">%d my songs</item>
+    </plurals>
     <string name="share">Share</string>
     <string name="bookmark">Bookmark</string>
     <string name="chords">Chords</string>
@@ -37,6 +58,7 @@
     <string name="settings">Settings</string>
     <string name="add_song">Add song</string>
     <string name="settings_preferred_instrument_ttl">Preferred instrument</string>
+    <string name="settings_preferred_theme_ttl">Preferred theme</string>
     <string name="settings_display_chords_msg">Display chords with song</string>
     <string name="got_it">Got it</string>
     <string name="tutorial_add_song">Tap on this icon to add new song to your songer</string>
@@ -57,4 +79,7 @@
     <string name="msg_factory_reset_long">Reset database to factory configurations. All previously added songs will be saved. After reset app will be relaunched.</string>
     <string name="msg_factory_reset_error">Can\'t reset database. Please go to \"Settings\" and clear storage manually. All previously added songs will be deleted.</string>
     <string name="reset">Reset</string>
+    <string name="preferences_sign_in_title">Sign in with Google</string>
+    <string name="preferences_sign_in_description">You can sign in to share your favourite song with community</string>
+    <string name="preferences_you_are_signed_in">You are logged in as:</string>
 </resources>

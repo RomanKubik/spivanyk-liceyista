@@ -23,7 +23,9 @@ class EditSongPresenter @Inject constructor(
 
     override fun fetchSong(songId: Int) {
         compositeDisposable.add(
-                preferencesInteractor.isMarkChordsTutorialShown
+                preferencesInteractor.preferences
+                        .map { it.tutorialPreferences }
+                        .map { it.isMarkChordsShown }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
