@@ -6,6 +6,7 @@ import com.roman.kubik.songer.domain.navigation.NavigationService
 import com.roman.kubik.songer.domain.shaker.ShakeInteractor
 import com.roman.kubik.songer.domain.song.SongRepository
 import com.roman.kubik.songer.navigation.NavigationServiceImpl
+import com.roman.kubik.songer.utils.AssetsDrawableLoader
 import dagger.Module
 import dagger.Provides
 
@@ -28,4 +29,7 @@ class ActivityModule(private val activity: Activity) {
         shakeInteractor.setNavigationInteractor(navigationInteractor)
         return navigationInteractor
     }
+
+    @Provides
+    fun getAssetsDrawableLoader(activity: Activity) = AssetsDrawableLoader(activity)
 }

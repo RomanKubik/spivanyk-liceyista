@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.general.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
@@ -37,7 +38,7 @@ class ApplicationModule(private val applicationContext: Context) {
 
     @Provides
     @Singleton
-    fun getSharedPregferences(context: Context) = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+    fun getSharedPreferences(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
 
     @Provides
     @Singleton
