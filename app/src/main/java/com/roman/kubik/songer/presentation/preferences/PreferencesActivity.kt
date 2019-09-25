@@ -88,10 +88,10 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
 //                .into(profileImage)
     }
 
-    @OnClick(R.id.sectionProfile)
-    fun onProfileClicked() {
-        presenter.signIn()
-    }
+//    @OnClick(R.id.sectionProfile)
+//    fun onProfileClicked() {
+//        presenter.signIn()
+//    }
 
     private fun init() {
         setSupportActionBar(toolbar)
