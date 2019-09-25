@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.TwoStatePreference
 import butterknife.OnClick
@@ -113,9 +114,9 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
 
     private fun generatePreferences(): Preferences {
         val pref = Preferences()
-        pref.isChordsVisible = (preferences.findPreference(getString(R.string.id_chord_visible)) as TwoStatePreference).isChecked
-        pref.selectedInstrument = (preferences.findPreference(getString(R.string.id_selected_instrument)) as ListPreference).value
-        pref.selectedTheme = (preferences.findPreference(getString(R.string.id_selected_theme)) as ListPreference).value
+        pref.isChordsVisible = preferences.findPreference<TwoStatePreference>(getString(R.string.id_chord_visible))!!.isChecked
+        pref.selectedInstrument = preferences.findPreference<ListPreference>(getString(R.string.id_selected_instrument))!!.value
+        pref.selectedTheme = preferences.findPreference<ListPreference>(getString(R.string.id_selected_theme))!!.value
         return pref
     }
 
@@ -126,7 +127,7 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
         }
 
         fun addResetClickListener(function: () -> Unit) {
-            val myPref = findPreference(getString(R.string.id_factory_reset))
+            val myPref: Preference? = findPreference(getString(R.string.id_factory_reset))
             myPref?.setOnPreferenceClickListener {
                 function.invoke()
                 true
@@ -134,8 +135,8 @@ class PreferencesActivity : BaseActivity(), PreferencesContract.View {
         }
 
         fun addThemeChangeListener(function: (nightMode: String) -> Unit) {
-            findPreference(getString(R.string.id_selected_theme))
-                    .setOnPreferenceChangeListener { _, newValue ->
+            findPreference<ListPreference>(getString(R.string.id_selected_theme))
+                    ?.setOnPreferenceChangeListener { _, newValue ->
                         function.invoke(newValue as @kotlin.ParameterName(name = "nightMode") String)
                         true
                     }

@@ -1,10 +1,9 @@
 package com.roman.kubik.songer.utils
 
 import android.content.Context
-import android.content.res.Configuration
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
-import java.io.IOException
+import com.roman.kubik.songer.R
 import javax.inject.Inject
 
 class AssetsDrawableLoader @Inject constructor(val context: Context) {
@@ -27,11 +26,7 @@ class AssetsDrawableLoader @Inject constructor(val context: Context) {
     }
 
     private fun isDarkMode(): Boolean {
-        return when (context.resources.configuration.uiMode and
-                Configuration.UI_MODE_NIGHT_MASK) {
-            Configuration.UI_MODE_NIGHT_YES -> true
-            else -> false
-        }
+        return !context.resources.getBoolean(R.bool.use_light_status)
     }
 
     companion object {
