@@ -1,20 +1,18 @@
 package com.roman.kubik.songer.presentation.main.di
 
-import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
-import com.roman.kubik.songer.presentation.main.MainActivity
+import com.roman.kubik.songer.presentation.main.MainFragment
 import com.roman.kubik.songer.presentation.main.MainContract
 import com.roman.kubik.songer.presentation.main.MainPresenter
 import dagger.Module
 import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
 
 @Module
-class MainModule(private val activity: MainActivity) {
+class MainModule(private val fragment: MainFragment) {
 
     @Provides
     @ActivityScope
-    fun getView(): MainContract.View = activity
+    fun getView(): MainContract.View = fragment
 
     @Provides
     @ActivityScope

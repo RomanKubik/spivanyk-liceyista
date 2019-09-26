@@ -5,6 +5,8 @@ import com.roman.kubik.songer.domain.song.SongRepository;
 
 import java.util.Random;
 
+import javax.inject.Inject;
+
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -14,6 +16,7 @@ public class NavigationInteractor {
     private final NavigationService navigationService;
     private final SongRepository songRepository;
 
+    @Inject
     public NavigationInteractor(NavigationService navigationService, SongRepository songRepository) {
         this.navigationService = navigationService;
         this.songRepository = songRepository;

@@ -16,4 +16,5 @@ import dagger.Component
 interface ApplicationComponent {
     fun getApplicationContext(): Context
     fun getActivityComponent(module: ActivityModule): ActivityComponent
+    fun getFragmentComponent(module: FragmentModule): FragmentComponent
 }

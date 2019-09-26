@@ -2,6 +2,8 @@ package com.roman.kubik.songer.general.di
 
 import com.roman.kubik.songer.presentation.edit.di.EditSongComponent
 import com.roman.kubik.songer.presentation.edit.di.EditSongModule
+import com.roman.kubik.songer.presentation.holder.di.HolderComponent
+import com.roman.kubik.songer.presentation.holder.di.HolderModule
 import com.roman.kubik.songer.presentation.list.di.ListComponent
 import com.roman.kubik.songer.presentation.list.di.ListModule
 import com.roman.kubik.songer.presentation.main.di.MainComponent
@@ -16,7 +18,7 @@ import dagger.Subcomponent
 
 @Subcomponent(modules = [ActivityModule::class])
 interface ActivityComponent {
-    fun mainComponent(mainModule: MainModule): MainComponent
+    fun holderComponent(holderModule: HolderModule): HolderComponent
     fun listComponent(listModule: ListModule): ListComponent
     fun songComponent(songModule: SongModule): SongComponent
     fun preferencesComponent(preferencesModule: PreferencesModule): PreferencesComponent

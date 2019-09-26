@@ -1,55 +1,56 @@
 package com.roman.kubik.songer.presentation.main
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import android.view.*
 import android.widget.Toast
 import butterknife.OnClick
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
 import com.roman.kubik.songer.domain.logger.event.CategoryEvent
-import com.roman.kubik.songer.general.di.ActivityComponent
-import com.roman.kubik.songer.presentation.base.BaseActivity
+import com.roman.kubik.songer.general.di.FragmentComponent
+import com.roman.kubik.songer.presentation.base.BaseFragment
 import com.roman.kubik.songer.presentation.main.di.MainModule
 import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
 import com.roman.kubik.songer.presentation.tutorial.TutorialType
 import com.roman.kubik.songer.utils.getPluralString
 import com.roman.kubik.songer.utils.hasOpenDialog
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissListener {
+class MainFragment : BaseFragment(), MainContract.View, TutorialDialog.DismissListener {
 
     @Inject
     lateinit var presenter: MainContract.Presenter
     @Inject
     lateinit var logger: LoggerInteractor
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presenter.onCreated()
-        setContentView(R.layout.activity_main)
-        init()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        init()
         presenter.requestData()
     }
 
-    override fun injectActivity(activityComponent: ActivityComponent) {
-        activityComponent.mainComponent(MainModule(this)).inject(this)
+    private fun init() {
+        setHasOptionsMenu(true)
+        getBaseActivity().setSupportActionBar(toolbar)
+        getBaseActivity().supportActionBar?.title = getString(R.string.app_name)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
+    override fun injectFragment(fragmentComponent: FragmentComponent) {
+        fragmentComponent.mainComponent(MainModule(this)).inject(this)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.app_bar_add_song -> presenter.addSong()
             R.id.app_bar_settings -> presenter.showSettings()
         }
@@ -81,24 +82,19 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
     }
 
     override fun showTutorial(tutorialType: TutorialType) {
-        if (!hasOpenDialog()) {
+        if (!hasOpenDialog() && fragmentManager != null) {
             val dialog = TutorialDialog.getInstance(tutorialType)
             dialog.dismissListener = this
-            dialog.show(supportFragmentManager, TUTORIAL_DLG_TAG)
+            dialog.show(fragmentManager!!, TUTORIAL_DLG_TAG)
         }
     }
 
     override fun showError(error: Throwable) {
         error.printStackTrace()
-        Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDismissed(tutorialType: TutorialType) = presenter.tutorialShown(tutorialType)
-
-    private fun init() {
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = getString(R.string.app_name)
-    }
 
     @OnClick(R.id.lastCategory)
     fun onLastClicked() {

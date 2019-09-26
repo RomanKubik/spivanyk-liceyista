@@ -30,10 +30,6 @@
         </activity>
 
         <activity
-            android:name=".presentation.main.MainActivity"
-            android:theme="@style/AppTheme" />
-
-        <activity
             android:name=".presentation.list.ListActivity"
             android:theme="@style/AppTheme" />
 
@@ -47,6 +43,8 @@
             android:name=".presentation.edit.EditSongActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".presentation.holder.HolderActivity"
+            android:theme="@style/AppTheme" />
 
     </application>
 
