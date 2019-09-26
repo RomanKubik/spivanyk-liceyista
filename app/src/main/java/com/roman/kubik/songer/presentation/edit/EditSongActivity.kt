@@ -11,7 +11,7 @@ import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.general.di.ActivityComponent
-import com.roman.kubik.songer.presentation.BaseActivity
+import com.roman.kubik.songer.presentation.base.BaseActivity
 import com.roman.kubik.songer.presentation.edit.di.EditSongModule
 import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
 import com.roman.kubik.songer.presentation.tutorial.TutorialType

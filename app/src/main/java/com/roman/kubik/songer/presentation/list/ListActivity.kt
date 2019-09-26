@@ -12,16 +12,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.annimon.stream.function.Consumer
 import com.google.android.material.snackbar.Snackbar
 import com.roman.kubik.songer.Constants
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.general.di.ActivityComponent
-import com.roman.kubik.songer.presentation.BaseActivity
+import com.roman.kubik.songer.presentation.base.BaseActivity
 import com.roman.kubik.songer.presentation.list.di.ListModule
-import com.roman.kubik.songer.presentation.main.MainActivity
 import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
 import com.roman.kubik.songer.presentation.tutorial.TutorialType
 import com.roman.kubik.songer.utils.CategoryTitleMapper

@@ -9,12 +9,11 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.TwoStatePreference
-import butterknife.OnClick
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.preferences.Preferences
 import com.roman.kubik.songer.domain.user.User
 import com.roman.kubik.songer.general.di.ActivityComponent
-import com.roman.kubik.songer.presentation.BaseActivity
+import com.roman.kubik.songer.presentation.base.BaseActivity
 import com.roman.kubik.songer.presentation.preferences.di.PreferencesModule
 import kotlinx.android.synthetic.main.activity_preferences.*
 import javax.inject.Inject

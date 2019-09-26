@@ -19,7 +19,7 @@ import com.roman.kubik.songer.R
 import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.chord.Chord
 import com.roman.kubik.songer.general.di.ActivityComponent
-import com.roman.kubik.songer.presentation.BaseActivity
+import com.roman.kubik.songer.presentation.base.BaseActivity
 import com.roman.kubik.songer.presentation.song.di.SongModule
 import com.roman.kubik.songer.presentation.view.ChordDialog
 import com.roman.kubik.songer.utils.AssetsDrawableLoader

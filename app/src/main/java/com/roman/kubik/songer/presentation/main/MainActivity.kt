@@ -10,7 +10,7 @@ import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.logger.LoggerInteractor
 import com.roman.kubik.songer.domain.logger.event.CategoryEvent
 import com.roman.kubik.songer.general.di.ActivityComponent
-import com.roman.kubik.songer.presentation.BaseActivity
+import com.roman.kubik.songer.presentation.base.BaseActivity
 import com.roman.kubik.songer.presentation.main.di.MainModule
 import com.roman.kubik.songer.presentation.tutorial.TutorialDialog
 import com.roman.kubik.songer.presentation.tutorial.TutorialType

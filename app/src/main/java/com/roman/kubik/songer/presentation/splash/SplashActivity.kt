@@ -2,7 +2,7 @@ package com.roman.kubik.songer.presentation.splash
 
 import android.os.Bundle
 import com.roman.kubik.songer.general.di.ActivityComponent
-import com.roman.kubik.songer.presentation.BaseActivity
+import com.roman.kubik.songer.presentation.base.BaseActivity
 import com.roman.kubik.songer.presentation.splash.di.SplashModule
 import javax.inject.Inject
 

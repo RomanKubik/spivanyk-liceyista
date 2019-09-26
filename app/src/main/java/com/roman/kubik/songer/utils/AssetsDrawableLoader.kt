@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
-import com.roman.kubik.songer.R
-import javax.inject.Inject
 
 class AssetsDrawableLoader constructor(val context: Context) {
 
