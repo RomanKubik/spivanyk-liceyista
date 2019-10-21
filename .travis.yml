@@ -7,6 +7,6 @@ android:
     - build-tools-29.0.2
     - android-29
 before_install:
-  - yes | sdkmanager "platforms;android-29"
+  - yes | sdkmanager "platforms;android-29;android-27"
 script:
    - ./gradlew assembleRelease
