@@ -9,4 +9,8 @@ public interface PreferencesService {
     Single<Preferences> getPreferences();
 
     Completable updatePreferences(Preferences preferences);
+
+    Single<Long> getLastUpdatedWebSongs();
+
+    Completable setLastUpdatedWebSongs(long timestamp);
 }

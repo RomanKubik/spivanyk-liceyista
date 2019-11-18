@@ -42,4 +42,17 @@ public class PreferencesServiceImpl implements PreferencesService {
                         .putString(Keys.PREFERENCES, gson.toJson(preferencesMapper.toEntity(preferences)))
                         ::commit);
     }
+
+    @Override
+    public Single<Long> getLastUpdatedWebSongs() {
+        return Single.fromCallable(() -> sharedPreferences.getLong(Keys.LAST_UPDATED_WEB, -1));
+    }
+
+    @Override
+    public Completable setLastUpdatedWebSongs(long timestamp) {
+        return Completable.fromAction(
+                sharedPreferences.edit()
+                .putLong(Keys.LAST_UPDATED_WEB, timestamp)
+                ::commit);
+    }
 }
