@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.song;
+package com.roman.kubik.songer.data.song.local;
 
 import com.roman.kubik.songer.domain.category.Category;
 

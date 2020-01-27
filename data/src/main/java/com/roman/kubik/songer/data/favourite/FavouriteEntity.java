@@ -1,6 +1,6 @@
 package com.roman.kubik.songer.data.favourite;
 
-import com.roman.kubik.songer.data.song.SongEntity;
+import com.roman.kubik.songer.data.song.local.SongEntity;
 
 import java.util.UUID;
 

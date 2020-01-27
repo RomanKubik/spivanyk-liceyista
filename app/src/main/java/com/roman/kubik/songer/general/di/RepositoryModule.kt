@@ -7,13 +7,15 @@ import com.roman.kubik.songer.data.favourite.FavouriteDao
 import com.roman.kubik.songer.data.favourite.FavouriteRepositoryImpl
 import com.roman.kubik.songer.data.history.HistoryDao
 import com.roman.kubik.songer.data.history.HistoryRepositoryImpl
-import com.roman.kubik.songer.data.song.SongDao
-import com.roman.kubik.songer.data.song.SongModelMapper
-import com.roman.kubik.songer.data.song.SongRepositoryImpl
+import com.roman.kubik.songer.data.song.local.SongDao
+import com.roman.kubik.songer.data.song.local.SongModelMapper
+import com.roman.kubik.songer.data.song.local.SongRepositoryImpl
+import com.roman.kubik.songer.data.song.remote.RemoteSongRepositoryImpl
 import com.roman.kubik.songer.data.user.UserRepositoryImpl
 import com.roman.kubik.songer.domain.category.CategoryRepository
 import com.roman.kubik.songer.domain.favourite.FavouriteRepository
 import com.roman.kubik.songer.domain.history.HistoryRepository
+import com.roman.kubik.songer.domain.song.RemoteSongRepository
 import com.roman.kubik.songer.domain.song.SongRepository
 import com.roman.kubik.songer.domain.user.UserRepository
 import dagger.Module
@@ -42,4 +44,8 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun getUserRepository(userRepositoryImpl: UserRepositoryImpl): UserRepository = userRepositoryImpl
+
+    @Provides
+    @Singleton
+    fun getRemoteSongRepository(remoteSongRepository: RemoteSongRepositoryImpl): RemoteSongRepository = remoteSongRepository
 }

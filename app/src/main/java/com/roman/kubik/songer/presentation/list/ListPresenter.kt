@@ -4,6 +4,7 @@ import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.preferences.Preferences
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
+import com.roman.kubik.songer.domain.song.RemoteSongRepository
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
@@ -23,7 +24,8 @@ constructor(private val view: ListContract.View,
             private val navigationInteractor: NavigationInteractor,
             private val songInteractor: SongInteractor,
             private val preferencesInteractor: PreferencesInteractor,
-            private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
+            private val compositeDisposable: CompositeDisposable,
+            private val remoteSongRepository: RemoteSongRepository) : ListContract.Presenter {
 
     private var songs: List<Song> = ArrayList()
     private var categoryId = Category.ALL_ID
@@ -76,6 +78,11 @@ constructor(private val view: ListContract.View,
                         .doFinally { view.showProgress(false) }
                         .subscribe(this::onSongsFetched
                         ) { t -> view.showError(t.message) })
+        compositeDisposable.add(
+                remoteSongRepository.search("wild")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe()
+        )
 
     }
 

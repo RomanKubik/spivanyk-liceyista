@@ -31,16 +31,16 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void refreshUser() {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        User user = new User();
-        if (firebaseUser != null) {
-            user.setEmail(firebaseUser.getEmail());
-            user.setFullName(firebaseUser.getDisplayName());
-            user.setId(firebaseUser.getUid());
-            user.setPicturePath(firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null);
-        }
-        user.setUserPreferences(getUserPreferences());
-        userSubject.onNext(user);
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        User user = new User();
+//        if (firebaseUser != null) {
+//            user.setEmail(firebaseUser.getEmail());
+//            user.setFullName(firebaseUser.getDisplayName());
+//            user.setId(firebaseUser.getUid());
+//            user.setPicturePath(firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : null);
+//        }
+//        user.setUserPreferences(getUserPreferences());
+//        userSubject.onNext(user);
     }
 
     @Override

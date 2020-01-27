@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.song;
+package com.roman.kubik.songer.data.song.local;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

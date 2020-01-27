@@ -2,7 +2,7 @@ package com.roman.kubik.songer.data.database;
 
 import android.content.Context;
 
-import com.roman.kubik.songer.data.song.SongEntity;
+import com.roman.kubik.songer.data.song.local.SongEntity;
 import com.roman.kubik.songer.domain.category.Category;
 
 import java.io.File;

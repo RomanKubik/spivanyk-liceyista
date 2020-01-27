@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.song;
+package com.roman.kubik.songer.data.song.local;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;

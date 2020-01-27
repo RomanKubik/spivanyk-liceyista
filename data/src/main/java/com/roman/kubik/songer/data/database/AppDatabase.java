@@ -9,8 +9,8 @@ import com.roman.kubik.songer.data.favourite.FavouriteDao;
 import com.roman.kubik.songer.data.favourite.FavouriteEntity;
 import com.roman.kubik.songer.data.history.HistoryDao;
 import com.roman.kubik.songer.data.history.HistoryEntity;
-import com.roman.kubik.songer.data.song.SongDao;
-import com.roman.kubik.songer.data.song.SongEntity;
+import com.roman.kubik.songer.data.song.local.SongDao;
+import com.roman.kubik.songer.data.song.local.SongEntity;
 
 /**
  * Room database representation
