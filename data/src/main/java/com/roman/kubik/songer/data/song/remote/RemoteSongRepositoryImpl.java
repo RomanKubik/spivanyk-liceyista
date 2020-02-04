@@ -1,13 +1,14 @@
 package com.roman.kubik.songer.data.song.remote;
 
+import com.roman.kubik.songer.domain.category.Category;
 import com.roman.kubik.songer.domain.song.RemoteSongRepository;
 import com.roman.kubik.songer.domain.song.Song;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
-import java.net.URLEncoder;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,8 +18,10 @@ import io.reactivex.Single;
 
 public class RemoteSongRepositoryImpl implements RemoteSongRepository {
 
-    private static final String BASE_URL = "http://m.pisni.org.ua/?phrase=";
-    private static final String URL_ENCODING = "windows-1251";
+    private static final String BASE_URL = "https://mychords.net";
+    private static final String SEARCH_URL = "/search?q=";
+
+    private static final String SONG_TABLE_ITEM = "a.b-listing__item__link";
 
     @Inject
     public RemoteSongRepositoryImpl() {
@@ -32,11 +35,21 @@ public class RemoteSongRepositoryImpl implements RemoteSongRepository {
     @Override
     public Single<List<Song>> search(String query) {
         return Single.fromCallable(() -> {
-            String encodedQuery = URLEncoder.encode(query, URL_ENCODING);
-            Document document = Jsoup.connect(BASE_URL + encodedQuery).get();
-            document.select("tr");
+            Document document = Jsoup.connect(BASE_URL + SEARCH_URL + query.replaceAll(" ", "+")).get();
+            Elements elements = document.select(SONG_TABLE_ITEM);
 
-            return Collections.emptyList();
+            List<Song> songs = new ArrayList<>();
+
+            for (int i = 0; i < elements.size(); i++) {
+                try {
+                    songs.add(new Song(-1, elements.get(i).text(), null, Category.WEB_ID));
+                } catch (Exception e) {
+                    /* ignore exception */
+                }
+            }
+
+
+            return songs;
         });
     }
 
