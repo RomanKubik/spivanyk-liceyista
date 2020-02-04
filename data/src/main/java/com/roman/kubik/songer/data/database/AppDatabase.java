@@ -16,7 +16,7 @@ import com.roman.kubik.songer.data.song.SongEntity;
  * Room database representation
  * Created by kubik on 1/14/18.
  */
-@Database(entities = {SongEntity.class, CategoryEntity.class, FavouriteEntity.class, HistoryEntity.class}, version = 4, exportSchema = false)
+@Database(entities = {SongEntity.class, CategoryEntity.class, FavouriteEntity.class, HistoryEntity.class}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract SongDao songDao();

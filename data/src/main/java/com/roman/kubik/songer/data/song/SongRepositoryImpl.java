@@ -60,7 +60,7 @@ public class SongRepositoryImpl implements SongRepository {
     }
 
     @Override
-    public Maybe<Song> getById(int id) {
+    public Maybe<Song> getById(String id) {
         return songDao.getById(id).map(s -> songModelMapper.fromEntity(s));
     }
 

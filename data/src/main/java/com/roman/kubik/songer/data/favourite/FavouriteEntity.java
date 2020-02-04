@@ -4,6 +4,7 @@ import com.roman.kubik.songer.data.song.SongEntity;
 
 import java.util.UUID;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -23,34 +24,36 @@ import static androidx.room.ForeignKey.CASCADE;
 public class FavouriteEntity {
 
     @PrimaryKey
-    private int id;
+    @NonNull
+    private String id;
     @ColumnInfo(name = "song_id")
-    private int songId;
+    @NonNull
+    private String songId;
 
     @Ignore
-    public FavouriteEntity(int songId) {
-        this.id = UUID.randomUUID().hashCode();
+    public FavouriteEntity(String songId) {
+        this.id = UUID.randomUUID().toString();
         this.songId = songId;
     }
 
-    public FavouriteEntity(int id, int songId) {
+    public FavouriteEntity(String id, String songId) {
         this.id = id;
         this.songId = songId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getSongId() {
+    public String getSongId() {
         return songId;
     }
 
-    public void setSongId(int songId) {
+    public void setSongId(String songId) {
         this.songId = songId;
     }
 }

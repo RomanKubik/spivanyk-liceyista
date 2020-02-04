@@ -21,7 +21,7 @@ public interface SongRepository {
 
     Single<List<Song>> search(String query, @Category.CategoryId int categoryId);
 
-    Maybe<Song> getById(int id);
+    Maybe<Song> getById(String id);
 
     Single<Integer> getCount();
 
