@@ -34,7 +34,7 @@ public interface SongDao {
     Single<List<SongEntity>> search(String query, @Category.CategoryId int categoryId);
 
     @Query("SELECT * FROM song WHERE song.id = :id LIMIT 1")
-    Maybe<SongEntity> getById(String id);
+    Single<SongEntity> getById(String id);
 
     @Query("SELECT count(id) FROM song")
     Single<Integer> getCount();

@@ -78,12 +78,6 @@ constructor(private val view: ListContract.View,
                         .doFinally { view.showProgress(false) }
                         .subscribe(this::onSongsFetched
                         ) { t -> view.showError(t.message) })
-        compositeDisposable.add(
-                remoteSongRepository.search("wild")
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread()).subscribe()
-        )
-
     }
 
     override fun filter(query: String) {

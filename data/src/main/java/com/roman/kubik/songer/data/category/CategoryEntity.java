@@ -19,7 +19,7 @@ public class CategoryEntity {
     @NonNull
     private String name;
 
-    public CategoryEntity(int id, String name) {
+    public CategoryEntity(int id, @NonNull String name) {
         this.id = id;
         this.name = name;
     }
@@ -32,11 +32,12 @@ public class CategoryEntity {
         this.id = id;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 }

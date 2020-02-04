@@ -10,5 +10,5 @@ public interface RemoteSongRepository {
 
     Single<List<Song>> search(String query);
 
-    Maybe<Song> getSong(String id);
+    Single<Song> getSong(String id);
 }

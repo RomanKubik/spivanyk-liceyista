@@ -136,6 +136,8 @@ public final class DatabaseMigrations {
             database.execSQL("INSERT INTO `song`" +
                     "SELECT `id`, `title`, `lyrics`, `category_id` FROM `_song_old_old`;");
 
+            database.execSQL("INSERT INTO `category` VALUES (5, 'web')");
+
             database.execSQL("DROP TABLE `_song_old`;");
             database.execSQL("DROP TABLE `_song_old_old`;");
             database.execSQL("DROP TABLE `_history_old`;");

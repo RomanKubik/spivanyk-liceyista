@@ -3,6 +3,7 @@ package com.roman.kubik.songer.domain.song;
 
 import com.roman.kubik.songer.domain.category.Category;
 import com.roman.kubik.songer.domain.favourite.FavouriteRepository;
+import com.roman.kubik.songer.domain.formatting.LyricsFormatter;
 import com.roman.kubik.songer.domain.history.HistoryRepository;
 import com.roman.kubik.songer.domain.utils.TextUtils;
 
@@ -11,7 +12,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
-import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 /**
@@ -24,17 +24,20 @@ public class SongInteractor {
     private final RemoteSongRepository remoteSongRepository;
     private final FavouriteRepository favouriteRepository;
     private final HistoryRepository historyRepository;
+    private final LyricsFormatter chordsRecognizer;
     private Song deletion;
 
     @Inject
     public SongInteractor(final SongRepository localSongRepository,
                           final RemoteSongRepository remoteSongRepository,
                           final FavouriteRepository favouriteRepository,
-                          final HistoryRepository historyRepository) {
+                          final HistoryRepository historyRepository,
+                          final LyricsFormatter chordsRecognizer) {
         this.localSongRepository = localSongRepository;
         this.remoteSongRepository = remoteSongRepository;
         this.favouriteRepository = favouriteRepository;
         this.historyRepository = historyRepository;
+        this.chordsRecognizer = chordsRecognizer;
     }
 
     public Single<List<Song>> getAllByCategory(@Category.CategoryId int categoryId) {
@@ -75,12 +78,12 @@ public class SongInteractor {
         }
     }
 
-    public Maybe<Song> getById(String id) {
-        return localSongRepository.getById(id);
-    }
-
-    public Maybe<Song> getRemoteById(String id) {
-        return remoteSongRepository.getSong(id);
+    public Single<Song> getById(String id) {
+        return localSongRepository.getById(id)
+                .onErrorResumeNext(
+                        remoteSongRepository.getSong(id)
+                                .doOnSuccess(s -> s.setLyrics(chordsRecognizer.format(s.getLyrics()).toString()))
+                );
     }
 
     public Single<Integer> getCount() {
@@ -107,7 +110,7 @@ public class SongInteractor {
     }
 
     public Completable undoDeletion() {
-        if (deletion != null){
+        if (deletion != null) {
             return localSongRepository.insertOrUpdate(deletion).doOnComplete(() -> deletion = null);
         }
         return Completable.complete();

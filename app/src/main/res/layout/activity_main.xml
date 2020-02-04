@@ -96,6 +96,18 @@
                 android:layout_height="@dimen/view_size_72"
                 app:image="@drawable/ic_bookmark_button"
                 app:title="@string/ttl_favourite" />
+
+            <View style="@style/AppTheme.Separator" />
+
+            <com.roman.kubik.songer.presentation.view.MainItemView
+                android:id="@+id/webCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_web"
+                app:title="@string/ttl_web"
+                app:description="@string/dsc_web"/>
+
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

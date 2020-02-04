@@ -6,6 +6,7 @@ import com.roman.kubik.songer.domain.song.Song;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
@@ -42,19 +43,22 @@ public class RemoteSongRepositoryImpl implements RemoteSongRepository {
 
             for (int i = 0; i < elements.size(); i++) {
                 try {
-                    songs.add(new Song(-1, elements.get(i).text(), null, Category.WEB_ID));
+                    songs.add(new Song(elements.get(i).attr("href"), elements.get(i).text(), "", Category.WEB_ID));
                 } catch (Exception e) {
                     /* ignore exception */
                 }
             }
-
-
             return songs;
         });
     }
 
     @Override
-    public Maybe<Song> getSong(String id) {
-        return null;
+    public Single<Song> getSong(String id) {
+        return Single.fromCallable(() -> {
+            Document document = Jsoup.connect(BASE_URL + id).get();
+            String title = document.selectFirst("h1.b-title").text();
+            String lyrics = document.selectFirst("pre.w-words__text").text();
+            return new Song(id, title, lyrics, Category.WEB_ID);
+        });
     }
 }

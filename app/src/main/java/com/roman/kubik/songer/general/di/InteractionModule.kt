@@ -28,12 +28,6 @@ import javax.inject.Singleton
 @Module
 class InteractionModule {
 
-//    @Provides
-//    @Singleton
-//    internal fun getSongInteractor(songRepository: SongRepository, favouriteRepository: FavouriteRepository, historyRepository: HistoryRepository): SongInteractor {
-//        return SongInteractor(songRepository, remoteSongRepository, favouriteRepository, historyRepository)
-//    }
-
     @Provides
     @Singleton
     internal fun getCategoryInteractor(categoryRepository: CategoryRepository): CategoryInteractor {

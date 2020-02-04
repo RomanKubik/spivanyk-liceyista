@@ -35,6 +35,8 @@
         <item quantity="one">%d my song</item>
         <item quantity="other">%d my songs</item>
     </plurals>
+    <string name="ttl_web">Songs in web</string>
+    <string name="dsc_web">Search songs in the Internet</string>
     <string name="share">Share</string>
     <string name="bookmark">Bookmark</string>
     <string name="chords">Chords</string>
