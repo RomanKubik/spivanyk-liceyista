@@ -88,16 +88,6 @@ public final class DatabaseMigrations {
                     "ON DELETE NO ACTION" +
                     ");");
 
-            database.execSQL("CREATE TABLE `history`\n" +
-                    "(\n" +
-                    "`song_id` TEXT NOT NULL PRIMARY KEY,\n" +
-                    "`timestamp` INTEGER NOT NULL DEFAULT 0,\n" +
-                    "CONSTRAINT `fk_song`\n" +
-                    "FOREIGN KEY (`song_id`)\n" +
-                    "REFERENCES song(`id`)\n" +
-                    "ON DELETE CASCADE" +
-                    ");");
-
             database.execSQL("CREATE TABLE `favourite`\n" +
                     "(\n" +
                     "`id` TEXT NOT NULL PRIMARY KEY,\n" +
@@ -108,16 +98,26 @@ public final class DatabaseMigrations {
                     "ON DELETE CASCADE" +
                     ");");
 
+            database.execSQL("CREATE TABLE `history`\n" +
+                    "(\n" +
+                    "`song_id` TEXT NOT NULL PRIMARY KEY,\n" +
+                    "`timestamp` INTEGER NOT NULL DEFAULT 0,\n" +
+                    "CONSTRAINT `fk_song`\n" +
+                    "FOREIGN KEY (`song_id`)\n" +
+                    "REFERENCES song(`id`)\n" +
+                    "ON DELETE CASCADE" +
+                    ");");
+
             database.execSQL("INSERT INTO `song` " +
                     "SELECT lower(hex(randomblob(16))), `id`, `title`, `lyrics`, `category_id` FROM `_song_old`;");
 
             database.execSQL("INSERT INTO `favourite` " +
-                    "SELECT lower(hex(randomblob(16))), `song.id` FROM `song` " +
-                    "INNER JOIN `_favourite_old` ON `_favourite_old.song_id` = `song.id_old`");
+                    "SELECT lower(hex(randomblob(16))), `song`.`id` FROM `song` " +
+                    "INNER JOIN `_favourite_old` ON `_favourite_old`.`song_id` = `song`.`id_old`");
 
             database.execSQL("INSERT INTO `history` " +
-                    "SELECT lower(hex(randomblob(16))), `song.id` FROM `song` " +
-                    "INNER JOIN `_history_old` ON `_history_old.song_id` = `song.id_old`");
+                    "SELECT `song`.`id`, `_history_old`.`timestamp` FROM `_history_old` " +
+                    "INNER JOIN `song` ON `_history_old`.`song_id` = `song`.`id_old`");
 
             database.execSQL("ALTER TABLE `song` RENAME TO `_song_old_old`;");
 
@@ -127,7 +127,6 @@ public final class DatabaseMigrations {
                     "`title` TEXT NOT NULL,\n" +
                     "`lyrics` TEXT NOT NULL,\n" +
                     "`category_id` INTEGER NOT NULL,\n" +
-                    "`id` TEXT NOT NULL,\n" +
                     "CONSTRAINT `fk_category`\n" +
                     "FOREIGN KEY (`category_id`)\n" +
                     "REFERENCES category(`id`)\n" +
@@ -141,6 +140,9 @@ public final class DatabaseMigrations {
             database.execSQL("DROP TABLE `_song_old_old`;");
             database.execSQL("DROP TABLE `_history_old`;");
             database.execSQL("DROP TABLE `_favourite_old`;");
+
+            database.execSQL("CREATE INDEX `song_id_clustered_index` ON song(`id`)");
+            database.execSQL("CREATE INDEX `song_title_nonclustered_index` ON song(`title`)");
         }
     };
 
