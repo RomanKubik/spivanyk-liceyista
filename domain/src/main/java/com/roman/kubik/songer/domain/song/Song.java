@@ -9,23 +9,23 @@ import com.annimon.stream.Objects;
 
 public class Song {
 
-    private int id;
+    private String id;
     private String title;
     private String lyrics;
     private int categoryId;
 
-    public Song(int id, String title, String lyrics, int categoryId) {
+    public Song(String id, String title, String lyrics, int categoryId) {
         this.id = id;
         this.title = title;
         this.lyrics = lyrics;
         this.categoryId = categoryId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -58,7 +58,7 @@ public class Song {
         if (this == o) return true;
         if (!(o instanceof Song)) return false;
         Song song = (Song) o;
-        return id == song.id &&
+        return Objects.equals(id, song.id) &&
                 categoryId == song.categoryId &&
                 Objects.equals(title, song.title) &&
                 Objects.equals(lyrics, song.lyrics);

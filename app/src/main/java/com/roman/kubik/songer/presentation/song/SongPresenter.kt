@@ -43,7 +43,7 @@ constructor(private val view: SongContract.View,
         this.backgroundColor = backgroundColor
     }
 
-    override fun fetchSong(id: Int) {
+    override fun fetchSong(id: String) {
         compositeDisposable.add(
                 songInteractor.getById(id)
                         .subscribeOn(Schedulers.io())

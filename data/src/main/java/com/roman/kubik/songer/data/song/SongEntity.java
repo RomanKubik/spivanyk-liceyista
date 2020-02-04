@@ -21,7 +21,8 @@ import com.roman.kubik.songer.data.category.CategoryEntity;
 public class SongEntity {
 
     @PrimaryKey
-    private int id;
+    @NonNull
+    private String id;
     @ColumnInfo(name = "title")
     @NonNull
     private String title;
@@ -31,18 +32,18 @@ public class SongEntity {
     @ColumnInfo(name = "category_id")
     private int categoryId;
 
-    public SongEntity(int id, String title, String lyrics, int categoryId) {
+    public SongEntity(String id, String title, String lyrics, int categoryId) {
         this.id = id;
         this.title = title;
         this.lyrics = lyrics;
         this.categoryId = categoryId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

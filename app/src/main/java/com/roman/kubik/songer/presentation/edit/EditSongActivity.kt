@@ -93,7 +93,7 @@ class EditSongActivity : BaseActivity(), EditSongContract.View, TutorialDialog.D
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, -1))
+        presenter.fetchSong(intent.getStringExtra(Constants.Extras.SONG_ID))
     }
 
     private fun showSaveDialog() {

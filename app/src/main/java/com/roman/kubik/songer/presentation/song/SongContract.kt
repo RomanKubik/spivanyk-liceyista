@@ -26,7 +26,7 @@ interface SongContract {
 
     interface Presenter {
         fun setChordColors(textColor: Int, backgroundColor: Int)
-        fun fetchSong(id: Int)
+        fun fetchSong(id: String)
         fun fetchPreferences()
         fun addToFavourite()
         fun shareSong()

@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.data.history;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -17,27 +18,28 @@ import static androidx.room.ForeignKey.CASCADE;
 public class HistoryEntity {
 
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "song_id")
-    private int songId;
+    private String songId;
     @ColumnInfo(name = "timestamp")
     private long timestamp;
 
     @Ignore
-    public HistoryEntity(int songId) {
+    public HistoryEntity(String songId) {
         this.songId = songId;
         this.timestamp = System.currentTimeMillis();
     }
 
-    public HistoryEntity(int songId, long timestamp) {
+    public HistoryEntity(String songId, long timestamp) {
         this.songId = songId;
         this.timestamp = timestamp;
     }
 
-    public int getSongId() {
+    public String getSongId() {
         return songId;
     }
 
-    public void setSongId(int songId) {
+    public void setSongId(String songId) {
         this.songId = songId;
     }
 

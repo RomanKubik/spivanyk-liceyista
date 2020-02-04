@@ -69,7 +69,7 @@ public class SongInteractor {
         }
     }
 
-    public Maybe<Song> getById(int id) {
+    public Maybe<Song> getById(String id) {
         return songRepository.getById(id);
     }
 

@@ -21,7 +21,7 @@ class EditSongPresenter @Inject constructor(
 
     private var song: Song? = null
 
-    override fun fetchSong(songId: Int) {
+    override fun fetchSong(songId: String?) {
         compositeDisposable.add(
                 preferencesInteractor.preferences
                         .map { it.tutorialPreferences }
@@ -35,7 +35,7 @@ class EditSongPresenter @Inject constructor(
                                 tutorialShown(TutorialType.TYPE_MARK_CHORDS)
                         }, { view.showError(it!!.message!!) })
         )
-        if (songId == -1) return
+        if (songId == null) return
         view.showProgress(true)
         compositeDisposable.add(songInteractor.getById(songId)
                 .subscribeOn(Schedulers.io())
@@ -53,7 +53,7 @@ class EditSongPresenter @Inject constructor(
     override fun saveSong(title: String, lyrics: String) {
         view.showProgress(true)
         if (song == null) {
-            song = Song(UUID.randomUUID().hashCode(), title, lyrics, Category.USERS_ID)
+            song = Song(UUID.randomUUID().toString(), title, lyrics, Category.USERS_ID)
         } else {
             song?.title = title
             song?.lyrics = lyrics

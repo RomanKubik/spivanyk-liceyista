@@ -7,27 +7,27 @@ package com.roman.kubik.songer.domain.favourite;
 
 public class Favourite {
 
-    private int id;
-    private int songId;
+    private String id;
+    private String songId;
 
-    public Favourite(int id, int songId) {
+    public Favourite(String id, String songId) {
         this.id = id;
         this.songId = songId;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getSongId() {
+    public String getSongId() {
         return songId;
     }
 
-    public void setSongId(int songId) {
+    public void setSongId(String songId) {
         this.songId = songId;
     }
 }
