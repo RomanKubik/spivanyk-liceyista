@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.annimon.stream.function.Consumer
 import com.roman.kubik.songer.R
+import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.formatting.LyricsFormattingInteractor
 import com.roman.kubik.songer.domain.song.Song
 import javax.inject.Inject
@@ -20,7 +22,7 @@ import javax.inject.Inject
 
 class SongsAdapter @Inject
 constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
-    : androidx.recyclerview.widget.RecyclerView.Adapter<SongsAdapter.SongHolder>() {
+    : RecyclerView.Adapter<SongsAdapter.BaseSongHolder>() {
 
     private var onClickListener: OnItemClickListener? = null
 
@@ -28,12 +30,15 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
 
     private var showChords = true
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseSongHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return SongHolder(inflater.inflate(R.layout.item_song, parent, false))
+        return when (viewType) {
+            TYPE_WEB -> BaseSongHolder(inflater.inflate(R.layout.item_song_web, parent, false))
+            else -> SongHolder(inflater.inflate(R.layout.item_song, parent, false))
+        }
     }
 
-    override fun onBindViewHolder(holder: SongHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseSongHolder, position: Int) {
         holder.setItem(songList[position])
         if (onClickListener != null) {
             holder.setOnItemClickListener(onClickListener!!)
@@ -42,6 +47,13 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
 
     override fun getItemCount(): Int {
         return songList.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (songList[position].categoryId) {
+            Category.WEB_ID -> TYPE_WEB
+            else -> TYPE_GENERAL
+        }
     }
 
     fun setShowChords(showChords: Boolean) {
@@ -62,16 +74,14 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
         }
     }
 
-    inner class SongHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
+    open inner class BaseSongHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private lateinit var song: Song
-        private var tvTitle: TextView = itemView.findViewById(R.id.title)
-        private var tvLyrics: TextView = itemView.findViewById(R.id.lyrics)
+        protected lateinit var song: Song
+        protected var tvTitle: TextView = itemView.findViewById(R.id.title)
 
-        fun setItem(song: Song) {
+        open fun setItem(song: Song) {
             this.song = song
             tvTitle.text = song.title
-            tvLyrics.text = getLyrics(song.lyrics)
         }
 
         fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
@@ -83,10 +93,20 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
                 true
             }
         }
+    }
+
+    inner class SongHolder(itemView: View) : BaseSongHolder(itemView) {
+
+        private var tvLyrics: TextView = itemView.findViewById(R.id.lyrics)
+
+        override fun setItem(song: Song) {
+            super.setItem(song)
+            tvLyrics.text = getLyrics(song.lyrics)
+        }
 
         private fun getLyrics(lyrics: String): CharSequence {
             return if (showChords)
-                lyricsFormattingInteractor.createChords(lyrics, null, ContextCompat.getColor(tvTitle.context, R.color.colorTextPrimary), Color.TRANSPARENT)
+                lyricsFormattingInteractor.createChords(lyrics, null, ContextCompat.getColor(tvLyrics.context, R.color.colorTextPrimary), Color.TRANSPARENT)
             else
                 lyricsFormattingInteractor.removeChords(lyrics)
         }
@@ -95,5 +115,10 @@ constructor(val lyricsFormattingInteractor: LyricsFormattingInteractor)
     interface OnItemClickListener {
         fun onItemClicked(song: Song)
         fun onItemLongClicked(song: Song)
+    }
+
+    companion object SongType {
+        const val TYPE_GENERAL = 0
+        const val TYPE_WEB = 1
     }
 }

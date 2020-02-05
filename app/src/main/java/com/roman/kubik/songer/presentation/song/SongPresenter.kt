@@ -148,6 +148,7 @@ constructor(private val view: SongContract.View,
 
     private fun addSongToFavourite(song: Song) {
         if (Category.WEB_ID == song.categoryId) {
+            song.categoryId = Category.USERS_ID
             compositeDisposable.add(
                     songInteractor.insertOrUpdate(song)
                             .andThen(favouriteInteractor.addSong(song))

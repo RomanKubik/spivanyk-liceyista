@@ -23,6 +23,9 @@ public class RemoteSongRepositoryImpl implements RemoteSongRepository {
     private static final String SEARCH_URL = "/search?q=";
 
     private static final String SONG_TABLE_ITEM = "a.b-listing__item__link";
+    private static final String SONG_TITLE_ITEM = "h1.b-title";
+    private static final String SONG_LYRICS_ITEM = "pre.w-words__text";
+    private static final String LYRICS_COPYRIGHT = "Взято с сайта https://mychords.net";
 
     @Inject
     public RemoteSongRepositoryImpl() {
@@ -56,8 +59,8 @@ public class RemoteSongRepositoryImpl implements RemoteSongRepository {
     public Single<Song> getSong(String id) {
         return Single.fromCallable(() -> {
             Document document = Jsoup.connect(BASE_URL + id).get();
-            String title = document.selectFirst("h1.b-title").text();
-            String lyrics = document.selectFirst("pre.w-words__text").text();
+            String title = document.selectFirst(SONG_TITLE_ITEM).text();
+            String lyrics = document.selectFirst(SONG_LYRICS_ITEM).text().replaceAll(LYRICS_COPYRIGHT, "");
             return new Song(id, title, lyrics, Category.WEB_ID);
         });
     }

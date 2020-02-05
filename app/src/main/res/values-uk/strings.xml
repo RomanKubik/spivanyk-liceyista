@@ -45,8 +45,8 @@
         <item quantity="many">%d моїх пісень</item>
         <item quantity="other">%d моїх пісень</item>
     </plurals>
-    <string name="ttl_web">Пісні в інтернетах</string>
-    <string name="dsc_web">Пошук пісень у інтернеті</string>
+    <string name="ttl_web">Пісні з інтернетів</string>
+    <string name="dsc_web">Пошук пісень в інтернеті</string>
     <string name="share">Поділитися</string>
     <string name="bookmark">Вподобайка</string>
     <string name="chords">Акорди</string>
