@@ -16,6 +16,7 @@ interface ListContract {
         fun onSongsFetched(songList: List<Song>)
         fun onSongRemoved(song: Song)
         fun showDeletionTutorialDialog()
+        fun showInfo(state: InfoState)
     }
 
     interface Presenter {
@@ -27,5 +28,9 @@ interface ListContract {
         fun filter(query: String)
         fun destroy()
         fun onTutorialDialogShowed()
+    }
+
+    enum class InfoState {
+        OK, NOT_FOUND, WEB_PLACEHOLDER
     }
 }

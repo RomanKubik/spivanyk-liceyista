@@ -96,7 +96,6 @@ class ListActivity : BaseActivity(), ListContract.View, SongsAdapter.OnItemClick
     }
 
     override fun showError(errorMessage: String?) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
     }
 
     override fun onPreferencesFetched(showChords: Boolean) {
@@ -134,6 +133,29 @@ class ListActivity : BaseActivity(), ListContract.View, SongsAdapter.OnItemClick
                 }
                 .show()
     }
+
+    override fun showInfo(state: ListContract.InfoState) {
+        when (state) {
+           ListContract.InfoState.OK -> hidePlaceHolder()
+           ListContract.InfoState.NOT_FOUND -> showNotFound()
+           ListContract.InfoState.WEB_PLACEHOLDER -> showWebPlaceholder()
+        }
+    }
+
+    private fun hidePlaceHolder() {
+        infoContainer.visibility = View.GONE
+    }
+
+    private fun showNotFound() {
+        infoContainer.visibility = View.VISIBLE
+        infoImage.setImageResource(R.drawable.ic_not_found)
+        infoText.text = getString(R.string.err_empty_list)    }
+
+    private fun showWebPlaceholder() {
+        infoContainer.visibility = View.VISIBLE
+        infoImage.setImageResource(R.drawable.ic_web_search)
+        infoText.text = getString(R.string.msg_web_search)    }
+
 
     private fun init(categoryId: Int) {
         songsAdapter.setOnClickListener(this)

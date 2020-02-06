@@ -11,7 +11,9 @@ import com.roman.kubik.songer.general.di.ActivityScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * Presenter for main activity
@@ -24,8 +26,7 @@ constructor(private val view: ListContract.View,
             private val navigationInteractor: NavigationInteractor,
             private val songInteractor: SongInteractor,
             private val preferencesInteractor: PreferencesInteractor,
-            private val compositeDisposable: CompositeDisposable,
-            private val remoteSongRepository: RemoteSongRepository) : ListContract.Presenter {
+            private val compositeDisposable: CompositeDisposable) : ListContract.Presenter {
 
     private var songs: List<Song> = ArrayList()
     private var categoryId = Category.ALL_ID
@@ -70,6 +71,10 @@ constructor(private val view: ListContract.View,
 
     override fun fetchSongByCategory(categoryId: Int) {
         this.categoryId = categoryId
+        if (categoryId == Category.WEB_ID && songs.isEmpty()) {
+            view.showInfo(ListContract.InfoState.WEB_PLACEHOLDER)
+            return
+        }
         view.showProgress(true)
         compositeDisposable.add(
                 songInteractor.getAllByCategory(categoryId)
@@ -81,11 +86,16 @@ constructor(private val view: ListContract.View,
     }
 
     override fun filter(query: String) {
+        if (categoryId == Category.WEB_ID && query.isEmpty()) {
+            onSongsFetched(emptyList())
+            view.showInfo(ListContract.InfoState.WEB_PLACEHOLDER)
+            return
+        }
         compositeDisposable.add(
                 songInteractor.search(query, categoryId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(view::onSongsFetched
+                        .subscribe(this::onSongsFetched
                         ) { t -> view.showError(t.message) })
     }
 
@@ -105,6 +115,11 @@ constructor(private val view: ListContract.View,
         if (songs != this.songs) {
             this.songs = songs
             view.onSongsFetched(songs)
+            if (songs.isNotEmpty()) {
+                view.showInfo(ListContract.InfoState.OK)
+            } else {
+                view.showInfo(ListContract.InfoState.NOT_FOUND)
+            }
         }
     }
 }
