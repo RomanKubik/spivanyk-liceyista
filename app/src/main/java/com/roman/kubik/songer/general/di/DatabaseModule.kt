@@ -6,7 +6,7 @@ import com.roman.kubik.songer.data.database.AppDatabase
 import com.roman.kubik.songer.data.database.DatabaseManager
 import com.roman.kubik.songer.data.database.DatabaseManagerImpl
 import com.roman.kubik.songer.data.favourite.FavouriteModelMapper
-import com.roman.kubik.songer.data.song.SongModelMapper
+import com.roman.kubik.songer.data.song.local.SongModelMapper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

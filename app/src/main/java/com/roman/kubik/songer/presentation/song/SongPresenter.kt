@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.presentation.song
 
 import com.roman.kubik.songer.R
+import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.category.CategoryInteractor
 import com.roman.kubik.songer.domain.chord.ChordInteractor
 import com.roman.kubik.songer.domain.favourite.FavouriteInteractor
@@ -117,7 +118,7 @@ constructor(private val view: SongContract.View,
                 .doOnSuccess(this::fetchChords)
                 .subscribe({ s -> view.setSongLyrics(formatLyrics(s.lyrics)) }, this::showTransposeChordError))
     }
-    
+
     private fun showTransposeChordError(throwable: Throwable) = view.showError(R.string.song_details_transpose_error)
 
     private fun formatLyrics(lyrics: String): CharSequence {
@@ -146,13 +147,24 @@ constructor(private val view: SongContract.View,
     }
 
     private fun addSongToFavourite(song: Song) {
-        compositeDisposable.add(
-                favouriteInteractor.addSong(song)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe {
-                            view.isFavouriteSong(true)
-                        })
+        if (Category.WEB_ID == song.categoryId) {
+            song.categoryId = Category.USERS_ID
+            compositeDisposable.add(
+                    songInteractor.insertOrUpdate(song)
+                            .andThen(favouriteInteractor.addSong(song))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe { view.isFavouriteSong(true) }
+            )
+        } else {
+            compositeDisposable.add(
+                    favouriteInteractor.addSong(song)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe {
+                                view.isFavouriteSong(true)
+                            })
+        }
     }
 
     private fun getCategory(song: Song) {
@@ -172,12 +184,14 @@ constructor(private val view: SongContract.View,
     }
 
     private fun addToHistory(song: Song) {
-        compositeDisposable.add(
-                historyInteractor.addSong(song)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
-        )
+        if (Category.WEB_ID != song.categoryId) {
+            compositeDisposable.add(
+                    historyInteractor.addSong(song)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe()
+            )
+        }
     }
 
 }

@@ -16,6 +16,7 @@ class CategoryTitleMapper @Inject constructor(private val context: Context){
             Category.PATRIOTIC_ID -> return context.getString(R.string.ttl_patriotic)
             Category.LAST_ID -> return context.getString(R.string.ttl_last_played)
             Category.USERS_ID -> return context.getString(R.string.ttl_my_songs)
+            Category.WEB_ID -> return context.getString(R.string.ttl_web)
         }
         return ""
     }

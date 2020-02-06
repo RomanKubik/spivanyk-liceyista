@@ -4,16 +4,13 @@ import android.util.Log;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
-import com.roman.kubik.songer.data.song.SongModelMapper;
+import com.roman.kubik.songer.data.song.local.SongModelMapper;
 import com.roman.kubik.songer.domain.favourite.FavouriteRepository;
 import com.roman.kubik.songer.domain.song.Song;
-import com.roman.kubik.songer.domain.song.SongInteractor;
-import com.roman.kubik.songer.domain.song.SongRepository;
 
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.internal.operators.observable.ObservableAllSingle;
 

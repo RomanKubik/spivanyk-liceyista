@@ -3,19 +3,16 @@ package com.roman.kubik.songer.domain.song;
 
 import com.roman.kubik.songer.domain.category.Category;
 import com.roman.kubik.songer.domain.favourite.FavouriteRepository;
+import com.roman.kubik.songer.domain.formatting.LyricsFormatter;
 import com.roman.kubik.songer.domain.history.HistoryRepository;
 import com.roman.kubik.songer.domain.utils.TextUtils;
 
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import io.reactivex.Completable;
-import io.reactivex.Maybe;
-import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by kubik on 1/14/18.
@@ -23,16 +20,24 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SongInteractor {
 
-    private final SongRepository songRepository;
+    private final SongRepository localSongRepository;
+    private final RemoteSongRepository remoteSongRepository;
     private final FavouriteRepository favouriteRepository;
     private final HistoryRepository historyRepository;
+    private final LyricsFormatter chordsRecognizer;
     private Song deletion;
 
-    public SongInteractor(SongRepository songRepository, FavouriteRepository favouriteRepository,
-                          final HistoryRepository historyRepository) {
-        this.songRepository = songRepository;
+    @Inject
+    public SongInteractor(final SongRepository localSongRepository,
+                          final RemoteSongRepository remoteSongRepository,
+                          final FavouriteRepository favouriteRepository,
+                          final HistoryRepository historyRepository,
+                          final LyricsFormatter chordsRecognizer) {
+        this.localSongRepository = localSongRepository;
+        this.remoteSongRepository = remoteSongRepository;
         this.favouriteRepository = favouriteRepository;
         this.historyRepository = historyRepository;
+        this.chordsRecognizer = chordsRecognizer;
     }
 
     public Single<List<Song>> getAllByCategory(@Category.CategoryId int categoryId) {
@@ -42,13 +47,15 @@ public class SongInteractor {
             case Category.LAST_ID:
                 return historyRepository.getLastSongs();
             case Category.ALL_ID:
-                return songRepository.getAll();
+                return localSongRepository.getAll();
+            case Category.WEB_ID:
+                return remoteSongRepository.getAll();
             case Category.ABROAD_ID:
             case Category.BONFIRE_ID:
             case Category.PATRIOTIC_ID:
             case Category.USERS_ID:
             default:
-                return songRepository.getAllByCategory(categoryId);
+                return localSongRepository.getAllByCategory(categoryId);
         }
     }
 
@@ -59,26 +66,32 @@ public class SongInteractor {
             case Category.LAST_ID:
                 return historyRepository.search(query);
             case Category.ALL_ID:
-                return songRepository.search(query);
+                return localSongRepository.search(query);
+            case Category.WEB_ID:
+                return remoteSongRepository.search(query);
             case Category.ABROAD_ID:
             case Category.BONFIRE_ID:
             case Category.PATRIOTIC_ID:
             case Category.USERS_ID:
             default:
-                return songRepository.search(query, categoryId);
+                return localSongRepository.search(query, categoryId);
         }
     }
 
-    public Maybe<Song> getById(String id) {
-        return songRepository.getById(id);
+    public Single<Song> getById(String id) {
+        return localSongRepository.getById(id)
+                .onErrorResumeNext(
+                        remoteSongRepository.getSong(id)
+                                .doOnSuccess(s -> s.setLyrics(chordsRecognizer.format(s.getLyrics()).toString()))
+                );
     }
 
     public Single<Integer> getCount() {
-        return songRepository.getCount();
+        return localSongRepository.getCount();
     }
 
     public Single<Integer> getCountByCategory(@Category.CategoryId int categoryId) {
-        return songRepository.getCountByCategory(categoryId);
+        return localSongRepository.getCountByCategory(categoryId);
     }
 
     public Completable insertOrUpdate(Song song) {
@@ -88,17 +101,17 @@ public class SongInteractor {
         if (TextUtils.isEmpty(song.getLyrics())) {
             return Completable.error(new IllegalArgumentException("Lyrics must be not empty"));
         }
-        return songRepository.insertOrUpdate(song);
+        return localSongRepository.insertOrUpdate(song);
     }
 
     public Completable deleteSong(Song song) {
         deletion = song;
-        return songRepository.delete(song);
+        return localSongRepository.delete(song);
     }
 
     public Completable undoDeletion() {
-        if (deletion != null){
-            return songRepository.insertOrUpdate(deletion).doOnComplete(() -> deletion = null);
+        if (deletion != null) {
+            return localSongRepository.insertOrUpdate(deletion).doOnComplete(() -> deletion = null);
         }
         return Completable.complete();
     }

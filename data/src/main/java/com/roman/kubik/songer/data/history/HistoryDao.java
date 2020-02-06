@@ -1,6 +1,6 @@
 package com.roman.kubik.songer.data.history;
 
-import com.roman.kubik.songer.data.song.SongEntity;
+import com.roman.kubik.songer.data.song.local.SongEntity;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

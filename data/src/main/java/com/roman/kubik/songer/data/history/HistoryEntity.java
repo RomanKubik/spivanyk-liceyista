@@ -7,7 +7,7 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.roman.kubik.songer.data.song.SongEntity;
+import com.roman.kubik.songer.data.song.local.SongEntity;
 
 import static androidx.room.ForeignKey.CASCADE;
 
