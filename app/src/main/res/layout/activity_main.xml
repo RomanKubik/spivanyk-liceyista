@@ -26,6 +26,26 @@
             android:orientation="vertical">
 
             <com.roman.kubik.songer.presentation.view.MainItemView
+                android:id="@+id/lastCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_history"
+                app:title="@string/ttl_last_played"
+                app:description="@string/dsc_last_played"/>
+
+            <View style="@style/AppTheme.Separator" />
+
+            <com.roman.kubik.songer.presentation.view.MainItemView
+                android:id="@+id/surpriseCategory"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/view_size_72"
+                app:image="@drawable/ic_shocked"
+                app:title="@string/ttl_surprise_me"
+                app:description="@string/dsc_surprise_me"/>
+
+            <View style="@style/AppTheme.Separator" />
+
+            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/allCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
@@ -45,31 +65,11 @@
             <View style="@style/AppTheme.Separator" />
 
             <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/surpriseCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_shocked"
-                app:title="@string/ttl_surprise_me"
-                app:description="@string/dsc_surprise_me"/>
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
                 android:id="@+id/mySongsCategory"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/view_size_72"
                 app:image="@drawable/ic_my_songs"
                 app:title="@string/ttl_my_songs" />
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/lastCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_history"
-                app:title="@string/ttl_last_played"
-                app:description="@string/dsc_last_played"/>
 
             <View style="@style/AppTheme.Separator" />
 

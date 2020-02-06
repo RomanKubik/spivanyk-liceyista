@@ -4,14 +4,12 @@ import com.roman.kubik.songer.domain.category.Category
 import com.roman.kubik.songer.domain.navigation.NavigationInteractor
 import com.roman.kubik.songer.domain.preferences.Preferences
 import com.roman.kubik.songer.domain.preferences.PreferencesInteractor
-import com.roman.kubik.songer.domain.song.RemoteSongRepository
 import com.roman.kubik.songer.domain.song.Song
 import com.roman.kubik.songer.domain.song.SongInteractor
 import com.roman.kubik.songer.general.di.ActivityScope
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -60,14 +58,14 @@ constructor(private val view: ListContract.View,
                         .preferences
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSuccess { if (!isDeleteShown(it)) view.showDeletionTutorialDialog() }
+                        .doOnSuccess { if (showDelete(it)) view.showDeletionTutorialDialog() }
                         .map { it.isChordsVisible }
                         .subscribe(view::onPreferencesFetched
                         ) { t -> view.showError(t.message) })
     }
 
-    private fun isDeleteShown(preferences: Preferences)
-            = preferences.tutorialPreferences.isDeleteShown
+    private fun showDelete(preferences: Preferences)
+            = !preferences.tutorialPreferences.isDeleteShown && categoryId != Category.WEB_ID
 
     override fun fetchSongByCategory(categoryId: Int) {
         this.categoryId = categoryId

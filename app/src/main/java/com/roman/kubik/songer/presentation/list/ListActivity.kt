@@ -123,6 +123,7 @@ class ListActivity : BaseActivity(), ListContract.View, SongsAdapter.OnItemClick
     }
 
     override fun onItemLongClicked(song: Song) {
+        if (song.categoryId == Category.WEB_ID) return
         AlertDialog.Builder(this)
                 .setTitle(R.string.ttl_remove_song)
                 .setMessage(R.string.msg_remove_song)
