@@ -9,14 +9,14 @@ import com.roman.kubik.songer.data.favourite.FavouriteDao;
 import com.roman.kubik.songer.data.favourite.FavouriteEntity;
 import com.roman.kubik.songer.data.history.HistoryDao;
 import com.roman.kubik.songer.data.history.HistoryEntity;
-import com.roman.kubik.songer.data.song.SongDao;
-import com.roman.kubik.songer.data.song.SongEntity;
+import com.roman.kubik.songer.data.song.local.SongDao;
+import com.roman.kubik.songer.data.song.local.SongEntity;
 
 /**
  * Room database representation
  * Created by kubik on 1/14/18.
  */
-@Database(entities = {SongEntity.class, CategoryEntity.class, FavouriteEntity.class, HistoryEntity.class}, version = 4, exportSchema = false)
+@Database(entities = {SongEntity.class, CategoryEntity.class, FavouriteEntity.class, HistoryEntity.class}, version = 5, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract SongDao songDao();

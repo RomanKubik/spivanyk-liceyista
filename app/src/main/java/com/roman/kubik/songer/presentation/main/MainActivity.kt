@@ -148,6 +148,12 @@ class MainActivity : BaseActivity(), MainContract.View, TutorialDialog.DismissLi
         presenter.selectCategory(Category.FAVOURITE_ID)
     }
 
+    @OnClick(R.id.webCategory)
+    fun onWebClicked() {
+        logger.log(CategoryEvent("webCategory"))
+        presenter.selectCategory(Category.WEB_ID)
+    }
+
     companion object {
         private const val TUTORIAL_DLG_TAG = "tutorial_dlg_tag"
     }

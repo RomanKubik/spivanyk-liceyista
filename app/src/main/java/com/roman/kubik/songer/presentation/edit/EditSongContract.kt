@@ -22,7 +22,7 @@ interface EditSongContract {
 
     interface Presenter {
 
-        fun fetchSong(songId: Int)
+        fun fetchSong(songId: String?)
 
         fun recognizeChords(lyrics: String)
 

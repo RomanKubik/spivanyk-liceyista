@@ -2,7 +2,6 @@ package com.roman.kubik.songer.general.di
 
 import com.roman.kubik.songer.data.chord.ChordRepositoryFactoryImpl
 import com.roman.kubik.songer.data.logger.FirebaseLogger
-import com.roman.kubik.songer.data.preferences.PreferencesServiceImpl
 import com.roman.kubik.songer.domain.category.CategoryInteractor
 import com.roman.kubik.songer.domain.category.CategoryRepository
 import com.roman.kubik.songer.domain.chord.ChordInteractor
@@ -28,12 +27,6 @@ import javax.inject.Singleton
 
 @Module
 class InteractionModule {
-
-    @Provides
-    @Singleton
-    internal fun getSongInteractor(songRepository: SongRepository, favouriteRepository: FavouriteRepository, historyRepository: HistoryRepository): SongInteractor {
-        return SongInteractor(songRepository, favouriteRepository, historyRepository)
-    }
 
     @Provides
     @Singleton

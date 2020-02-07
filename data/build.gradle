@@ -53,5 +53,8 @@ dependencies {
     // Json
     api 'com.google.code.gson:gson:2.8.5'
 
+    // Html parsing
+    implementation 'org.jsoup:jsoup:1.11.1'
+
     implementation "javax.inject:javax.inject:1@jar"
 }

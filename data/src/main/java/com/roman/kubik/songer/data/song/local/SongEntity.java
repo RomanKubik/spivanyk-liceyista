@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.song;
+package com.roman.kubik.songer.data.song.local;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -21,7 +21,8 @@ import com.roman.kubik.songer.data.category.CategoryEntity;
 public class SongEntity {
 
     @PrimaryKey
-    private int id;
+    @NonNull
+    private String id;
     @ColumnInfo(name = "title")
     @NonNull
     private String title;
@@ -31,34 +32,35 @@ public class SongEntity {
     @ColumnInfo(name = "category_id")
     private int categoryId;
 
-    public SongEntity(int id, String title, String lyrics, int categoryId) {
+    public SongEntity(@NonNull String id, @NonNull String title, @NonNull String lyrics, int categoryId) {
         this.id = id;
         this.title = title;
         this.lyrics = lyrics;
         this.categoryId = categoryId;
     }
 
-    public int getId() {
+    @NonNull
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
-
+    @NonNull
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(@NonNull String title) {
         this.title = title;
     }
-
+    @NonNull
     public String getLyrics() {
         return lyrics;
     }
 
-    public void setLyrics(String lyrics) {
+    public void setLyrics(@NonNull String lyrics) {
         this.lyrics = lyrics;
     }
 

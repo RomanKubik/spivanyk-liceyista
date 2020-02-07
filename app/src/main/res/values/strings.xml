@@ -35,6 +35,8 @@
         <item quantity="one">%d my song</item>
         <item quantity="other">%d my songs</item>
     </plurals>
+    <string name="ttl_web">Songs from web</string>
+    <string name="dsc_web">Search songs in the Internet</string>
     <string name="share">Share</string>
     <string name="bookmark">Bookmark</string>
     <string name="chords">Chords</string>
@@ -82,4 +84,6 @@
     <string name="preferences_sign_in_title">Sign in with Google</string>
     <string name="preferences_sign_in_description">You can sign in to share your favourite song with community</string>
     <string name="preferences_you_are_signed_in">You are logged in as:</string>
+    <string name="err_empty_list">Sorry, we can\'t find anything</string>
+    <string name="msg_web_search">Web results will be displayed here</string>
 </resources>

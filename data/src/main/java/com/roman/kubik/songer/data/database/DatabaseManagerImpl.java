@@ -2,7 +2,7 @@ package com.roman.kubik.songer.data.database;
 
 import android.content.Context;
 
-import com.roman.kubik.songer.data.song.SongEntity;
+import com.roman.kubik.songer.data.song.local.SongEntity;
 import com.roman.kubik.songer.domain.category.Category;
 
 import java.io.File;
@@ -15,6 +15,7 @@ import io.reactivex.Completable;
 import static com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_1_2;
 import static com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_2_3;
 import static com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_3_4;
+import static com.roman.kubik.songer.data.database.DatabaseMigrations.MIGRATION_4_5;
 
 public class DatabaseManagerImpl implements DatabaseManager {
 
@@ -53,7 +54,7 @@ public class DatabaseManagerImpl implements DatabaseManager {
 
     public static AppDatabase generateAppDatabase(Context context) {
         return Room.databaseBuilder(context, AppDatabase.class, DB_NAME)
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                 .build();
     }
 

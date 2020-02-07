@@ -1,6 +1,6 @@
 package com.roman.kubik.songer.data.history;
 
-import com.roman.kubik.songer.data.song.SongModelMapper;
+import com.roman.kubik.songer.data.song.local.SongModelMapper;
 import com.roman.kubik.songer.domain.history.HistoryRepository;
 import com.roman.kubik.songer.domain.song.Song;
 

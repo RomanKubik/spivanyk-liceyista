@@ -7,7 +7,6 @@ import androidx.core.content.ContextCompat
 import android.text.method.LinkMovementMethod
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
@@ -81,7 +80,9 @@ class SongActivity : BaseActivity(), SongContract.View {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == Constants.RequestCode.EDIT_SONG && resultCode == Activity.RESULT_OK) {
-            presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
+            presenter.fetchSong(intent.getStringExtra(Constants.Extras.SONG_ID))
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
@@ -117,9 +118,9 @@ class SongActivity : BaseActivity(), SongContract.View {
 
     override fun setChordsVisibility(visible: Boolean) {
         showChordsItem.isChecked = visible
-        chordsList.visibility = if (visible) View.VISIBLE else View.GONE
-        chords.visibility = if (visible) View.VISIBLE else View.GONE
-        presenter.fetchSong(intent.getIntExtra(Constants.Extras.SONG_ID, 0))
+        chordsList.visibility = if (visible) VISIBLE else GONE
+        chords.visibility = if (visible) VISIBLE else GONE
+        presenter.fetchSong(intent.getStringExtra(Constants.Extras.SONG_ID))
         menu?.findItem(R.id.app_bar_transposition)?.isVisible = visible
     }
 

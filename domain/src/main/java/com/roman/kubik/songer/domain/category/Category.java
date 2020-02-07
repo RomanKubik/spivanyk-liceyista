@@ -18,9 +18,10 @@ public class Category {
             PATRIOTIC_ID = 1,
             BONFIRE_ID = 2,
             ABROAD_ID = 3,
-            USERS_ID = 4;
+            USERS_ID = 4,
+            WEB_ID = 5;
 
-    @IntDef({FAVOURITE_ID, ALL_ID, LAST_ID, PATRIOTIC_ID, BONFIRE_ID, ABROAD_ID, USERS_ID})
+    @IntDef({FAVOURITE_ID, ALL_ID, LAST_ID, PATRIOTIC_ID, BONFIRE_ID, ABROAD_ID, USERS_ID, WEB_ID})
     @Retention(RetentionPolicy.SOURCE)
     public @interface CategoryId {
     }

@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.song;
+package com.roman.kubik.songer.data.song.local;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
@@ -60,7 +60,7 @@ public class SongRepositoryImpl implements SongRepository {
     }
 
     @Override
-    public Maybe<Song> getById(int id) {
+    public Single<Song> getById(String id) {
         return songDao.getById(id).map(s -> songModelMapper.fromEntity(s));
     }
 

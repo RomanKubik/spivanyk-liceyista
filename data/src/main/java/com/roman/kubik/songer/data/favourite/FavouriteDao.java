@@ -4,7 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.roman.kubik.songer.data.song.SongEntity;
+import com.roman.kubik.songer.data.song.local.SongEntity;
 
 import java.util.List;
 
@@ -27,10 +27,10 @@ public interface FavouriteDao {
     void add(FavouriteEntity favouriteEntity);
 
     @Query("DELETE FROM favourite WHERE favourite.song_id = :songId")
-    void delete(int songId);
+    void delete(String songId);
 
     @Query("SELECT * FROM favourite WHERE favourite.song_id = :songId")
-    Single<FavouriteEntity> isSongExists(int songId);
+    Single<FavouriteEntity> isSongExists(String songId);
 
     @Query("SELECT count(id) FROM favourite")
     Single<Integer> getCount();

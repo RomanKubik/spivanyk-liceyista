@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.general.di
 
 import com.roman.kubik.songer.data.preferences.PreferencesServiceImpl
+import com.roman.kubik.songer.domain.formatting.LyricsFormatter
 import com.roman.kubik.songer.domain.formatting.LyricsFormattingInteractor
 import com.roman.kubik.songer.domain.preferences.PreferencesService
 import com.roman.kubik.songer.domain.utils.ChordsRecognizer
@@ -12,6 +13,10 @@ import javax.inject.Singleton
 
 @Module
 class GeneralModule {
+
+    @Provides
+    @Singleton
+    fun getLyricsFormatter(chordsRecognizer: ChordsRecognizer): LyricsFormatter = chordsRecognizer
 
     @Provides
     @Singleton

@@ -11,6 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 /**
  * Presenter for main activity
@@ -57,17 +58,21 @@ constructor(private val view: ListContract.View,
                         .preferences
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSuccess { if (!isDeleteShown(it)) view.showDeletionTutorialDialog() }
+                        .doOnSuccess { if (showDelete(it)) view.showDeletionTutorialDialog() }
                         .map { it.isChordsVisible }
                         .subscribe(view::onPreferencesFetched
                         ) { t -> view.showError(t.message) })
     }
 
-    private fun isDeleteShown(preferences: Preferences)
-            = preferences.tutorialPreferences.isDeleteShown
+    private fun showDelete(preferences: Preferences)
+            = !preferences.tutorialPreferences.isDeleteShown && categoryId != Category.WEB_ID
 
     override fun fetchSongByCategory(categoryId: Int) {
         this.categoryId = categoryId
+        if (categoryId == Category.WEB_ID && songs.isEmpty()) {
+            view.showInfo(ListContract.InfoState.WEB_PLACEHOLDER)
+            return
+        }
         view.showProgress(true)
         compositeDisposable.add(
                 songInteractor.getAllByCategory(categoryId)
@@ -76,15 +81,19 @@ constructor(private val view: ListContract.View,
                         .doFinally { view.showProgress(false) }
                         .subscribe(this::onSongsFetched
                         ) { t -> view.showError(t.message) })
-
     }
 
     override fun filter(query: String) {
+        if (categoryId == Category.WEB_ID && query.isEmpty()) {
+            onSongsFetched(emptyList())
+            view.showInfo(ListContract.InfoState.WEB_PLACEHOLDER)
+            return
+        }
         compositeDisposable.add(
                 songInteractor.search(query, categoryId)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(view::onSongsFetched
+                        .subscribe(this::onSongsFetched
                         ) { t -> view.showError(t.message) })
     }
 
@@ -104,6 +113,11 @@ constructor(private val view: ListContract.View,
         if (songs != this.songs) {
             this.songs = songs
             view.onSongsFetched(songs)
+            if (songs.isNotEmpty()) {
+                view.showInfo(ListContract.InfoState.OK)
+            } else {
+                view.showInfo(ListContract.InfoState.NOT_FOUND)
+            }
         }
     }
 }
