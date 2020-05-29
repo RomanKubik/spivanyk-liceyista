@@ -61,4 +61,8 @@ public class NavigationInteractor {
     public void toSignIn(int requestCode) {
         navigationService.toSignIn(requestCode);
     }
+
+    public void navigateUp() {
+        navigationService.navigateUp();
+    }
 }

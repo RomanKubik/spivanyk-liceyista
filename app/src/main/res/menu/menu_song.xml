@@ -17,6 +17,11 @@
         android:title="@string/edit"
         app:showAsAction="ifRoom|collapseActionView" />
     <item
+        android:id="@+id/app_bar_remove"
+        android:icon="@drawable/ic_delete"
+        android:title="@string/remove"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/app_bar_show_chords"
         android:checkable="true"
         android:title="@string/settings_show_chords_ttl"

@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.graphics.ColorUtils
 import butterknife.OnClick
 import com.annimon.stream.function.Consumer
@@ -34,6 +35,7 @@ import javax.inject.Inject
 class SongActivity : BaseActivity(), SongContract.View {
 
     private var menu: Menu? = null
+    private lateinit var removeSongItem: MenuItem
     private lateinit var bookmarkItem: MenuItem
     private lateinit var showChordsItem: MenuItem
     private lateinit var chordDialog: ChordDialog
@@ -60,8 +62,9 @@ class SongActivity : BaseActivity(), SongContract.View {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         this.menu = menu
         menuInflater.inflate(R.menu.menu_song, menu)
-        bookmarkItem = menu?.findItem(R.id.app_bar_bookmark)!!
+        bookmarkItem = menu!!.findItem(R.id.app_bar_bookmark)
         showChordsItem = menu.findItem(R.id.app_bar_show_chords)
+        removeSongItem = menu.findItem(R.id.app_bar_remove)
         presenter.fetchPreferences()
         return true
     }
@@ -71,11 +74,24 @@ class SongActivity : BaseActivity(), SongContract.View {
             R.id.app_bar_bookmark -> presenter.addToFavourite()
             R.id.app_bar_share -> presenter.shareSong()
             R.id.app_bar_edit -> presenter.edit()
+            R.id.app_bar_remove -> askRemove()
             R.id.app_bar_show_chords -> presenter.showChords()
             R.id.app_bar_transposition -> displayTonalityView()
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun askRemove() {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.ttl_remove_song)
+                .setMessage(R.string.msg_remove_song)
+                .setPositiveButton(R.string.remove) { _, _ ->
+                    presenter.remove()
+                }
+                .setNegativeButton(R.string.discard) { _, _ ->
+                }
+                .show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -101,6 +117,7 @@ class SongActivity : BaseActivity(), SongContract.View {
 
     override fun setSongCategory(category: Category) {
         categoryView.text = categoryTitleMapper.getCategoryTitle(category.id)
+        removeSongItem.isVisible = category.id != Category.WEB_ID
     }
 
     override fun setSongDifficulty(difficulty: CharSequence) {
