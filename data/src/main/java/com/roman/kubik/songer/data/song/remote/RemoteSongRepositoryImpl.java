@@ -6,7 +6,6 @@ import com.roman.kubik.songer.domain.song.Song;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 public class RemoteSongRepositoryImpl implements RemoteSongRepository {
@@ -61,6 +59,7 @@ public class RemoteSongRepositoryImpl implements RemoteSongRepository {
             Document document = Jsoup.connect(BASE_URL + id).get();
             String title = document.selectFirst(SONG_TITLE_ITEM).text();
             String lyrics = document.selectFirst(SONG_LYRICS_ITEM).text().replaceAll(LYRICS_COPYRIGHT, "");
+//            throw new NullPointerException();
             return new Song(id, title, lyrics, Category.WEB_ID);
         });
     }

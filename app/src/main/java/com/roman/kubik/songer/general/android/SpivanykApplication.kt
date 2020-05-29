@@ -7,6 +7,7 @@ import com.roman.kubik.songer.general.di.ApplicationComponent
 import com.roman.kubik.songer.general.di.ApplicationModule
 import com.roman.kubik.songer.general.di.DaggerApplicationComponent
 import io.fabric.sdk.android.Fabric
+import io.reactivex.plugins.RxJavaPlugins
 
 
 /**
@@ -18,6 +19,7 @@ class SpivanykApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+//        RxJavaPlugins.setErrorHandler { }
         initializeCrashlytics()
         initializeDi()
     }

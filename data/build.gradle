@@ -34,7 +34,7 @@ dependencies {
 
     implementation project(":domain")
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
@@ -51,7 +51,7 @@ dependencies {
     api 'com.firebaseui:firebase-ui-auth:4.3.1'
 
     // Json
-    api 'com.google.code.gson:gson:2.8.5'
+    api 'com.google.code.gson:gson:2.8.6'
 
     // Html parsing
     implementation 'org.jsoup:jsoup:1.11.1'

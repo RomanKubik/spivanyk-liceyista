@@ -21,4 +21,6 @@ public interface NavigationService {
     void restart();
 
     void toSignIn(int requestCode);
+
+    void navigateUp();
 }
