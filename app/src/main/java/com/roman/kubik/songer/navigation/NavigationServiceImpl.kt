@@ -79,4 +79,8 @@ class NavigationServiceImpl(private val activity: Activity) : NavigationService 
                 requestCode)
 
     }
+
+    override fun navigateUp() {
+        activity.finish()
+    }
 }

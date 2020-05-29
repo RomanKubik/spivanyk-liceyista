@@ -89,6 +89,14 @@ constructor(private val view: SongContract.View,
         navigationInteractor.toEditActivity(song)
     }
 
+    override fun remove() {
+        compositeDisposable.add(
+                songInteractor.deleteSong(song)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(navigationInteractor::navigateUp) { t -> view.showError(t.message!!) })
+    }
+
     override fun showChords() {
         compositeDisposable.add(
                 preferencesInteractor
