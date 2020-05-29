@@ -1,54 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.roman.kubik.songer">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
-        android:name=".general.android.SpivanykApplication"
-        android:allowBackup="false"
-        android:usesCleartextTraffic="true"
+        android:name=".SpivanykApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="233640e9f6b617b44be9d00285c7743485f1fd82"
-            />
-
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.splash.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".presentation.main.MainActivity"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".presentation.list.ListActivity"
-            android:theme="@style/AppTheme" />
-
-        <activity
-            android:name=".presentation.song.SongActivity"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".presentation.preferences.PreferencesActivity"
-            android:theme="@style/AppTheme"/>
-        <activity
-            android:name=".presentation.edit.EditSongActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
-
     </application>
 
 </manifest>

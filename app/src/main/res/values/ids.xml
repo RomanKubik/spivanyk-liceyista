@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <item name="id_chord_visible" type="string" translatable="false">chord_visible</item>
-    <item name="id_selected_instrument" type="string" translatable="false">selected_instrument</item>
-    <item name="id_selected_theme" type="string" translatable="false">selected_theme</item>
-    <item name="id_factory_reset" type="string" translatable="false">factory_reset</item>
-
-</resources>
