@@ -1,14 +1,7 @@
 package com.roman.kubik.songer.ui.main
 
-import com.roman.kubik.songer.ui.base.BaseViewModel
-import javax.inject.Inject
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.ViewModel
 
-/**
- * ViewModel of {@link MainActivity}
- */
-class MainActivityViewModel @Inject constructor() : BaseViewModel() {
-
-    fun toMainScreen() {
-        navigationService.toMainScreen()
-    }
+class MainActivityViewMode @ViewModelInject constructor(): ViewModel() {
 }

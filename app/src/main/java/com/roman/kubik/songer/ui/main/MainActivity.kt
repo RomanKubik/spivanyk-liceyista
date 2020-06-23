@@ -1,20 +1,19 @@
 package com.roman.kubik.songer.ui.main
 
 import android.os.Bundle
-import com.roman.kubik.songer.activityComponent
-import com.roman.kubik.songer.ui.base.BaseActivity
-import com.roman.kubik.songer.dagger.viewModel
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import com.roman.kubik.songer.R
+import dagger.hilt.android.AndroidEntryPoint
 
-/**
- * Main activity. Application entry point
- */
-class MainActivity : BaseActivity() {
+@AndroidEntryPoint
+class MainActivity: AppCompatActivity() {
 
-    override val viewModel by viewModel { activityComponent.mainActivityViewModel }
+    private val viewModel: MainActivityViewMode by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel.toMainScreen()
+        setContentView(R.layout.activity_main)
+        viewModel.toString()
     }
 }

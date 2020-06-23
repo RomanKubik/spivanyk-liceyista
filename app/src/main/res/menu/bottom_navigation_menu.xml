@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:id="@+id/menu_discover"
+        android:title="Discover"
+        android:icon="@drawable/ic_discover"/>
+
+    <item
+        android:id="@+id/menu_empty"
+        android:title="@null"
+        android:enabled="false"/>
+
+    <item
+        android:id="@+id/menu_add"
+        android:title="Add"
+        android:icon="@drawable/ic_add"/>
+
+    <item
+        android:id="@+id/menu_setting"
+        android:title="Setting"
+        android:icon="@drawable/ic_settings"/>
+
+</menu>
