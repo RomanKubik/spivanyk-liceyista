@@ -20,7 +20,7 @@ buildscript {
             'coreKtx'         : '1.2.0',
             'fragment'        : '1.2.5',
             'constraintLayout': '2.0.0-beta7',
-            'navigation'      : '2.3.0-rc01',
+            'navigation'      : '2.3.0',
 
             'analytics'       : '17.3.0',
             'crashlytics'     : '17.0.0-beta04',
@@ -32,6 +32,8 @@ buildscript {
             'retrofit'        : '2.6.0',
             'gson'            : '2.8.5',
             'okhttp'          : '4.5.0',
+
+            'room'            : '2.2.5',
 
             'junit'           : '4.13',
             'mockito'         : '2.23.0'
