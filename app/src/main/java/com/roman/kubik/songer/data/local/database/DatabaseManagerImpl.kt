@@ -24,9 +24,11 @@ class DatabaseManagerImpl @Inject constructor(
         databaseCopyHelper.createDataBase()
     }
 
-    fun generateAppDatabase(context: Context?): AppDatabase? {
-        return Room.databaseBuilder(context!!, AppDatabase::class.java, DatabaseManager.DB_NAME)
-                .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
-                .build()
+    companion object {
+        fun generateAppDatabase(context: Context): AppDatabase {
+            return Room.databaseBuilder(context, AppDatabase::class.java, DatabaseManager.DB_NAME)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
+                    .build()
+        }
     }
 }
