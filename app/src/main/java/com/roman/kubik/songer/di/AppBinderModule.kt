@@ -1,6 +1,6 @@
 package com.roman.kubik.songer.di
 
-import com.roman.kubik.songer.data.core.StringProvider
+import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.data.core.StringProviderImpl
 import com.roman.kubik.songer.data.local.database.DatabaseManager
 import com.roman.kubik.songer.data.local.database.DatabaseManagerImpl

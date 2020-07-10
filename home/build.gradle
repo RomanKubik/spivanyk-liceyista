@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -13,15 +13,15 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode versions.appVersionCode
         versionName versions.appVersionName
-
-        applicationId names.applicationId
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -35,28 +35,18 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    testOptions {
-        unitTests.all {
-            unitTests.returnDefaultValues = true
-        }
-    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 
     implementation project(':core')
-    implementation project(':home')
 
-    //AndroidX
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+
     implementation "androidx.appcompat:appcompat:$versions.appCompat"
     implementation "androidx.activity:activity-ktx:$versions.activity"
     implementation "androidx.fragment:fragment-ktx:$versions.fragment"
-    implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:$versions.navigation"
-    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
     implementation "com.google.android.material:material:$versions.material"
 
     // DI / Hilt
@@ -65,16 +55,7 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
     kapt "androidx.hilt:hilt-compiler:$versions.hiltAndroid"
 
-    // Room
-    implementation "androidx.room:room-runtime:$versions.room"
-    implementation "androidx.room:room-ktx:$versions.room"
-    kapt "androidx.room:room-compiler:$versions.room"
-    androidTestImplementation "androidx.room:room-testing:$versions.room"
-
     testImplementation "junit:junit:$versions.junit"
-    testImplementation "org.mockito:mockito-core:$versions.mockito"
-    testImplementation 'org.mockito:mockito-inline:2.21.0'
-    testImplementation 'com.github.dpreussler:android-tdd-utils:v0.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 

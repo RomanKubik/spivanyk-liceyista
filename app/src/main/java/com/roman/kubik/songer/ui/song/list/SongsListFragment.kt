@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roman.kubik.songer.R
-import com.roman.kubik.songer.ui.base.BaseFragment
+import com.roman.kubik.songer.core.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song_list.*
 

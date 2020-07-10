@@ -19,7 +19,7 @@ buildscript {
             'lifecycle'       : '2.2.0',
             'coreKtx'         : '1.2.0',
             'fragment'        : '1.2.5',
-            'constraintLayout': '2.0.0-beta7',
+            'constraintLayout': '2.0.0-beta8',
             'navigation'      : '2.3.0',
 
             'analytics'       : '17.3.0',

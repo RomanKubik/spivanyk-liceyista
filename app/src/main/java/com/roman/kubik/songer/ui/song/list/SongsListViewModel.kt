@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.roman.kubik.songer.domain.repository.SongRepository
 import com.roman.kubik.songer.domain.song.Song
-import com.roman.kubik.songer.ui.base.BaseViewModel
+import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

@@ -1,7 +1,6 @@
-package com.roman.kubik.songer.ui.home
+package com.roman.kubik.songer.home.ui
 
 import androidx.annotation.DrawableRes
-import com.roman.kubik.songer.domain.models.Category
 
 data class HomeCategory(val categoryId: Int,
                         val title: CharSequence,

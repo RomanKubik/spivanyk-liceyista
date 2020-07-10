@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/menu_home"
-        android:name="com.roman.kubik.songer.ui.home.HomeFragment"
+        android:name="com.roman.kubik.songer.home.ui.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
 
@@ -15,6 +15,6 @@
         android:id="@+id/menu_discover"
         android:name="com.roman.kubik.songer.ui.song.list.SongsListFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_song_list" />
 
 </navigation>

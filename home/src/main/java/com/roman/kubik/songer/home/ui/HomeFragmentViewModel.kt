@@ -1,13 +1,17 @@
-package com.roman.kubik.songer.ui.home
+package com.roman.kubik.songer.home.ui
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.roman.kubik.songer.R
-import com.roman.kubik.songer.data.core.StringProvider
-import com.roman.kubik.songer.ui.base.BaseViewModel
+import com.roman.kubik.songer.core.data.StringProvider
+import com.roman.kubik.songer.core.ui.base.BaseViewModel
+import com.roman.kubik.songer.home.R
+import com.roman.kubik.songer.home.navigation.HomeNavigator
 
-class HomeFragmentViewModel @ViewModelInject constructor(private val stringProvider: StringProvider) : BaseViewModel() {
+class HomeFragmentViewModel @ViewModelInject constructor(
+        private val stringProvider: StringProvider,
+        private val homeNavigator: HomeNavigator
+) : BaseViewModel() {
 
     private val _categories = MutableLiveData<List<HomeCategory>>()
     val categories: LiveData<List<HomeCategory>> = _categories
@@ -17,7 +21,7 @@ class HomeFragmentViewModel @ViewModelInject constructor(private val stringProvi
     }
 
     fun onCategorySelected(category: HomeCategory) {
-
+        homeNavigator.navigateToCategory(category)
     }
 
     private fun fillCategories() {

@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.data.core
 
 import android.content.Context
+import com.roman.kubik.songer.core.data.StringProvider
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

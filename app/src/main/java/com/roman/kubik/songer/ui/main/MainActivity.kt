@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.roman.kubik.songer.R
-import com.roman.kubik.songer.ui.base.BaseActivity
+import com.roman.kubik.songer.core.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 

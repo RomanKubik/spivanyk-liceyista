@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.core
+package com.roman.kubik.songer.core.data
 
 import androidx.annotation.StringRes
 

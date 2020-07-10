@@ -1,10 +1,10 @@
-package com.roman.kubik.songer.ui.home
+package com.roman.kubik.songer.home.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.roman.kubik.songer.R
+import com.roman.kubik.songer.home.R
 import kotlinx.android.synthetic.main.item_home_category.view.*
 
 class HomeCategoryAdapter(private val clickListener: (HomeCategory) -> Unit)

@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.ui.home
+package com.roman.kubik.songer.home.ui
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -10,8 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.roman.kubik.songer.R
-import com.roman.kubik.songer.ui.base.BaseFragment
+import com.roman.kubik.songer.core.ui.base.BaseFragment
+import com.roman.kubik.songer.home.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -42,6 +42,5 @@ class HomeFragment : BaseFragment() {
 
     private fun addObservables() {
         viewModel.categories.observe(viewLifecycleOwner, Observer(adapter::publishItems))
-
     }
 }
