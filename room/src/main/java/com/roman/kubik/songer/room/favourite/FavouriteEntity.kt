@@ -1,8 +1,8 @@
-package com.roman.kubik.songer.data.local.favourite
+package com.roman.kubik.songer.room.favourite
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import com.roman.kubik.songer.data.local.song.SongEntity
+import com.roman.kubik.songer.room.song.SongEntity
 import java.util.*
 
 

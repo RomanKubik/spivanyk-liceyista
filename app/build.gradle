@@ -49,6 +49,7 @@ dependencies {
     implementation project(':core')
     implementation project(':home')
     implementation project(':songs')
+    implementation project(':room')
 
     //AndroidX
     implementation "androidx.appcompat:appcompat:$versions.appCompat"
@@ -66,11 +67,7 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
     kapt "androidx.hilt:hilt-compiler:$versions.hiltAndroid"
 
-    // Room
     implementation "androidx.room:room-runtime:$versions.room"
-    implementation "androidx.room:room-ktx:$versions.room"
-    kapt "androidx.room:room-compiler:$versions.room"
-    androidTestImplementation "androidx.room:room-testing:$versions.room"
 
     testImplementation "junit:junit:$versions.junit"
     testImplementation "org.mockito:mockito-core:$versions.mockito"

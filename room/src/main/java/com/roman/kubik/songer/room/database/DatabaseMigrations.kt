@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.local.database
+package com.roman.kubik.songer.room.database
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase

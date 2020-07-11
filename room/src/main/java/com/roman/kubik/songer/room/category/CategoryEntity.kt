@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.local.category
+package com.roman.kubik.songer.room.category
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

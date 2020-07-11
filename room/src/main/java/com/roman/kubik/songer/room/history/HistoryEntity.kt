@@ -1,8 +1,8 @@
-package com.roman.kubik.songer.data.local.history
+package com.roman.kubik.songer.room.history
 
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
-import com.roman.kubik.songer.data.local.song.SongEntity
+import com.roman.kubik.songer.room.song.SongEntity
 
 
 @Entity(tableName = "history", foreignKeys = [ForeignKey(entity = SongEntity::class, childColumns = ["song_id"], parentColumns = ["id"], onDelete = CASCADE)])

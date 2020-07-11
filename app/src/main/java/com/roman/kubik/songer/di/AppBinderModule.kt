@@ -2,9 +2,9 @@ package com.roman.kubik.songer.di
 
 import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.data.core.StringProviderImpl
-import com.roman.kubik.songer.data.local.database.DatabaseManager
-import com.roman.kubik.songer.data.local.database.DatabaseManagerImpl
-import com.roman.kubik.songer.data.local.song.RoomSongService
+import com.roman.kubik.songer.room.database.DatabaseManager
+import com.roman.kubik.songer.room.database.DatabaseManagerImpl
+import com.roman.kubik.songer.room.song.RoomSongService
 import com.roman.kubik.songer.songs.domain.song.SongsService
 import dagger.Binds
 import dagger.Module

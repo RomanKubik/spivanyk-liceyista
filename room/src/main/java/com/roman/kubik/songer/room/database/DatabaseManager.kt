@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.local.database
+package com.roman.kubik.songer.room.database
 
 interface DatabaseManager {
     suspend fun reset()

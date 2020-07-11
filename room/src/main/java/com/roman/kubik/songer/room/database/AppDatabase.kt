@@ -1,12 +1,12 @@
-package com.roman.kubik.songer.data.local.database
+package com.roman.kubik.songer.room.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.roman.kubik.songer.data.local.category.CategoryEntity
-import com.roman.kubik.songer.data.local.favourite.FavouriteEntity
-import com.roman.kubik.songer.data.local.history.HistoryEntity
-import com.roman.kubik.songer.data.local.song.SongDao
-import com.roman.kubik.songer.data.local.song.SongEntity
+import com.roman.kubik.songer.room.category.CategoryEntity
+import com.roman.kubik.songer.room.favourite.FavouriteEntity
+import com.roman.kubik.songer.room.history.HistoryEntity
+import com.roman.kubik.songer.room.song.SongDao
+import com.roman.kubik.songer.room.song.SongEntity
 
 /**
  * Room database representation

@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.data.local.song
+package com.roman.kubik.songer.room.song
 
 import androidx.room.Dao
 import androidx.room.Query

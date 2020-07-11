@@ -1,7 +1,7 @@
-package com.roman.kubik.songer.data.local.song
+package com.roman.kubik.songer.room.song
 
 import androidx.room.*
-import com.roman.kubik.songer.data.local.category.CategoryEntity
+import com.roman.kubik.songer.room.category.CategoryEntity
 
 
 @Entity(indices = [Index(value = ["id"], name = "song_id_clustered_index"), Index(value = ["title"], name = "song_title_nonclustered_index")],

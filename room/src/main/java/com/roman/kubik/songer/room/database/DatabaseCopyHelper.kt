@@ -1,10 +1,9 @@
-package com.roman.kubik.songer.data.local.database
+package com.roman.kubik.songer.room.database
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
@@ -12,7 +11,7 @@ import java.io.OutputStream
 import javax.inject.Inject
 
 
-class DatabaseCopyHelper @Inject constructor(@ApplicationContext private val context: Context) : SQLiteOpenHelper(context, dbName, null, DB_VERSION) {
+class DatabaseCopyHelper @Inject constructor(private val context: Context) : SQLiteOpenHelper(context, dbName, null, DB_VERSION) {
 
     private val dbPath: String = context.applicationInfo.dataDir.toString() + "/databases/"
 
