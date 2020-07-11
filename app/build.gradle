@@ -48,6 +48,7 @@ dependencies {
 
     implementation project(':core')
     implementation project(':home')
+    implementation project(':songs')
 
     //AndroidX
     implementation "androidx.appcompat:appcompat:$versions.appCompat"

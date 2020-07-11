@@ -5,7 +5,7 @@ import com.roman.kubik.songer.data.core.StringProviderImpl
 import com.roman.kubik.songer.data.local.database.DatabaseManager
 import com.roman.kubik.songer.data.local.database.DatabaseManagerImpl
 import com.roman.kubik.songer.data.local.song.RoomSongService
-import com.roman.kubik.songer.domain.song.SongsService
+import com.roman.kubik.songer.songs.domain.song.SongsService
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

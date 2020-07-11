@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.ui.song.list
+package com.roman.kubik.songer.songs.ui.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.roman.kubik.songer.R
 import com.roman.kubik.songer.core.ui.base.BaseFragment
+import com.roman.kubik.songs.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song_list.*
 

@@ -1,4 +1,4 @@
-package com.roman.kubik.songer.domain.song
+package com.roman.kubik.songer.songs.domain.song
 
 interface SongsService {
 

@@ -1,11 +1,11 @@
-package com.roman.kubik.songer.ui.song.list
+package com.roman.kubik.songer.songs.ui.list
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.roman.kubik.songer.R
-import com.roman.kubik.songer.domain.song.Song
+import com.roman.kubik.songer.songs.domain.song.Song
+import com.roman.kubik.songs.R
 import kotlinx.android.synthetic.main.item_song_list.view.*
 
 class SongsListAdapter : RecyclerView.Adapter<SongsListAdapter.SongHolder>() {

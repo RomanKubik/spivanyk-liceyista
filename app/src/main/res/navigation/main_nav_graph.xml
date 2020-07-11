@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/menu_discover"
-        android:name="com.roman.kubik.songer.ui.song.list.SongsListFragment"
+        android:name="com.roman.kubik.songer.songs.ui.list.SongsListFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_song_list" />
 
