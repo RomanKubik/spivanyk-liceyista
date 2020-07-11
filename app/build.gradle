@@ -49,7 +49,7 @@ dependencies {
     implementation project(':core')
     implementation project(':home')
     implementation project(':songs')
-    implementation project(':room')
+    implementation project(':songsRoom')
 
     //AndroidX
     implementation "androidx.appcompat:appcompat:$versions.appCompat"
