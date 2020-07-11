@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_song_list.*
 class SongsListFragment: BaseFragment() {
 
     private val viewModel by viewModels<SongsListViewModel>()
-    private val adapter = SongsListAdapter()
+    private lateinit var adapter: SongsListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_song_list, container, false)
@@ -24,6 +24,7 @@ class SongsListFragment: BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        adapter = SongsListAdapter(viewModel::selectSong)
         songsList.adapter = adapter
         songsList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         viewModel.songs.observe(viewLifecycleOwner, Observer(adapter::publishItems))

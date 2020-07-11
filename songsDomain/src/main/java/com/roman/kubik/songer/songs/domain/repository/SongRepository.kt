@@ -8,4 +8,5 @@ class SongRepository @Inject constructor(private val songsService: SongsService)
 
     suspend fun getAllSongs(): List<Song> = songsService.getAllSongs()
 
+    suspend fun getSongById(songId: String): Song = songsService.getSongById(songId)
 }

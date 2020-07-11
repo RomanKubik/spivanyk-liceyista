@@ -8,12 +8,12 @@ import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songs.R
 import kotlinx.android.synthetic.main.item_song_list.view.*
 
-class SongsListAdapter : RecyclerView.Adapter<SongsListAdapter.SongHolder>() {
+class SongsListAdapter constructor(private val clickListener: (Song) -> Unit) : RecyclerView.Adapter<SongsListAdapter.SongHolder>() {
     private var items = mutableListOf<Song>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return SongHolder(inflater.inflate(R.layout.item_song_list, parent, false))
+        return SongHolder(inflater.inflate(R.layout.item_song_list, parent, false), clickListener)
     }
 
     override fun getItemCount(): Int = items.size
@@ -28,11 +28,12 @@ class SongsListAdapter : RecyclerView.Adapter<SongsListAdapter.SongHolder>() {
         notifyDataSetChanged()
     }
 
-    class SongHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class SongHolder(itemView: View, private val clickListener: (Song) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(song: Song) {
             itemView.title.text = song.title
             itemView.lyrics.text = song.lyrics
+            itemView.setOnClickListener { clickListener.invoke(song) }
         }
 
     }

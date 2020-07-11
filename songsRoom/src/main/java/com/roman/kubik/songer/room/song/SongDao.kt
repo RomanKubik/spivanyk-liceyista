@@ -9,4 +9,7 @@ interface SongDao {
     @Query("SELECT * FROM song ORDER BY song.title")
     suspend fun getAll(): List<SongEntity>
 
+    @Query("SELECT * FROM song WHERE song.id = :songId LIMIT 1")
+    suspend fun getSongById(songId: String): SongEntity
+
 }

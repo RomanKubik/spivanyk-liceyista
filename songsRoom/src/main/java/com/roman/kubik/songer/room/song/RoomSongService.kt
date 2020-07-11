@@ -7,6 +7,10 @@ import javax.inject.Inject
 class RoomSongService @Inject constructor(private val songDao: SongDao) : SongsService {
 
     override suspend fun getAllSongs(): List<Song> {
-        return songDao.getAll().map { Song(it.id, it.title, it.lyrics) }
+        return songDao.getAll().map { it.toSong() }
+    }
+
+    override suspend fun getSongById(songId: String): Song {
+        return songDao.getSongById(songId).toSong()
     }
 }

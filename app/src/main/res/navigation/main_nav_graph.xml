@@ -9,12 +9,25 @@
         android:id="@+id/menu_home"
         android:name="com.roman.kubik.songer.home.ui.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_menu_home_to_menu_discover"
+            app:destination="@id/menu_discover" />
+    </fragment>
 
     <fragment
         android:id="@+id/menu_discover"
         android:name="com.roman.kubik.songer.songs.ui.list.SongsListFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_song_list" />
+        tools:layout="@layout/fragment_song_list">
+        <action
+            android:id="@+id/action_menu_discover_to_songDetailsFragment"
+            app:destination="@id/songDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/songDetailsFragment"
+        android:name="com.roman.kubik.songer.songs.ui.details.SongDetailsFragment"
+        android:label="SongDetailsFragment"
+        tools:layout="@layout/fragment_song_details"/>
 
 </navigation>
