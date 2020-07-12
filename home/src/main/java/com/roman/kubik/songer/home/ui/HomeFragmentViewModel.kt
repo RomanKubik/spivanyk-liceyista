@@ -7,6 +7,7 @@ import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.home.R
 import com.roman.kubik.songer.home.navigation.HomeNavigator
+import com.roman.kubik.songer.songs.domain.song.SongCategory
 
 class HomeFragmentViewModel @ViewModelInject constructor(
         private val stringProvider: StringProvider,
@@ -21,44 +22,35 @@ class HomeFragmentViewModel @ViewModelInject constructor(
     }
 
     fun onCategorySelected(category: HomeCategory) {
-        homeNavigator.navigateToCategory(category)
+        homeNavigator.navigateToCategory(category.songCategory)
     }
 
     private fun fillCategories() {
         val list = mutableListOf<HomeCategory>()
-        list.add(HomeCategory(CATEGORY_LAST_PLAYED,
+        list.add(HomeCategory(SongCategory.LAST_PLAYED,
                 stringProvider.getString(R.string.home_category_last_played),
                 stringProvider.getString(R.string.home_category_last_played_subtitle),
                 R.drawable.ic_home))
-        list.add(HomeCategory(CATEGORY_MY_SONGS,
+        list.add(HomeCategory(SongCategory.MY_SONGS,
                 stringProvider.getString(R.string.home_category_my_songs),
                 stringProvider.getString(R.string.home_category_my_songs_subtitle),
                 R.drawable.ic_home))
-        list.add(HomeCategory(CATEGORY_FAVOURITE,
+        list.add(HomeCategory(SongCategory.FAVOURITE,
                 stringProvider.getString(R.string.home_category_favourite),
                 stringProvider.getString(R.string.home_category_favourite_subtitle),
                 R.drawable.ic_home))
-        list.add(HomeCategory(CATEGORY_PATRIOTIC,
+        list.add(HomeCategory(SongCategory.PATRIOTIC,
                 stringProvider.getString(R.string.home_category_patriotic),
                 stringProvider.getString(R.string.home_category_patriotic_subtitle),
                 R.drawable.ic_home))
-        list.add(HomeCategory(CATEGORY_BONFIRE,
+        list.add(HomeCategory(SongCategory.BONFIRE,
                 stringProvider.getString(R.string.home_category_bonfire),
                 stringProvider.getString(R.string.home_category_bonfire_subtitle),
                 R.drawable.ic_home))
-        list.add(HomeCategory(CATEGORY_ABROAD,
+        list.add(HomeCategory(SongCategory.ABROAD,
                 stringProvider.getString(R.string.home_category_abroad),
                 stringProvider.getString(R.string.home_category_abroad_subtitle),
                 R.drawable.ic_home))
         _categories.value = list
-    }
-
-    companion object {
-        const val CATEGORY_LAST_PLAYED = 0
-        const val CATEGORY_MY_SONGS = 1
-        const val CATEGORY_FAVOURITE = 2
-        const val CATEGORY_PATRIOTIC = 3
-        const val CATEGORY_BONFIRE = 4
-        const val CATEGORY_ABROAD = 5
     }
 }

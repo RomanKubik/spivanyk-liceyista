@@ -4,5 +4,11 @@ interface SongsService {
 
     suspend fun getAllSongs(): List<Song>
 
+    suspend fun getAllSongs(songCategory: SongCategory): List<Song>
+
+    suspend fun getLastPlayedSongs(): List<Song>
+
+    suspend fun getFavouriteSongs(): List<Song>
+
     suspend fun getSongById(songId: String): Song
 }

@@ -15,6 +15,10 @@ import kotlinx.android.synthetic.main.fragment_song_list.*
 @AndroidEntryPoint
 class SongsListFragment: BaseFragment() {
 
+    companion object {
+        const val ARG_CATEGORY = "category"
+    }
+
     private val viewModel by viewModels<SongsListViewModel>()
     private lateinit var adapter: SongsListAdapter
 
@@ -27,6 +31,11 @@ class SongsListFragment: BaseFragment() {
         adapter = SongsListAdapter(viewModel::selectSong)
         songsList.adapter = adapter
         songsList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        setupObservables()
+        viewModel.loadSongs(arguments?.getString(ARG_CATEGORY))
+    }
+
+    private fun setupObservables() {
         viewModel.songs.observe(viewLifecycleOwner, Observer(adapter::publishItems))
     }
 }
