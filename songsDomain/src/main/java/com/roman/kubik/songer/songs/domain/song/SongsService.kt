@@ -10,5 +10,7 @@ interface SongsService {
 
     suspend fun getFavouriteSongs(): List<Song>
 
+    suspend fun searchSongs(query: String): List<Song>
+
     suspend fun getSongById(songId: String): Song
 }

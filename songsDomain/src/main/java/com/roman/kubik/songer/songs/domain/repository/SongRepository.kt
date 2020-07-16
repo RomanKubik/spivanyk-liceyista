@@ -20,4 +20,8 @@ class SongRepository @Inject constructor(private val songsService: SongsService)
 
     suspend fun getSongById(songId: String): Song = songsService.getSongById(songId)
 
+    suspend fun searchSong(query: String): List<Song> {
+        return songsService.searchSongs(query)
+    }
+
 }

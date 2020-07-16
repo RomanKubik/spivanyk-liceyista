@@ -8,26 +8,34 @@
     <fragment
         android:id="@+id/menu_home"
         android:name="com.roman.kubik.songer.home.ui.HomeFragment"
-        android:label="HomeFragment"
+        android:label="Home Fragment"
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_menu_home_to_menu_discover"
-            app:destination="@id/menu_discover" />
+            app:destination="@id/menu_discover"
+            app:launchSingleTop="true" />
     </fragment>
 
     <fragment
         android:id="@+id/menu_discover"
         android:name="com.roman.kubik.songer.songs.ui.list.SongsListFragment"
-        android:label="HomeFragment"
+        android:label="Songs"
         tools:layout="@layout/fragment_song_list">
         <action
             android:id="@+id/action_menu_discover_to_songDetailsFragment"
-            app:destination="@id/songDetailsFragment" />
+            app:destination="@id/songDetailsFragment"
+            app:launchSingleTop="true" />
     </fragment>
+
     <fragment
         android:id="@+id/songDetailsFragment"
         android:name="com.roman.kubik.songer.songs.ui.details.SongDetailsFragment"
-        android:label="SongDetailsFragment"
-        tools:layout="@layout/fragment_song_details"/>
+        android:label="SongDetails"
+        tools:layout="@layout/fragment_song_details" />
+
+    <action
+        android:id="@+id/action_global_menu_discover"
+        app:destination="@id/menu_discover"
+        app:launchSingleTop="true" />
 
 </navigation>

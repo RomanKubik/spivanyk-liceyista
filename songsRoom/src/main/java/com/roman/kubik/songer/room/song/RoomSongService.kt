@@ -36,6 +36,10 @@ class RoomSongService @Inject constructor(
         return favouriteDao.getAll().map { it.toSong() }
     }
 
+    override suspend fun searchSongs(query: String): List<Song> {
+        return songDao.search("%$query%").map { it.toSong() }
+    }
+
     override suspend fun getSongById(songId: String): Song {
         return songDao.getSongById(songId).toSong()
     }
