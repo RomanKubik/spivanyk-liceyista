@@ -3,6 +3,7 @@ package com.roman.kubik.songer.room.song
 import com.roman.kubik.songer.room.category.CategoryEntity
 import com.roman.kubik.songer.room.favourite.FavouriteDao
 import com.roman.kubik.songer.room.history.HistoryDao
+import com.roman.kubik.songer.songs.domain.models.Category
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongsService
@@ -42,5 +43,9 @@ class RoomSongService @Inject constructor(
 
     override suspend fun getSongById(songId: String): Song {
         return songDao.getSongById(songId).toSong()
+    }
+
+    override suspend fun createOrUpdateSong(song: Song) {
+        songDao.createOrUpdateSong(song.toSongEntity())
     }
 }

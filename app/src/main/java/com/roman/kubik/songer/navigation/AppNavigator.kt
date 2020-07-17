@@ -9,6 +9,7 @@ import com.roman.kubik.songer.home.navigation.HomeNavigator
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
 import com.roman.kubik.songer.songs.ui.details.SongDetailsFragment
+import com.roman.kubik.songer.songs.ui.edit.EditSongFragment
 import com.roman.kubik.songer.songs.ui.list.SongsListFragment
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -45,5 +46,14 @@ class AppNavigator @Inject constructor() :
     override fun navigateToSongDetails(songId: String) {
         val args = bundleOf(SongDetailsFragment.ARG_SONG_ID to songId)
         navController.navigate(R.id.action_menu_discover_to_songDetailsFragment, args)
+    }
+
+    override fun navigateToEditSong(songId: String) {
+        val args = bundleOf(EditSongFragment.ARG_SONG_ID to songId)
+        navController.navigate(R.id.action_songDetailsFragment_to_editSongFragment, args)
+    }
+
+    override fun navigateUp() {
+        navController.navigateUp()
     }
 }

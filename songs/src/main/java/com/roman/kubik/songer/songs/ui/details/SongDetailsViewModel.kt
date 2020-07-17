@@ -7,12 +7,14 @@ import com.roman.kubik.songer.core.navigation.SearchNavigator
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
+import com.roman.kubik.songer.songs.navigation.SongsNavigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class SongDetailsViewModel @ViewModelInject constructor(
         private val songRepository: SongRepository,
+        private val songsNavigator: SongsNavigator,
         searchNavigator: SearchNavigator
 ) : BaseSearchViewModel(searchNavigator) {
 
@@ -23,6 +25,10 @@ class SongDetailsViewModel @ViewModelInject constructor(
         GlobalScope.launch(Dispatchers.IO) {
             _song.postValue(songRepository.getSongById(songId))
         }
+    }
+
+    fun editSong() {
+        song.value?.id?.let(songsNavigator::navigateToEditSong)
     }
 
 }

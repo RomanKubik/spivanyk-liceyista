@@ -24,4 +24,8 @@ class SongRepository @Inject constructor(private val songsService: SongsService)
         return songsService.searchSongs(query)
     }
 
+    suspend fun createOrUpdateSong(song: Song) {
+        songsService.createOrUpdateSong(song)
+    }
+
 }

@@ -1,9 +1,7 @@
 package com.roman.kubik.songer.songs.ui.details
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
@@ -29,6 +27,18 @@ class SongDetailsFragment: BaseSearchFragment() {
         setupToolbar(songDetailsToobar)
         setupObservables()
         viewModel.loadSong(arguments?.getString(ARG_SONG_ID) ?: throw IllegalArgumentException("songId was not passed as argument"))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_song_details, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.edit -> viewModel.editSong()
+        }
+        return true
     }
 
     private fun setupObservables() {

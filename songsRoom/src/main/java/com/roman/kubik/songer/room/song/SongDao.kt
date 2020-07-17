@@ -1,7 +1,6 @@
 package com.roman.kubik.songer.room.song
 
-import androidx.room.Dao
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface SongDao {
@@ -17,5 +16,8 @@ interface SongDao {
 
     @Query("SELECT * FROM song WHERE song.id = :songId LIMIT 1")
     suspend fun getSongById(songId: String): SongEntity
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun createOrUpdateSong(songEntity: SongEntity)
 
 }
