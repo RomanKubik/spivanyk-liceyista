@@ -6,4 +6,6 @@ interface MainNavigator {
 
     fun setNavHostFragment(navHostFragment: NavHostFragment)
 
+    fun navigateToSongDetails(songId: String)
+
 }

@@ -31,10 +31,11 @@
         app:menu="@menu/bottom_navigation_menu" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/randomFab"
         android:layout_width="@dimen/navigation_bar_size"
         android:layout_height="@dimen/navigation_bar_size"
-        android:elevation="10dp"
         android:src="@drawable/ic_random"
+        app:elevation="10dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

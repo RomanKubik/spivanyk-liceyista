@@ -19,6 +19,14 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
+        setupViews()
         viewModel.create(navHostFragment)
+    }
+
+    private fun setupViews() {
+        randomFab.setOnClickListener {
+            bottomNavigationView.menu.findItem(R.id.menu_empty).isChecked = true
+            viewModel.navigateToRandomSong()
+        }
     }
 }

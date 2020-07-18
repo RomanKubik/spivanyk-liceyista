@@ -20,12 +20,7 @@
         android:id="@+id/menu_discover"
         android:name="com.roman.kubik.songer.songs.ui.list.SongsListFragment"
         android:label="Songs"
-        tools:layout="@layout/fragment_song_list">
-        <action
-            android:id="@+id/action_menu_discover_to_songDetailsFragment"
-            app:destination="@id/songDetailsFragment"
-            app:launchSingleTop="true" />
-    </fragment>
+        tools:layout="@layout/fragment_song_list"/>
 
     <fragment
         android:id="@+id/songDetailsFragment"
@@ -47,5 +42,9 @@
         android:name="com.roman.kubik.songer.songs.ui.edit.EditSongFragment"
         android:label="EditSong"
         tools:layout="@layout/fragment_edit_song" />
+    <action
+        android:id="@+id/action_global_songDetailsFragment"
+        app:destination="@id/songDetailsFragment"
+        app:launchSingleTop="true" />
 
 </navigation>

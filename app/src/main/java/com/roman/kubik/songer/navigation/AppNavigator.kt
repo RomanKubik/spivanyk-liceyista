@@ -45,7 +45,7 @@ class AppNavigator @Inject constructor() :
 
     override fun navigateToSongDetails(songId: String) {
         val args = bundleOf(SongDetailsFragment.ARG_SONG_ID to songId)
-        navController.navigate(R.id.action_menu_discover_to_songDetailsFragment, args)
+        navController.navigate(R.id.action_global_songDetailsFragment, args)
     }
 
     override fun navigateToEditSong(songId: String) {

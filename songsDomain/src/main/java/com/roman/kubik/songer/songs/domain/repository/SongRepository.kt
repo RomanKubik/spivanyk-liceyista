@@ -5,6 +5,8 @@ import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongCategory.*
 import com.roman.kubik.songer.songs.domain.song.SongsService
 import javax.inject.Inject
+import kotlin.math.abs
+import kotlin.random.Random
 
 class SongRepository @Inject constructor(private val songsService: SongsService) {
 
@@ -26,6 +28,12 @@ class SongRepository @Inject constructor(private val songsService: SongsService)
 
     suspend fun createOrUpdateSong(song: Song) {
         songsService.createOrUpdateSong(song)
+    }
+
+    suspend fun getRandomSong(): Song {
+        val songs = songsService.getAllSongs()
+        val randomIdx = abs(Random.nextInt()) % songs.size
+        return songs[randomIdx]
     }
 
 }
