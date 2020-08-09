@@ -38,7 +38,7 @@ class EditSongFragment: BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.save -> viewModel.save(editSongTitle.text.toString(), editSongLyrics.text.toString())
-            R.id.recognize -> viewModel.recognize(editSongLyrics.text.toString())
+            R.id.recognize -> viewModel.recognize(editSongTitle.text.toString(), editSongLyrics.text.toString())
         }
         return true
     }

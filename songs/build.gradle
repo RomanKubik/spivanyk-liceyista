@@ -41,6 +41,7 @@ dependencies {
 
     implementation project(':core')
     implementation project(':songsDomain')
+    implementation project(':chords')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 

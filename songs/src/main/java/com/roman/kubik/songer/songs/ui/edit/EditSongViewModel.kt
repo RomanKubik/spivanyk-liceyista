@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
+import com.roman.kubik.songer.chords.ChordsRecognizer
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
@@ -29,12 +30,7 @@ class EditSongViewModel @ViewModelInject constructor(
 
     fun save(title: String, lyrics: String) {
         GlobalScope.launch(Dispatchers.IO) {
-            val currentSong = song.value
-            val song =
-                    if (currentSong == null)
-                        Song(title, lyrics, SongCategory.MY_SONGS)
-                    else
-                        Song(currentSong.id, title, lyrics, currentSong.category)
+            val song = updateSong(title, lyrics)
             songRepository.createOrUpdateSong(song)
             withContext(Dispatchers.Main) {
                 songsNavigator.navigateUp()
@@ -42,7 +38,15 @@ class EditSongViewModel @ViewModelInject constructor(
         }
     }
 
-    fun recognize(lyrics: String) {
+    fun recognize(title: String, lyrics: String) {
+        _song.postValue(updateSong(title, ChordsRecognizer.recognizeChords(lyrics)))
+    }
 
+    private fun updateSong(title: String, lyrics: String): Song {
+        val currentSong = song.value
+        return if (currentSong == null)
+            Song(title, lyrics, SongCategory.MY_SONGS)
+        else
+            Song(currentSong.id, title, lyrics, currentSong.category)
     }
 }

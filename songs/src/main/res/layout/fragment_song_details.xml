@@ -64,12 +64,11 @@
                 android:id="@+id/chordsList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chords" />
 
-            <TextView
+            <com.roman.kubik.songer.songs.ui.view.LyricsTextView
                 android:id="@+id/songLyrics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
