@@ -36,4 +36,8 @@ class SongRepository @Inject constructor(private val songsService: SongsService)
         return songs[randomIdx]
     }
 
+    suspend fun addSongToLastPlayed(song: Song) {
+        songsService.addToLastPlayed(song)
+    }
+
 }

@@ -37,6 +37,10 @@ class LyricsTextView : MaterialTextView {
         }
 
     var chordsClickListener: ChordClickListener? = null
+        set(value) {
+            field = value
+            movementMethod = LinkMovementMethod.getInstance()
+        }
 
     constructor(context: Context) : this(context, null)
 
@@ -50,8 +54,6 @@ class LyricsTextView : MaterialTextView {
 
             it.recycle()
         }
-
-        movementMethod = LinkMovementMethod.getInstance()
     }
 
 

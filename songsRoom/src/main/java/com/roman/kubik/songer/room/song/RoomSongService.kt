@@ -3,6 +3,7 @@ package com.roman.kubik.songer.room.song
 import com.roman.kubik.songer.room.category.CategoryEntity
 import com.roman.kubik.songer.room.favourite.FavouriteDao
 import com.roman.kubik.songer.room.history.HistoryDao
+import com.roman.kubik.songer.room.history.HistoryEntity
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongsService
@@ -46,5 +47,10 @@ class RoomSongService @Inject constructor(
 
     override suspend fun createOrUpdateSong(song: Song) {
         songDao.createOrUpdateSong(song.toSongEntity())
+    }
+
+    override suspend fun addToLastPlayed(song: Song) {
+        val historyEntity = HistoryEntity(song.id, System.currentTimeMillis())
+        historyDao.addToHistory(historyEntity)
     }
 }
