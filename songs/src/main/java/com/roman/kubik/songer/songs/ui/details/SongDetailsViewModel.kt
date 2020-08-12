@@ -25,23 +25,40 @@ class SongDetailsViewModel @ViewModelInject constructor(
         const val ADD_TO_HISTORY_DELAY = 5000L
     }
 
-    private val _song = MutableLiveData<Song>()
-    private val _chords = MutableLiveData<List<Chord>>()
-    val song: LiveData<Song> = _song
-    val chords: LiveData<List<Chord>> = _chords
+    private val _song = MutableLiveData<SongDetails>()
+    val song: LiveData<SongDetails> = _song
 
     fun loadSong(songId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val song = songRepository.getSongById(songId)
-            _chords.postValue(ChordsImageMapper.getChords(song.lyrics).toList())
-            _song.postValue(song)
+            val songDetails = SongDetails(song, ChordsImageMapper.getChords(song.lyrics).toList())
+            _song.postValue(songDetails)
             delay(ADD_TO_HISTORY_DELAY)
             songRepository.addSongToLastPlayed(song)
         }
     }
 
     fun editSong() {
-        song.value?.id?.let(songsNavigator::navigateToEditSong)
+        song.value?.song?.id?.let(songsNavigator::navigateToEditSong)
     }
 
+    fun likeDislikeSong() {
+        song.value?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                val updatedSong = SongDetails(Song(it.song.id,
+                        it.song.title,
+                        it.song.lyrics,
+                        it.song.category,
+                        !it.song.isFavourite),
+                        it.chords)
+                songRepository.createOrUpdateSong(updatedSong.song)
+                _song.postValue(updatedSong)
+            }
+        }
+    }
+
+    data class SongDetails(
+            val song: Song,
+            val chords: List<Chord>
+    )
 }

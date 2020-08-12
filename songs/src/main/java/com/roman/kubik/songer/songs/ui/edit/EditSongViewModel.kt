@@ -47,6 +47,6 @@ class EditSongViewModel @ViewModelInject constructor(
         return if (currentSong == null)
             Song(title, lyrics, SongCategory.MY_SONGS)
         else
-            Song(currentSong.id, title, lyrics, currentSong.category)
+            Song(currentSong.id, title, lyrics, currentSong.category, currentSong.isFavourite)
     }
 }

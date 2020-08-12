@@ -4,14 +4,14 @@ import com.roman.kubik.songer.room.category.CategoryEntity
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 
-internal fun SongEntity.toSong(): Song {
+internal fun SongEntity.toSong(isFavourite: Boolean = false): Song {
     val category: SongCategory = when (categoryId) {
         CategoryEntity.CATEGORY_PATRIOTIC -> SongCategory.PATRIOTIC
         CategoryEntity.CATEGORY_BONFIRE -> SongCategory.BONFIRE
         CategoryEntity.CATEGORY_ABROAD -> SongCategory.ABROAD
         else -> SongCategory.MY_SONGS
     }
-    return Song(id, title, lyrics, category)
+    return Song(id, title, lyrics, category, isFavourite)
 }
 
 internal fun Song.toSongEntity(): SongEntity {

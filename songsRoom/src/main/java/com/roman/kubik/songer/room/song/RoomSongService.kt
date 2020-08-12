@@ -2,6 +2,7 @@ package com.roman.kubik.songer.room.song
 
 import com.roman.kubik.songer.room.category.CategoryEntity
 import com.roman.kubik.songer.room.favourite.FavouriteDao
+import com.roman.kubik.songer.room.favourite.FavouriteEntity
 import com.roman.kubik.songer.room.history.HistoryDao
 import com.roman.kubik.songer.room.history.HistoryEntity
 import com.roman.kubik.songer.songs.domain.song.Song
@@ -42,11 +43,18 @@ class RoomSongService @Inject constructor(
     }
 
     override suspend fun getSongById(songId: String): Song {
-        return songDao.getSongById(songId).toSong()
+        val isFavourite = favouriteDao.isSongExists(songId) != null
+        return songDao.getSongById(songId).toSong(isFavourite)
     }
 
     override suspend fun createOrUpdateSong(song: Song) {
         songDao.createOrUpdateSong(song.toSongEntity())
+        if (song.isFavourite) {
+            favouriteDao.add(FavouriteEntity(song.id))
+        } else {
+            favouriteDao.delete(song.id)
+        }
+
     }
 
     override suspend fun addToLastPlayed(song: Song) {
