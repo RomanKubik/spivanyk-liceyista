@@ -57,6 +57,10 @@ class SongDetailsViewModel @ViewModelInject constructor(
         }
     }
 
+    fun shareSong() {
+        song.value?.song?.let(songsNavigator::shareSong)
+    }
+
     data class SongDetails(
             val song: Song,
             val chords: List<Chord>

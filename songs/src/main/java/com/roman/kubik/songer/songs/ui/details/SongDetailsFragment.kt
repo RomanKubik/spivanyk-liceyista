@@ -54,6 +54,7 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         when (item.itemId) {
             R.id.edit -> viewModel.editSong()
             R.id.addToFavourite -> viewModel.likeDislikeSong()
+            R.id.share -> viewModel.shareSong()
         }
         return true
     }

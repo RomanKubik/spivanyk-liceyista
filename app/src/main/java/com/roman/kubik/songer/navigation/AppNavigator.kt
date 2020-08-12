@@ -1,11 +1,13 @@
 package com.roman.kubik.songer.navigation
 
+import android.content.Intent
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.core.navigation.SearchNavigator
 import com.roman.kubik.songer.home.navigation.HomeNavigator
+import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
 import com.roman.kubik.songer.songs.ui.details.SongDetailsFragment
@@ -51,6 +53,15 @@ class AppNavigator @Inject constructor() :
     override fun navigateToEditSong(songId: String) {
         val args = bundleOf(EditSongFragment.ARG_SONG_ID to songId)
         navController.navigate(R.id.action_songDetailsFragment_to_editSongFragment, args)
+    }
+
+    override fun shareSong(song: Song) {
+        val intent = Intent()
+                .setAction(Intent.ACTION_SEND)
+                .setType("text/plain")
+                .putExtra(Intent.EXTRA_TITLE, song.title)
+                .putExtra(Intent.EXTRA_TEXT, song.lyrics)
+        navHostFragment.activity?.startActivity(intent)
     }
 
     override fun navigateUp() {
