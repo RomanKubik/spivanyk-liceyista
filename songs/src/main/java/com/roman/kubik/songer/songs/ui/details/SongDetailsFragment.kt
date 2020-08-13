@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
+import com.roman.kubik.songer.songs.ui.utils.toUiCategory
 import com.roman.kubik.songer.songs.ui.view.ChordClickListener
 import com.roman.kubik.songs.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +20,7 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         const val ARG_SONG_ID = "songId"
     }
 
-    private lateinit var bookmarkItem: MenuItem
+    private var bookmarkItem: MenuItem? = null
 
     private val chordsAdapter: SongChordsAdapter = SongChordsAdapter(this)
     private var chords: List<Chord> = emptyList()
@@ -65,9 +66,10 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
             val song = it.song
             songTitle.text = song.title
             songLyrics.text = song.lyrics
+            songCategory.setText(song.category.toUiCategory())
             chords = it.chords.toList()
             chordsAdapter.publishItems(chords)
-            bookmarkItem.setIcon(if (song.isFavourite) R.drawable.ic_is_favourite else R.drawable.ic_is_not_favourite)
+            bookmarkItem?.setIcon(if (song.isFavourite) R.drawable.ic_is_favourite else R.drawable.ic_is_not_favourite)
         })
     }
 
