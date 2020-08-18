@@ -1,3 +1,6 @@
+include ':settings:preferences'
+include ':settings:domain'
+include ':settings:presentation'
 include ':chords'
 include ':songsDomain'
 include ':songsRoom'

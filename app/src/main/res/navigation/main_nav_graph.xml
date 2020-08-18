@@ -46,5 +46,10 @@
         android:id="@+id/action_global_songDetailsFragment"
         app:destination="@id/songDetailsFragment"
         app:launchSingleTop="true" />
+    <fragment
+        android:id="@+id/menu_setting"
+        android:name="com.roman.kubik.songer.settings.presentation.ui.settings.SettingsFragment"
+        tools:layout="@layout/fragment_settings"
+        android:label="SettingsFragment" />
 
 </navigation>

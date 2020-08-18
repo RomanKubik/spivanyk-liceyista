@@ -1,10 +1,12 @@
 package com.roman.kubik.songer.di
 
+import com.roman.kubik.settings.domain.preference.PreferenceService
 import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.data.core.StringProviderImpl
 import com.roman.kubik.songer.room.database.DatabaseManager
 import com.roman.kubik.songer.room.database.DatabaseManagerImpl
 import com.roman.kubik.songer.room.song.RoomSongService
+import com.roman.kubik.songer.settings.preferences.SharedPreferencesService
 import com.roman.kubik.songer.songs.domain.song.SongsService
 import dagger.Binds
 import dagger.Module
@@ -23,4 +25,7 @@ abstract class AppBinderModule {
 
     @Binds
     abstract fun bindRoomSongService(roomSongService: RoomSongService): SongsService
+
+    @Binds
+    abstract fun bindPreferencesService(preferencesService: SharedPreferencesService): PreferenceService
 }
