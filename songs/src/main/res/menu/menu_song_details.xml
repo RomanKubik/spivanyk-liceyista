@@ -18,4 +18,9 @@
         android:id="@+id/edit"
         android:title="Edit"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/tonality"
+        android:title="Tonality"
+        app:showAsAction="never" />
 </menu>

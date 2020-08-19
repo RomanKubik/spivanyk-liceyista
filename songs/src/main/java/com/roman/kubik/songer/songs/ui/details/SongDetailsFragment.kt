@@ -37,6 +37,7 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         super.onActivityCreated(savedInstanceState)
         setupToolbar(songDetailsToobar)
         setupChordsRecyclerView()
+        setupTonalityListeners()
         setupObservables()
         viewModel.loadSong(arguments?.getString(ARG_SONG_ID)
                 ?: throw IllegalArgumentException("songId was not passed as argument"))
@@ -45,21 +46,6 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     private fun setupChordsRecyclerView() {
         chordsList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         chordsList.adapter = chordsAdapter
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_song_details, menu)
-        bookmarkItem = menu.findItem(R.id.addToFavourite)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.edit -> viewModel.editSong()
-            R.id.addToFavourite -> viewModel.likeDislikeSong()
-            R.id.share -> viewModel.shareSong()
-        }
-        return true
     }
 
     private fun setupObservables() {
@@ -78,6 +64,31 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
             chordsAdapter.publishItems(chords)
             bookmarkItem?.setIcon(if (song.isFavourite) R.drawable.ic_is_favourite else R.drawable.ic_is_not_favourite)
         })
+    }
+
+    private fun setupTonalityListeners() {
+        transpositionUp.setOnClickListener {
+            viewModel.transpositionUp()
+        }
+        transpositionDown.setOnClickListener {
+            viewModel.transpositionDown()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_song_details, menu)
+        bookmarkItem = menu.findItem(R.id.addToFavourite)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.edit -> viewModel.editSong()
+            R.id.addToFavourite -> viewModel.likeDislikeSong()
+            R.id.share -> viewModel.shareSong()
+            R.id.tonality -> transpositionContainer.isVisible = !transpositionContainer.isVisible
+        }
+        return true
     }
 
     override fun onChordClicked(chordName: String) {

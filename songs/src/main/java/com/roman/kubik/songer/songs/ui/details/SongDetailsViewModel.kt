@@ -9,6 +9,7 @@ import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.navigation.SearchNavigator
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.chords.ChordsImageMapper
+import com.roman.kubik.songer.chords.ChordsTransposer
 import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
@@ -51,20 +52,37 @@ class SongDetailsViewModel @ViewModelInject constructor(
     fun likeDislikeSong() {
         song.value?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                val updatedSong = SongDetails(Song(it.song.id,
-                        it.song.title,
-                        it.song.lyrics,
-                        it.song.category,
-                        !it.song.isFavourite),
-                        it.chords)
-                songRepository.createOrUpdateSong(updatedSong.song)
-                _song.postValue(updatedSong)
+                val updatedSong = it.copy(song = it.song.copy(isFavourite = !it.song.isFavourite))
+                updateSong(updatedSong)
             }
         }
     }
 
     fun shareSong() {
         song.value?.song?.let(songsNavigator::shareSong)
+    }
+
+    fun transpositionUp() {
+        song.value?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                val updatedSong = it.copy(song = it.song.copy(lyrics = ChordsTransposer.transposeUp(it.song.lyrics)))
+                updateSong(updatedSong)
+            }
+        }
+    }
+
+    fun transpositionDown() {
+        song.value?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                val updatedSong = it.copy(song = it.song.copy(lyrics = ChordsTransposer.transposeDown(it.song.lyrics)))
+                updateSong(updatedSong)
+            }
+        }
+    }
+
+    private suspend fun updateSong(songDetails: SongDetails) {
+        songRepository.createOrUpdateSong(songDetails.song)
+        _song.postValue(songDetails)
     }
 
     data class SongDetails(
