@@ -10,6 +10,11 @@ import kotlinx.android.synthetic.main.item_song_list.view.*
 
 class SongsListAdapter constructor(private val clickListener: (Song) -> Unit) : RecyclerView.Adapter<SongsListAdapter.SongHolder>() {
     private var items = mutableListOf<Song>()
+    var showChords: Boolean = true
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -19,7 +24,7 @@ class SongsListAdapter constructor(private val clickListener: (Song) -> Unit) : 
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: SongHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], showChords)
     }
 
     fun publishItems(items: List<Song>) {
@@ -30,8 +35,9 @@ class SongsListAdapter constructor(private val clickListener: (Song) -> Unit) : 
 
     class SongHolder(itemView: View, private val clickListener: (Song) -> Unit) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(song: Song) {
+        fun bind(song: Song, showChords: Boolean) {
             itemView.title.text = song.title
+            itemView.lyrics.showChords = showChords
             itemView.lyrics.text = song.lyrics
             itemView.setOnClickListener { clickListener.invoke(song) }
         }

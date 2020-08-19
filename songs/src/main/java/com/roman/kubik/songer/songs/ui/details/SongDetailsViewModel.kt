@@ -4,6 +4,8 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.roman.kubik.settings.domain.preference.Preferences
+import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.navigation.SearchNavigator
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.chords.ChordsImageMapper
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 
 class SongDetailsViewModel @ViewModelInject constructor(
         private val songRepository: SongRepository,
+        private val settingsRepository: SettingsRepository,
         private val songsNavigator: SongsNavigator,
         searchNavigator: SearchNavigator
 ) : BaseSearchViewModel(searchNavigator) {
@@ -26,10 +29,13 @@ class SongDetailsViewModel @ViewModelInject constructor(
     }
 
     private val _song = MutableLiveData<SongDetails>()
+    private val _preferences = MutableLiveData<Preferences>()
     val song: LiveData<SongDetails> = _song
+    val preferences: LiveData<Preferences> = _preferences
 
     fun loadSong(songId: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            _preferences.postValue(settingsRepository.getPreferences())
             val song = songRepository.getSongById(songId)
             val songDetails = SongDetails(song, ChordsImageMapper.getChords(song.lyrics).toList())
             _song.postValue(songDetails)

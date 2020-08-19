@@ -2,9 +2,11 @@ package com.roman.kubik.songer.songs.ui.details
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
 import com.roman.kubik.songer.songs.ui.utils.toUiCategory
@@ -62,6 +64,11 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
 
     private fun setupObservables() {
         songLyrics.chordsClickListener = this
+        viewModel.preferences.observe(viewLifecycleOwner, Observer {
+            chordsList.isVisible = it.showChords
+            songLyrics.showChords = it.showChords
+            chordsAdapter.selectedInstrument = it.selectedInstrument
+        })
         viewModel.song.observe(viewLifecycleOwner, Observer {
             val song = it.song
             songTitle.text = song.title
@@ -74,6 +81,9 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     }
 
     override fun onChordClicked(chordName: String) {
-        ChordsDialog(requireContext(), chords).showChord(chordName)
+        ChordsDialog(requireContext(),
+                chords,
+                viewModel.preferences.value?.selectedInstrument ?: Instrument.GUITAR)
+                .showChord(chordName)
     }
 }

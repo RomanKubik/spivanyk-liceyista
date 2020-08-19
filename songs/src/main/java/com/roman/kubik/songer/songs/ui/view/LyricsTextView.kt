@@ -20,6 +20,7 @@ class LyricsTextView : MaterialTextView {
 
     companion object {
         private val bracketsPattern: Pattern = ChordsFormatter.bracketsPattern
+        private val emptyLinePattern = Pattern.compile("(\\n\\W+\\n)")
     }
 
     @ColorInt
@@ -42,6 +43,12 @@ class LyricsTextView : MaterialTextView {
             movementMethod = LinkMovementMethod.getInstance()
         }
 
+    var showChords: Boolean = true
+        set(value) {
+            field = value
+            invalidate()
+        }
+
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, android.R.attr.textViewStyle)
@@ -62,10 +69,14 @@ class LyricsTextView : MaterialTextView {
     }
 
     private fun format(text: String): CharSequence {
-        val selections = findSelections(text)
-        val formattedText = clearFormatting(text)
-        val spannableString = SpannableString(formattedText)
-        return attachClickableSpan(spannableString, selections)
+        return if (showChords) {
+            val selections = findSelections(text)
+            val formattedText = clearFormatting(text)
+            val spannableString = SpannableString(formattedText)
+            attachClickableSpan(spannableString, selections)
+        } else {
+            removeChords(text)
+        }
     }
 
     private fun findSelections(text: String): List<IntRange> {
@@ -108,5 +119,27 @@ class LyricsTextView : MaterialTextView {
             spannableString.setSpan(clickable, range.first, range.last, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         return spannableString
+    }
+
+    private fun removeChords(text: String): String {
+        val matcher = ChordsFormatter.bracketsPattern.matcher(text)
+        var str = text
+        while (matcher.find()) {
+            matcher.group(1)?.apply {
+                str = str.replace(toRegex(), " ")
+            }
+        }
+        return removeEmptyLines(str)
+    }
+
+    private fun removeEmptyLines(text: String): String {
+        var str = text
+        val matcher = emptyLinePattern.matcher(str)
+        while (matcher.find()) {
+            matcher.group(1)?.apply {
+                str = str.replace(toRegex(), "\n")
+            }
+        }
+        return str
     }
 }

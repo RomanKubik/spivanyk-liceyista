@@ -51,6 +51,7 @@ class SongsListFragment: BaseSearchFragment() {
     }
 
     private fun setupObservables() {
+        viewModel.preferences.observe(viewLifecycleOwner, Observer { adapter.showChords = it.showChords })
         viewModel.songs.observe(viewLifecycleOwner, Observer(adapter::publishItems))
     }
 }

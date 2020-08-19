@@ -105,7 +105,7 @@ object ChordsImageMapper {
     fun getChords(text: String): Set<Chord> {
         return getStringChords(text).map {
             val chord = unifyChord(it)
-            val path = chordImageMap[chord]?.format("guitar")
+            val path = chordImageMap[chord]
             Chord(it, path)
         }.toSet()
     }
