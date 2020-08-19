@@ -48,8 +48,8 @@ dependencies {
 
     implementation project(':core')
     implementation project(':home')
-    implementation project(':songs')
-    implementation project(':songsRoom')
+    implementation project(':song:songs')
+    implementation project(':song:songsRoom')
 
     implementation project(':settings:presentation')
     implementation project(':settings:preferences')
