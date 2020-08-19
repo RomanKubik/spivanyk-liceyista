@@ -50,4 +50,8 @@ class SettingsViewModel @ViewModelInject constructor(private val settingsReposit
             _preferences.postValue(preferences)
         }
     }
+
+    fun factoryReset() {
+
+    }
 }
