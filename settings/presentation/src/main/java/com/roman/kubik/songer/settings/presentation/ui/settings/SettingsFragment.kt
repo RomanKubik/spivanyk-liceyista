@@ -23,12 +23,15 @@ class SettingsFragment: BaseFragment() {
         return inflater.inflate(R.layout.fragment_settings, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        showChords.settingsItemSwitch.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.showChords(isChecked)
+        }
         viewModel.preferences.observe(viewLifecycleOwner, Observer {
-            showChords.settingsItemSwitch.isChecked = it.showChords
-            preferredInstrument.settingsItemValue.text = it.selectedInstrument.name
-            preferredTheme.settingsItemValue.text = it.uiMode.name
+            showChords.isChecked = it.showChords
+            preferredInstrument.setSettingsValue(it.selectedInstrument.name)
+            preferredTheme.setSettingsValue(it.uiMode.name)
         })
     }
 }

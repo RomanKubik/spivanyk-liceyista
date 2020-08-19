@@ -9,22 +9,22 @@
         android:id="@+id/settingsItemTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/settingsItemValue"
         app:layout_constraintEnd_toStartOf="@+id/settingsItemSwitch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Title" />
 
     <TextView
         android:id="@+id/settingsItemValue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/settingsItemSwitch"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settingsItemTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/settingsItemTitle"
+        tools:text="Value" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/settingsItemSwitch"

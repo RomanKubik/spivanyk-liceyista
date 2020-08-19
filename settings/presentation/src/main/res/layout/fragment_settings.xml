@@ -29,22 +29,28 @@
             <com.roman.kubik.songer.settings.presentation.ui.view.SwitchSettingsItemView
                 android:id="@+id/showChords"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:settingsTitle="Show chords"
+                app:settingsValue="Display chords with song"/>
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/preferredInstrument"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:settingsTitle="Preferred instrument" />
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/preferredTheme"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:settingsTitle="Preferred theme"/>
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/factoryReset"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:settingsTitle="Factory reset"
+                app:settingsValue="Reset database to factory configuration" />
         </LinearLayout>
     </ScrollView>
 
