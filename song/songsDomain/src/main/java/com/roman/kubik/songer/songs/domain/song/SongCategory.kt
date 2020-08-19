@@ -7,6 +7,7 @@ enum class SongCategory {
     FAVOURITE,
     PATRIOTIC,
     BONFIRE,
-    ABROAD
+    ABROAD,
+    WEB
 
 }

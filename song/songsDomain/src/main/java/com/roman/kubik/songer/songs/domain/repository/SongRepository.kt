@@ -5,39 +5,76 @@ import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongCategory.*
 import com.roman.kubik.songer.songs.domain.song.SongsService
 import javax.inject.Inject
+import javax.inject.Named
 import kotlin.math.abs
 import kotlin.random.Random
 
-class SongRepository @Inject constructor(private val songsService: SongsService) {
+class SongRepository @Inject constructor(@Named("SongServices") private val songsServices: List<SongsService>) {
 
-    suspend fun getAllSongs(): List<Song> = songsService.getAllSongs()
-
-    suspend fun getAllSongs(category: SongCategory): List<Song> {
-        return when (category) {
-            LAST_PLAYED -> songsService.getLastPlayedSongs()
-            FAVOURITE -> songsService.getFavouriteSongs()
-            else -> songsService.getAllSongs(category)
+    suspend fun getAllSongs(): List<Song> {
+        val result = mutableListOf<Song>()
+        for (songsService in songsServices) {
+            result.addAll(songsService.getAllSongs())
         }
+        return result
     }
 
-    suspend fun getSongById(songId: String): Song = songsService.getSongById(songId)
+    suspend fun getAllSongs(category: SongCategory): List<Song> {
+        val result = mutableListOf<Song>()
+        for (songsService in songsServices) {
+            val r = when (category) {
+                LAST_PLAYED -> songsService.getLastPlayedSongs()
+                FAVOURITE -> songsService.getFavouriteSongs()
+                else -> songsService.getAllSongs(category)
+            }
+            result.addAll(r)
+        }
+        return result
+    }
+
+    suspend fun getSongById(songId: String): Song {
+        for (songsService in songsServices) {
+            try {
+                return songsService.getSongById(songId)
+            } catch (e: Exception) {
+                /* ignore */
+            }
+        }
+        throw Exception()
+    }
 
     suspend fun searchSong(query: String): List<Song> {
-        return songsService.searchSongs(query)
+        val result = mutableListOf<Song>()
+        for (songsService in songsServices) {
+            result.addAll(songsService.searchSongs(query))
+        }
+        return result
     }
 
     suspend fun createOrUpdateSong(song: Song) {
-        songsService.createOrUpdateSong(song)
+        for (songsService in songsServices) {
+            try {
+                songsService.createOrUpdateSong(song)
+            } catch (e: Exception) {
+                /* ignore */
+            }
+        }
     }
 
     suspend fun getRandomSong(): Song {
-        val songs = songsService.getAllSongs()
-        val randomIdx = abs(Random.nextInt()) % songs.size
-        return songs[randomIdx]
+        for (songsService in songsServices) {
+            val songs = songsService.getAllSongs()
+            if (songs.isEmpty()) continue
+            val randomIdx = abs(Random.nextInt()) % songs.size
+            return songs[randomIdx]
+        }
+        throw Exception()
     }
 
     suspend fun addSongToLastPlayed(song: Song) {
-        songsService.addToLastPlayed(song)
+        for (songsService in songsServices) {
+            songsService.addToLastPlayed(song)
+        }
     }
 
 }

@@ -38,6 +38,8 @@ buildscript {
 
             'room'            : '2.2.5',
 
+            'jsoup'           : '1.11.1',
+
             'junit'           : '4.13',
             'mockito'         : '2.23.3'
     ]
