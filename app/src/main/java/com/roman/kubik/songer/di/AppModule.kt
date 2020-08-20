@@ -7,15 +7,17 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import javax.inject.Named
+import dagger.multibindings.ElementsIntoSet
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 class AppModule {
 
     @Provides
-    @Named("SongServices")
-    fun getSongServices(roomSongService: RoomSongService, myChordsSongsService: MyChordsSongsService): List<SongsService> {
-        return listOf(roomSongService, myChordsSongsService)
+    @Singleton
+    @ElementsIntoSet
+    fun getSongServices(roomSongService: RoomSongService, myChordsSongsService: MyChordsSongsService): Set<SongsService> {
+        return linkedSetOf(roomSongService, myChordsSongsService)
     }
 }

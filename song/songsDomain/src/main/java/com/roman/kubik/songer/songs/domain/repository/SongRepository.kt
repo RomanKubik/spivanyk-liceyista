@@ -5,11 +5,10 @@ import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongCategory.*
 import com.roman.kubik.songer.songs.domain.song.SongsService
 import javax.inject.Inject
-import javax.inject.Named
 import kotlin.math.abs
 import kotlin.random.Random
 
-class SongRepository @Inject constructor(@Named("SongServices") private val songsServices: List<SongsService>) {
+class SongRepository @Inject constructor(private val songsServices: Set<@JvmSuppressWildcards SongsService>) {
 
     suspend fun getAllSongs(): List<Song> {
         val result = mutableListOf<Song>()
@@ -40,7 +39,7 @@ class SongRepository @Inject constructor(@Named("SongServices") private val song
                 /* ignore */
             }
         }
-        throw Exception()
+        throw IllegalArgumentException("Couldn't find song with id: $songId")
     }
 
     suspend fun searchSong(query: String): List<Song> {

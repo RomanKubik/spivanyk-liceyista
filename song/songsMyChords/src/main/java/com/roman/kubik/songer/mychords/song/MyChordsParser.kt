@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.mychords.song
 
+import com.roman.kubik.songer.chords.ChordsRecognizer
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import org.jsoup.nodes.Document
@@ -31,7 +32,10 @@ object MyChordsParser {
 
     fun parseSongDetails(document: Document, songId: String): Song {
         val title = document.selectFirst(SONG_TITLE_ITEM).text()
-        val lyrics: String = document.selectFirst(SONG_LYRICS_ITEM).text().replace(LYRICS_COPYRIGHT, "")
+        val lyrics: String = ChordsRecognizer.recognizeChords(document
+                .selectFirst(SONG_LYRICS_ITEM)
+                .text()
+                .replace(LYRICS_COPYRIGHT, ""))
         return Song(songId, title, lyrics, SongCategory.WEB, false)
     }
 
