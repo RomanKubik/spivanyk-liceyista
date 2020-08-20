@@ -13,6 +13,7 @@ import com.roman.kubik.songer.chords.ChordsTransposer
 import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
+import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -40,8 +41,10 @@ class SongDetailsViewModel @ViewModelInject constructor(
             val song = songRepository.getSongById(songId)
             val songDetails = SongDetails(song, ChordsImageMapper.getChords(song.lyrics).toList())
             _song.postValue(songDetails)
-            delay(ADD_TO_HISTORY_DELAY)
-            songRepository.addSongToLastPlayed(song)
+            if (song.category != SongCategory.WEB) {
+                delay(ADD_TO_HISTORY_DELAY)
+                songRepository.addSongToLastPlayed(song)
+            }
         }
     }
 
