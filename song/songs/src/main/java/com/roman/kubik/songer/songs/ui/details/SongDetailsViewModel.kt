@@ -52,6 +52,10 @@ class SongDetailsViewModel @ViewModelInject constructor(
         song.value?.song?.id?.let(songsNavigator::navigateToEditSong)
     }
 
+    fun shareSong() {
+        song.value?.song?.let(songsNavigator::shareSong)
+    }
+
     fun likeDislikeSong() {
         song.value?.let {
             viewModelScope.launch(Dispatchers.IO) {
@@ -59,10 +63,6 @@ class SongDetailsViewModel @ViewModelInject constructor(
                 updateSong(updatedSong)
             }
         }
-    }
-
-    fun shareSong() {
-        song.value?.song?.let(songsNavigator::shareSong)
     }
 
     fun transpositionUp() {

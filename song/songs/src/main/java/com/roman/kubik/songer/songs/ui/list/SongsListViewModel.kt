@@ -3,6 +3,7 @@ package com.roman.kubik.songer.songs.ui.list
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.roman.kubik.settings.domain.preference.Preferences
 import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.navigation.SearchNavigator
@@ -11,9 +12,8 @@ import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
-import com.roman.kubik.songer.songs.ui.details.SongDetailsViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class SongsListViewModel @ViewModelInject constructor(
@@ -23,13 +23,15 @@ class SongsListViewModel @ViewModelInject constructor(
         searchNavigator: SearchNavigator
 ) : BaseSearchViewModel(searchNavigator) {
 
+    private var searchJob: Job? = null
+
     private val _songs = MutableLiveData<List<Song>>(emptyList())
     private val _preferences = MutableLiveData<Preferences>()
     val songs: LiveData<List<Song>> = _songs
     val preferences: LiveData<Preferences> = _preferences
 
     fun loadSongs(categoryId: String?) {
-        GlobalScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             _preferences.postValue(settingsRepository.getPreferences())
             val result = if (categoryId == null) {
                 songRepository.getAllSongs()
@@ -41,8 +43,10 @@ class SongsListViewModel @ViewModelInject constructor(
     }
 
     fun searchSongs(query: String) {
-        GlobalScope.launch(Dispatchers.IO) {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch(Dispatchers.IO) {
             _songs.postValue(songRepository.searchSong(query))
+            searchJob = null
         }
     }
 

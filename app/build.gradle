@@ -77,7 +77,7 @@ dependencies {
     testImplementation "org.mockito:mockito-core:$versions.mockito"
     testImplementation 'org.mockito:mockito-inline:3.3.3'
     testImplementation 'com.github.dpreussler:android-tdd-utils:v0.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 }

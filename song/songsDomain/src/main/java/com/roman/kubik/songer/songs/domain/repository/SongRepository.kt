@@ -4,6 +4,8 @@ import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongCategory.*
 import com.roman.kubik.songer.songs.domain.song.SongsService
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.abs
 import kotlin.random.Random
@@ -11,23 +13,41 @@ import kotlin.random.Random
 class SongRepository @Inject constructor(private val songsServices: Set<@JvmSuppressWildcards SongsService>) {
 
     suspend fun getAllSongs(): List<Song> {
-        val result = mutableListOf<Song>()
-        for (songsService in songsServices) {
-            result.addAll(songsService.getAllSongs())
+        val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
+        coroutineScope {
+            songsServices.forEachIndexed { index, songsService ->
+                launch { resultPairs.add(index to songsService.getAllSongs()) }
+            }
         }
+        resultPairs.sortBy { it.first }
+
+        val result = mutableListOf<Song>()
+        resultPairs.forEach { pair ->
+            result.addAll(pair.second)
+        }
+
         return result
     }
 
     suspend fun getAllSongs(category: SongCategory): List<Song> {
-        val result = mutableListOf<Song>()
-        for (songsService in songsServices) {
-            val r = when (category) {
-                LAST_PLAYED -> songsService.getLastPlayedSongs()
-                FAVOURITE -> songsService.getFavouriteSongs()
-                else -> songsService.getAllSongs(category)
+        val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
+        coroutineScope {
+            songsServices.forEachIndexed { index, songsService ->
+                val r = when (category) {
+                    LAST_PLAYED -> songsService.getLastPlayedSongs()
+                    FAVOURITE -> songsService.getFavouriteSongs()
+                    else -> songsService.getAllSongs(category)
+                }
+                resultPairs.add(index to r)
             }
-            result.addAll(r)
         }
+        resultPairs.sortBy { it.first }
+
+        val result = mutableListOf<Song>()
+        resultPairs.forEach { pair ->
+            result.addAll(pair.second)
+        }
+
         return result
     }
 
@@ -43,10 +63,19 @@ class SongRepository @Inject constructor(private val songsServices: Set<@JvmSupp
     }
 
     suspend fun searchSong(query: String): List<Song> {
-        val result = mutableListOf<Song>()
-        for (songsService in songsServices) {
-            result.addAll(songsService.searchSongs(query))
+        val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
+        coroutineScope {
+            songsServices.forEachIndexed { index, songsService ->
+                launch { resultPairs.add(index to songsService.searchSongs(query)) }
+            }
         }
+        resultPairs.sortBy { it.first }
+
+        val result = mutableListOf<Song>()
+        resultPairs.forEach { pair ->
+            result.addAll(pair.second)
+        }
+
         return result
     }
 
