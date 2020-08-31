@@ -7,21 +7,25 @@ import androidx.navigation.fragment.NavHostFragment
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.core.navigation.SearchNavigator
 import com.roman.kubik.songer.home.navigation.HomeNavigator
+import com.roman.kubik.songer.settings.presentation.navigation.SettingsNavigator
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
 import com.roman.kubik.songer.songs.ui.details.SongDetailsFragment
 import com.roman.kubik.songer.songs.ui.edit.EditSongFragment
 import com.roman.kubik.songer.songs.ui.list.SongsListFragment
+import com.roman.kubik.songer.ui.main.MainActivity
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.system.exitProcess
 
 @Singleton
 class AppNavigator @Inject constructor() :
         MainNavigator,
         SearchNavigator,
         HomeNavigator,
-        SongsNavigator {
+        SongsNavigator,
+        SettingsNavigator {
 
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
@@ -66,5 +70,15 @@ class AppNavigator @Inject constructor() :
 
     override fun navigateUp() {
         navController.navigateUp()
+    }
+
+    override fun restart() {
+        navHostFragment.activity?.apply {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+            exitProcess(0)
+        }
+
     }
 }

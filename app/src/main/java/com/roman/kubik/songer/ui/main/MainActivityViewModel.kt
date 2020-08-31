@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.ui.main
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.NavHostFragment
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.navigation.MainNavigator
@@ -25,7 +26,7 @@ class MainActivityViewModel @ViewModelInject constructor(
     }
 
     fun navigateToRandomSong() {
-        GlobalScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             val song = songRepository.getRandomSong()
             withContext(Dispatchers.Main) {
                 navigator.navigateToSongDetails(song.id)

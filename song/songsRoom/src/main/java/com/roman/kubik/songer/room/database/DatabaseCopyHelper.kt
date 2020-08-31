@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class DatabaseCopyHelper @Inject constructor(private val context: Context) : SQLiteOpenHelper(context, dbName, null, DB_VERSION) {
 
-    private val dbPath: String = context.applicationInfo.dataDir.toString() + "/databases/"
+    internal val dbPath: String = context.applicationInfo.dataDir.toString() + "/databases/"
 
     fun createDataBase() {
         //If the database does not exist, copy it from the assets.
@@ -59,6 +59,6 @@ class DatabaseCopyHelper @Inject constructor(private val context: Context) : SQL
     companion object {
         private val TAG = DatabaseCopyHelper::class.java.simpleName
         private const val DB_VERSION = 1
-        private const val dbName: String = DatabaseManager.DB_NAME
+        internal const val dbName: String = DatabaseManager.DB_NAME
     }
 }

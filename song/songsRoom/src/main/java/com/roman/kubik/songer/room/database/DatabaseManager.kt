@@ -1,7 +1,8 @@
 package com.roman.kubik.songer.room.database
 
-interface DatabaseManager {
-    suspend fun reset()
+import com.roman.kubik.settings.domain.database.DatabaseController
+
+interface DatabaseManager : DatabaseController {
     suspend fun createDatabase()
 
     companion object {

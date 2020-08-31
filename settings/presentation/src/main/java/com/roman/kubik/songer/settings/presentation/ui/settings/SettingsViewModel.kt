@@ -4,15 +4,22 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.roman.kubik.settings.domain.database.DatabaseController
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.settings.domain.preference.Preferences
 import com.roman.kubik.settings.domain.preference.UiMode
 import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
+import com.roman.kubik.songer.settings.presentation.navigation.SettingsNavigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class SettingsViewModel @ViewModelInject constructor(private val settingsRepository: SettingsRepository) : BaseViewModel() {
+class SettingsViewModel @ViewModelInject constructor(
+        private val settingsRepository: SettingsRepository,
+        private val databaseController: DatabaseController,
+        private val settingsNavigator: SettingsNavigator
+) : BaseViewModel() {
 
     private val _preferences = MutableLiveData<Preferences>()
     val preferences: LiveData<Preferences> = _preferences
@@ -25,21 +32,21 @@ class SettingsViewModel @ViewModelInject constructor(private val settingsReposit
 
     fun showChords(show: Boolean) {
         preferences.value?.let {
-            val prefs = Preferences(it.selectedInstrument, it.uiMode, show)
+            val prefs = it.copy(showChords = show)
             updatePreferences(prefs)
         }
     }
 
     fun selectInstrument(instrument: Instrument) {
         preferences.value?.let {
-            val prefs = Preferences(instrument, it.uiMode, it.showChords)
+            val prefs = it.copy(selectedInstrument = instrument)
             updatePreferences(prefs)
         }
     }
 
     fun changeUiMode(uiMode: UiMode) {
         preferences.value?.let {
-            val prefs = Preferences(it.selectedInstrument, uiMode, it.showChords)
+            val prefs = it.copy(uiMode = uiMode)
             updatePreferences(prefs)
         }
     }
@@ -52,6 +59,11 @@ class SettingsViewModel @ViewModelInject constructor(private val settingsReposit
     }
 
     fun factoryReset() {
-
+        viewModelScope.launch(Dispatchers.IO) {
+            databaseController.reset()
+            withContext(Dispatchers.Main) {
+                settingsNavigator.restart()
+            }
+        }
     }
 }

@@ -50,12 +50,12 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
 
     private fun setupObservables() {
         songLyrics.chordsClickListener = this
-        viewModel.preferences.observe(viewLifecycleOwner, Observer {
+        viewModel.preferences.observe(viewLifecycleOwner, {
             chordsList.isVisible = it.showChords
             songLyrics.showChords = it.showChords
             chordsAdapter.selectedInstrument = it.selectedInstrument
         })
-        viewModel.song.observe(viewLifecycleOwner, Observer {
+        viewModel.song.observe(viewLifecycleOwner, {
             val song = it.song
             songTitle.text = song.title
             songLyrics.text = song.lyrics
