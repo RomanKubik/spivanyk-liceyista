@@ -18,6 +18,7 @@ import com.roman.kubik.songer.songs.navigation.SongsNavigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SongDetailsViewModel @ViewModelInject constructor(
         private val songRepository: SongRepository,
@@ -86,6 +87,18 @@ class SongDetailsViewModel @ViewModelInject constructor(
     private suspend fun updateSong(songDetails: SongDetails) {
         songRepository.createOrUpdateSong(songDetails.song)
         _song.postValue(songDetails)
+    }
+
+    fun deleteSong() {
+        song.value?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                songRepository.removeSong(it.song)
+                withContext(Dispatchers.Main) {
+                    songsNavigator.navigateUp()
+                }
+            }
+        }
+
     }
 
     data class SongDetails(

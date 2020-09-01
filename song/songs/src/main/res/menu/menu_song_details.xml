@@ -20,6 +20,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/delete"
+        android:title="Delete"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/tonality"
         android:title="Tonality"
         app:showAsAction="never" />

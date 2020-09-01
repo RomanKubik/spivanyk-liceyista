@@ -80,11 +80,15 @@ class SongRepository @Inject constructor(private val songsServices: Set<@JvmSupp
     }
 
     suspend fun createOrUpdateSong(song: Song) {
-        for (songsService in songsServices) {
-            try {
-                songsService.createOrUpdateSong(song)
-            } catch (e: Exception) {
-                /* ignore */
+        coroutineScope {
+            songsServices.forEach { songsService ->
+                launch {
+                    try {
+                        songsService.createOrUpdateSong(song)
+                    } catch (e: Exception) {
+                        /* ignore */
+                    }
+                }
             }
         }
     }
@@ -100,8 +104,18 @@ class SongRepository @Inject constructor(private val songsServices: Set<@JvmSupp
     }
 
     suspend fun addSongToLastPlayed(song: Song) {
-        for (songsService in songsServices) {
-            songsService.addToLastPlayed(song)
+        coroutineScope {
+            songsServices.forEach { songsService ->
+                launch { songsService.addToLastPlayed(song) }
+            }
+        }
+    }
+
+    suspend fun removeSong(song: Song) {
+        coroutineScope {
+            songsServices.forEach { songsService ->
+                launch { songsService.removeSong(song) }
+            }
         }
     }
 

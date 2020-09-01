@@ -1,6 +1,8 @@
 package com.roman.kubik.songer.settings.presentation.navigation
 
-interface SettingsNavigator {
+import com.roman.kubik.songer.core.navigation.BaseNavigator
+
+interface SettingsNavigator: BaseNavigator {
 
     fun restart()
 }

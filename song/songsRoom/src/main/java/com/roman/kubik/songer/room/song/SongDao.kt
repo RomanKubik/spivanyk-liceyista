@@ -2,6 +2,7 @@ package com.roman.kubik.songer.room.song
 
 import androidx.room.*
 
+
 @Dao
 interface SongDao {
 
@@ -19,5 +20,8 @@ interface SongDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun createOrUpdateSong(songEntity: SongEntity)
+
+    @Delete
+    suspend fun delete(song: SongEntity)
 
 }

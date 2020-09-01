@@ -37,6 +37,9 @@ class MyChordsSongsService @Inject constructor(): SongsService {
     override suspend fun addToLastPlayed(song: Song) {
     }
 
+    override suspend fun removeSong(song: Song) {
+    }
+
     @Suppress("BlockingMethodInNonBlockingContext")
     override suspend fun searchSongs(query: String): List<Song> {
         val document: Document = Jsoup

@@ -17,4 +17,6 @@ interface SongsService {
     suspend fun createOrUpdateSong(song: Song)
 
     suspend fun addToLastPlayed(song: Song)
+
+    suspend fun removeSong(song: Song)
 }

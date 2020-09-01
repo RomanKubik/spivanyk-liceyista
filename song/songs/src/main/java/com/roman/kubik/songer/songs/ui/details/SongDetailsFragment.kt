@@ -2,6 +2,7 @@ package com.roman.kubik.songer.songs.ui.details
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -84,11 +85,24 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.edit -> viewModel.editSong()
+            R.id.delete -> requestDeleteSong()
             R.id.addToFavourite -> viewModel.likeDislikeSong()
             R.id.share -> viewModel.shareSong()
             R.id.tonality -> transpositionContainer.isVisible = !transpositionContainer.isVisible
         }
         return true
+    }
+
+    private fun requestDeleteSong() {
+        AlertDialog.Builder(requireContext())
+                .setTitle("Remove song")
+                .setMessage("Are you sure you want to remove this song from your Songer?")
+                .setPositiveButton("Remove") { _, _ ->
+                    viewModel.deleteSong()
+                }
+                .setNegativeButton("Cancel") { _, _ ->
+                }
+                .show()
     }
 
     override fun onChordClicked(chordName: String) {

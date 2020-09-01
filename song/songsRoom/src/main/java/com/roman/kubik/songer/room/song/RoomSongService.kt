@@ -61,4 +61,8 @@ class RoomSongService @Inject constructor(
         val historyEntity = HistoryEntity(song.id, System.currentTimeMillis())
         historyDao.addToHistory(historyEntity)
     }
+
+    override suspend fun removeSong(song: Song) {
+        songDao.delete(song.toSongEntity())
+    }
 }
