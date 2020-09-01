@@ -34,6 +34,7 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun setupUi() {
+        setupToolbar(songDetailsToolbar)
         showChords.setOnClickListener {
             viewModel.showChords(!showChords.isChecked)
         }

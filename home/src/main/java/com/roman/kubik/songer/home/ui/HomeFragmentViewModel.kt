@@ -32,27 +32,27 @@ class HomeFragmentViewModel @ViewModelInject constructor(
         list.add(HomeCategory(SongCategory.LAST_PLAYED,
                 stringProvider.getString(R.string.home_category_last_played),
                 stringProvider.getString(R.string.home_category_last_played_subtitle),
-                R.drawable.ic_home))
+                R.drawable.ic_category_last_played))
         list.add(HomeCategory(SongCategory.MY_SONGS,
                 stringProvider.getString(R.string.home_category_my_songs),
                 stringProvider.getString(R.string.home_category_my_songs_subtitle),
-                R.drawable.ic_home))
+                R.drawable.ic_category_my_songs))
         list.add(HomeCategory(SongCategory.FAVOURITE,
                 stringProvider.getString(R.string.home_category_favourite),
                 stringProvider.getString(R.string.home_category_favourite_subtitle),
-                R.drawable.ic_home))
+                R.drawable.ic_category_favourite))
         list.add(HomeCategory(SongCategory.PATRIOTIC,
                 stringProvider.getString(R.string.home_category_patriotic),
                 stringProvider.getString(R.string.home_category_patriotic_subtitle),
-                R.drawable.ic_home))
+                R.drawable.ic_category_patriotic))
         list.add(HomeCategory(SongCategory.BONFIRE,
                 stringProvider.getString(R.string.home_category_bonfire),
                 stringProvider.getString(R.string.home_category_bonfire_subtitle),
-                R.drawable.ic_home))
+                R.drawable.ic_category_bonfire))
         list.add(HomeCategory(SongCategory.ABROAD,
                 stringProvider.getString(R.string.home_category_abroad),
                 stringProvider.getString(R.string.home_category_abroad_subtitle),
-                R.drawable.ic_home))
+                R.drawable.ic_category_abroad))
         _categories.value = list
     }
 }

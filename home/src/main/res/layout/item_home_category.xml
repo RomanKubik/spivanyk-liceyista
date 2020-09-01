@@ -10,11 +10,12 @@
         android:id="@+id/categoryIcon"
         android:layout_width="@dimen/default_image_view_size"
         android:layout_height="@dimen/default_image_view_size"
+        android:scaleType="fitXY"
+        tools:src="@drawable/ic_category_last_played"
         android:layout_marginStart="@dimen/default_margin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/colorPrimary" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/categoryTitle"
@@ -22,6 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
+        android:maxLines="1"
+        android:textAppearance="?textAppearanceItemTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/categoryIcon"
@@ -34,6 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
+        android:maxLines="1"
+        android:textAppearance="?textAppearanceItemSubtitle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

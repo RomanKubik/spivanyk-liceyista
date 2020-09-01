@@ -1,4 +1,33 @@
 <resources>
 
+    <style name="TextAppearance.Songer" parent="TextAppearance.MaterialComponents.Body1" />
+
+    <style name="TextAppearance.Songer.Item" />
+
+    <style name="TextAppearance.Songer.Item.Title">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="TextAppearance.Songer.Item.Subtitle">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_13</item>
+    </style>
+
+    <style name="TextAppearance.Songer.Settings" />
+
+    <style name="TextAppearance.Songer.Settings.Title">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
+    <style name="TextAppearance.Songer.Settings.Value">
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_13</item>
+    </style>
 
 </resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="24dp"
+                android:height="24dp" />
+            <solid android:color="@color/hot_pink" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="@dimen/default_padding"
+        android:drawable="@drawable/ic_history"
+        android:left="@dimen/default_padding"
+        android:right="10dp"
+        android:top="@dimen/default_padding"
+        android:gravity="center"/>
+
+</layer-list>

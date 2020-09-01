@@ -20,6 +20,7 @@
 
     <com.roman.kubik.songer.ui.view.FabBottomNavigationView
         android:id="@+id/bottomNavigationView"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
         android:layout_width="0dp"
         android:layout_height="@dimen/navigation_bar_size"
         app:fab_cradle_margin="@dimen/default_padding"
@@ -35,7 +36,7 @@
         android:id="@+id/randomFab"
         android:layout_width="@dimen/navigation_bar_size"
         android:layout_height="@dimen/navigation_bar_size"
-        android:src="@drawable/ic_random"
+        app:srcCompat="@drawable/ic_random"
         app:backgroundTint="?colorAccent"
         app:elevation="@dimen/design_bottom_navigation_elevation"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
