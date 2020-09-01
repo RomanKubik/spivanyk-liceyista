@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.home.ui
 
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -37,7 +38,7 @@ class HomeFragment : BaseSearchFragment() {
         homeCategoryList.layoutManager = LinearLayoutManager(requireContext())
         homeCategoryList.adapter = adapter
         val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        divider.setDrawable(ColorDrawable(ContextCompat.getColor(requireContext(), R.color.colorAccent)))
+        divider.setDrawable(ColorDrawable(Color.GRAY))
         homeCategoryList.addItemDecoration(divider)
     }
 
