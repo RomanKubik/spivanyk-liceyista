@@ -8,34 +8,30 @@
         android:id="@+id/chord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginLeft="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin_x1_5"
+        android:layout_marginRight="@dimen/default_margin"
+        android:textAppearance="?textAppearanceSongLyrics"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Am" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/closeButton"
-        style="@android:style/Widget.ActionButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_close"
+        style="@style/Widget.Songer.IconButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close"
+        tools:ignore="ContentDescription" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/chordImage"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="@dimen/chord_dialog_image_size"
+        android:layout_height="@dimen/chord_dialog_image_size"
+        android:layout_marginLeft="@dimen/default_margin_x1_5"
+        android:layout_marginRight="@dimen/default_margin_x1_5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chord" />
@@ -44,48 +40,38 @@
         android:id="@+id/indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginLeft="@dimen/default_margin_x1_5"
+        android:layout_marginRight="@dimen/default_margin_x1_5"
+        android:layout_marginBottom="@dimen/default_margin_x2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chordImage"
         tools:text="1 of 5" />
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/nextButton"
-        style="@android:style/Widget.ActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="8dp"
-        app:srcCompat="@drawable/ic_arrow"
+        style="@style/Widget.Songer.IconButton"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_padding"
         app:layout_constraintBottom_toBottomOf="@+id/chordImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/chordImage"
-        app:layout_constraintTop_toTopOf="@+id/chordImage" />
-
-    <ImageButton
-        android:id="@+id/prevButton"
-        style="@android:style/Widget.ActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="16dp"
-        android:rotation="180"
+        app:layout_constraintTop_toTopOf="@+id/chordImage"
         app:srcCompat="@drawable/ic_arrow"
+        tools:ignore="ContentDescription" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/prevButton"
+        style="@style/Widget.Songer.IconButton"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_padding"
+        android:rotation="180"
         app:layout_constraintBottom_toBottomOf="@+id/chordImage"
         app:layout_constraintEnd_toStartOf="@+id/chordImage"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/chordImage" />
+        app:layout_constraintTop_toTopOf="@+id/chordImage"
+        app:srcCompat="@drawable/ic_arrow" />
 </androidx.constraintlayout.widget.ConstraintLayout>

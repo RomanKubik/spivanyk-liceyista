@@ -1,12 +1,17 @@
 package com.roman.kubik.songer.songs.ui.details
 
+import android.content.Context
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.*
 import androidx.appcompat.app.AlertDialog
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
@@ -94,13 +99,13 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     }
 
     private fun requestDeleteSong() {
-        AlertDialog.Builder(requireContext())
-                .setTitle("Remove song")
-                .setMessage("Are you sure you want to remove this song from your Songer?")
-                .setPositiveButton("Remove") { _, _ ->
+        MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.dialog_remove_song))
+                .setMessage(getString(R.string.dialog_remove_song_text))
+                .setPositiveButton(getString(R.string.dialog_remove)) { _, _ ->
                     viewModel.deleteSong()
                 }
-                .setNegativeButton("Cancel") { _, _ ->
+                .setNegativeButton(getString(R.string.cancel)) { _, _ ->
                 }
                 .show()
     }

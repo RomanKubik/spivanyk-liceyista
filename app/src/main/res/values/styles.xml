@@ -1,6 +1,15 @@
 <resources>
 
+    <!-- Text appearances -->
     <style name="TextAppearance.Songer" parent="TextAppearance.MaterialComponents.Body1" />
+
+    <style name="TextAppearance.Songer.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/font_courier_new</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_size_12</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 
     <style name="TextAppearance.Songer.Item" />
 
@@ -34,12 +43,12 @@
         <item name="fontFamily">@font/font_courier_new</item>
     </style>
 
-    <style name="TextAppearance.Songer.Song.Title" >
+    <style name="TextAppearance.Songer.Song.Title">
         <item name="android:textColor">?android:textColorPrimary</item>
-        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textSize">@dimen/text_size_24</item>
     </style>
 
-    <style name="TextAppearance.Songer.Song.Lyrics" >
+    <style name="TextAppearance.Songer.Song.Lyrics">
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>

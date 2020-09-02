@@ -16,6 +16,10 @@
         <item name="android:textColorPrimary">@android:color/black</item>
         <item name="android:textColorSecondary">@color/grey_500</item>
 
+        <item name="textAppearanceCaption">@style/TextAppearance.Songer.Caption</item>
+        
+        <item name="materialAlertDialogTheme">@style/Theme.Songer.AlertDialog</item>
+
         <!-- Custom theme attributes -->
         <item name="textAppearanceItemTitle">@style/TextAppearance.Songer.Item.Title</item>
         <item name="textAppearanceItemSubtitle">@style/TextAppearance.Songer.Item.Subtitle</item>
@@ -25,6 +29,11 @@
 
         <item name="textAppearanceSongTitle">@style/TextAppearance.Songer.Song.Title</item>
         <item name="textAppearanceSongLyrics">@style/TextAppearance.Songer.Song.Lyrics</item>
+    </style>
+
+    <!-- Dialogs -->
+    <style name="Theme.Songer.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">?colorAccent</item>
     </style>
 
 </resources>

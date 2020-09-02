@@ -17,7 +17,7 @@ class ChordsDialog(context: Context,
             val c = chords[field]
             chord.text = c.name
             chordImage.setImageDrawable(AssetImageLoader.loadAsset(context, c.imagePath?.format(selectedInstrument.name.toLowerCase())))
-            indicator.text = String.format("%d of %d", currentPosition + 1, chords.size)
+            indicator.text = String.format(context.getString(R.string.chords_a_of_b), currentPosition + 1, chords.size)
             show()
         }
 

@@ -16,7 +16,6 @@
         android:layout_marginEnd="@dimen/default_margin"
         android:layout_marginRight="@dimen/default_margin"
         android:textAppearance="?textAppearanceSongTitle"
-        android:textSize="@dimen/text_size_24"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

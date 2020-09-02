@@ -13,11 +13,13 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/songDetailsToobar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways" />
     </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/songDetailsContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -30,6 +32,10 @@
                 android:id="@+id/songTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:textAppearance="?textAppearanceSongTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +46,10 @@
                 android:id="@+id/songCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:textAppearance="?textAppearanceCaption"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/songTitle"
                 tools:text="При ватрі" />
@@ -48,6 +58,8 @@
                 android:id="@+id/separator"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 android:background="?colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +67,16 @@
 
             <TextView
                 android:id="@+id/chords"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin"
+                android:text="@string/chords"
+                android:textAppearance="?textAppearanceCaption"
+                android:textColor="?android:textColorPrimary"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/separator" />
 
@@ -64,6 +84,9 @@
                 android:id="@+id/chordsList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_padding"
+                android:layout_marginEnd="@dimen/default_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chords" />
@@ -72,7 +95,11 @@
                 android:id="@+id/songLyrics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_padding"
+                android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/navigation_bar_padding"
+                android:textAppearance="?textAppearanceSongLyrics"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,6 +114,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_margin="@dimen/default_padding"
+        android:translationY="@dimen/default_padding"
         android:visibility="gone"
         app:layout_anchor="@+id/songDetailsAppBar"
         app:layout_anchorGravity="bottom|end"
@@ -97,24 +126,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/transpositionDown"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="8dp"
+                style="@style/Widget.Songer.IconButton"
                 android:rotation="90"
                 app:srcCompat="@drawable/ic_arrow" />
 
             <View
-                android:layout_width="1dp"
+                android:layout_width="0.5dp"
                 android:layout_height="match_parent"
                 android:background="?colorAccent" />
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/transpositionUp"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="8dp"
+                style="@style/Widget.Songer.IconButton"
                 android:rotation="270"
                 app:srcCompat="@drawable/ic_arrow" />
 
