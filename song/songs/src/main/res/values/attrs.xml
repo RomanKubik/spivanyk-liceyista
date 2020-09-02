@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="textAppearanceSongTitle" format="reference"/>
+    <attr name="textAppearanceSongLyrics" format="reference"/>
+
     <declare-styleable name="LyricsTextView">
         <attr name="chordColor" format="reference|color"/>
         <attr name="chordColorBackground" format="reference|color"/>

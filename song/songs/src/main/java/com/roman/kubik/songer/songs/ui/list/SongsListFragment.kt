@@ -1,11 +1,14 @@
 package com.roman.kubik.songer.songs.ui.list
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
+import com.roman.kubik.songer.core.ui.utils.getAttributeColor
 import com.roman.kubik.songs.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song_list.*
@@ -28,9 +31,7 @@ class SongsListFragment: BaseSearchFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupToolbar(songsToobar)
-        adapter = SongsListAdapter(viewModel::selectSong)
-        songsList.adapter = adapter
-        songsList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        setupSongsList()
         setupObservables()
         if (arguments?.getString(ARG_QUERY).isNullOrEmpty()) {
             viewModel.loadSongs(arguments?.getString(ARG_CATEGORY))
@@ -50,8 +51,17 @@ class SongsListFragment: BaseSearchFragment() {
         viewModel.searchSongs(query)
     }
 
+    private fun setupSongsList() {
+        adapter = SongsListAdapter(viewModel::selectSong)
+        songsList.adapter = adapter
+        songsList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        divider.setDrawable(ColorDrawable(requireContext().getAttributeColor(android.R.attr.textColorSecondary)))
+        songsList.addItemDecoration(divider)
+    }
+
     private fun setupObservables() {
-        viewModel.preferences.observe(viewLifecycleOwner, Observer { adapter.showChords = it.showChords })
-        viewModel.songs.observe(viewLifecycleOwner, Observer(adapter::publishItems))
+        viewModel.preferences.observe(viewLifecycleOwner, { adapter.showChords = it.showChords })
+        viewModel.songs.observe(viewLifecycleOwner, adapter::publishItems)
     }
 }

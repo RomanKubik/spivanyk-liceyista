@@ -30,4 +30,18 @@
         <item name="android:textSize">@dimen/text_size_13</item>
     </style>
 
+    <style name="TextAppearance.Songer.Song">
+        <item name="fontFamily">@font/font_courier_new</item>
+    </style>
+
+    <style name="TextAppearance.Songer.Song.Title" >
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">@dimen/text_size_18</item>
+    </style>
+
+    <style name="TextAppearance.Songer.Song.Lyrics" >
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+    </style>
+
 </resources>

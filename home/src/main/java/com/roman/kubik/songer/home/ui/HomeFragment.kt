@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
+import com.roman.kubik.songer.core.ui.utils.getAttributeColor
 import com.roman.kubik.songer.home.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -38,7 +39,7 @@ class HomeFragment : BaseSearchFragment() {
         homeCategoryList.layoutManager = LinearLayoutManager(requireContext())
         homeCategoryList.adapter = adapter
         val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        divider.setDrawable(ColorDrawable(Color.GRAY))
+        divider.setDrawable(ColorDrawable(requireContext().getAttributeColor(android.R.attr.textColorSecondary)))
         homeCategoryList.addItemDecoration(divider)
     }
 

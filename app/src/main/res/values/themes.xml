@@ -22,6 +22,9 @@
 
         <item name="textAppearanceSettingsTitle">@style/TextAppearance.Songer.Settings.Title</item>
         <item name="textAppearanceSettingsValue">@style/TextAppearance.Songer.Settings.Value</item>
+
+        <item name="textAppearanceSongTitle">@style/TextAppearance.Songer.Song.Title</item>
+        <item name="textAppearanceSongLyrics">@style/TextAppearance.Songer.Song.Lyrics</item>
     </style>
 
 </resources>
