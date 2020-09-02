@@ -22,8 +22,11 @@
         android:id="@+id/editSongTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Title"
+        android:layout_margin="@dimen/default_margin"
+        android:hint="@string/edit_song_title"
+        android:importantForAutofill="no"
         android:inputType="textCapSentences"
+        android:textAppearance="?textAppearanceSongTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editSongAppBar" />
@@ -31,6 +34,8 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
         android:clipToPadding="false"
         android:paddingBottom="@dimen/navigation_bar_padding"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -42,8 +47,10 @@
             android:id="@+id/editSongLyrics"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Lyrics"
-            android:inputType="textMultiLine" />
+            android:hint="@string/edit_song_lyrics"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:textAppearance="?textAppearanceSongLyrics" />
     </ScrollView>
 
     <ProgressBar
