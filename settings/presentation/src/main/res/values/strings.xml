@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_preferred_instrument">Preferred instrument</string>
+    <string-array name="instruments">
+        <item>Guitar</item>
+        <item>Ukulele</item>
+    </string-array>
+    <string name="dialog_preferred_theme">Preferred theme</string>
+    <string-array name="themes">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System default</item>
+    </string-array>
+    <string name="dialog_factory_reset">Factory reset</string>
+    <string name="dialog_factory_reset_text">Reset database to factory configurations. All previously added songs will be saved. After reset app will be relaunched.</string>
+    <string name="dialog_reset">Reset</string>
+</resources>

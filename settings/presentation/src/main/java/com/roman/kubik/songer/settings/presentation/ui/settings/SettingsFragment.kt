@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.settings.domain.preference.UiMode
 import com.roman.kubik.songer.core.ui.base.BaseFragment
@@ -26,10 +25,10 @@ class SettingsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
-        viewModel.preferences.observe(viewLifecycleOwner, Observer {
+        viewModel.preferences.observe(viewLifecycleOwner, {
             showChords.isChecked = it.showChords
-            preferredInstrument.setSettingsValue(it.selectedInstrument.name)
-            preferredTheme.setSettingsValue(it.uiMode.name)
+            preferredInstrument.setSettingsValue(resources.getStringArray(R.array.instruments)[it.selectedInstrument.ordinal])
+            preferredTheme.setSettingsValue(resources.getStringArray(R.array.themes)[it.uiMode.ordinal])
         })
     }
 
@@ -50,39 +49,40 @@ class SettingsFragment : BaseFragment() {
     }
 
     private fun showSelectInstrumentDialog() {
-        AlertDialog.Builder(requireContext())
-                .setTitle("Preferred instrument")
-                .setSingleChoiceItems(arrayOf("Guitar", "Ukulele"), viewModel.preferences.value?.selectedInstrument?.ordinal
-                        ?: 0) { dialog, which ->
+        MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.dialog_preferred_instrument)
+                .setSingleChoiceItems(resources.getStringArray(R.array.instruments),
+                        viewModel.preferences.value?.selectedInstrument?.ordinal
+                                ?: 0) { dialog, which ->
                     viewModel.selectInstrument(Instrument.values()[which])
                     dialog.dismiss()
                 }
-                .setNegativeButton("Cancel") { _, _ ->
+                .setNegativeButton(R.string.cancel) { _, _ ->
                 }
                 .show()
     }
 
     private fun showSelectUiModeDialog() {
-        AlertDialog.Builder(requireContext())
-                .setTitle("Preferred theme")
-                .setSingleChoiceItems(UiMode.values().map { it.name }.toTypedArray(), viewModel.preferences.value?.uiMode?.ordinal
+        MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.dialog_preferred_theme)
+                .setSingleChoiceItems(resources.getStringArray(R.array.themes), viewModel.preferences.value?.uiMode?.ordinal
                         ?: 0) { dialog, which ->
                     viewModel.changeUiMode(UiMode.values()[which])
                     dialog.dismiss()
                 }
-                .setNegativeButton("Cancel") { _, _ ->
+                .setNegativeButton(R.string.cancel) { _, _ ->
                 }
                 .show()
     }
 
     private fun showFactoryResetDialog() {
-        AlertDialog.Builder(requireContext())
-                .setTitle("Factory reset")
-                .setMessage("Factory reset message")
-                .setPositiveButton("Reset") { _, _ ->
+        MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.dialog_factory_reset)
+                .setMessage(R.string.dialog_factory_reset_text)
+                .setPositiveButton(R.string.dialog_reset) { _, _ ->
                     viewModel.factoryReset()
                 }
-                .setNegativeButton("Discard") { _, _ ->
+                .setNegativeButton(R.string.cancel) { _, _ ->
                 }
                 .show()
     }
