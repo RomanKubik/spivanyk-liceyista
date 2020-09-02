@@ -29,7 +29,7 @@
         tools:layout="@layout/fragment_song_details">
         <action
             android:id="@+id/action_songDetailsFragment_to_editSongFragment"
-            app:destination="@id/menu_add" />
+            app:destination="@id/editSongFragment" />
     </fragment>
 
     <action
@@ -42,6 +42,13 @@
         android:name="com.roman.kubik.songer.songs.ui.edit.EditSongFragment"
         android:label="EditSong"
         tools:layout="@layout/fragment_edit_song" />
+
+    <fragment
+        android:id="@+id/editSongFragment"
+        android:name="com.roman.kubik.songer.songs.ui.edit.EditSongFragment"
+        android:label="EditSong"
+        tools:layout="@layout/fragment_edit_song" />
+
     <action
         android:id="@+id/action_global_songDetailsFragment"
         app:destination="@id/songDetailsFragment"

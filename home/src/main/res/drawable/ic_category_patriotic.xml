@@ -12,8 +12,8 @@
 
     <item
         android:bottom="@dimen/default_padding"
-        android:drawable="@drawable/ic_patriotic"
-        android:left="@dimen/default_padding"
+        android:drawable="@drawable/ic_flag"
+        android:left="10dp"
         android:right="@dimen/default_padding"
         android:top="@dimen/default_padding" />
 

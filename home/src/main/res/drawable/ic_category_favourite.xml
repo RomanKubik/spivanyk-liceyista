@@ -12,7 +12,7 @@
 
     <item
         android:bottom="@dimen/default_padding"
-        android:drawable="@drawable/ic_favourite"
+        android:drawable="@drawable/ic_favorite"
         android:left="@dimen/default_padding"
         android:right="@dimen/default_padding"
         android:top="@dimen/default_padding" />

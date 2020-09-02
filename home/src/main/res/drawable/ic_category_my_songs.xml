@@ -12,9 +12,9 @@
 
     <item
         android:bottom="@dimen/default_padding"
-        android:drawable="@drawable/ic_users"
+        android:drawable="@drawable/ic_light_bulb"
         android:left="@dimen/default_padding"
         android:right="@dimen/default_padding"
-        android:top="@dimen/default_padding" />
+        android:top="9dp" />
 
 </layer-list>

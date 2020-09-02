@@ -19,12 +19,24 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
+        navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (shouldUncheckFab(destination.id)) {
+                randomFab.isChecked = false
+            }
+        }
         setupViews()
         viewModel.create(navHostFragment)
     }
 
+    private fun shouldUncheckFab(destinationId: Int): Boolean {
+        return randomFab.isChecked
+                && destinationId != R.id.songDetailsFragment
+                && destinationId != R.id.editSongFragment
+    }
+
     private fun setupViews() {
         randomFab.setOnClickListener {
+            randomFab.isChecked = true
             bottomNavigationView.menu.findItem(R.id.menu_empty).isChecked = true
             viewModel.navigateToRandomSong()
         }

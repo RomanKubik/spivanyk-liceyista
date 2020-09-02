@@ -32,11 +32,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.roman.kubik.songer.ui.view.FabBottomMenuItem
         android:id="@+id/randomFab"
         android:layout_width="@dimen/navigation_bar_size"
         android:layout_height="@dimen/navigation_bar_size"
         app:srcCompat="@drawable/ic_random"
+        app:tint="@color/mtrl_bottom_nav_colored_item_tint"
         app:backgroundTint="?colorAccent"
         app:elevation="@dimen/design_bottom_navigation_elevation"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
