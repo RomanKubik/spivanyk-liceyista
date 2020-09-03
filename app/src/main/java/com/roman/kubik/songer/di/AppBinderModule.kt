@@ -2,6 +2,8 @@ package com.roman.kubik.songer.di
 
 import com.roman.kubik.settings.domain.database.DatabaseController
 import com.roman.kubik.settings.domain.preference.PreferenceService
+import com.roman.kubik.settings.domain.theme.ThemeService
+import com.roman.kubik.songer.app.themes.ThemeServiceImpl
 import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.data.core.StringProviderImpl
 import com.roman.kubik.songer.room.database.DatabaseManager
@@ -27,5 +29,8 @@ abstract class AppBinderModule {
 
     @Binds
     abstract fun bindPreferencesService(preferencesService: SharedPreferencesService): PreferenceService
+
+    @Binds
+    abstract fun bindThemeService(themeServiceImpl: ThemeServiceImpl): ThemeService
 
 }

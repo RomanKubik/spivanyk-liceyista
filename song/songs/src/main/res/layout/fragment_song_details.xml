@@ -100,6 +100,7 @@
                 android:layout_marginEnd="@dimen/default_margin"
                 android:layout_marginBottom="@dimen/navigation_bar_padding"
                 android:textAppearance="?textAppearanceSongLyrics"
+                app:chordColor="?android:textColorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

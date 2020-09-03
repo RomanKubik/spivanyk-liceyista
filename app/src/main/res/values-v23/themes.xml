@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.Songer" parent="Base.Songer">
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">@bool/light_status_bar</item>
 
     </style>
 </resources>

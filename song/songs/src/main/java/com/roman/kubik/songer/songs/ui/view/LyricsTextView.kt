@@ -1,6 +1,7 @@
 package com.roman.kubik.songer.songs.ui.view
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.Spanned
@@ -11,8 +12,10 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import com.google.android.material.textview.MaterialTextView
 import com.roman.kubik.songer.chords.ChordsFormatter
+import com.roman.kubik.songer.core.ui.utils.getAttributeColor
 import com.roman.kubik.songs.R
 import java.util.regex.Pattern
 
@@ -56,8 +59,11 @@ class LyricsTextView : MaterialTextView {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         context.theme.obtainStyledAttributes(attrs, R.styleable.LyricsTextView, defStyleAttr, 0).also {
 
-            chordsColor = it.getColor(R.styleable.LyricsTextView_chordColor, ContextCompat.getColor(context, R.color.chord))
-            chordsBackground = it.getColor(R.styleable.LyricsTextView_chordColorBackground, ContextCompat.getColor(context, R.color.chord_background))
+            val defaultColor = context.getAttributeColor(android.R.attr.textColorPrimary)
+            chordsColor = it.getColor(R.styleable.LyricsTextView_chordColor, defaultColor)
+
+            val defaultBackground = ColorUtils.setAlphaComponent(chordsColor, 40)
+            chordsBackground = it.getColor(R.styleable.LyricsTextView_chordColorBackground, defaultBackground)
 
             it.recycle()
         }

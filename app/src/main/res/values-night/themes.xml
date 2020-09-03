@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.Songer" parent="Base.Songer">
-
-    </style>
-
     <!-- Base application theme. -->
     <style name="Base.Songer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Default theme attributes -->
-        <item name="colorPrimary">@android:color/white</item>
-        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="colorPrimary">@color/grey_100</item>
+        <item name="colorPrimaryDark">@color/grey_100</item>
         <item name="colorAccent">@color/olive_500</item>
-        <item name="colorSurface">@android:color/white</item>
-        <item name="colorControlNormal">@android:color/black</item>
-        <item name="android:textColorPrimary">@android:color/black</item>
-        <item name="android:textColorSecondary">@color/grey_500</item>
+        <item name="colorSurface">@color/grey_100</item>
+        <item name="colorControlNormal">@color/grey_700</item>
+        <item name="android:textColorPrimary">@color/grey_800</item>
+        <item name="android:textColorSecondary">@color/grey_700</item>
 
         <item name="textAppearanceCaption">@style/TextAppearance.Songer.Caption</item>
-        
+
         <item name="materialAlertDialogTheme">@style/Theme.Songer.AlertDialog</item>
 
         <!-- Custom theme attributes -->
@@ -30,10 +25,4 @@
         <item name="textAppearanceSongTitle">@style/TextAppearance.Songer.Song.Title</item>
         <item name="textAppearanceSongLyrics">@style/TextAppearance.Songer.Song.Lyrics</item>
     </style>
-
-    <!-- Dialogs -->
-    <style name="Theme.Songer.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
-        <item name="colorPrimary">?colorAccent</item>
-    </style>
-
 </resources>

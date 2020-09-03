@@ -9,7 +9,7 @@
     <string-array name="themes">
         <item>Light</item>
         <item>Dark</item>
-        <item>System default</item>
+        <item>Set by battery</item>
     </string-array>
     <string name="dialog_factory_reset">Factory reset</string>
     <string name="dialog_factory_reset_text">Reset database to factory configurations. All previously added songs will be saved. After reset app will be relaunched.</string>
