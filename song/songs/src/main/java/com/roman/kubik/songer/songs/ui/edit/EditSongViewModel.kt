@@ -44,9 +44,7 @@ class EditSongViewModel @ViewModelInject constructor(
 
     private fun updateSong(title: String, lyrics: String): Song {
         val currentSong = song.value
-        return if (currentSong == null)
-            Song(title, lyrics, SongCategory.MY_SONGS)
-        else
-            Song(currentSong.id, title, lyrics, currentSong.category, currentSong.isFavourite)
+        return currentSong?.copy(title = title, lyrics = lyrics)
+                ?: Song(title, lyrics, SongCategory.MY_SONGS)
     }
 }

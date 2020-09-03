@@ -9,6 +9,8 @@ import org.jsoup.select.Elements
 
 object PisniOrgUaParser {
 
+    private const val SOURCE_NAME = "pisni.org.ua"
+
     private const val SONG_TABLE_ITEM = "a.dyn"
     private const val SONG_TABLE_ITEM_ID = "href"
     private const val SONG_TABLE_ID = "/songs/"
@@ -24,7 +26,7 @@ object PisniOrgUaParser {
             try {
                 val songId = elements[i].attr(SONG_TABLE_ITEM_ID)
                 if (!songId.contains(SONG_TABLE_ID)) continue
-                songs.add(Song(songId, elements[i].text(), "", SongCategory.WEB, false))
+                songs.add(Song(songId, elements[i].text(), "", SongCategory.WEB, false, SOURCE_NAME))
             } catch (e: Exception) {
                 /* ignore exception */
             }
@@ -37,7 +39,7 @@ object PisniOrgUaParser {
         val lyrics: String = ChordsRecognizer.recognizeChords(document
                 .selectFirst(SONG_LYRICS_ITEM)
                 .text())
-        return Song(songId, title, lyrics, SongCategory.WEB, false)
+        return Song(songId, title, lyrics, SongCategory.WEB, false, SOURCE_NAME)
     }
 
 }

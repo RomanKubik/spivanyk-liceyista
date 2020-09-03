@@ -9,6 +9,8 @@ import org.jsoup.select.Elements
 
 object MyChordsParser {
 
+    private const val SOURCE_NAME = "mychords.net"
+
     private const val SONG_TABLE_ITEM = "a.b-listing__item__link"
     private const val SONG_TABLE_ITEM_ID = "href"
     private const val SONG_TITLE_ITEM = "h1.b-title"
@@ -22,7 +24,7 @@ object MyChordsParser {
 
         for (i in 0 until elements.size) {
             try {
-                songs.add(Song(elements[i].attr(SONG_TABLE_ITEM_ID), elements[i].text(), "", SongCategory.WEB, false))
+                songs.add(Song(elements[i].attr(SONG_TABLE_ITEM_ID), elements[i].text(), "", SongCategory.WEB, false, SOURCE_NAME))
             } catch (e: Exception) {
                 /* ignore exception */
             }
@@ -36,7 +38,7 @@ object MyChordsParser {
                 .selectFirst(SONG_LYRICS_ITEM)
                 .text()
                 .replace(LYRICS_COPYRIGHT, ""))
-        return Song(songId, title, lyrics, SongCategory.WEB, false)
+        return Song(songId, title, lyrics, SongCategory.WEB, false, SOURCE_NAME)
     }
 
 }

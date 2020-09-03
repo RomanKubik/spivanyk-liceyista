@@ -3,6 +3,7 @@ package com.roman.kubik.songer.songs.ui.list
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songs.R
@@ -39,6 +40,9 @@ class SongsListAdapter constructor(private val clickListener: (Song) -> Unit) : 
             itemView.title.text = song.title
             itemView.lyrics.showChords = showChords
             itemView.lyrics.text = song.lyrics
+            itemView.lyrics.isVisible = song.lyrics.isNotEmpty()
+            itemView.source.text = song.source
+            itemView.source.isVisible = song.source.isNotEmpty()
             itemView.setOnClickListener { clickListener.invoke(song) }
         }
 

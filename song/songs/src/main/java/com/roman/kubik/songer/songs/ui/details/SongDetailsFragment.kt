@@ -1,16 +1,10 @@
 package com.roman.kubik.songer.songs.ui.details
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.*
-import androidx.appcompat.app.AlertDialog
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.songer.chords.model.Chord
@@ -67,6 +61,8 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
             songLyrics.text = song.lyrics
             songCategory.setText(song.category.toUiCategory())
             chords = it.chords.toList()
+            chordsList.isVisible = chords.isNotEmpty()
+            chordsCaption.isVisible = chords.isNotEmpty()
             chordsAdapter.publishItems(chords)
             bookmarkItem?.setIcon(if (song.isFavourite) R.drawable.ic_is_favourite else R.drawable.ic_is_not_favourite)
         })
