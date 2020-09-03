@@ -1,3 +1,4 @@
+include ':song:songsPisniOrgUa'
 include ':song:songsMyChords'
 include ':song:songs'
 include ':song:songsDomain'
