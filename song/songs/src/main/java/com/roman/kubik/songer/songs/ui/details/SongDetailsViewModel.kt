@@ -69,7 +69,8 @@ class SongDetailsViewModel @ViewModelInject constructor(
     fun transpositionUp() {
         song.value?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                val updatedSong = it.copy(song = it.song.copy(lyrics = ChordsTransposer.transposeUp(it.song.lyrics)))
+                val lyrics = ChordsTransposer.transposeUp(it.song.lyrics)
+                val updatedSong = it.copy(song = it.song.copy(lyrics = lyrics), chords = ChordsImageMapper.getChords(lyrics).toList())
                 updateSong(updatedSong)
             }
         }
@@ -78,7 +79,8 @@ class SongDetailsViewModel @ViewModelInject constructor(
     fun transpositionDown() {
         song.value?.let {
             viewModelScope.launch(Dispatchers.IO) {
-                val updatedSong = it.copy(song = it.song.copy(lyrics = ChordsTransposer.transposeDown(it.song.lyrics)))
+                val lyrics = ChordsTransposer.transposeDown(it.song.lyrics)
+                val updatedSong = it.copy(song = it.song.copy(lyrics = lyrics), chords = ChordsImageMapper.getChords(lyrics).toList())
                 updateSong(updatedSong)
             }
         }
