@@ -34,8 +34,8 @@ class SettingsFragment : BaseFragment() {
 
     private fun setupUi() {
         setupToolbar(songDetailsToolbar)
-        showChords.setOnClickListener {
-            viewModel.showChords(!showChords.isChecked)
+        showChords.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.showChords(isChecked)
         }
         preferredInstrument.setOnClickListener {
             showSelectInstrumentDialog()
