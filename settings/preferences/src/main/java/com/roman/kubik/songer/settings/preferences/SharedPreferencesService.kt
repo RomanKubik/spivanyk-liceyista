@@ -2,10 +2,7 @@ package com.roman.kubik.songer.settings.preferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.roman.kubik.settings.domain.preference.Instrument
-import com.roman.kubik.settings.domain.preference.PreferenceService
-import com.roman.kubik.settings.domain.preference.Preferences
-import com.roman.kubik.settings.domain.preference.UiMode
+import com.roman.kubik.settings.domain.preference.*
 import javax.inject.Inject
 
 class SharedPreferencesService @Inject constructor(context: Context) : PreferenceService {
@@ -16,6 +13,7 @@ class SharedPreferencesService @Inject constructor(context: Context) : Preferenc
         const val SETTINGS_INSTRUMENT = "settings.instrument"
         const val SETTINGS_UI_MODE = "settings.ui.mode"
         const val SETTINGS_SHOW_CHORDS = "settings.show.chords"
+        const val SETTINGS_REMOTE_DATA_SET = "settings.remote.data.set"
     }
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(SETTINGS_PREFERENCES, Context.MODE_PRIVATE)
@@ -25,7 +23,8 @@ class SharedPreferencesService @Inject constructor(context: Context) : Preferenc
             Preferences(
                     Instrument.valueOf(getString(SETTINGS_INSTRUMENT, Instrument.GUITAR.name)!!),
                     UiMode.valueOf(getString(SETTINGS_UI_MODE, UiMode.SYSTEM_DEFAULT.name)!!),
-                    getBoolean(SETTINGS_SHOW_CHORDS, true))
+                    getBoolean(SETTINGS_SHOW_CHORDS, true),
+                    getDataSources(this))
         }
     }
 
@@ -34,6 +33,19 @@ class SharedPreferencesService @Inject constructor(context: Context) : Preferenc
             putString(SETTINGS_INSTRUMENT, preferences.selectedInstrument.name)
             putString(SETTINGS_UI_MODE, preferences.uiMode.name)
             putBoolean(SETTINGS_SHOW_CHORDS, preferences.showChords)
+            putDataSources(this, preferences.selectedSongDataSource)
         }.apply()
+    }
+
+    private fun getDataSources(sharedPreferences: SharedPreferences): Set<SongDataSource> {
+        val defaultSources = linkedSetOf(SongDataSource.PISNI_ORG_UA, SongDataSource.MY_CHORDS_NET)
+        val sources = sharedPreferences.getStringSet(SETTINGS_REMOTE_DATA_SET, null)
+                ?.map { SongDataSource.valueOf(it) }
+                ?.toMutableSet()
+        return sources ?: defaultSources
+    }
+
+    private fun putDataSources(sharedPreferences: SharedPreferences.Editor, dataSources: Set<SongDataSource>) {
+        sharedPreferences.putStringSet(SETTINGS_REMOTE_DATA_SET, dataSources.map { it.name }.toSet())
     }
 }

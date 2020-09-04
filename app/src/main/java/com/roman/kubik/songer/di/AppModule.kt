@@ -16,7 +16,15 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun getSongServices(roomSongService: RoomSongService, myChordsSongsService: MyChordsSongsService, pisniOrgUaSongsService: PisniOrgUaSongsService): Set<SongsService> {
-        return linkedSetOf(roomSongService, pisniOrgUaSongsService, myChordsSongsService)
+    fun getSongServices(
+            roomSongService: RoomSongService,
+            myChordsSongsService: MyChordsSongsService,
+            pisniOrgUaSongsService: PisniOrgUaSongsService
+    ): Set<SongsService> {
+        return linkedSetOf(
+                roomSongService,
+                pisniOrgUaSongsService,
+                myChordsSongsService
+        )
     }
 }

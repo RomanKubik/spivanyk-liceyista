@@ -43,6 +43,9 @@ class SettingsFragment : BaseFragment() {
         preferredTheme.setOnClickListener {
             showSelectUiModeDialog()
         }
+        selectedDataSources.setOnClickListener {
+            showSelectDataSourcesDialog()
+        }
         factoryReset.setOnClickListener {
             showFactoryResetDialog()
         }
@@ -73,6 +76,20 @@ class SettingsFragment : BaseFragment() {
                 .setNegativeButton(R.string.cancel) { _, _ ->
                 }
                 .show()
+    }
+
+    private fun showSelectDataSourcesDialog() {
+        val selectedDataSources = viewModel.getSelectedDataSources()
+        MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Select remote data sources")
+                .setMultiChoiceItems(viewModel.allDataSources.map { it.sourceName }.toTypedArray(), selectedDataSources)
+                { _, which, isChecked ->
+                    selectedDataSources[which] = isChecked
+                }
+                .setPositiveButton("Accept") { _, _ -> viewModel.selectDataSources(selectedDataSources) }
+                .setNegativeButton(R.string.cancel) { _, _ -> }
+                .show()
+
     }
 
     private fun showFactoryResetDialog() {

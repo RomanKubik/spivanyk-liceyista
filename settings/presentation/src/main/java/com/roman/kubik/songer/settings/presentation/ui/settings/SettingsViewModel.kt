@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.roman.kubik.settings.domain.database.DatabaseController
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.settings.domain.preference.Preferences
+import com.roman.kubik.settings.domain.preference.SongDataSource
 import com.roman.kubik.settings.domain.preference.UiMode
 import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
@@ -20,6 +21,8 @@ class SettingsViewModel @ViewModelInject constructor(
         private val databaseController: DatabaseController,
         private val settingsNavigator: SettingsNavigator
 ) : BaseViewModel() {
+
+    val allDataSources = linkedSetOf(SongDataSource.PISNI_ORG_UA, SongDataSource.MY_CHORDS_NET)
 
     private val _preferences = MutableLiveData<Preferences>()
     val preferences: LiveData<Preferences> = _preferences
@@ -66,4 +69,26 @@ class SettingsViewModel @ViewModelInject constructor(
             }
         }
     }
+
+    fun getSelectedDataSources(): BooleanArray {
+        val result = BooleanArray(allDataSources.size)
+        allDataSources.forEachIndexed { index, source ->
+            result[index] = preferences.value?.selectedSongDataSource?.contains(source) ?: false
+        }
+        return result
+    }
+
+    fun selectDataSources(selectedDataSources: BooleanArray) {
+        val result = linkedSetOf<SongDataSource>()
+        allDataSources.forEachIndexed { index, source ->
+            if (selectedDataSources[index]) {
+                result.add(source)
+            }
+        }
+        preferences.value?.let {
+            val prefs = it.copy(selectedSongDataSource = result)
+            updatePreferences(prefs)
+        }
+    }
+
 }
