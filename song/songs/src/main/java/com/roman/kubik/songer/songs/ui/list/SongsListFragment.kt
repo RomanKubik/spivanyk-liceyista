@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song_list.*
 
 @AndroidEntryPoint
-class SongsListFragment: BaseSearchFragment() {
+class SongsListFragment : BaseSearchFragment() {
 
     companion object {
         const val ARG_CATEGORY = "category"
@@ -23,16 +23,10 @@ class SongsListFragment: BaseSearchFragment() {
 
     override val viewModel by viewModels<SongsListViewModel>()
     private lateinit var adapter: SongsListAdapter
+    private var query: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_song_list, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupToolbar(songsToobar)
-        setupSongsList()
-        setupObservables()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         if (arguments?.getString(ARG_QUERY).isNullOrEmpty()) {
             viewModel.loadSongs(arguments?.getString(ARG_CATEGORY))
         } else {
@@ -40,19 +34,37 @@ class SongsListFragment: BaseSearchFragment() {
         }
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_song_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupToolbar(songsToobar)
+        setupSongsList()
+        setupObservables()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         if (arguments?.getString(ARG_QUERY) != null) {
             searchMenuItem.expandActionView()
+            searchView.setQuery(arguments?.getString(ARG_QUERY) ?: "", false)
         }
     }
 
     fun searchSongs(query: String) {
+        this.query = query
         viewModel.searchSongs(query)
     }
 
     private fun setupSongsList() {
-        adapter = SongsListAdapter(viewModel::selectSong)
+        adapter = SongsListAdapter {
+            if (query != null) {
+                arguments?.putString(ARG_QUERY, query)
+            }
+            viewModel.selectSong(it)
+        }
         songsList.adapter = adapter
         songsList.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         val divider = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
