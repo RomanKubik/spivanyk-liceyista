@@ -9,11 +9,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
+import com.roman.kubik.songer.core.ui.utils.hide
+import com.roman.kubik.songer.core.ui.utils.show
 import com.roman.kubik.songer.songs.ui.utils.toUiCategory
 import com.roman.kubik.songer.songs.ui.view.ChordClickListener
 import com.roman.kubik.songs.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song_details.*
+import kotlinx.android.synthetic.main.include_trouble.*
 
 @AndroidEntryPoint
 class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
@@ -39,6 +42,13 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         setupChordsRecyclerView()
         setupTonalityListeners()
         setupObservables()
+        loadSong()
+        troubleRetry.setOnClickListener {
+           loadSong()
+        }
+    }
+
+    private fun loadSong() {
         viewModel.loadSong(arguments?.getString(ARG_SONG_ID)
                 ?: throw IllegalArgumentException("songId was not passed as argument"))
     }
@@ -50,22 +60,49 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
 
     private fun setupObservables() {
         songLyrics.chordsClickListener = this
-        viewModel.preferences.observe(viewLifecycleOwner, {
-            chordsList.isVisible = it.showChords
-            songLyrics.showChords = it.showChords
-            chordsAdapter.selectedInstrument = it.selectedInstrument
-        })
         viewModel.song.observe(viewLifecycleOwner, {
-            val song = it.song
-            songTitle.text = song.title
-            songLyrics.text = song.lyrics
-            songCategory.setText(song.category.toUiCategory())
-            chords = it.chords.toList()
-            chordsList.isVisible = chords.isNotEmpty()
-            chordsCaption.isVisible = chords.isNotEmpty()
-            chordsAdapter.publishItems(chords)
-            bookmarkItem?.setIcon(if (song.isFavourite) R.drawable.ic_is_favourite else R.drawable.ic_is_not_favourite)
+            when (it) {
+                LoadingState -> showLoading()
+                is ErrorState -> showError()
+                is SuccessState -> showSuccess(it)
+            }
         })
+    }
+
+    private fun showLoading() {
+        songDetailsProgress.show()
+        songDetailsContainer.hide()
+        songDetailsTrouble.hide()
+    }
+
+    private fun showError() {
+        songDetailsProgress.hide()
+        songDetailsContainer.hide()
+        songDetailsTrouble.show()
+
+        troubleTitle.setText(R.string.error_song_details)
+        troubleImage.setImageResource(R.drawable.ic_campfire)
+    }
+
+    private fun showSuccess(successState: SuccessState) {
+        songDetailsProgress.hide()
+        songDetailsContainer.show()
+        songDetailsTrouble.hide()
+
+        chordsList.isVisible = successState.preferences.showChords
+        songLyrics.showChords = successState.preferences.showChords
+        chordsAdapter.selectedInstrument = successState.preferences.selectedInstrument
+
+        val song = successState.song
+        songTitle.text = song.title
+        songLyrics.text = song.lyrics
+        songCategory.setText(song.category.toUiCategory())
+        chords = successState.chords.toList()
+        chordsList.isVisible = chords.isNotEmpty()
+        chordsCaption.isVisible = chords.isNotEmpty()
+        chordsAdapter.publishItems(chords)
+        bookmarkItem?.setIcon(if (song.isFavourite) R.drawable.ic_is_favourite else R.drawable.ic_is_not_favourite)
+
     }
 
     private fun setupTonalityListeners() {
@@ -109,7 +146,7 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     override fun onChordClicked(chordName: String) {
         ChordsDialog(requireContext(),
                 chords,
-                viewModel.preferences.value?.selectedInstrument ?: Instrument.GUITAR)
+                (viewModel.song as? SuccessState)?.preferences?.selectedInstrument ?: Instrument.GUITAR)
                 .showChord(chordName)
     }
 }

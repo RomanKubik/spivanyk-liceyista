@@ -5,6 +5,7 @@
     <dimen name="default_image_view_size">40dp</dimen>
     <dimen name="default_clickable_icon_size">48dp</dimen>
     <dimen name="default_list_item_size">72dp</dimen>
+    <dimen name="error_image_size">80dp</dimen>
 
     <!-- Default Spacings -->
     <dimen name="default_padding_x0_5">4dp</dimen>

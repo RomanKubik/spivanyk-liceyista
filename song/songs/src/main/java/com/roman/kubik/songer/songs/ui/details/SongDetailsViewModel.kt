@@ -11,6 +11,7 @@ import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.chords.ChordsImageMapper
 import com.roman.kubik.songer.chords.ChordsTransposer
 import com.roman.kubik.songer.chords.model.Chord
+import com.roman.kubik.songer.core.AppResult
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
@@ -31,34 +32,48 @@ class SongDetailsViewModel @ViewModelInject constructor(
         const val ADD_TO_HISTORY_DELAY = 5000L
     }
 
-    private val _song = MutableLiveData<SongDetails>()
-    private val _preferences = MutableLiveData<Preferences>()
-    val song: LiveData<SongDetails> = _song
-    val preferences: LiveData<Preferences> = _preferences
+    private val _song = MutableLiveData<SongDetailsViewState>()
+    val song: LiveData<SongDetailsViewState> = _song
 
     fun loadSong(songId: String) {
+        _song.value = LoadingState
         viewModelScope.launch(Dispatchers.IO) {
-            _preferences.postValue(settingsRepository.getPreferences())
-            val song = songRepository.getSongById(songId)
-            val songDetails = SongDetails(song, ChordsImageMapper.getChords(song.lyrics).toList())
-            _song.postValue(songDetails)
-            if (song.category != SongCategory.WEB) {
-                delay(ADD_TO_HISTORY_DELAY)
-                songRepository.addSongToLastPlayed(song)
+            val prefs = settingsRepository.getPreferences()
+            val result = songRepository.getSongById(songId)
+            if (result is AppResult.Success) {
+                val song = result.data
+                _song.postValue(SuccessState(song, ChordsImageMapper.getChords(song.lyrics).toList(), prefs))
+                if (song.category != SongCategory.WEB) {
+                    delay(ADD_TO_HISTORY_DELAY)
+                    songRepository.addSongToLastPlayed(song)
+                }
+            } else {
+                _song.postValue(ErrorState((result as AppResult.Error).throwable))
             }
         }
     }
 
     fun editSong() {
-        song.value?.song?.id?.let(songsNavigator::navigateToEditSong)
+        (song.value as? SuccessState)?.song?.id?.let(songsNavigator::navigateToEditSong)
     }
 
     fun shareSong() {
-        song.value?.song?.let(songsNavigator::shareSong)
+        (song.value as? SuccessState)?.song?.let(songsNavigator::shareSong)
+    }
+
+    fun deleteSong() {
+        (song.value as? SuccessState)?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                songRepository.removeSong(it.song)
+                withContext(Dispatchers.Main) {
+                    songsNavigator.navigateUp()
+                }
+            }
+        }
     }
 
     fun likeDislikeSong() {
-        song.value?.let {
+        (song.value as? SuccessState)?.let {
             viewModelScope.launch(Dispatchers.IO) {
                 val updatedSong = it.copy(song = it.song.copy(isFavourite = !it.song.isFavourite))
                 updateSong(updatedSong)
@@ -67,7 +82,7 @@ class SongDetailsViewModel @ViewModelInject constructor(
     }
 
     fun transpositionUp() {
-        song.value?.let {
+        (song.value as? SuccessState)?.let {
             viewModelScope.launch(Dispatchers.IO) {
                 val lyrics = ChordsTransposer.transposeUp(it.song.lyrics)
                 val updatedSong = it.copy(song = it.song.copy(lyrics = lyrics), chords = ChordsImageMapper.getChords(lyrics).toList())
@@ -77,7 +92,7 @@ class SongDetailsViewModel @ViewModelInject constructor(
     }
 
     fun transpositionDown() {
-        song.value?.let {
+        (song.value as? SuccessState)?.let {
             viewModelScope.launch(Dispatchers.IO) {
                 val lyrics = ChordsTransposer.transposeDown(it.song.lyrics)
                 val updatedSong = it.copy(song = it.song.copy(lyrics = lyrics), chords = ChordsImageMapper.getChords(lyrics).toList())
@@ -86,25 +101,8 @@ class SongDetailsViewModel @ViewModelInject constructor(
         }
     }
 
-    private suspend fun updateSong(songDetails: SongDetails) {
-        songRepository.createOrUpdateSong(songDetails.song)
-        _song.postValue(songDetails)
+    private suspend fun updateSong(successState: SuccessState) {
+        songRepository.createOrUpdateSong(successState.song)
+        _song.postValue(successState)
     }
-
-    fun deleteSong() {
-        song.value?.let {
-            viewModelScope.launch(Dispatchers.IO) {
-                songRepository.removeSong(it.song)
-                withContext(Dispatchers.Main) {
-                    songsNavigator.navigateUp()
-                }
-            }
-        }
-
-    }
-
-    data class SongDetails(
-            val song: Song,
-            val chords: List<Chord>
-    )
 }

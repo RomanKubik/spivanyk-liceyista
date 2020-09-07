@@ -24,7 +24,7 @@ class EditSongViewModel @ViewModelInject constructor(
 
     fun loadSong(songId: String) {
         GlobalScope.launch(Dispatchers.IO) {
-            _song.postValue(songRepository.getSongById(songId))
+//            _song.postValue(songRepository.getSongById(songId))
         }
     }
 

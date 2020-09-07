@@ -8,6 +8,9 @@
     <string name="song_category_abroad">Abroad songs</string>
     <string name="empty_string" />
 
+    <string name="error_empty_list">It\'s empty here</string>
+    <string name="error_load_list">Unable to load songs</string>
+
     <string name="menu_song_details_favourite">Favourite</string>
     <string name="menu_song_details_share">Share</string>
     <string name="menu_song_details_edit">Edit</string>
@@ -16,6 +19,7 @@
 
     <string name="chords">Chords</string>
     <string name="chords_a_of_b">%d of %d</string>
+    <string name="error_song_details">Couldn\'t load this song. Please try again.</string>
 
     <string name="dialog_remove_song">Remove song</string>
     <string name="dialog_remove_song_text">Are you sure you want to remove this song from your Songer?</string>

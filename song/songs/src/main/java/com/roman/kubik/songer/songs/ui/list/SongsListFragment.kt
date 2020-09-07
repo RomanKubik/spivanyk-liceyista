@@ -4,14 +4,19 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.roman.kubik.settings.domain.preference.Preferences
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
 import com.roman.kubik.songer.core.ui.utils.getAttributeColor
+import com.roman.kubik.songer.core.ui.utils.hide
+import com.roman.kubik.songer.core.ui.utils.show
+import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songs.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song_list.*
+import kotlinx.android.synthetic.main.include_trouble.*
+import kotlinx.android.synthetic.main.include_trouble.view.*
 
 @AndroidEntryPoint
 class SongsListFragment : BaseSearchFragment() {
@@ -27,11 +32,7 @@ class SongsListFragment : BaseSearchFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments?.getString(ARG_QUERY).isNullOrEmpty()) {
-            viewModel.loadSongs(arguments?.getString(ARG_CATEGORY))
-        } else {
-            searchSongs(arguments?.getString(ARG_QUERY) ?: "")
-        }
+        load()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,6 +44,9 @@ class SongsListFragment : BaseSearchFragment() {
         setupToolbar(songsToobar)
         setupSongsList()
         setupObservables()
+        troubleRetry.setOnClickListener {
+            load()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,14 +59,20 @@ class SongsListFragment : BaseSearchFragment() {
 
     fun searchSongs(query: String) {
         this.query = query
+        arguments?.putString(ARG_QUERY, query)
         viewModel.searchSongs(query)
+    }
+
+    private fun load() {
+        if (arguments?.getString(ARG_QUERY).isNullOrEmpty()) {
+            viewModel.loadSongs(arguments?.getString(ARG_CATEGORY))
+        } else {
+            searchSongs(arguments?.getString(ARG_QUERY) ?: "")
+        }
     }
 
     private fun setupSongsList() {
         adapter = SongsListAdapter {
-            if (query != null) {
-                arguments?.putString(ARG_QUERY, query)
-            }
             viewModel.selectSong(it)
         }
         songsList.adapter = adapter
@@ -73,7 +83,47 @@ class SongsListFragment : BaseSearchFragment() {
     }
 
     private fun setupObservables() {
-        viewModel.preferences.observe(viewLifecycleOwner, { adapter.showChords = it.showChords })
-        viewModel.songs.observe(viewLifecycleOwner, adapter::publishItems)
+        viewModel.songs.observe(viewLifecycleOwner) { viewState ->
+            when (viewState) {
+                LoadingState -> showLoading()
+                NoSongsViewState -> showEmptyList()
+                is ErrorState -> showError()
+                is SuccessState -> showSuccess(viewState.songs, viewState.preferences)
+            }
+        }
+    }
+
+    private fun showLoading() {
+        songsProgress.show()
+        songsTrouble.hide()
+    }
+
+    private fun showEmptyList() {
+        songsProgress.hide()
+        songsTrouble.show()
+        songsList.hide()
+        songsTrouble.troubleRetry.hide()
+
+        songsTrouble.troubleImage.setImageResource(R.drawable.ic_empty_list)
+        songsTrouble.troubleTitle.setText(getString(R.string.error_empty_list))
+    }
+
+    private fun showError() {
+        songsProgress.hide()
+        songsTrouble.show()
+        songsList.hide()
+        songsTrouble.troubleRetry.show()
+
+        songsTrouble.troubleImage.setImageResource(R.drawable.ic_error)
+        songsTrouble.troubleTitle.setText(getString(R.string.error_load_list))
+    }
+
+    private fun showSuccess(songs: List<Song>, preferences: Preferences) {
+        songsProgress.hide()
+        songsTrouble.hide()
+        songsList.show()
+
+        adapter.showChords = preferences.showChords
+        adapter.publishItems(songs)
     }
 }

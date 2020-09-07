@@ -18,7 +18,7 @@
 
         <item name="textAppearanceCaption">@style/TextAppearance.Songer.Caption</item>
         
-        <item name="materialAlertDialogTheme">@style/Theme.Songer.AlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Songer.AlertDialog</item>
 
         <!-- Custom theme attributes -->
         <item name="textAppearanceItemTitle">@style/TextAppearance.Songer.Item.Title</item>
@@ -32,7 +32,7 @@
     </style>
 
     <!-- Dialogs -->
-    <style name="Theme.Songer.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <style name="ThemeOverlay.Songer.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="colorPrimary">?colorAccent</item>
     </style>
 

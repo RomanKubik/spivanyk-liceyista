@@ -147,4 +147,17 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <ProgressBar
+        android:id="@+id/songDetailsProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <include
+        android:id="@+id/songDetailsTrouble"
+        layout="@layout/include_trouble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

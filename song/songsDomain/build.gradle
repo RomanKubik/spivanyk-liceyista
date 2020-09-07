@@ -4,6 +4,7 @@ apply plugin: 'kotlin'
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation project(':song:provider')
+    api project(':coreKotlin')
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
 

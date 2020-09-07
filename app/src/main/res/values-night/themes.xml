@@ -13,7 +13,7 @@
 
         <item name="textAppearanceCaption">@style/TextAppearance.Songer.Caption</item>
 
-        <item name="materialAlertDialogTheme">@style/Theme.Songer.AlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Songer.AlertDialog</item>
 
         <!-- Custom theme attributes -->
         <item name="textAppearanceItemTitle">@style/TextAppearance.Songer.Item.Title</item>

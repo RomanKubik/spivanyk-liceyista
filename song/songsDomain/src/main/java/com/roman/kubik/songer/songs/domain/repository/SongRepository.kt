@@ -1,6 +1,6 @@
 package com.roman.kubik.songer.songs.domain.repository
 
-import com.roman.kubik.provider.SongServiceConfigUpdater
+import com.roman.kubik.songer.core.AppResult
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongCategory.FAVOURITE
@@ -18,7 +18,7 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
     private val songsServices: Set<SongsService>
         get() = songServiceProvider.getSongServices()
 
-    suspend fun getAllSongs(): List<Song> {
+    suspend fun getAllSongs(): AppResult<List<Song>> {
         val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
         coroutineScope {
             songsServices.forEachIndexed { index, songsService ->
@@ -32,10 +32,10 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
             result.addAll(pair.second)
         }
 
-        return result
+        return AppResult.Success(result)
     }
 
-    suspend fun getAllSongs(category: SongCategory): List<Song> {
+    suspend fun getAllSongs(category: SongCategory): AppResult<List<Song>> {
         val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
         coroutineScope {
             songsServices.forEachIndexed { index, songsService ->
@@ -54,25 +54,33 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
             result.addAll(pair.second)
         }
 
-        return result
+        return AppResult.Success(result)
     }
 
-    suspend fun getSongById(songId: String): Song {
+    suspend fun getSongById(songId: String): AppResult<Song> {
         for (songsService in songsServices) {
             try {
-                return songsService.getSongById(songId)
+                return AppResult.Success(songsService.getSongById(songId))
             } catch (e: Exception) {
                 /* ignore */
             }
         }
-        throw IllegalArgumentException("Couldn't find song with id: $songId")
+        return AppResult.Error(IllegalArgumentException("Couldn't find song with id: $songId"))
     }
 
-    suspend fun searchSong(query: String): List<Song> {
+    suspend fun searchSong(query: String): AppResult<List<Song>> {
+        var success = false
         val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
         coroutineScope {
             songsServices.forEachIndexed { index, songsService ->
-                launch { resultPairs.add(index to songsService.searchSongs(query)) }
+                launch {
+                    try {
+                        resultPairs.add(index to songsService.searchSongs(query))
+                        success = true
+                    } catch (e: Exception) {
+                        /* ignore */
+                    }
+                }
             }
         }
         resultPairs.sortBy { it.first }
@@ -82,7 +90,7 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
             result.addAll(pair.second)
         }
 
-        return result
+        return if (success) AppResult.Success(result) else AppResult.Error(Exception())
     }
 
     suspend fun createOrUpdateSong(song: Song) {
@@ -99,6 +107,23 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
         }
     }
 
+    //    suspend fun createOrUpdateSong(song: Song): AppResult<Any> {
+//        var success = false
+//        coroutineScope {
+//            songsServices.forEach { songsService ->
+//                launch {
+//                    try {
+//                        songsService.createOrUpdateSong(song)
+//                        success = true
+//                    } catch (e: Exception) {
+//                        /* ignore */
+//                    }
+//                }
+//            }
+//        }
+//        return if (success) AppResult.Success(Any()) else AppResult.Error(Exception())
+//    }
+
     suspend fun getRandomSong(): Song {
         for (songsService in songsServices) {
             val songs = songsService.getAllSongs()
@@ -109,6 +134,16 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
         throw Exception()
     }
 
+//    suspend fun getRandomSong(): AppResult<Song> {
+//        for (songsService in songsServices) {
+//            val songs = songsService.getAllSongs()
+//            if (songs.isEmpty()) continue
+//            val randomIdx = abs(Random.nextInt()) % songs.size
+//            return AppResult.Success(songs[randomIdx])
+//        }
+//        return AppResult.Error(Exception())
+//    }
+
     suspend fun addSongToLastPlayed(song: Song) {
         coroutineScope {
             songsServices.forEach { songsService ->
@@ -117,12 +152,13 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
         }
     }
 
-    suspend fun removeSong(song: Song) {
+    suspend fun removeSong(song: Song): AppResult<Any> {
         coroutineScope {
             songsServices.forEach { songsService ->
                 launch { songsService.removeSong(song) }
             }
         }
+        return AppResult.Success(Any())
     }
 
 }
