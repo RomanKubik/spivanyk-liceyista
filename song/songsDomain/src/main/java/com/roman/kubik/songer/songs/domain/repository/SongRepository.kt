@@ -93,36 +93,22 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
         return if (success) AppResult.Success(result) else AppResult.Error(Exception())
     }
 
-    suspend fun createOrUpdateSong(song: Song) {
+    suspend fun createOrUpdateSong(song: Song): AppResult<Any> {
+        var success = false
         coroutineScope {
             songsServices.forEach { songsService ->
                 launch {
                     try {
                         songsService.createOrUpdateSong(song)
+                        success = true
                     } catch (e: Exception) {
                         /* ignore */
                     }
                 }
             }
         }
+        return if (success) AppResult.Success(Any()) else AppResult.Error(Exception())
     }
-
-    //    suspend fun createOrUpdateSong(song: Song): AppResult<Any> {
-//        var success = false
-//        coroutineScope {
-//            songsServices.forEach { songsService ->
-//                launch {
-//                    try {
-//                        songsService.createOrUpdateSong(song)
-//                        success = true
-//                    } catch (e: Exception) {
-//                        /* ignore */
-//                    }
-//                }
-//            }
-//        }
-//        return if (success) AppResult.Success(Any()) else AppResult.Error(Exception())
-//    }
 
     suspend fun getRandomSong(): Song {
         for (songsService in songsServices) {
