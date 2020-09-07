@@ -4,10 +4,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.roman.kubik.provider.SongDataSource
 import com.roman.kubik.settings.domain.database.DatabaseController
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.settings.domain.preference.Preferences
-import com.roman.kubik.settings.domain.preference.SongDataSource
 import com.roman.kubik.settings.domain.preference.UiMode
 import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.ui.base.BaseViewModel

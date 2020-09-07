@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.di
 
+import com.roman.kubik.provider.SongServiceConfigUpdater
 import com.roman.kubik.settings.domain.database.DatabaseController
 import com.roman.kubik.settings.domain.preference.PreferenceService
 import com.roman.kubik.settings.domain.theme.ThemeService
@@ -9,6 +10,7 @@ import com.roman.kubik.songer.data.core.StringProviderImpl
 import com.roman.kubik.songer.room.database.DatabaseManager
 import com.roman.kubik.songer.room.database.DatabaseManagerImpl
 import com.roman.kubik.songer.settings.preferences.SharedPreferencesService
+import com.roman.kubik.songer.songs.domain.song.SongServiceProvider
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -32,5 +34,8 @@ abstract class AppBinderModule {
 
     @Binds
     abstract fun bindThemeService(themeServiceImpl: ThemeServiceImpl): ThemeService
+
+    @Binds
+    abstract fun bigSongServiceConfigUpdater(songServiceProvider: SongServiceProvider): SongServiceConfigUpdater
 
 }

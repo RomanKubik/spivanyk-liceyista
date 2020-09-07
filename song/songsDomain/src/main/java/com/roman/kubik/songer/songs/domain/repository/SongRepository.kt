@@ -1,8 +1,11 @@
 package com.roman.kubik.songer.songs.domain.repository
 
+import com.roman.kubik.provider.SongServiceConfigUpdater
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
-import com.roman.kubik.songer.songs.domain.song.SongCategory.*
+import com.roman.kubik.songer.songs.domain.song.SongCategory.FAVOURITE
+import com.roman.kubik.songer.songs.domain.song.SongCategory.LAST_PLAYED
+import com.roman.kubik.songer.songs.domain.song.SongServiceProvider
 import com.roman.kubik.songer.songs.domain.song.SongsService
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -10,7 +13,10 @@ import javax.inject.Inject
 import kotlin.math.abs
 import kotlin.random.Random
 
-class SongRepository @Inject constructor(private val songsServices: Set<@JvmSuppressWildcards SongsService>) {
+class SongRepository @Inject constructor(private val songServiceProvider: SongServiceProvider) {
+
+    private val songsServices: Set<SongsService>
+        get() = songServiceProvider.getSongServices()
 
     suspend fun getAllSongs(): List<Song> {
         val resultPairs = mutableListOf<Pair<Int, List<Song>>>()

@@ -52,6 +52,7 @@ dependencies {
     implementation project(':song:songsRoom')
     implementation project(':song:songsMyChords')
     implementation project(':song:songsPisniOrgUa')
+    implementation project(':song:provider')
 
     implementation project(':settings:presentation')
     implementation project(':settings:preferences')

@@ -1,4 +1,4 @@
-package com.roman.kubik.settings.domain.preference
+package com.roman.kubik.provider
 
 enum class SongDataSource(val sourceName: String) {
     PISNI_ORG_UA("pisni.org.ua"),

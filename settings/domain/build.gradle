@@ -3,6 +3,8 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':song:provider')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 
     implementation "javax.inject:javax.inject:1"
