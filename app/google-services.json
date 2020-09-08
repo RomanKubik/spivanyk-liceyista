@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "668868331656",
+    "firebase_url": "https://lyceum-songer.firebaseio.com",
+    "project_id": "lyceum-songer",
+    "storage_bucket": "lyceum-songer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:668868331656:android:456ba6ed9241639b",
+        "android_client_info": {
+          "package_name": "com.roman.kubik.songer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "668868331656-8spqv2s5kneqe4062935re53mvbb03q5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roman.kubik.songer",
+            "certificate_hash": "355bcf7a2f46c51b427b3de4e4a3a293c4604f2b"
+          }
+        },
+        {
+          "client_id": "668868331656-ou5hqvv6ne3rm0lp7la1pjb9uuj96vf7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roman.kubik.songer",
+            "certificate_hash": "42701dd31dee7fbdebfbff80c48305cc7acce640"
+          }
+        },
+        {
+          "client_id": "668868331656-bn4luhibsqgg0lr351rhril9pqug0bna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWHcmbx4v2zqwdKh1vPC4obSSHHR7vMZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "668868331656-bn4luhibsqgg0lr351rhril9pqug0bna.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
