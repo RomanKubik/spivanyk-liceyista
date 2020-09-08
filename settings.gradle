@@ -1,3 +1,4 @@
+include ':shaker'
 include ':coreKotlin'
 include ':song:provider'
 include ':song:songsPisniOrgUa'

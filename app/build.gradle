@@ -47,6 +47,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 
     implementation project(':core')
+    implementation project(':shaker')
     implementation project(':home')
     implementation project(':song:songs')
     implementation project(':song:songsRoom')
