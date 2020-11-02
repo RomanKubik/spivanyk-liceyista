@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roman.kubik.settings.domain.preference.Preferences
@@ -105,7 +106,7 @@ class SongsListFragment : BaseSearchFragment() {
         songsTrouble.troubleRetry.hide()
 
         songsTrouble.troubleImage.setImageResource(R.drawable.ic_empty_list)
-        songsTrouble.troubleTitle.setText(getString(R.string.error_empty_list))
+        songsTrouble.troubleTitle.setText(R.string.error_empty_list)
     }
 
     private fun showError() {
@@ -115,7 +116,7 @@ class SongsListFragment : BaseSearchFragment() {
         songsTrouble.troubleRetry.show()
 
         songsTrouble.troubleImage.setImageResource(R.drawable.ic_error)
-        songsTrouble.troubleTitle.setText(getString(R.string.error_load_list))
+        songsTrouble.troubleTitle.setText(R.string.error_load_list)
     }
 
     private fun showSuccess(songs: List<Song>, preferences: Preferences) {

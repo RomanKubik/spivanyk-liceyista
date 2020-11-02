@@ -3,6 +3,7 @@ package com.roman.kubik.songer.songs.ui.edit
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.lifecycle.observe
 import androidx.fragment.app.viewModels
 import com.roman.kubik.songer.core.ui.base.BaseFragment
 import com.roman.kubik.songer.core.ui.utils.hide
@@ -47,7 +48,7 @@ class EditSongFragment: BaseFragment() {
     }
 
     private fun setupObservables() {
-        viewModel.song.observe(viewLifecycleOwner, { state ->
+        viewModel.song.observe(viewLifecycleOwner) { state ->
             when (state) {
                 LoadingState -> showLoading()
                 EmptyTitle -> showEmptyTitle()
@@ -56,7 +57,7 @@ class EditSongFragment: BaseFragment() {
                 is ErrorState -> showError()
                 is EditSongState -> showSong(state.song)
             }
-        })
+        }
     }
 
     private fun showLoading() {

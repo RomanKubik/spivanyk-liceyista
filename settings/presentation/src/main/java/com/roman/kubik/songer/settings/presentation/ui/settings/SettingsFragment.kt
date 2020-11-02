@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import androidx.lifecycle.observe
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.roman.kubik.settings.domain.preference.Instrument
@@ -25,18 +27,18 @@ class SettingsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
-        viewModel.preferences.observe(viewLifecycleOwner, {
+        viewModel.preferences.observe(viewLifecycleOwner) {
             showChords.isChecked = it.showChords
             preferredInstrument.setSettingsValue(resources.getStringArray(R.array.instruments)[it.selectedInstrument.ordinal])
             preferredTheme.setSettingsValue(resources.getStringArray(R.array.themes)[it.uiMode.ordinal])
-        })
+        }
     }
 
     private fun setupUi() {
         setupToolbar(songDetailsToolbar)
-        showChords.setOnCheckedChangeListener { _, isChecked ->
+        showChords.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
             viewModel.showChords(isChecked)
-        }
+        })
         preferredInstrument.setOnClickListener {
             showSelectInstrumentDialog()
         }
@@ -81,12 +83,12 @@ class SettingsFragment : BaseFragment() {
     private fun showSelectDataSourcesDialog() {
         val selectedDataSources = viewModel.getSelectedDataSources()
         MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Select remote data sources")
+                .setTitle(R.string.dialog_remote_data_source)
                 .setMultiChoiceItems(viewModel.allDataSources.map { it.sourceName }.toTypedArray(), selectedDataSources)
                 { _, which, isChecked ->
                     selectedDataSources[which] = isChecked
                 }
-                .setPositiveButton("Accept") { _, _ -> viewModel.selectDataSources(selectedDataSources) }
+                .setPositiveButton(R.string.accept) { _, _ -> viewModel.selectDataSources(selectedDataSources) }
                 .setNegativeButton(R.string.cancel) { _, _ -> }
                 .show()
 

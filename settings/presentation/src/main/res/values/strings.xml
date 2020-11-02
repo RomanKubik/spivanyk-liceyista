@@ -14,4 +14,6 @@
     <string name="dialog_factory_reset">Factory reset</string>
     <string name="dialog_factory_reset_text">Reset database to factory configurations. All previously added songs will be saved. After reset app will be relaunched.</string>
     <string name="dialog_reset">Reset</string>
+    <string name="dialog_remote_data_source">Select remote data sources</string>
+    <string name="accept">Accept</string>
 </resources>
