@@ -4,6 +4,8 @@ import com.roman.kubik.provider.SongServiceConfigUpdater
 import com.roman.kubik.settings.domain.database.DatabaseController
 import com.roman.kubik.settings.domain.preference.PreferenceService
 import com.roman.kubik.settings.domain.theme.ThemeService
+import com.roman.kubik.songer.analytics.core.AnalyticsService
+import com.roman.kubik.songer.analytics.core.DefaultAnalyticsService
 import com.roman.kubik.songer.app.themes.ThemeServiceImpl
 import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.data.core.StringProviderImpl
@@ -17,6 +19,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -42,5 +45,9 @@ abstract class AppBinderModule {
 
     @Binds
     abstract fun bindShakeDetector(shakeDetectorImpl: ShakeDetectorImpl): ShakeDetector
+
+    @Singleton
+    @Binds
+    abstract fun bindAnalyticsService(defaultAnalyticsService: DefaultAnalyticsService): AnalyticsService
 
 }

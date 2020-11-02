@@ -1,3 +1,4 @@
+include ':analytics:analyticsCore'
 include ':shaker'
 include ':coreKotlin'
 include ':song:provider'

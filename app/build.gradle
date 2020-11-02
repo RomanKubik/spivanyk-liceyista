@@ -60,6 +60,8 @@ dependencies {
     implementation project(':settings:presentation')
     implementation project(':settings:preferences')
 
+    implementation project(':analytics:analyticsCore')
+
     //AndroidX
     implementation "androidx.appcompat:appcompat:$versions.appCompat"
     implementation "androidx.activity:activity-ktx:$versions.activity"

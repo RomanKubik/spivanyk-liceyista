@@ -3,15 +3,18 @@ package com.roman.kubik.songer.home.ui
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.roman.kubik.songer.analytics.core.AnalyticsService
 import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.core.navigation.SearchNavigator
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.home.R
+import com.roman.kubik.songer.home.analytics.SelectedHomeCategoryEvent
 import com.roman.kubik.songer.home.navigation.HomeNavigator
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 
 class HomeFragmentViewModel @ViewModelInject constructor(
         private val stringProvider: StringProvider,
+        private val analyticsService: AnalyticsService,
         private val homeNavigator: HomeNavigator,
         searchNavigator: SearchNavigator
 ) : BaseSearchViewModel(searchNavigator) {
@@ -24,6 +27,7 @@ class HomeFragmentViewModel @ViewModelInject constructor(
     }
 
     fun onCategorySelected(category: HomeCategory) {
+        analyticsService.log(SelectedHomeCategoryEvent(category))
         homeNavigator.navigateToCategory(category.songCategory)
     }
 

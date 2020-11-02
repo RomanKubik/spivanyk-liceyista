@@ -8,7 +8,9 @@ import com.roman.kubik.songer.R
 import com.roman.kubik.songer.core.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
@@ -38,7 +40,7 @@ class MainActivity : BaseActivity() {
         randomFab.setOnClickListener {
             randomFab.isChecked = true
             bottomNavigationView.menu.findItem(R.id.menu_empty).isChecked = true
-            viewModel.navigateToRandomSong()
+            viewModel.onSelectRandomSong()
         }
     }
 }

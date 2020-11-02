@@ -43,6 +43,7 @@ dependencies {
     implementation project(':song:songsDomain')
     implementation project(':chords')
     implementation project(':settings:domain')
+    implementation project(':analytics:analyticsCore')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 
