@@ -27,21 +27,17 @@ class AppNavigator @Inject constructor() :
         SongsNavigator,
         SettingsNavigator {
 
-    private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
+    private lateinit var navController: NavController
 
     override fun setNavHostFragment(navHostFragment: NavHostFragment) {
         this.navHostFragment = navHostFragment
         this.navController = navHostFragment.navController
     }
 
-    override fun navigateToSearch(query: String) {
-        val args = bundleOf(SongsListFragment.ARG_QUERY to query)
-        if (navHostFragment.childFragmentManager.fragments.last() is SongsListFragment) {
-            (navHostFragment.childFragmentManager.fragments.last() as SongsListFragment).searchSongs(query)
-        } else {
-            navController.navigate(R.id.action_global_menu_discover, args)
-        }
+    override fun navigateToSearch() {
+        val args = bundleOf(SongsListFragment.ARG_QUERY to "")
+        navController.navigate(R.id.action_global_menu_discover, args)
     }
 
     override fun navigateToCategory(songCategory: SongCategory) {

@@ -2,13 +2,15 @@ package com.roman.kubik.songer.songs.ui.list
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.roman.kubik.settings.domain.preference.Preferences
-import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
+import com.roman.kubik.songer.core.ui.base.BaseFragment
 import com.roman.kubik.songer.core.ui.utils.getAttributeColor
 import com.roman.kubik.songer.core.ui.utils.hide
 import com.roman.kubik.songer.core.ui.utils.show
@@ -20,16 +22,17 @@ import kotlinx.android.synthetic.main.include_trouble.*
 import kotlinx.android.synthetic.main.include_trouble.view.*
 
 @AndroidEntryPoint
-class SongsListFragment : BaseSearchFragment() {
+class SongsListFragment : BaseFragment() {
 
     companion object {
         const val ARG_CATEGORY = "category"
         const val ARG_QUERY = "query"
     }
 
-    override val viewModel by viewModels<SongsListViewModel>()
+    private val viewModel by viewModels<SongsListViewModel>()
     private lateinit var adapter: SongsListAdapter
-    private var query: String? = null
+    private lateinit var savedView: View
+    private var searchView: SearchView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +40,16 @@ class SongsListFragment : BaseSearchFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_song_list, container, false)
+        if (::savedView.isInitialized.not()) {
+            savedView = inflater.inflate(R.layout.fragment_song_list, container, false)
+        }
+        return savedView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupToolbar(songsToobar)
+        setupToolbar(songsToolbar)
+        initSearchView()
         setupSongsList()
         setupObservables()
         troubleRetry.setOnClickListener {
@@ -50,25 +57,41 @@ class SongsListFragment : BaseSearchFragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        if (arguments?.getString(ARG_QUERY) != null) {
-            searchMenuItem.expandActionView()
-            searchView.setQuery(arguments?.getString(ARG_QUERY) ?: "", false)
+    private fun load() {
+        if (searchView?.query.isNullOrBlank()) {
+            viewModel.loadSongs(arguments?.getString(ARG_CATEGORY))
+        } else {
+            viewModel.searchSongs(searchView?.query?.toString() ?: "")
         }
     }
 
-    fun searchSongs(query: String) {
-        this.query = query
-        arguments?.putString(ARG_QUERY, query)
-        viewModel.searchSongs(query)
-    }
+    private fun initSearchView() {
+        if (searchView != null) return
+        val searchMenuItem = songsToolbar.menu.findItem(R.id.search)
+        searchView = searchMenuItem.actionView as SearchView
+        searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return if (query != null) {
+                    viewModel.searchSongs(query)
+                    true
+                } else {
+                    false
+                }
+            }
 
-    private fun load() {
-        if (arguments?.getString(ARG_QUERY).isNullOrEmpty()) {
-            viewModel.loadSongs(arguments?.getString(ARG_CATEGORY))
-        } else {
-            searchSongs(arguments?.getString(ARG_QUERY) ?: "")
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return if (newText != null) {
+                    viewModel.searchSongs(newText)
+                    true
+                } else {
+                    false
+                }
+            }
+
+        })
+        arguments?.getString(ARG_QUERY)?.let {
+            searchMenuItem.expandActionView()
+            searchView?.setQuery(it, true)
         }
     }
 

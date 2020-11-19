@@ -1,8 +1,10 @@
 package com.roman.kubik.songer.app
 
 import android.app.Application
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.settings.domain.theme.ThemeService
+import com.roman.kubik.songer.BuildConfig
 import com.roman.kubik.songer.analytics.core.AnalyticsService
 import com.roman.kubik.songer.analytics.FirebaseAnalyticsModule
 import dagger.hilt.android.HiltAndroidApp
@@ -28,6 +30,7 @@ class SpivanykApplication : Application() {
     }
 
     private fun setupAnalytics() {
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
         analyticsService.register(this, FirebaseAnalyticsModule())
     }
 

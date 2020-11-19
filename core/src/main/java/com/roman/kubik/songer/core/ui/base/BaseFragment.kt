@@ -7,9 +7,8 @@ import androidx.navigation.ui.NavigationUI
 
 abstract class BaseFragment : Fragment() {
 
-    protected fun setupToolbar(toolbar: Toolbar?) {
+    protected open fun setupToolbar(toolbar: Toolbar?) {
         if (toolbar != null) {
-            (activity as? BaseActivity)?.setSupportActionBar(toolbar)
             NavigationUI.setupWithNavController(toolbar, findNavController())
         }
     }

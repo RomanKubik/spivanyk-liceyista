@@ -40,6 +40,7 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$versions.appCompat"
     implementation "androidx.activity:activity-ktx:$versions.activity"
+    implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
 

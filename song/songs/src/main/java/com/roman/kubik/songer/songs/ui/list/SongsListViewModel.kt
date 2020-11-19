@@ -8,6 +8,7 @@ import com.roman.kubik.settings.domain.preference.Preferences
 import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.AppResult
 import com.roman.kubik.songer.core.navigation.SearchNavigator
+import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
@@ -21,8 +22,8 @@ class SongsListViewModel @ViewModelInject constructor(
         private val songRepository: SongRepository,
         private val settingsRepository: SettingsRepository,
         private val songsNavigator: SongsNavigator,
-        searchNavigator: SearchNavigator
-) : BaseSearchViewModel(searchNavigator) {
+        private val searchNavigator: SearchNavigator
+) : BaseViewModel() {
 
     private var searchJob: Job? = null
     private var preferences: Preferences? = null

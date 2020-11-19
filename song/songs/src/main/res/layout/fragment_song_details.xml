@@ -10,11 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/songDetailsToobar"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/songDetailsToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:menu="@menu/menu_song_details"/>
     </com.google.android.material.appbar.AppBarLayout>
 
 

@@ -42,13 +42,34 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupToolbar(songDetailsToobar)
+        setupToolbar(songDetailsToolbar)
+        setupMenuItems()
         setupChordsRecyclerView()
         setupTonalityListeners()
         setupObservables()
         loadSong()
         troubleRetry.setOnClickListener {
             loadSong()
+        }
+    }
+
+    private fun setupMenuItems() {
+        songDetailsToolbar.apply {
+            bookmarkItem = menu.findItem(R.id.addToFavourite)
+            deleteItem = menu.findItem(R.id.delete)
+            tonalityItem = menu.findItem(R.id.tonality)
+
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.search -> viewModel.openSearch()
+                    R.id.edit -> viewModel.editSong()
+                    R.id.delete -> requestDeleteSong()
+                    R.id.addToFavourite -> viewModel.likeDislikeSong()
+                    R.id.share -> viewModel.shareSong()
+                    R.id.tonality -> transpositionContainer.isVisible = !transpositionContainer.isVisible
+                }
+                true
+            }
         }
     }
 
