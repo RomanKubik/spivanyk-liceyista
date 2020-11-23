@@ -21,8 +21,7 @@ import kotlinx.coroutines.launch
 class SongsListViewModel @ViewModelInject constructor(
         private val songRepository: SongRepository,
         private val settingsRepository: SettingsRepository,
-        private val songsNavigator: SongsNavigator,
-        private val searchNavigator: SearchNavigator
+        private val songsNavigator: SongsNavigator
 ) : BaseViewModel() {
 
     private var searchJob: Job? = null

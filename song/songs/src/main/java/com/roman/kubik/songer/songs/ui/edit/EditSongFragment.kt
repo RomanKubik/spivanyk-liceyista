@@ -3,7 +3,6 @@ package com.roman.kubik.songer.songs.ui.edit
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.lifecycle.observe
 import androidx.fragment.app.viewModels
 import com.roman.kubik.songer.core.ui.base.BaseFragment
 import com.roman.kubik.songer.core.ui.utils.hide
@@ -30,21 +29,19 @@ class EditSongFragment: BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
         setupToolbar(editSongToolbar)
+        setupOptionsMenu()
         setupObservables()
         arguments?.getString(ARG_SONG_ID).let(viewModel::loadSong)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_edit_song, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.save -> viewModel.save(editSongTitle.text.toString(), editSongLyrics.text.toString())
-            R.id.recognize -> viewModel.recognize(editSongTitle.text.toString(), editSongLyrics.text.toString())
+    private fun setupOptionsMenu() {
+        editSongToolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.save -> viewModel.save(editSongTitle.text.toString(), editSongLyrics.text.toString())
+                R.id.recognize -> viewModel.recognize(editSongTitle.text.toString(), editSongLyrics.text.toString())
+            }
+            true
         }
-        return true
     }
 
     private fun setupObservables() {
