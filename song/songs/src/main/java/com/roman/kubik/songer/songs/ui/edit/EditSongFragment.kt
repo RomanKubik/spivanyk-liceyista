@@ -1,7 +1,9 @@
 package com.roman.kubik.songer.songs.ui.edit
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.roman.kubik.songer.core.ui.base.BaseFragment

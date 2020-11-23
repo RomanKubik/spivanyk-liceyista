@@ -66,6 +66,7 @@ class SongDetailsViewModel @ViewModelInject constructor(
             viewModelScope.launch(Dispatchers.IO) {
                 songRepository.removeSong(it.song)
                 withContext(Dispatchers.Main) {
+                    _song.value = SongDeleteSuccess
                     songsNavigator.navigateUp()
                 }
             }

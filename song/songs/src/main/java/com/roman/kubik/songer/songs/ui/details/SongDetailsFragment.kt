@@ -3,6 +3,7 @@ package com.roman.kubik.songer.songs.ui.details
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -12,6 +13,7 @@ import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
 import com.roman.kubik.songer.core.ui.utils.hide
 import com.roman.kubik.songer.core.ui.utils.show
 import com.roman.kubik.songer.songs.domain.song.SongCategory
+import com.roman.kubik.songer.songs.ui.SharedSongViewModel
 import com.roman.kubik.songer.songs.ui.utils.toUiCategory
 import com.roman.kubik.songer.songs.ui.view.ChordClickListener
 import com.roman.kubik.songs.R
@@ -34,6 +36,7 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     private var chords: List<Chord> = emptyList()
 
     override val viewModel: SongDetailsViewModel by viewModels()
+    private val sharedViewModel by activityViewModels<SharedSongViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_song_details, container, false)
@@ -89,6 +92,7 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
                 LoadingState -> showLoading()
                 is ErrorState -> showError()
                 is SuccessState -> showSuccess(it)
+                SongDeleteSuccess -> showSongDeletedSuccess()
             }
         }
     }
@@ -128,6 +132,10 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         bookmarkItem?.setIcon(if (song.isFavourite) R.drawable.ic_is_favourite else R.drawable.ic_is_not_favourite)
         deleteItem?.isVisible = song.category != SongCategory.WEB
         tonalityItem?.isVisible = successState.preferences.showChords && successState.chords.isNotEmpty()
+    }
+
+    private fun showSongDeletedSuccess() {
+        sharedViewModel.songDeletedCommand.postValue(Unit)
     }
 
     private fun setupTonalityListeners() {

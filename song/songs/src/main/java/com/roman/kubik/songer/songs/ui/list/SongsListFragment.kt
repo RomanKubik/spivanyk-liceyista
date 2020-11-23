@@ -4,6 +4,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,7 @@ import com.roman.kubik.songer.core.ui.utils.getAttributeColor
 import com.roman.kubik.songer.core.ui.utils.hide
 import com.roman.kubik.songer.core.ui.utils.show
 import com.roman.kubik.songer.songs.domain.song.Song
+import com.roman.kubik.songer.songs.ui.SharedSongViewModel
 import com.roman.kubik.songs.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song_list.*
@@ -28,6 +30,7 @@ class SongsListFragment : BaseFragment() {
     }
 
     private val viewModel by viewModels<SongsListViewModel>()
+    private val sharedViewModel by activityViewModels<SharedSongViewModel>()
     private lateinit var adapter: SongsListAdapter
     private lateinit var savedView: View
     private var searchView: SearchView? = null
@@ -111,6 +114,12 @@ class SongsListFragment : BaseFragment() {
                 NoSongsViewState -> showEmptyList()
                 is ErrorState -> showError()
                 is SuccessState -> showSuccess(viewState.songs, viewState.preferences)
+            }
+        }
+        sharedViewModel.songDeletedCommand.observe(viewLifecycleOwner) {
+            if (it != null) {
+                load()
+                sharedViewModel.songDeletedCommand.clear()
             }
         }
     }
