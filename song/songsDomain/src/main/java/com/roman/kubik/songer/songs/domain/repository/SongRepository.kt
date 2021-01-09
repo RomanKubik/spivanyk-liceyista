@@ -7,8 +7,8 @@ import com.roman.kubik.songer.songs.domain.song.SongCategory.FAVOURITE
 import com.roman.kubik.songer.songs.domain.song.SongCategory.LAST_PLAYED
 import com.roman.kubik.songer.songs.domain.song.SongServiceProvider
 import com.roman.kubik.songer.songs.domain.song.SongsService
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.channelFlow
 import javax.inject.Inject
 import kotlin.math.abs
 import kotlin.random.Random
@@ -68,14 +68,18 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
         return AppResult.Error(IllegalArgumentException("Couldn't find song with id: $songId"))
     }
 
-    suspend fun searchSong(query: String): AppResult<List<Song>> {
+    fun searchSongFlow(query: String) = channelFlow {
         var success = false
         val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
         coroutineScope {
             songsServices.forEachIndexed { index, songsService ->
                 launch {
                     try {
-                        resultPairs.add(index to songsService.searchSongs(query))
+                        val songList = songsService.searchSongs(query)
+                        if (index == 0) {
+                            offer(AppResult.Success(songList))
+                        }
+                        resultPairs.add(index to songList)
                         success = true
                     } catch (e: Exception) {
                         /* ignore */
@@ -84,13 +88,12 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
             }
         }
         resultPairs.sortBy { it.first }
-
         val result = mutableListOf<Song>()
         resultPairs.forEach { pair ->
             result.addAll(pair.second)
         }
 
-        return if (success) AppResult.Success(result) else AppResult.Error(Exception())
+        if (success) offer(AppResult.Success(result)) else offer(AppResult.Error(Exception()))
     }
 
     suspend fun createOrUpdateSong(song: Song): AppResult<Any> {

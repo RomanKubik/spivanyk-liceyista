@@ -7,15 +7,15 @@ import androidx.lifecycle.viewModelScope
 import com.roman.kubik.settings.domain.preference.Preferences
 import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.AppResult
-import com.roman.kubik.songer.core.navigation.SearchNavigator
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
-import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class SongsListViewModel @ViewModelInject constructor(
@@ -45,9 +45,12 @@ class SongsListViewModel @ViewModelInject constructor(
     fun searchSongs(query: String) {
         _songs.value = LoadingState
         searchJob?.cancel()
-        searchJob = viewModelScope.launch(Dispatchers.IO) {
-            handleSongResult(songRepository.searchSong(query), getPreferences())
-            searchJob = null
+        searchJob = viewModelScope.launch {
+            songRepository.searchSongFlow(query)
+                    .flowOn(Dispatchers.IO)
+                    .collect {
+                        handleSongResult(it, getPreferences())
+                    }
         }
     }
 
