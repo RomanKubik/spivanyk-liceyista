@@ -3,12 +3,14 @@ package com.roman.kubik.songer.songs.ui.details
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.isVisible
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.songer.chords.model.Chord
+import com.roman.kubik.songer.core.ui.base.FragmentScrollListener
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
 import com.roman.kubik.songer.core.ui.utils.hide
 import com.roman.kubik.songer.core.ui.utils.show
@@ -38,6 +40,8 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     override val viewModel: SongDetailsViewModel by viewModels()
     private val sharedViewModel by activityViewModels<SharedSongViewModel>()
 
+    private var scrollListener: FragmentScrollListener? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_song_details, container, false)
     }
@@ -47,12 +51,18 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         setupToolbar(songDetailsToolbar)
         setupMenuItems()
         setupChordsRecyclerView()
+        setupScrollListener()
         setupTonalityListeners()
         setupObservables()
         loadSong()
         troubleRetry.setOnClickListener {
             loadSong()
         }
+    }
+
+    override fun onDestroy() {
+        scrollListener?.onScrollUp()
+        super.onDestroy()
     }
 
     private fun setupMenuItems() {
@@ -83,6 +93,18 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     private fun setupChordsRecyclerView() {
         chordsList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         chordsList.adapter = chordsAdapter
+    }
+
+
+    private fun setupScrollListener() {
+        scrollListener = activity as? FragmentScrollListener
+        songDetailsContainer.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+            if (scrollY - oldScrollY <= 0) {
+                scrollListener?.onScrollUp()
+            } else {
+                scrollListener?.onScrollDown()
+            }
+        })
     }
 
     private fun setupObservables() {
