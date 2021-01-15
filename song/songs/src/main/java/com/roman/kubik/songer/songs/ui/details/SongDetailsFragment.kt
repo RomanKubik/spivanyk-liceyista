@@ -203,7 +203,7 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     override fun onChordClicked(chordName: String) {
         ChordsDialog(requireContext(),
                 chords,
-                (viewModel.song as? SuccessState)?.preferences?.selectedInstrument
+                (viewModel.song.value as? SuccessState)?.preferences?.selectedInstrument
                         ?: Instrument.GUITAR)
                 .showChord(chordName)
     }

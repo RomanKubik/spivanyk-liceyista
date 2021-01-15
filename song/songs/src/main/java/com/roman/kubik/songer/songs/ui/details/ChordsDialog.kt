@@ -1,7 +1,7 @@
 package com.roman.kubik.songer.songs.ui.details
 
-import android.app.Dialog
 import android.content.Context
+import androidx.appcompat.app.AppCompatDialog
 import com.roman.kubik.settings.domain.preference.Instrument
 import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.core.ui.utils.AssetImageLoader
@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.dialog_chord.*
 
 class ChordsDialog(context: Context,
                    private val chords: List<Chord>,
-                   private val selectedInstrument: Instrument) : Dialog(context) {
+                   private val selectedInstrument: Instrument) : AppCompatDialog(context) {
     private var currentPosition: Int = 0
         set(value) {
             field = validatePage(value)
