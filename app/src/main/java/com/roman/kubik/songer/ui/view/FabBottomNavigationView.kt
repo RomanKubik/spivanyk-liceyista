@@ -6,7 +6,6 @@ import android.content.Context
 import android.graphics.Paint
 import android.util.AttributeSet
 import androidx.core.animation.doOnEnd
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.google.android.material.bottomappbar.BottomAppBarTopEdgeTreatment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,6 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.ShapeAppearanceModel
 import com.roman.kubik.songer.R
+import com.roman.kubik.songer.core.ui.utils.getAttributeColor
 
 @SuppressLint("RestrictedApi")
 class FabBottomNavigationView @JvmOverloads constructor(
@@ -44,7 +44,7 @@ class FabBottomNavigationView @JvmOverloads constructor(
                 .build()
 
         materialShapeDrawable = MaterialShapeDrawable(shapeAppearanceModel).apply {
-            setTint(ContextCompat.getColor(context, R.color.colorAccent))
+            setTint(context.getAttributeColor(R.attr.colorAccent))
             paintStyle = Paint.Style.FILL_AND_STROKE
         }
 

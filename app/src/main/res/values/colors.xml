@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">@color/colorPrimary</color>
-    <color name="colorAccent">@color/olive_500</color>
-
     <color name="olive_500">#417505</color>
 
     <color name="grey_100">#141414</color>
@@ -11,4 +7,6 @@
     <color name="grey_500">#777777</color>
     <color name="grey_700">#c1c1c1</color>
     <color name="grey_800">#d9d9d9</color>
+
+    <color name="splash_background">@android:color/white</color>
 </resources>
