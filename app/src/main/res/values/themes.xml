@@ -33,6 +33,11 @@
 
         <item name="textAppearanceSongTitle">@style/TextAppearance.Songer.Song.Title</item>
         <item name="textAppearanceSongLyrics">@style/TextAppearance.Songer.Song.Lyrics</item>
+
+        <item name="tutorialBackground">@color/black_a90</item>
+        <item name="tutorialTextAppearance">@style/TextAppearance.Songer.Tutorial</item>
+        <item name="tutorialButton">@style/Widget.Songer.Button.Tutorial</item>
+
     </style>
 
     <!-- Dialogs -->

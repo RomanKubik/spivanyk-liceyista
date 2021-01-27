@@ -51,6 +51,7 @@ dependencies {
     implementation project(':core')
     implementation project(':shaker')
     implementation project(':home')
+    implementation project(':view:tutorial')
     implementation project(':song:songs')
     implementation project(':song:songsRoom')
     implementation project(':song:songsMyChords')
