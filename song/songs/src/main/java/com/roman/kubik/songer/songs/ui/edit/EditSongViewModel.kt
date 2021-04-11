@@ -1,22 +1,23 @@
 package com.roman.kubik.songer.songs.ui.edit
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.chords.ChordsRecognizer
 import com.roman.kubik.songer.core.AppResult
+import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class EditSongViewModel @ViewModelInject constructor(
+@HiltViewModel
+class EditSongViewModel @Inject constructor(
         private val songRepository: SongRepository,
         private var songsNavigator: SongsNavigator
 ) : BaseViewModel() {

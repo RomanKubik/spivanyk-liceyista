@@ -1,6 +1,5 @@
 package com.roman.kubik.songer.ui.main
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.NavHostFragment
 import com.roman.kubik.songer.analytics.core.AnalyticsService
@@ -10,12 +9,15 @@ import com.roman.kubik.songer.navigation.MainNavigator
 import com.roman.kubik.songer.room.database.DatabaseManager
 import com.roman.kubik.songer.shaker.ShakeDetector
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
+import javax.inject.Inject
 
 @FlowPreview
-class MainActivityViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainActivityViewModel @Inject constructor(
         private val databaseManager: DatabaseManager,
         private val songRepository: SongRepository,
         private val shakeDetector: ShakeDetector,

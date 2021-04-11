@@ -1,27 +1,26 @@
 package com.roman.kubik.songer.songs.ui.details
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.roman.kubik.settings.domain.preference.Preferences
 import com.roman.kubik.settings.domain.repository.SettingsRepository
-import com.roman.kubik.songer.core.navigation.SearchNavigator
-import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.chords.ChordsImageMapper
 import com.roman.kubik.songer.chords.ChordsTransposer
-import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.core.AppResult
+import com.roman.kubik.songer.core.navigation.SearchNavigator
+import com.roman.kubik.songer.core.ui.base.search.BaseSearchViewModel
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
-import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class SongDetailsViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SongDetailsViewModel @Inject constructor(
         private val songRepository: SongRepository,
         private val settingsRepository: SettingsRepository,
         private val songsNavigator: SongsNavigator,

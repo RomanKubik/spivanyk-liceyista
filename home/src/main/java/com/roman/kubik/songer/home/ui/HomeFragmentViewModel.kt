@@ -1,6 +1,5 @@
 package com.roman.kubik.songer.home.ui
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.roman.kubik.songer.analytics.core.AnalyticsService
@@ -11,8 +10,11 @@ import com.roman.kubik.songer.home.R
 import com.roman.kubik.songer.home.analytics.SelectedHomeCategoryEvent
 import com.roman.kubik.songer.home.navigation.HomeNavigator
 import com.roman.kubik.songer.songs.domain.song.SongCategory
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomeFragmentViewModel @ViewModelInject constructor(
+@HiltViewModel
+class HomeFragmentViewModel @Inject constructor(
         private val stringProvider: StringProvider,
         private val analyticsService: AnalyticsService,
         private val homeNavigator: HomeNavigator,

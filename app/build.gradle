@@ -66,7 +66,7 @@ dependencies {
     //AndroidX
     implementation "androidx.appcompat:appcompat:$versions.appCompat"
     implementation "androidx.activity:activity-ktx:$versions.activity"
-    implementation "androidx.fragment:fragment-ktx:$versions.fragment"
+    implementation "androidx.fragment:fragment-ktx:$versions.fraхgment"
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
     implementation "androidx.navigation:navigation-dynamic-features-fragment:$versions.navigation"
@@ -75,7 +75,7 @@ dependencies {
 
     // DI / Hilt
     implementation "com.google.dagger:hilt-android:$versions.hilt"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltAndroid"
+//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltAndroid"
     kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
     kapt "androidx.hilt:hilt-compiler:$versions.hiltAndroid"
 
