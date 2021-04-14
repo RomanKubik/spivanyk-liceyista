@@ -10,5 +10,6 @@
 
     <color name="splash_background">@android:color/white</color>
     
-    <color name="black_a90">#ca000000</color>
+    <color name="tutorial_surface">#ca000000</color>
+    <color name="tutorial_on_surface">#d9d9d9</color>
 </resources>

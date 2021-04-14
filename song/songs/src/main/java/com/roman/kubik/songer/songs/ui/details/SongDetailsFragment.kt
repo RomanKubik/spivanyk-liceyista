@@ -2,7 +2,6 @@ package com.roman.kubik.songer.songs.ui.details
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.activityViewModels
@@ -19,7 +18,6 @@ import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.ui.SharedSongViewModel
 import com.roman.kubik.songer.songs.ui.utils.toUiCategory
 import com.roman.kubik.songer.songs.ui.view.ChordClickListener
-import com.roman.kubik.songer.view.tutorial.TutorialDialogFragment
 import com.roman.kubik.songs.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_song_details.*
@@ -165,16 +163,6 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
     private fun setupTonalityListeners() {
         transpositionUp.setOnClickListener {
             viewModel.transpositionUp()
-
-            val fragment = TutorialDialogFragment.getInstance(R.drawable.ic_search, R.string.dialog_remove_song_text)
-            fragment.dismissListener = object : TutorialDialogFragment.DismissListener {
-                override fun onDismissed(tag: String?) {
-                    Toast.makeText(requireContext(), "Dismissed : $tag", Toast.LENGTH_SHORT).show()
-                }
-
-            }
-            childFragmentManager.beginTransaction().add(fragment, "MyTag")
-                    .commit()
         }
         transpositionDown.setOnClickListener {
             viewModel.transpositionDown()

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="tutorialTheme" format="reference"/>
     <attr name="tutorialBackground" format="reference|color"/>
     <attr name="tutorialTextAppearance" format="reference"/>
     <attr name="tutorialButton" format="reference"/>

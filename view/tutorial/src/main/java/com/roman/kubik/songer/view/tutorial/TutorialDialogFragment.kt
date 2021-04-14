@@ -1,6 +1,5 @@
 package com.roman.kubik.songer.view.tutorial
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
-import com.roman.kubik.songer.core.ui.utils.getAttributeColor
 import kotlinx.android.synthetic.main.dialog_tutorial.*
 
 class TutorialDialogFragment : DialogFragment() {
@@ -17,11 +15,10 @@ class TutorialDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NO_FRAME, R.style.Theme_AppCompat)
+        setStyle(STYLE_NO_FRAME, R.style.Theme_TutorialDialog)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(requireContext().getAttributeColor(R.attr.tutorialBackground)))
         return inflater.inflate(R.layout.dialog_tutorial, container, false)
     }
 

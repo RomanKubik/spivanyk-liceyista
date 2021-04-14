@@ -54,7 +54,7 @@
     </style>
 
     <style name="TextAppearance.Songer.Tutorial">
-        <item name="android:textColor">#d9d9d9</item>
+        <item name="android:textColor">@color/tutorial_on_surface</item>
         <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 
@@ -65,9 +65,9 @@
     <style name="Widget.Songer.Button" parent="Widget.MaterialComponents.Button"/>
 
     <style name="Widget.Songer.Button.Tutorial">
-        <item name="textAllCaps">true</item>
-        <item name="android:textColor">#d9d9d9</item>
+        <item name="android:textColor">@color/tutorial_on_surface</item>
         <item name="android:textSize">@dimen/text_size_16</item>
-        <item name="background">@drawable/bg_btn_outlined</item>
+        <item name="android:background">@drawable/bg_btn_outlined</item>
+        <item name="backgroundTint">@null</item>
     </style>
 </resources>
