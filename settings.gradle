@@ -1,3 +1,6 @@
+include ':settings:hints'
+include ':view:tutorial'
+include ':view'
 include ':analytics:analyticsCore'
 include ':shaker'
 include ':coreKotlin'

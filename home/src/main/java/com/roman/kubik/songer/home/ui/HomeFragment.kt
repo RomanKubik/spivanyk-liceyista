@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.roman.kubik.songer.core.ui.base.search.BaseSearchFragment
 import com.roman.kubik.songer.core.ui.utils.getAttributeColor
 import com.roman.kubik.songer.home.R
+import com.roman.kubik.songer.view.tutorial.TutorialDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -43,5 +44,10 @@ class HomeFragment : BaseSearchFragment() {
 
     private fun addObservables() {
         viewModel.categories.observe(viewLifecycleOwner, Observer(adapter::publishItems))
+        viewModel.showShakeHintCommand.observe(viewLifecycleOwner) {
+            TutorialDialogFragment
+                    .getInstance(R.drawable.ic_tutorial_shake, R.string.home_tutorial_shake_phone)
+                    .show(childFragmentManager, null)
+        }
     }
 }

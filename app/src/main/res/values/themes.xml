@@ -21,7 +21,7 @@
         <item name="android:textColorSecondary">@color/grey_500</item>
 
         <item name="textAppearanceCaption">@style/TextAppearance.Songer.Caption</item>
-        
+
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Songer.AlertDialog</item>
 
         <!-- Custom theme attributes -->
@@ -33,6 +33,12 @@
 
         <item name="textAppearanceSongTitle">@style/TextAppearance.Songer.Song.Title</item>
         <item name="textAppearanceSongLyrics">@style/TextAppearance.Songer.Song.Lyrics</item>
+
+        <!-- Tutorial dialog -->
+        <item name="tutorialBackground">@color/tutorial_surface</item>
+        <item name="tutorialTextAppearance">@style/TextAppearance.Songer.Tutorial</item>
+        <item name="tutorialButton">@style/Widget.Songer.Button.Tutorial</item>
+        <item name="tutorialIconTint">@color/tutorial_on_surface</item>
     </style>
 
     <!-- Dialogs -->

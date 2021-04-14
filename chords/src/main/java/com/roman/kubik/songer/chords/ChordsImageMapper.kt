@@ -114,7 +114,7 @@ object ChordsImageMapper {
         val selectionsList = LinkedHashSet<String>()
         val matcher = ChordsFormatter.bracketsPattern.matcher(text)
         while (matcher.find()) {
-            var chord = matcher.group(1)
+            var chord = matcher.group(1) ?: ""
             chord = ChordsFormatter.clearChordMarks(chord)
             selectionsList.add(chord)
         }

@@ -32,14 +32,14 @@ object ChordsTransposer {
     }
 
     private fun move(chord: String, transposition: Transposition): String {
-        var chord: String? = chord
-        val modifier = getModifier(chord)
-        chord = normalizeChord(chord, modifier)
-        var power = getPower(chord)
+        var c: String? = chord
+        val modifier = getModifier(c)
+        c = normalizeChord(c, modifier)
+        var power = getPower(c)
         power = calculateNewPower(power, transposition)
-        chord = getChord(power)
-        chord = applyModifier(chord, modifier)
-        return "$chord!>"
+        c = getChord(power)
+        c = applyModifier(c, modifier)
+        return "$c!>"
     }
 
     private fun calculateNewPower(oldPower: Int, transposition: Transposition): Int {
@@ -50,10 +50,10 @@ object ChordsTransposer {
         var modifier = ""
         if (chord != null) {
             if (chord.contains("m")) {
-                modifier = modifier + "m"
+                modifier += "m"
             }
             if (chord.contains("7")) {
-                modifier = modifier + "7"
+                modifier += "7"
             }
         }
         return modifier
@@ -68,10 +68,10 @@ object ChordsTransposer {
         return c
     }
 
-    private fun applyModifier(chord: String?, modifier: String): String? {
-        var chord = chord
-        chord = if (chord!!.length > 1) chord.substring(0, 1) + modifier + chord.substring(1, 2) else if (chord.length > 0) chord + modifier else chord
-        return chord
+    private fun applyModifier(chord: String?, modifier: String): String {
+        var c = chord
+        c = if (c!!.length > 1) c.substring(0, 1) + modifier + c.substring(1, 2) else if (c.isNotEmpty()) c + modifier else c
+        return c
     }
 
     private fun markChord(chord: String): String {
@@ -118,11 +118,11 @@ object ChordsTransposer {
         }
     }
 
-    private fun findSelections(text: String?): Set<String> {
+    private fun findSelections(text: String): Set<String> {
         val selectionsList: MutableSet<String> = HashSet()
         val matcher: Matcher = bracketsPattern.matcher(text)
         while (matcher.find()) {
-            var chord: String = matcher.group(1)
+            var chord: String = matcher.group(1) ?: ""
             chord = clearFormatting(chord)
             selectionsList.add(chord)
         }

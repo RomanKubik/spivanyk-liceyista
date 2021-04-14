@@ -24,5 +24,11 @@
 
         <item name="textAppearanceSongTitle">@style/TextAppearance.Songer.Song.Title</item>
         <item name="textAppearanceSongLyrics">@style/TextAppearance.Songer.Song.Lyrics</item>
+
+        <!-- Tutorial dialog -->
+        <item name="tutorialBackground">@color/tutorial_surface</item>
+        <item name="tutorialTextAppearance">@style/TextAppearance.Songer.Tutorial</item>
+        <item name="tutorialButton">@style/Widget.Songer.Button.Tutorial</item>
+        <item name="tutorialIconTint">@color/tutorial_on_surface</item>
     </style>
 </resources>

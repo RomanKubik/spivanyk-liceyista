@@ -40,6 +40,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation project(':core')
+    implementation project(':view:tutorial')
     implementation project(':song:songsDomain')
     implementation project(':chords')
     implementation project(':settings:domain')
@@ -56,7 +57,7 @@ dependencies {
 
     // DI / Hilt
     implementation "com.google.dagger:hilt-android:$versions.hilt"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltAndroid"
+//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltAndroid"
     kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
     kapt "androidx.hilt:hilt-compiler:$versions.hiltAndroid"
 

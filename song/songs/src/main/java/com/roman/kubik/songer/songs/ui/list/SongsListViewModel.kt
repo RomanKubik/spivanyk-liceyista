@@ -1,6 +1,5 @@
 package com.roman.kubik.songer.songs.ui.list
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -12,13 +11,16 @@ import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.navigation.SongsNavigator
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SongsListViewModel @ViewModelInject constructor(
+@HiltViewModel
+class SongsListViewModel @Inject constructor(
         private val songRepository: SongRepository,
         private val settingsRepository: SettingsRepository,
         private val songsNavigator: SongsNavigator

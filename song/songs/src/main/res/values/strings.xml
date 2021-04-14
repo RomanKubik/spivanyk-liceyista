@@ -29,6 +29,7 @@
     <string name="add_song_toolbar_edit">Edit song</string>
     <string name="edit_song_title">Title</string>
     <string name="edit_song_lyrics">Lyrics</string>
+    <string name="edit_song_tutorial_recognizer">Tap on this icon to mark chords automatically with super powerful algorithm</string>
     <string name="error_save_song_empty_title">Title should not be blank</string>
     <string name="error_save_song_empty_lyrics">Lyrics should not be blank</string>
     <string name="error_save_song_general">Could\'t save this song.</string>
