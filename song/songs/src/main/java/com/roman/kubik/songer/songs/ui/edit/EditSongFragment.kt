@@ -10,6 +10,7 @@ import com.roman.kubik.songer.core.ui.base.BaseFragment
 import com.roman.kubik.songer.core.ui.utils.hide
 import com.roman.kubik.songer.core.ui.utils.show
 import com.roman.kubik.songer.songs.domain.song.Song
+import com.roman.kubik.songer.view.tutorial.TutorialDialogFragment
 import com.roman.kubik.songs.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit_song.*
@@ -56,6 +57,11 @@ class EditSongFragment: BaseFragment() {
                 is ErrorState -> showError()
                 is EditSongState -> showSong(state.song)
             }
+        }
+        viewModel.showRecognizerHintCommand.observe(viewLifecycleOwner) {
+            TutorialDialogFragment
+                    .getInstance(R.drawable.ic_recognize, R.string.edit_song_tutorial_recognizer)
+                    .show(childFragmentManager, null)
         }
     }
 

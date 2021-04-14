@@ -1,10 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
 
 android {
+
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildTools
 
@@ -15,12 +14,11 @@ android {
         versionName versions.appVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,33 +31,17 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-
-    implementation project(':core')
-    implementation project(':settings:domain')
-    implementation project(':song:songsDomain')
-    implementation project(':analytics:analyticsCore')
-    implementation project(':view:tutorial')
+    api project(':settings:domain')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 
-    implementation "androidx.appcompat:appcompat:$versions.appCompat"
-    implementation "androidx.activity:activity-ktx:$versions.activity"
-    implementation "androidx.fragment:fragment-ktx:$versions.fragment"
-    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
-    implementation "com.google.android.material:material:$versions.material"
+    implementation "javax.inject:javax.inject:1"
 
-    // DI / Hilt
-    implementation "com.google.dagger:hilt-android:$versions.hilt"
-//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltAndroid"
-    kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
-    kapt "androidx.hilt:hilt-compiler:$versions.hiltAndroid"
-
-    testImplementation "junit:junit:$versions.junit"
+    testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 

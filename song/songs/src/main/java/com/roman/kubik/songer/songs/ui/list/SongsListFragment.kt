@@ -117,10 +117,7 @@ class SongsListFragment : BaseFragment() {
             }
         }
         sharedViewModel.songDeletedCommand.observe(viewLifecycleOwner) {
-            if (it != null) {
-                load()
-                sharedViewModel.songDeletedCommand.clear()
-            }
+            load()
         }
     }
 

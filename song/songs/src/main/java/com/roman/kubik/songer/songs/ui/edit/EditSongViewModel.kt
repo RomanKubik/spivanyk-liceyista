@@ -3,8 +3,10 @@ package com.roman.kubik.songer.songs.ui.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.roman.kubik.settings.domain.repository.HintsConfigRepository
 import com.roman.kubik.songer.chords.ChordsRecognizer
 import com.roman.kubik.songer.core.AppResult
+import com.roman.kubik.songer.core.Command
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import com.roman.kubik.songer.songs.domain.song.Song
@@ -19,11 +21,23 @@ import javax.inject.Inject
 @HiltViewModel
 class EditSongViewModel @Inject constructor(
         private val songRepository: SongRepository,
-        private var songsNavigator: SongsNavigator
+        private val hintsConfigRepository: HintsConfigRepository,
+        private val songsNavigator: SongsNavigator
 ) : BaseViewModel() {
 
     private val _song = MutableLiveData<EditSongViewState>()
     val song: LiveData<EditSongViewState> = _song
+    val showRecognizerHintCommand = Command<Unit>()
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            val hints = hintsConfigRepository.getHintsConfig()
+            if (!hints.chordsRecognizerShown) {
+                showRecognizerHintCommand.postValue(Unit)
+                hintsConfigRepository.updateHintsConfig(hints.copy(chordsRecognizerShown = true))
+            }
+        }
+    }
 
     fun loadSong(songId: String?) {
         if (songId == null) {

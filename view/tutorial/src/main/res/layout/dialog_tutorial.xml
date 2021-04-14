@@ -13,6 +13,7 @@
         android:layout_marginStart="@dimen/default_padding"
         android:layout_marginTop="@dimen/default_margin_x2"
         android:layout_marginEnd="@dimen/default_padding"
+        app:tint="?tutorialIconTint"
         app:layout_constraintBottom_toTopOf="@+id/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

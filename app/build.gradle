@@ -60,6 +60,7 @@ dependencies {
 
     implementation project(':settings:presentation')
     implementation project(':settings:preferences')
+    implementation project(':settings:hints')
 
     implementation project(':analytics:analyticsCore')
 
