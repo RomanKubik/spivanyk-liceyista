@@ -1,5 +1,7 @@
 package com.roman.kubik.songer.di
 
+import com.roman.kubik.ads.core.AdsModule
+import com.roman.kubik.ads.google.GoogleAdsModule
 import com.roman.kubik.provider.SongServiceConfigUpdater
 import com.roman.kubik.settings.domain.database.DatabaseController
 import com.roman.kubik.settings.domain.hint.HintService
@@ -54,5 +56,9 @@ abstract class AppBinderModule {
     @Singleton
     @Binds
     abstract fun bindAnalyticsService(defaultAnalyticsService: DefaultAnalyticsService): AnalyticsService
+
+    @Singleton
+    @Binds
+    abstract fun bindAdsModule(googleAdsModule: GoogleAdsModule): AdsModule
 
 }

@@ -16,6 +16,7 @@ import com.roman.kubik.songer.songs.domain.song.SongCategory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,7 +30,7 @@ class HomeFragmentViewModel @Inject constructor(
 
     private val _categories = MutableLiveData<List<HomeCategory>>()
     val categories: LiveData<List<HomeCategory>> = _categories
-    val showShakeHintCommand = Command<Unit>()
+    val showHintsCommand = Command<Queue<HintType>>()
 
     init {
         fillCategories()
@@ -73,10 +74,16 @@ class HomeFragmentViewModel @Inject constructor(
     private fun fetchHintsConfig() {
         viewModelScope.launch(Dispatchers.IO) {
             val hints = hintsConfigRepository.getHintsConfig()
+            val hintsList = LinkedList<HintType>()
             if (!hints.shakeHintShown) {
-                showShakeHintCommand.postValue(Unit)
+                hintsList.add(HintType.SHAKE_PHONE)
                 hintsConfigRepository.updateHintsConfig(hints.copy(shakeHintShown = true))
             }
+            if (!hints.supportDeveloperShown) {
+                hintsList.add(HintType.SUPPORT_DEVELOPER)
+                hintsConfigRepository.updateHintsConfig(hints.copy(supportDeveloperShown = true))
+            }
+            showHintsCommand.postValue(hintsList)
         }
     }
 }

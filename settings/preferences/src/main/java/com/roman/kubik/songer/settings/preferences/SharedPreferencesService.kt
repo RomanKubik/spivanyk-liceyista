@@ -15,6 +15,7 @@ class SharedPreferencesService @Inject constructor(context: Context) : Preferenc
         const val SETTINGS_UI_MODE = "settings.ui.mode"
         const val SETTINGS_SHOW_CHORDS = "settings.show.chords"
         const val SETTINGS_REMOTE_DATA_SET = "settings.remote.data.set"
+        const val SETTINGS_SHOW_ADS = "settings.show.ads"
     }
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(SETTINGS_PREFERENCES, Context.MODE_PRIVATE)
@@ -25,7 +26,9 @@ class SharedPreferencesService @Inject constructor(context: Context) : Preferenc
                     Instrument.valueOf(getString(SETTINGS_INSTRUMENT, Instrument.GUITAR.name)!!),
                     UiMode.valueOf(getString(SETTINGS_UI_MODE, UiMode.SYSTEM_DEFAULT.name)!!),
                     getBoolean(SETTINGS_SHOW_CHORDS, true),
-                    getDataSources(this))
+                    getDataSources(this),
+                    getBoolean(SETTINGS_SHOW_ADS, true)
+            )
         }
     }
 
@@ -35,6 +38,7 @@ class SharedPreferencesService @Inject constructor(context: Context) : Preferenc
             putString(SETTINGS_UI_MODE, preferences.uiMode.name)
             putBoolean(SETTINGS_SHOW_CHORDS, preferences.showChords)
             putDataSources(this, preferences.selectedSongDataSource)
+            putBoolean(SETTINGS_SHOW_ADS, preferences.showAds)
         }.apply()
     }
 

@@ -6,12 +6,14 @@ import android.view.animation.DecelerateInterpolator
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.roman.kubik.ads.google.GoogleAdsModule
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.core.ui.base.BaseActivity
 import com.roman.kubik.songer.core.ui.base.FragmentScrollListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.FlowPreview
+import javax.inject.Inject
 
 @FlowPreview
 @AndroidEntryPoint
@@ -26,10 +28,14 @@ class MainActivity : BaseActivity(), FragmentScrollListener {
         bottomNavigationView.height + randomFab.height / 2f
     }
 
+    @Inject
+    lateinit var googleAdsModule: GoogleAdsModule
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_Songer)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        googleAdsModule.activity = this
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         NavigationUI.setupWithNavController(bottomNavigationView, navHostFragment.navController)
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->

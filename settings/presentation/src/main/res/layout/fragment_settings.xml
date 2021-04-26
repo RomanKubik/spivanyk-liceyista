@@ -54,6 +54,13 @@
                 app:settingsTitle="Remote data sources"
                 app:settingsValue="Select remote data sources" />
 
+            <com.roman.kubik.songer.settings.presentation.ui.view.SwitchSettingsItemView
+                android:id="@+id/helpDeveloper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="Help developer"
+                app:settingsValue="Allow app display ads" />
+
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/factoryReset"
                 android:layout_width="match_parent"

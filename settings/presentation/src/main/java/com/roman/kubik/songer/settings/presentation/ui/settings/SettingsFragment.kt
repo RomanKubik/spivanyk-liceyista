@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import androidx.lifecycle.observe
 import androidx.fragment.app.viewModels
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.roman.kubik.settings.domain.preference.Instrument
@@ -31,14 +29,15 @@ class SettingsFragment : BaseFragment() {
             showChords.isChecked = it.showChords
             preferredInstrument.setSettingsValue(resources.getStringArray(R.array.instruments)[it.selectedInstrument.ordinal])
             preferredTheme.setSettingsValue(resources.getStringArray(R.array.themes)[it.uiMode.ordinal])
+            helpDeveloper.isChecked = it.showAds
         }
     }
 
     private fun setupUi() {
         setupToolbar(songDetailsToolbar)
-        showChords.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { _, isChecked ->
+        showChords.setOnCheckedChangeListener { _, isChecked ->
             viewModel.showChords(isChecked)
-        })
+        }
         preferredInstrument.setOnClickListener {
             showSelectInstrumentDialog()
         }
@@ -47,6 +46,9 @@ class SettingsFragment : BaseFragment() {
         }
         selectedDataSources.setOnClickListener {
             showSelectDataSourcesDialog()
+        }
+        helpDeveloper.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.allowAds(isChecked)
         }
         factoryReset.setOnClickListener {
             showFactoryResetDialog()

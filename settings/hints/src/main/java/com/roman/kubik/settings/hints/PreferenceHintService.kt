@@ -13,6 +13,7 @@ class PreferenceHintService @Inject constructor(context: Context) : HintService 
 
         const val HINT_SHAKE_KEY = "hint.shake"
         const val HINT_RECOGNIZER_KEY = "hint.recognizer"
+        const val HINT_SUPPORT_DEVELOPER_KEY = "hint.support.developer"
     }
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(HINT_PREFERENCES, Context.MODE_PRIVATE)
@@ -20,7 +21,8 @@ class PreferenceHintService @Inject constructor(context: Context) : HintService 
     override suspend fun getHintsStatus(): Hints {
         return Hints(
                 sharedPreferences.getBoolean(HINT_SHAKE_KEY, false),
-                sharedPreferences.getBoolean(HINT_RECOGNIZER_KEY, false)
+                sharedPreferences.getBoolean(HINT_RECOGNIZER_KEY, false),
+                sharedPreferences.getBoolean(HINT_SUPPORT_DEVELOPER_KEY, false)
         )
     }
 
@@ -28,6 +30,7 @@ class PreferenceHintService @Inject constructor(context: Context) : HintService 
         sharedPreferences.edit().apply {
             putBoolean(HINT_SHAKE_KEY, hints.shakeHintShown)
             putBoolean(HINT_RECOGNIZER_KEY, hints.chordsRecognizerShown)
+            putBoolean(HINT_SUPPORT_DEVELOPER_KEY, hints.supportDeveloperShown)
         }.apply()
     }
 }

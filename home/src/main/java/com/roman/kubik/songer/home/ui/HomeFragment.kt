@@ -15,6 +15,7 @@ import com.roman.kubik.songer.home.R
 import com.roman.kubik.songer.view.tutorial.TutorialDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseSearchFragment() {
@@ -44,10 +45,33 @@ class HomeFragment : BaseSearchFragment() {
 
     private fun addObservables() {
         viewModel.categories.observe(viewLifecycleOwner, Observer(adapter::publishItems))
-        viewModel.showShakeHintCommand.observe(viewLifecycleOwner) {
-            TutorialDialogFragment
-                    .getInstance(R.drawable.ic_tutorial_shake, R.string.home_tutorial_shake_phone)
-                    .show(childFragmentManager, null)
+        viewModel.showHintsCommand.observe(viewLifecycleOwner, Observer(this::showHint))
+    }
+
+    private fun showHint(hints: Queue<HintType>) {
+        val image: Int
+        val text: Int
+
+        when (hints.poll()) {
+            HintType.SHAKE_PHONE -> {
+                image = R.drawable.ic_tutorial_shake
+                text = R.string.home_tutorial_shake_phone
+            }
+            HintType.SUPPORT_DEVELOPER -> {
+                image = R.drawable.ic_tutorial_support_developer
+                text = R.string.home_tutorial_support_developer
+            }
+            else -> return
         }
+        TutorialDialogFragment
+                .getInstance(image, text).let {
+                    it.dismissListener = object : TutorialDialogFragment.DismissListener {
+                        override fun onDismissed(tag: String?) {
+                            showHint(hints)
+                        }
+                    }
+                    it.show(childFragmentManager, null)
+                }
+
     }
 }

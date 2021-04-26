@@ -93,4 +93,11 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+    fun allowAds(checked: Boolean) {
+        preferences.value?.let {
+            val prefs = it.copy(showAds = checked)
+            updatePreferences(prefs)
+        }
+    }
+
 }

@@ -6,5 +6,6 @@ data class Preferences(
         val selectedInstrument: Instrument,
         val uiMode: UiMode,
         val showChords: Boolean,
-        val selectedSongDataSource: Set<SongDataSource>
+        val selectedSongDataSource: Set<SongDataSource>,
+        val showAds: Boolean
 )

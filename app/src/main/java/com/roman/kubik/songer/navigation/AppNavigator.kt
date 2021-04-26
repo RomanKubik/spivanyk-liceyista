@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.roman.kubik.ads.core.AdsService
+import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.core.navigation.SearchNavigator
 import com.roman.kubik.songer.home.navigation.HomeNavigator
@@ -15,12 +17,19 @@ import com.roman.kubik.songer.songs.ui.details.SongDetailsFragment
 import com.roman.kubik.songer.songs.ui.edit.EditSongFragment
 import com.roman.kubik.songer.songs.ui.list.SongsListFragment
 import com.roman.kubik.songer.ui.main.MainActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.system.exitProcess
 
 @Singleton
-class AppNavigator @Inject constructor() :
+class AppNavigator @Inject constructor(
+        private val settingsRepository: SettingsRepository,
+        private val adsService: AdsService
+) :
         MainNavigator,
         SearchNavigator,
         HomeNavigator,
@@ -46,6 +55,13 @@ class AppNavigator @Inject constructor() :
     }
 
     override fun navigateToSongDetails(songId: String) {
+        GlobalScope.launch(Dispatchers.IO) {
+            if (settingsRepository.getPreferences().showAds) {
+                withContext(Dispatchers.Main) {
+                    adsService.tryShowAd()
+                }
+            }
+        }
         val args = bundleOf(SongDetailsFragment.ARG_SONG_ID to songId)
         navController.navigate(R.id.action_global_songDetailsFragment, args)
     }
