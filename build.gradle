@@ -27,6 +27,7 @@ buildscript {
 
             'analytics'       : '18.0.3',
             'crashlytics'     : '17.4.1',
+            'firestore'       : '22.1.2',
 
             'dagger'          : '2.34',
             'hilt'            : '2.33-beta',

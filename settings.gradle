@@ -1,3 +1,4 @@
+include ':song:songsFirebase'
 include ':ads:google'
 include ':ads:core'
 include ':settings:hints'

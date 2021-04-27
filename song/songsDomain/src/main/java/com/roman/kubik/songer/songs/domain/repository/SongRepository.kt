@@ -1,22 +1,28 @@
 package com.roman.kubik.songer.songs.domain.repository
 
 import com.roman.kubik.songer.core.AppResult
-import com.roman.kubik.songer.songs.domain.song.Song
-import com.roman.kubik.songer.songs.domain.song.SongCategory
+import com.roman.kubik.songer.songs.domain.song.*
 import com.roman.kubik.songer.songs.domain.song.SongCategory.FAVOURITE
 import com.roman.kubik.songer.songs.domain.song.SongCategory.LAST_PLAYED
-import com.roman.kubik.songer.songs.domain.song.SongServiceProvider
-import com.roman.kubik.songer.songs.domain.song.SongsService
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.channelFlow
 import javax.inject.Inject
 import kotlin.math.abs
 import kotlin.random.Random
 
-class SongRepository @Inject constructor(private val songServiceProvider: SongServiceProvider) {
+// TODO: Refactor SongsService. Create two interfaces SongsFetcher and SongsUpdater
+class SongRepository @Inject constructor(private val songServiceProvider: SongServiceProvider,
+                                         private val songsUpdateService: SongsUpdateService
+) {
 
     private val songsServices: Set<SongsService>
         get() = songServiceProvider.getSongServices()
+
+    init {
+        GlobalScope.launch(Dispatchers.IO) {
+            updateFetchNewSongs(false)
+        }
+    }
 
     suspend fun getAllSongs(): AppResult<List<Song>> {
         val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
@@ -148,6 +154,19 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
             }
         }
         return AppResult.Success(Any())
+    }
+
+    suspend fun updateFetchNewSongs(forceFetch: Boolean) {
+        when (val res = songsUpdateService.fetchNewSongs(forceFetch)) {
+            is AppResult.Success -> {
+                for (s in res.data) {
+                    createOrUpdateSong(s)
+                }
+            }
+            else -> {
+                /* ignore */
+            }
+        }
     }
 
 }

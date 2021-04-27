@@ -19,6 +19,8 @@ import com.roman.kubik.songer.settings.preferences.SharedPreferencesService
 import com.roman.kubik.songer.shaker.ShakeDetector
 import com.roman.kubik.songer.shaker.ShakeDetectorImpl
 import com.roman.kubik.songer.songs.domain.song.SongServiceProvider
+import com.roman.kubik.songer.songs.domain.song.SongsUpdateService
+import com.roman.kubik.songer.songs.firebase.FirestoreSongsService
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -60,5 +62,9 @@ abstract class AppBinderModule {
     @Singleton
     @Binds
     abstract fun bindAdsModule(googleAdsModule: GoogleAdsModule): AdsModule
+
+    @Singleton
+    @Binds
+    abstract fun bindsSongsUpdaterService(firestoreSongsService: FirestoreSongsService): SongsUpdateService
 
 }
