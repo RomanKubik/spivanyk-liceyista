@@ -1,11 +1,15 @@
 package com.roman.kubik.songer.ui.main
 
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.animation.DecelerateInterpolator
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.roman.kubik.ads.google.GoogleAdsModule
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.core.ui.base.BaseActivity
@@ -45,6 +49,24 @@ class MainActivity : BaseActivity(), FragmentScrollListener {
         }
         setupViews()
         viewModel.create(navHostFragment)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("MyTag", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+
+            // Log and toast
+            Log.d("MyTag", token)
+        })
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.d("MyTag", "onNewIntent")
     }
 
     private fun shouldUncheckFab(destinationId: Int): Boolean {

@@ -89,6 +89,7 @@ dependencies {
     // Firebase
     implementation "com.google.firebase:firebase-analytics-ktx:$versions.analytics"
     implementation "com.google.firebase:firebase-crashlytics-ktx:$versions.crashlytics"
+    implementation 'com.google.firebase:firebase-messaging:21.1.0'
 
     testImplementation "junit:junit:$versions.junit"
     testImplementation "org.mockito:mockito-core:$versions.mockito"

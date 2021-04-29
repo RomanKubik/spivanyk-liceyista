@@ -21,11 +21,15 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
 
     override suspend fun fetchNewSongs(forceFetch: Boolean): AppResult<List<Song>> {
         val lastUpdateTimestamp = preferences.getLong(FIRESTORE_LAST_UPDATED_KEY, -1)
+        val uncompletedForceFetch = preferences.getBoolean(FIRESTORE_FORCE_UPDATE_KEY, false)
 
-        if (!forceFetch) {
+        if (!(forceFetch || uncompletedForceFetch)) {
+            preferences.edit().apply {
+                putBoolean(FIRESTORE_FORCE_UPDATE_KEY, true)
+            }.apply()
+
             if (System.currentTimeMillis() - lastUpdateTimestamp < MIN_UPDATE_TIMEOUT_MILLIS)
                 return AppResult.Success(emptyList())
-
 
             val remoteLastUpdateTimestamp = database.document(FIRESTORE_METADATA_DOC)
                     .get()
@@ -56,7 +60,10 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
             result.add(song)
         }
 
-        preferences.edit().putLong(FIRESTORE_LAST_UPDATED_KEY, System.currentTimeMillis()).apply()
+        preferences.edit().apply {
+            putLong(FIRESTORE_LAST_UPDATED_KEY, System.currentTimeMillis())
+            putBoolean(FIRESTORE_FORCE_UPDATE_KEY, false)
+        }.apply()
 
         return AppResult.Success(result)
     }
@@ -74,6 +81,7 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
         private const val FIRESTORE_PREFERENCES = "firestore.preferences"
 
         private const val FIRESTORE_LAST_UPDATED_KEY = "firestore.last.updated"
+        private const val FIRESTORE_FORCE_UPDATE_KEY = "firestore.force.update"
 
         private const val MIN_UPDATE_TIMEOUT_MILLIS = 604_800_000L // 7 days
 
