@@ -1,6 +1,6 @@
 package com.roman.kubik.songer.songs.domain.song
 
-interface SongsService {
+interface SongsService: SongsSearcher {
 
     suspend fun getAllSongs(): List<Song>
 
@@ -9,10 +9,6 @@ interface SongsService {
     suspend fun getLastPlayedSongs(): List<Song>
 
     suspend fun getFavouriteSongs(): List<Song>
-
-    suspend fun searchSongs(query: String): List<Song>
-
-    suspend fun getSongById(songId: String): Song
 
     suspend fun createOrUpdateSong(song: Song)
 

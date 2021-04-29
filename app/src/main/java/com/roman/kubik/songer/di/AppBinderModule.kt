@@ -2,7 +2,7 @@ package com.roman.kubik.songer.di
 
 import com.roman.kubik.ads.core.AdsModule
 import com.roman.kubik.ads.google.GoogleAdsModule
-import com.roman.kubik.provider.SongServiceConfigUpdater
+import com.roman.kubik.provider.SongSercherConfigUpdater
 import com.roman.kubik.settings.domain.database.DatabaseController
 import com.roman.kubik.settings.domain.hint.HintService
 import com.roman.kubik.settings.domain.preference.PreferenceService
@@ -15,10 +15,12 @@ import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.data.core.StringProviderImpl
 import com.roman.kubik.songer.room.database.DatabaseManager
 import com.roman.kubik.songer.room.database.DatabaseManagerImpl
+import com.roman.kubik.songer.room.song.RoomSongService
 import com.roman.kubik.songer.settings.preferences.SharedPreferencesService
 import com.roman.kubik.songer.shaker.ShakeDetector
 import com.roman.kubik.songer.shaker.ShakeDetectorImpl
-import com.roman.kubik.songer.songs.domain.song.SongServiceProvider
+import com.roman.kubik.songer.songs.domain.song.SongSearcherProvider
+import com.roman.kubik.songer.songs.domain.song.SongsService
 import com.roman.kubik.songer.songs.domain.song.SongsUpdateService
 import com.roman.kubik.songer.songs.firebase.FirestoreSongsService
 import dagger.Binds
@@ -50,7 +52,7 @@ abstract class AppBinderModule {
     abstract fun bindHintService(preferenceHintService: PreferenceHintService): HintService
 
     @Binds
-    abstract fun bindSongServiceConfigUpdater(songServiceProvider: SongServiceProvider): SongServiceConfigUpdater
+    abstract fun bindSongServiceConfigUpdater(songSearcherProvider: SongSearcherProvider): SongSercherConfigUpdater
 
     @Binds
     abstract fun bindShakeDetector(shakeDetectorImpl: ShakeDetectorImpl): ShakeDetector
@@ -66,5 +68,9 @@ abstract class AppBinderModule {
     @Singleton
     @Binds
     abstract fun bindsSongsUpdaterService(firestoreSongsService: FirestoreSongsService): SongsUpdateService
+
+    @Singleton
+    @Binds
+    abstract fun bindsSongsService(roomSongService: RoomSongService): SongsService
 
 }

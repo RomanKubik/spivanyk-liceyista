@@ -3,24 +3,24 @@ package com.roman.kubik.songer.data.core
 import com.roman.kubik.provider.SongDataSource
 import com.roman.kubik.songer.mychords.song.MyChordsSongsService
 import com.roman.kubik.songer.room.song.RoomSongService
-import com.roman.kubik.songer.songs.domain.song.SongServiceProvider
-import com.roman.kubik.songer.songs.domain.song.SongsService
+import com.roman.kubik.songer.songs.domain.song.SongSearcherProvider
+import com.roman.kubik.songer.songs.domain.song.SongsSearcher
 import com.roman.kubik.songer.songs.pisniorgua.PisniOrgUaSongsService
 
-class SongServiceProviderImpl constructor(
+class SongSearcherProviderImpl constructor(
         private val roomSongService: RoomSongService,
         private val myChordsSongsService: MyChordsSongsService,
         private val pisniOrgUaSongsService: PisniOrgUaSongsService
-) : SongServiceProvider {
+) : SongSearcherProvider {
 
-    private var services = emptySet<SongsService>()
+    private var services = emptySet<SongsSearcher>()
 
-    override fun getSongServices(): Set<SongsService> {
+    override fun getSongSearchers(): Set<SongsSearcher> {
         return services
     }
 
     override fun updateSongConfig(config: Set<SongDataSource>) {
-        val services = linkedSetOf<SongsService>()
+        val services = linkedSetOf<SongsSearcher>()
         services.add(roomSongService)
 
         if (config.contains(SongDataSource.PISNI_ORG_UA)) {

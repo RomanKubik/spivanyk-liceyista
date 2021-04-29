@@ -1,6 +1,6 @@
 package com.roman.kubik.settings.domain.repository
 
-import com.roman.kubik.provider.SongServiceConfigUpdater
+import com.roman.kubik.provider.SongSercherConfigUpdater
 import com.roman.kubik.settings.domain.preference.PreferenceService
 import com.roman.kubik.settings.domain.preference.Preferences
 import com.roman.kubik.settings.domain.theme.ThemeService
@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class SettingsRepository @Inject constructor(private val preferenceService: PreferenceService,
                                              private val themeService: ThemeService,
-                                             private val songServiceProvider: SongServiceConfigUpdater) {
+                                             private val songSercherProvider: SongSercherConfigUpdater) {
 
     suspend fun getPreferences(): Preferences {
         return preferenceService.getPreferences()
@@ -20,7 +20,7 @@ class SettingsRepository @Inject constructor(private val preferenceService: Pref
                 themeService.applyUiMode(preferences.uiMode)
             }
             if (it.selectedSongDataSource != preferences.selectedSongDataSource) {
-                songServiceProvider.updateSongConfig(preferences.selectedSongDataSource)
+                songSercherProvider.updateSongConfig(preferences.selectedSongDataSource)
             }
         }
 

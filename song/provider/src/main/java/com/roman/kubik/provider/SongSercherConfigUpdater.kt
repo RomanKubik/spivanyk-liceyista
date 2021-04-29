@@ -1,7 +1,7 @@
 package com.roman.kubik.provider
 
 
-interface SongServiceConfigUpdater {
+interface SongSercherConfigUpdater {
 
     fun updateSongConfig(config: Set<SongDataSource>)
 

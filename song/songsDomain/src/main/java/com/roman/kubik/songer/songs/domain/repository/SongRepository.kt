@@ -2,21 +2,23 @@ package com.roman.kubik.songer.songs.domain.repository
 
 import com.roman.kubik.songer.core.AppResult
 import com.roman.kubik.songer.songs.domain.song.*
-import com.roman.kubik.songer.songs.domain.song.SongCategory.FAVOURITE
-import com.roman.kubik.songer.songs.domain.song.SongCategory.LAST_PLAYED
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.abs
 import kotlin.random.Random
 
-// TODO: Refactor SongsService. Create two interfaces SongsFetcher and SongsUpdater
-class SongRepository @Inject constructor(private val songServiceProvider: SongServiceProvider,
-                                         private val songsUpdateService: SongsUpdateService
+class SongRepository @Inject constructor(
+        private val songsService: SongsService,
+        private val songSearcherProvider: SongSearcherProvider,
+        private val songsUpdateService: SongsUpdateService
 ) {
 
-    private val songsServices: Set<SongsService>
-        get() = songServiceProvider.getSongServices()
+    private val songsSearchers: Set<SongsSearcher>
+        get() = songSearcherProvider.getSongSearchers()
 
     init {
         GlobalScope.launch(Dispatchers.IO) {
@@ -25,48 +27,25 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
     }
 
     suspend fun getAllSongs(): AppResult<List<Song>> {
-        val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
-        coroutineScope {
-            songsServices.forEachIndexed { index, songsService ->
-                launch { resultPairs.add(index to songsService.getAllSongs()) }
-            }
+        return try {
+            AppResult.Success(songsService.getAllSongs())
+        } catch (e: Throwable) {
+            AppResult.Error(e)
         }
-        resultPairs.sortBy { it.first }
-
-        val result = mutableListOf<Song>()
-        resultPairs.forEach { pair ->
-            result.addAll(pair.second)
-        }
-
-        return AppResult.Success(result)
     }
 
     suspend fun getAllSongs(category: SongCategory): AppResult<List<Song>> {
-        val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
-        coroutineScope {
-            songsServices.forEachIndexed { index, songsService ->
-                val r = when (category) {
-                    LAST_PLAYED -> songsService.getLastPlayedSongs()
-                    FAVOURITE -> songsService.getFavouriteSongs()
-                    else -> songsService.getAllSongs(category)
-                }
-                resultPairs.add(index to r)
-            }
+        return try {
+            AppResult.Success(songsService.getAllSongs(category))
+        } catch (e: Throwable) {
+            AppResult.Error(e)
         }
-        resultPairs.sortBy { it.first }
-
-        val result = mutableListOf<Song>()
-        resultPairs.forEach { pair ->
-            result.addAll(pair.second)
-        }
-
-        return AppResult.Success(result)
     }
 
     suspend fun getSongById(songId: String): AppResult<Song> {
-        for (songsService in songsServices) {
+        for (songsSearcher in songsSearchers) {
             try {
-                return AppResult.Success(songsService.getSongById(songId))
+                return AppResult.Success(songsSearcher.getSongById(songId))
             } catch (e: Exception) {
                 /* ignore */
             }
@@ -78,10 +57,10 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
         var success = false
         val resultPairs = mutableListOf<Pair<Int, List<Song>>>()
         coroutineScope {
-            songsServices.forEachIndexed { index, songsService ->
+            songsSearchers.forEachIndexed { index, songsSearcher ->
                 launch {
                     try {
-                        val songList = songsService.searchSongs(query)
+                        val songList = songsSearcher.searchSongs(query)
                         if (index == 0) {
                             offer(AppResult.Success(songList))
                         }
@@ -103,57 +82,33 @@ class SongRepository @Inject constructor(private val songServiceProvider: SongSe
     }
 
     suspend fun createOrUpdateSong(song: Song): AppResult<Any> {
-        var success = false
-        coroutineScope {
-            songsServices.forEach { songsService ->
-                launch {
-                    try {
-                        songsService.createOrUpdateSong(song)
-                        success = true
-                    } catch (e: Exception) {
-                        /* ignore */
-                    }
-                }
-            }
+        return try {
+            AppResult.Success(songsService.createOrUpdateSong(song))
+        } catch (e: Throwable) {
+            AppResult.Error(e)
         }
-        return if (success) AppResult.Success(Any()) else AppResult.Error(Exception())
     }
 
-    suspend fun getRandomSong(): Song {
-        for (songsService in songsServices) {
+    suspend fun getRandomSong(): AppResult<Song> {
+        return try {
             val songs = songsService.getAllSongs()
-            if (songs.isEmpty()) continue
             val randomIdx = abs(Random.nextInt()) % songs.size
-            return songs[randomIdx]
+            return AppResult.Success(songs[randomIdx])
+        } catch (e: Throwable) {
+            AppResult.Error(e)
         }
-        throw Exception()
     }
-
-//    suspend fun getRandomSong(): AppResult<Song> {
-//        for (songsService in songsServices) {
-//            val songs = songsService.getAllSongs()
-//            if (songs.isEmpty()) continue
-//            val randomIdx = abs(Random.nextInt()) % songs.size
-//            return AppResult.Success(songs[randomIdx])
-//        }
-//        return AppResult.Error(Exception())
-//    }
 
     suspend fun addSongToLastPlayed(song: Song) {
-        coroutineScope {
-            songsServices.forEach { songsService ->
-                launch { songsService.addToLastPlayed(song) }
-            }
-        }
+        songsService.addToLastPlayed(song)
     }
 
     suspend fun removeSong(song: Song): AppResult<Any> {
-        coroutineScope {
-            songsServices.forEach { songsService ->
-                launch { songsService.removeSong(song) }
-            }
+        return try {
+            AppResult.Success(songsService.removeSong(song))
+        } catch (e: Throwable) {
+            AppResult.Error(e)
         }
-        return AppResult.Success(Any())
     }
 
     suspend fun updateFetchNewSongs(forceFetch: Boolean) {

@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.NavHostFragment
 import com.roman.kubik.songer.analytics.core.AnalyticsService
 import com.roman.kubik.songer.analytics.events.RandomSongEvent
+import com.roman.kubik.songer.core.AppResult
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.navigation.MainNavigator
 import com.roman.kubik.songer.room.database.DatabaseManager
@@ -51,10 +52,17 @@ class MainActivityViewModel @Inject constructor(
 
     private fun navigateToRandomSong() {
         viewModelScope.launch(Dispatchers.IO) {
-            val song = songRepository.getRandomSong()
-            withContext(Dispatchers.Main) {
-                navigator.navigateToSongDetails(song.id)
+            when (val result = songRepository.getRandomSong()) {
+                is AppResult.Success -> {
+                    withContext(Dispatchers.Main) {
+                        navigator.navigateToSongDetails(result.data.id)
+                    }
+                }
+                else -> {
+                    /* ignore */
+                }
             }
+
         }
     }
 }

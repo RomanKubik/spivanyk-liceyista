@@ -9,7 +9,9 @@ import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongsService
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class RoomSongService @Inject constructor(
         private val songDao: SongDao,
         private val historyDao: HistoryDao,

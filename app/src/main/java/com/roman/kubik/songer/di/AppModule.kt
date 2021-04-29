@@ -1,10 +1,10 @@
 package com.roman.kubik.songer.di
 
 import com.roman.kubik.settings.domain.preference.PreferenceService
-import com.roman.kubik.songer.data.core.SongServiceProviderImpl
+import com.roman.kubik.songer.data.core.SongSearcherProviderImpl
 import com.roman.kubik.songer.mychords.song.MyChordsSongsService
 import com.roman.kubik.songer.room.song.RoomSongService
-import com.roman.kubik.songer.songs.domain.song.SongServiceProvider
+import com.roman.kubik.songer.songs.domain.song.SongSearcherProvider
 import com.roman.kubik.songer.songs.pisniorgua.PisniOrgUaSongsService
 import dagger.Module
 import dagger.Provides
@@ -23,8 +23,8 @@ class AppModule {
             myChordsSongsService: MyChordsSongsService,
             pisniOrgUaSongsService: PisniOrgUaSongsService,
             preferenceService: PreferenceService
-    ): SongServiceProvider {
-        val songServiceProvider = SongServiceProviderImpl(roomSongService, myChordsSongsService, pisniOrgUaSongsService)
+    ): SongSearcherProvider {
+        val songServiceProvider = SongSearcherProviderImpl(roomSongService, myChordsSongsService, pisniOrgUaSongsService)
 
         songServiceProvider.updateSongConfig(preferenceService.getPreferences().selectedSongDataSource)
 
