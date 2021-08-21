@@ -37,7 +37,7 @@
         android:layout_width="@dimen/navigation_bar_size"
         android:layout_height="@dimen/navigation_bar_size"
         app:srcCompat="@drawable/ic_random"
-        app:tint="@color/mtrl_bottom_nav_colored_item_tint"
+        app:tint="@color/mtrl_navigation_bar_colored_item_tint"
         app:backgroundTint="?colorAccent"
         app:elevation="@dimen/design_bottom_navigation_elevation"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
