@@ -10,9 +10,13 @@ import com.roman.kubik.settings.domain.theme.ThemeService
 import com.roman.kubik.settings.hints.PreferenceHintService
 import com.roman.kubik.songer.analytics.core.AnalyticsService
 import com.roman.kubik.songer.analytics.core.DefaultAnalyticsService
+import com.roman.kubik.songer.app.initializers.AppInitializer
+import com.roman.kubik.songer.app.initializers.ComposedAppInitializer
 import com.roman.kubik.songer.app.themes.ThemeServiceImpl
 import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.data.core.StringProviderImpl
+import com.roman.kubik.songer.fcm.PushMessageHandler
+import com.roman.kubik.songer.fcm.PushMessageHandlerImpl
 import com.roman.kubik.songer.room.database.DatabaseManager
 import com.roman.kubik.songer.room.database.DatabaseManagerImpl
 import com.roman.kubik.songer.room.song.RoomSongService
@@ -72,5 +76,13 @@ abstract class AppBinderModule {
     @Singleton
     @Binds
     abstract fun bindsSongsService(roomSongService: RoomSongService): SongsService
+
+    @Singleton
+    @Binds
+    abstract fun bindsAppInitializer(composedAppInitializer: ComposedAppInitializer): AppInitializer
+
+    @Singleton
+    @Binds
+    abstract fun bindsPushMessageHandler(pushMessageHandlerImpl: PushMessageHandlerImpl): PushMessageHandler
 
 }

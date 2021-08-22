@@ -57,7 +57,7 @@ class MainActivity : BaseActivity(), FragmentScrollListener {
             }
 
             // Get new FCM registration token
-            val token = task.result
+            val token = task.result ?: "null token"
 
             // Log and toast
             Log.d("MyTag", token)
