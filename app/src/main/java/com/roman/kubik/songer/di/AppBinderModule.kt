@@ -17,6 +17,8 @@ import com.roman.kubik.songer.core.data.StringProvider
 import com.roman.kubik.songer.data.core.StringProviderImpl
 import com.roman.kubik.songer.fcm.PushMessageHandler
 import com.roman.kubik.songer.fcm.PushMessageHandlerImpl
+import com.roman.kubik.songer.notification.NotificationManager
+import com.roman.kubik.songer.notification.NotificationManagerImpl
 import com.roman.kubik.songer.room.database.DatabaseManager
 import com.roman.kubik.songer.room.database.DatabaseManagerImpl
 import com.roman.kubik.songer.room.song.RoomSongService
@@ -31,6 +33,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.FlowPreview
 import javax.inject.Singleton
 
 @Module
@@ -81,8 +84,13 @@ abstract class AppBinderModule {
     @Binds
     abstract fun bindsAppInitializer(composedAppInitializer: ComposedAppInitializer): AppInitializer
 
+    @FlowPreview
     @Singleton
     @Binds
     abstract fun bindsPushMessageHandler(pushMessageHandlerImpl: PushMessageHandlerImpl): PushMessageHandler
+
+    @Singleton
+    @Binds
+    abstract fun bindsNotificationManager(notificationManagerImpl: NotificationManagerImpl): NotificationManager
 
 }

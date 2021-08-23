@@ -7,6 +7,7 @@ import com.roman.kubik.songer.analytics.events.RandomSongEvent
 import com.roman.kubik.songer.core.AppResult
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.navigation.MainNavigator
+import com.roman.kubik.songer.notification.NotificationManager
 import com.roman.kubik.songer.room.database.DatabaseManager
 import com.roman.kubik.songer.shaker.ShakeDetector
 import com.roman.kubik.songer.songs.domain.repository.SongRepository
@@ -23,7 +24,8 @@ class MainActivityViewModel @Inject constructor(
         private val songRepository: SongRepository,
         private val shakeDetector: ShakeDetector,
         private val analyticsService: AnalyticsService,
-        private val navigator: MainNavigator
+        private val navigator: MainNavigator,
+        private val notificationManager: NotificationManager
 ) : BaseViewModel() {
 
     init {
@@ -43,6 +45,10 @@ class MainActivityViewModel @Inject constructor(
         GlobalScope.launch(Dispatchers.IO) {
             databaseManager.createDatabase()
         }
+    }
+
+    fun dismissNotification(notificationId: Int) {
+        notificationManager.hideMessage(notificationId)
     }
 
     fun onSelectRandomSong() {

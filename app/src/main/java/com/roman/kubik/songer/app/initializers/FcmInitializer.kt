@@ -19,7 +19,7 @@ class FcmInitializer @Inject constructor() : AppInitializer {
             val name = "Channel name"
             val descriptionText = "Channel description"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("0", name, importance).apply {
+            val channel = NotificationChannel(com.roman.kubik.songer.notification.NotificationManager.DEFAULT_CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
             // Register the channel with the system
