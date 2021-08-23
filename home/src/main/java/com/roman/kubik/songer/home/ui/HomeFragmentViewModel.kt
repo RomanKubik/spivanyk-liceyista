@@ -73,16 +73,17 @@ class HomeFragmentViewModel @Inject constructor(
 
     private fun fetchHintsConfig() {
         viewModelScope.launch(Dispatchers.IO) {
-            val hints = hintsConfigRepository.getHintsConfig()
+            var hints = hintsConfigRepository.getHintsConfig()
             val hintsList = LinkedList<HintType>()
             if (!hints.shakeHintShown) {
                 hintsList.add(HintType.SHAKE_PHONE)
-                hintsConfigRepository.updateHintsConfig(hints.copy(shakeHintShown = true))
+                hints = hints.copy(shakeHintShown = true)
             }
             if (!hints.supportDeveloperShown) {
                 hintsList.add(HintType.SUPPORT_DEVELOPER)
-                hintsConfigRepository.updateHintsConfig(hints.copy(supportDeveloperShown = true))
+                hints = hints.copy(supportDeveloperShown = true)
             }
+            hintsConfigRepository.updateHintsConfig(hints)
             showHintsCommand.postValue(hintsList)
         }
     }
