@@ -3,7 +3,7 @@
 
     <style name="Theme.Songer" parent="Base.Songer">
         <item name="android:windowLightStatusBar">@bool/light_status_bar</item>
-        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/grey_100</item>
 
     </style>
 </resources>

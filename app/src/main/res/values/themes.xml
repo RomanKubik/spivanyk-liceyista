@@ -5,7 +5,7 @@
 
     </style>
 
-    <style name="Theme.Songer.Splash" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.Songer.Splash" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:windowBackground">@drawable/bg_splash_screen</item>
     </style>
 
@@ -13,7 +13,7 @@
     <style name="Base.Songer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Default theme attributes -->
         <item name="colorPrimary">@android:color/white</item>
-        <item name="colorPrimaryDark">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/grey_100</item>
         <item name="colorAccent">@color/olive_500</item>
         <item name="colorSurface">@android:color/white</item>
         <item name="colorControlNormal">@android:color/black</item>
