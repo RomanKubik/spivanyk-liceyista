@@ -5,10 +5,15 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import com.google.firebase.messaging.FirebaseMessaging
+import com.roman.kubik.songer.R
+import com.roman.kubik.songer.notification.NotificationManager.Companion.DEFAULT_CHANNEL_ID
+import com.roman.kubik.songer.notification.NotificationManager.Companion.TOPIC_ALL
 import javax.inject.Inject
 
 class FcmInitializer @Inject constructor() : AppInitializer {
     override fun init(app: Application) {
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_ALL)
         createNotificationChannel(app)
     }
 
@@ -16,12 +21,9 @@ class FcmInitializer @Inject constructor() : AppInitializer {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = "Channel name"
-            val descriptionText = "Channel description"
+            val name = app.getString(R.string.notification_channel_name)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(com.roman.kubik.songer.notification.NotificationManager.DEFAULT_CHANNEL_ID, name, importance).apply {
-                description = descriptionText
-            }
+            val channel = NotificationChannel(DEFAULT_CHANNEL_ID, name, importance)
             // Register the channel with the system
             val notificationManager: NotificationManager =
                     app.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
