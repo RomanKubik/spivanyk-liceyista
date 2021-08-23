@@ -28,6 +28,8 @@ class RoomSongService @Inject constructor(
             SongCategory.BONFIRE -> songDao.getAllByCategory(CategoryEntity.CATEGORY_BONFIRE).map { it.toSong() }
             SongCategory.ABROAD -> songDao.getAllByCategory(CategoryEntity.CATEGORY_ABROAD).map { it.toSong() }
             SongCategory.MY_SONGS -> songDao.getAllByCategory(CategoryEntity.CATEGORY_USERS).map { it.toSong() }
+            SongCategory.LAST_PLAYED -> getLastPlayedSongs()
+            SongCategory.FAVOURITE -> getFavouriteSongs()
             else -> getAllSongs()
         }
     }
