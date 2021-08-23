@@ -22,7 +22,7 @@ class SongRepository @Inject constructor(
 
     init {
         GlobalScope.launch(Dispatchers.IO) {
-            updateFetchNewSongs(false)
+            fetchNewSongs(false)
         }
     }
 
@@ -111,7 +111,7 @@ class SongRepository @Inject constructor(
         }
     }
 
-    suspend fun updateFetchNewSongs(forceFetch: Boolean) {
+    suspend fun fetchNewSongs(forceFetch: Boolean) {
         when (val res = songsUpdateService.fetchNewSongs(forceFetch)) {
             is AppResult.Success -> {
                 for (s in res.data) {

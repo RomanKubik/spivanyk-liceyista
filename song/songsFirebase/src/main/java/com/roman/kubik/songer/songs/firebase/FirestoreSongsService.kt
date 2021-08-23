@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.songs.firebase
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.firebase.Timestamp
@@ -19,13 +20,14 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
     private val database: FirebaseFirestore = Firebase.firestore
     private val preferences: SharedPreferences = context.getSharedPreferences(FIRESTORE_PREFERENCES, Context.MODE_PRIVATE)
 
+    @SuppressLint("ApplySharedPref")
     override suspend fun fetchNewSongs(forceFetch: Boolean): AppResult<List<Song>> {
         val lastUpdateTimestamp = preferences.getLong(FIRESTORE_LAST_UPDATED_KEY, -1)
+        val uncompletedForceFetch = preferences.getBoolean(FIRESTORE_FORCE_UPDATE_KEY, false)
 
-        if (!forceFetch) {
+        if (!(forceFetch || uncompletedForceFetch)) {
             if (System.currentTimeMillis() - lastUpdateTimestamp < MIN_UPDATE_TIMEOUT_MILLIS)
                 return AppResult.Success(emptyList())
-
 
             val remoteLastUpdateTimestamp = database.document(FIRESTORE_METADATA_DOC)
                     .get()
@@ -35,6 +37,9 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
             if (remoteLastUpdateTimestamp <= lastUpdateTimestamp)
                 return AppResult.Success(emptyList())
 
+            preferences.edit().apply {
+                putBoolean(FIRESTORE_FORCE_UPDATE_KEY, true)
+            }.commit()
         }
         val timestamp = Timestamp(Date(lastUpdateTimestamp))
 
@@ -56,7 +61,10 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
             result.add(song)
         }
 
-        preferences.edit().putLong(FIRESTORE_LAST_UPDATED_KEY, System.currentTimeMillis()).apply()
+        preferences.edit().apply {
+            putLong(FIRESTORE_LAST_UPDATED_KEY, System.currentTimeMillis())
+            putBoolean(FIRESTORE_FORCE_UPDATE_KEY, false)
+        }.commit()
 
         return AppResult.Success(result)
     }
@@ -74,8 +82,9 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
         private const val FIRESTORE_PREFERENCES = "firestore.preferences"
 
         private const val FIRESTORE_LAST_UPDATED_KEY = "firestore.last.updated"
+        private const val FIRESTORE_FORCE_UPDATE_KEY = "firestore.force.update"
 
-        private const val MIN_UPDATE_TIMEOUT_MILLIS = 604_800_000L // 7 days
+        private const val MIN_UPDATE_TIMEOUT_MILLIS = 2_419_200_000L // 4 weeks
 
         private const val FIRESTORE_METADATA_DOC = "meta/data"
         private const val FIRESTORE_METADATA_LAST_UPDATED = "lastUpdate"
