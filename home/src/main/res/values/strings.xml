@@ -2,6 +2,8 @@
     <!-- Home screen -->
     <string name="home_category_last_played">Last played</string>
     <string name="home_category_last_played_subtitle">Last played songs</string>
+    <string name="home_category_new_songs">New songs</string>
+    <string name="home_category_new_songs_subtitle">Find new songs here monthly</string>
     <string name="home_category_favourite">Favourite songs</string>
     <string name="home_category_favourite_subtitle">Your favourite songs</string>
     <string name="home_category_my_songs">My songs</string>

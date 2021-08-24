@@ -8,6 +8,7 @@ enum class SongCategory {
     PATRIOTIC,
     BONFIRE,
     ABROAD,
-    WEB
+    WEB,
+    LAST_ADDED
 
 }

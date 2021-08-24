@@ -15,4 +15,10 @@ interface SongsService: SongsSearcher {
     suspend fun addToLastPlayed(song: Song)
 
     suspend fun removeSong(song: Song)
+
+    suspend fun getLastAddedSongs(): List<Song>
+
+    suspend fun addSongsToLastAdded(songs: List<Song>)
+
+    suspend fun clearLastAddedSongs()
 }

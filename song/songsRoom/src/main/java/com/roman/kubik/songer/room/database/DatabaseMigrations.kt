@@ -130,4 +130,17 @@ object DatabaseMigrations {
             database.execSQL("CREATE INDEX `song_title_nonclustered_index` ON song(`title`)")
         }
     }
+    val MIGRATION_5_6: Migration = object : Migration(5, 6) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("""
+    CREATE TABLE `lastAdded`
+    (
+    `song_id` TEXT NOT NULL PRIMARY KEY,
+    CONSTRAINT `fk_song`
+    FOREIGN KEY (`song_id`)
+    REFERENCES song(`id`)
+    ON DELETE CASCADE);
+    """.trimIndent())
+        }
+    }
 }

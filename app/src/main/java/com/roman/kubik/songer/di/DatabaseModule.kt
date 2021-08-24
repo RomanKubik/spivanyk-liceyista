@@ -34,4 +34,7 @@ class DatabaseModule {
     @Reusable
     fun getFavouriteDao(appDatabase: AppDatabase) = appDatabase.favouriteDao()
 
+    @Provides
+    @Reusable
+    fun getLastAddedDao(appDatabase: AppDatabase) = appDatabase.lastAddedDao()
 }

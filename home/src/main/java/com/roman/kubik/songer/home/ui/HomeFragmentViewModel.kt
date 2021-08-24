@@ -48,6 +48,10 @@ class HomeFragmentViewModel @Inject constructor(
                 stringProvider.getString(R.string.home_category_last_played),
                 stringProvider.getString(R.string.home_category_last_played_subtitle),
                 R.drawable.ic_category_last_played))
+        list.add(HomeCategory(SongCategory.LAST_ADDED,
+                stringProvider.getString(R.string.home_category_new_songs),
+                stringProvider.getString(R.string.home_category_new_songs_subtitle),
+                R.drawable.ic_category_new_songs))
         list.add(HomeCategory(SongCategory.MY_SONGS,
                 stringProvider.getString(R.string.home_category_my_songs),
                 stringProvider.getString(R.string.home_category_my_songs_subtitle),

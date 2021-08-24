@@ -27,7 +27,7 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
 
         if (!(forceFetch || uncompletedForceFetch)) {
             if (System.currentTimeMillis() - lastUpdateTimestamp < MIN_UPDATE_TIMEOUT_MILLIS)
-                return AppResult.Success(emptyList())
+                return AppResult.Error(SongsUpdateService.UpdateNotNeededError)
 
             val remoteLastUpdateTimestamp = database.document(FIRESTORE_METADATA_DOC)
                     .get()
@@ -35,7 +35,7 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
                     .getTimestamp(FIRESTORE_METADATA_LAST_UPDATED)?.seconds?.times(1000L) ?: -1
 
             if (remoteLastUpdateTimestamp <= lastUpdateTimestamp)
-                return AppResult.Success(emptyList())
+                return AppResult.Error(SongsUpdateService.UpdateNotNeededError)
 
             preferences.edit().apply {
                 putBoolean(FIRESTORE_FORCE_UPDATE_KEY, true)

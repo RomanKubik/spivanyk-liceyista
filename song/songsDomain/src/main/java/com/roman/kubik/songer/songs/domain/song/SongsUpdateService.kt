@@ -6,4 +6,5 @@ interface SongsUpdateService {
 
     suspend fun fetchNewSongs(forceFetch: Boolean): AppResult<List<Song>>
 
+    object UpdateNotNeededError: Throwable()
 }

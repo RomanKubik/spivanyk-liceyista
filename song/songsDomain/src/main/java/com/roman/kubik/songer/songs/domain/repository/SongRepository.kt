@@ -36,7 +36,13 @@ class SongRepository @Inject constructor(
 
     suspend fun getAllSongs(category: SongCategory): AppResult<List<Song>> {
         return try {
-            AppResult.Success(songsService.getAllSongs(category))
+            val songs = when (category) {
+                SongCategory.LAST_PLAYED -> songsService.getLastPlayedSongs()
+                SongCategory.FAVOURITE -> songsService.getFavouriteSongs()
+                SongCategory.LAST_ADDED -> songsService.getLastAddedSongs()
+                else -> songsService.getAllSongs(category)
+            }
+            AppResult.Success(songs)
         } catch (e: Throwable) {
             AppResult.Error(e)
         }
@@ -117,6 +123,8 @@ class SongRepository @Inject constructor(
                 for (s in res.data) {
                     createOrUpdateSong(s)
                 }
+                songsService.clearLastAddedSongs()
+                songsService.addSongsToLastAdded(res.data)
             }
             else -> {
                 /* ignore */

@@ -5,6 +5,8 @@ import com.roman.kubik.songer.room.favourite.FavouriteDao
 import com.roman.kubik.songer.room.favourite.FavouriteEntity
 import com.roman.kubik.songer.room.history.HistoryDao
 import com.roman.kubik.songer.room.history.HistoryEntity
+import com.roman.kubik.songer.room.lastadded.LastAddedDao
+import com.roman.kubik.songer.room.lastadded.LastAddedEntity
 import com.roman.kubik.songer.songs.domain.song.Song
 import com.roman.kubik.songer.songs.domain.song.SongCategory
 import com.roman.kubik.songer.songs.domain.song.SongsService
@@ -15,7 +17,8 @@ import javax.inject.Singleton
 class RoomSongService @Inject constructor(
         private val songDao: SongDao,
         private val historyDao: HistoryDao,
-        private val favouriteDao: FavouriteDao
+        private val favouriteDao: FavouriteDao,
+        private val lastAddedDao: LastAddedDao
 ) : SongsService {
 
     override suspend fun getAllSongs(): List<Song> {
@@ -28,8 +31,6 @@ class RoomSongService @Inject constructor(
             SongCategory.BONFIRE -> songDao.getAllByCategory(CategoryEntity.CATEGORY_BONFIRE).map { it.toSong() }
             SongCategory.ABROAD -> songDao.getAllByCategory(CategoryEntity.CATEGORY_ABROAD).map { it.toSong() }
             SongCategory.MY_SONGS -> songDao.getAllByCategory(CategoryEntity.CATEGORY_USERS).map { it.toSong() }
-            SongCategory.LAST_PLAYED -> getLastPlayedSongs()
-            SongCategory.FAVOURITE -> getFavouriteSongs()
             else -> getAllSongs()
         }
     }
@@ -68,5 +69,17 @@ class RoomSongService @Inject constructor(
 
     override suspend fun removeSong(song: Song) {
         songDao.delete(song.toSongEntity())
+    }
+
+    override suspend fun getLastAddedSongs(): List<Song> {
+        return lastAddedDao.getLastAddedSongs().map { it.toSong() }
+    }
+
+    override suspend fun addSongsToLastAdded(songs: List<Song>) {
+        lastAddedDao.addNewSongs(songs.map { LastAddedEntity(it.id) })
+    }
+
+    override suspend fun clearLastAddedSongs() {
+        lastAddedDao.clearAll()
     }
 }
