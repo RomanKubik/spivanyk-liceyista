@@ -54,7 +54,7 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
             val song = Song(
                     doc.id,
                     doc[FIRESTORE_SONGS_TITLE].toString(),
-                    doc[FIRESTORE_SONGS_LYRICS].toString(),
+                    doc[FIRESTORE_SONGS_LYRICS].toString().replace("\\n", "\n"),
                     mapFirestoreCategoryType(doc[FIRESTORE_SONGS_CATEGORY_TYPE].toString()),
                     false
             )
