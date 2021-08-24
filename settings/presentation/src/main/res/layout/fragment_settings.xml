@@ -32,41 +32,41 @@
                 android:id="@+id/showChords"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:settingsTitle="Show chords"
-                app:settingsValue="Display chords with song"/>
+                app:settingsTitle="@string/settings_show_chords"
+                app:settingsValue="@string/settings_show_chords_description"/>
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/preferredInstrument"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:settingsTitle="Preferred instrument" />
+                app:settingsTitle="@string/settings_preferred_instrument" />
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/preferredTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:settingsTitle="Preferred theme"/>
+                app:settingsTitle="@string/dialog_preferred_theme"/>
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/selectedDataSources"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:settingsTitle="Remote data sources"
-                app:settingsValue="Select remote data sources" />
+                app:settingsTitle="@string/settings_remote_data_source"
+                app:settingsValue="@string/settings_show_chords_description" />
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SwitchSettingsItemView
                 android:id="@+id/helpDeveloper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:settingsTitle="Help developer"
-                app:settingsValue="Allow app display ads" />
+                app:settingsTitle="@string/settings_help_developer"
+                app:settingsValue="@string/settings_help_developer_message" />
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/factoryReset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:settingsTitle="Factory reset"
-                app:settingsValue="Reset database to factory configuration" />
+                app:settingsTitle="@string/settings_factory_reset"
+                app:settingsValue="@string/settings_factory_reset_message" />
         </LinearLayout>
     </ScrollView>
 

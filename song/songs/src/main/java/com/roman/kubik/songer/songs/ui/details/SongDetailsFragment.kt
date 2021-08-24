@@ -139,7 +139,6 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         songDetailsContainer.show()
         songDetailsTrouble.hide()
 
-        chordsList.isVisible = successState.preferences.showChords
         songLyrics.showChords = successState.preferences.showChords
         chordsAdapter.selectedInstrument = successState.preferences.selectedInstrument
 
@@ -148,8 +147,8 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         songLyrics.text = song.lyrics
         songCategory.setText(song.category.toUiCategory())
         chords = successState.chords.toList()
-        chordsList.isVisible = chords.isNotEmpty()
-        chordsCaption.isVisible = chords.isNotEmpty()
+        chordsList.isVisible = chords.isNotEmpty() && successState.preferences.showChords
+        chordsCaption.isVisible = chords.isNotEmpty() && successState.preferences.showChords
         chordsAdapter.publishItems(chords)
         bookmarkItem?.setIcon(if (song.isFavourite) R.drawable.ic_is_favourite else R.drawable.ic_is_not_favourite)
         deleteItem?.isVisible = song.category != SongCategory.WEB

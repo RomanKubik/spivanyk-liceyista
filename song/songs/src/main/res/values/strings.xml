@@ -33,5 +33,7 @@
     <string name="error_save_song_empty_title">Title should not be blank</string>
     <string name="error_save_song_empty_lyrics">Lyrics should not be blank</string>
     <string name="error_save_song_general">Could\'t save this song.</string>
+    <string name="song_recognize">Recognize</string>
+    <string name="song_save">Save</string>
 
 </resources>

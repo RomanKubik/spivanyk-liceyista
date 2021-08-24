@@ -56,7 +56,7 @@
     <fragment
         android:id="@+id/menu_setting"
         android:name="com.roman.kubik.songer.settings.presentation.ui.settings.SettingsFragment"
-        android:label="Settings"
+        android:label="@string/setting_toolbar_title"
         tools:layout="@layout/fragment_settings" />
 
 </navigation>
