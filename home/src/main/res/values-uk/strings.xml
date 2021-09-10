@@ -1,0 +1,19 @@
+<resources>
+    <!-- Home screen -->
+    <string name="home_category_last_played">Останні проспівані</string>
+    <string name="home_category_last_played_subtitle">Пісні, які співалися недавно</string>
+    <string name="home_category_new_songs">Нові пісні</string>
+    <string name="home_category_new_songs_subtitle">Знаходь нові пісні тут щомісячно</string>
+    <string name="home_category_favourite">Улюблені пісні</string>
+    <string name="home_category_favourite_subtitle">Мої самі-самі улюблені</string>
+    <string name="home_category_my_songs">Мої пісні</string>
+    <string name="home_category_my_songs_subtitle">Пісні що я сам додав</string>
+    <string name="home_category_patriotic">Патріотичні пісні</string>
+    <string name="home_category_patriotic_subtitle">Слава Україні!</string>
+    <string name="home_category_bonfire">При ватрі</string>
+    <string name="home_category_bonfire_subtitle">Приватренні українські пісні</string>
+    <string name="home_category_abroad">Цікаве закордонне</string>
+    <string name="home_category_abroad_subtitle">Пісні що співають у всьому світі</string>
+    <string name="home_tutorial_shake_phone">Потруси свого мобільного телефона, щоб показлась випадкова пісня зі співаника</string>
+    <string name="home_tutorial_support_developer">Киньте гріш Відьмакові, гмм… Розробнику\n\nПідтримай розробку додадка\nДозволь нам показувати тобі рекламу час від часу\nТи завжди можеш вимкнути рекламу в налаштуваннях додатка</string>
+</resources>

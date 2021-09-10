@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="theme_name">
-        <item>Світла</item>
-        <item>Темна</item>
-        <item>Системна</item>
-    </string-array>
-</resources>

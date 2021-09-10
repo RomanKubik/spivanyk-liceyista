@@ -1,0 +1,19 @@
+<resources>
+    <!-- Home screen -->
+    <string name="home_category_last_played">Last played</string>
+    <string name="home_category_last_played_subtitle">Last played songs</string>
+    <string name="home_category_new_songs">New songs</string>
+    <string name="home_category_new_songs_subtitle">Find new songs here monthly</string>
+    <string name="home_category_favourite">Favourite songs</string>
+    <string name="home_category_favourite_subtitle">Your favourite songs</string>
+    <string name="home_category_my_songs">My songs</string>
+    <string name="home_category_my_songs_subtitle">Songs added by me</string>
+    <string name="home_category_patriotic">Patriotic songs</string>
+    <string name="home_category_patriotic_subtitle">Songs about Motherland</string>
+    <string name="home_category_bonfire">Bonfire songs</string>
+    <string name="home_category_bonfire_subtitle">Songs to chill with your friend</string>
+    <string name="home_category_abroad">Abroad songs</string>
+    <string name="home_category_abroad_subtitle">Abroad specials</string>
+    <string name="home_tutorial_shake_phone">Shake your phone to get random song from songer</string>
+    <string name="home_tutorial_support_developer">Toss a coin to your developer\nSupport application creation. Let us show you ads\nYou can always turn it on and off in settings section</string>
+</resources>

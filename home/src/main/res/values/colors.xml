@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="hot_pink">#e8198b</color>
+    <color name="not_purple">#bd10e0</color>
+    <color name="olive_green">#417505</color>
+    <color name="bright_green">#7ed321</color>
+    <color name="aqua_marine">#50e3c2</color>
+    <color name="darkish_grey">#777777</color>
+    <color name="juicy_orange">#FF9E30</color>
+</resources>

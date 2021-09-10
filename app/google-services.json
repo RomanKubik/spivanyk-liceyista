@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "668868331656-8spqv2s5kneqe4062935re53mvbb03q5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roman.kubik.songer",
+            "certificate_hash": "355bcf7a2f46c51b427b3de4e4a3a293c4604f2b"
+          }
+        },
+        {
           "client_id": "668868331656-ou5hqvv6ne3rm0lp7la1pjb9uuj96vf7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

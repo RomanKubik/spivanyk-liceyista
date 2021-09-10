@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Songer" parent="Base.Songer">
+
+    </style>
+
+    <style name="Theme.Songer.Splash" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_splash_screen</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="Base.Songer" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Default theme attributes -->
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/grey_100</item>
+        <item name="colorAccent">@color/olive_500</item>
+        <item name="colorSurface">@android:color/white</item>
+        <item name="colorControlNormal">@android:color/black</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:textColorSecondary">@color/grey_500</item>
+
+        <item name="textAppearanceCaption">@style/TextAppearance.Songer.Caption</item>
+
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.Songer.AlertDialog</item>
+
+        <!-- Custom theme attributes -->
+        <item name="textAppearanceItemTitle">@style/TextAppearance.Songer.Item.Title</item>
+        <item name="textAppearanceItemSubtitle">@style/TextAppearance.Songer.Item.Subtitle</item>
+
+        <item name="textAppearanceSettingsTitle">@style/TextAppearance.Songer.Settings.Title</item>
+        <item name="textAppearanceSettingsValue">@style/TextAppearance.Songer.Settings.Value</item>
+
+        <item name="textAppearanceSongTitle">@style/TextAppearance.Songer.Song.Title</item>
+        <item name="textAppearanceSongLyrics">@style/TextAppearance.Songer.Song.Lyrics</item>
+
+        <!-- Tutorial dialog -->
+        <item name="tutorialBackground">@color/tutorial_surface</item>
+        <item name="tutorialTextAppearance">@style/TextAppearance.Songer.Tutorial</item>
+        <item name="tutorialButton">@style/Widget.Songer.Button.Tutorial</item>
+        <item name="tutorialIconTint">@color/tutorial_on_surface</item>
+    </style>
+
+    <!-- Dialogs -->
+    <style name="ThemeOverlay.Songer.AlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">?colorAccent</item>
+    </style>
+
+</resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_preferred_instrument">Preferred instrument</string>
+    <string-array name="instruments">
+        <item>Guitar</item>
+        <item>Ukulele</item>
+    </string-array>
+    <string name="dialog_preferred_theme">Preferred theme</string>
+    <string-array name="themes">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Set by battery</item>
+    </string-array>
+    <string name="dialog_factory_reset">Factory reset</string>
+    <string name="dialog_factory_reset_text">Reset database to factory configurations. All previously added songs will be saved. After reset app will be relaunched.</string>
+    <string name="dialog_reset">Reset</string>
+    <string name="dialog_remote_data_source">Select remote data sources</string>
+    <string name="accept">Accept</string>
+    <string name="settings_show_chords">Show chords</string>
+    <string name="settings_show_chords_description">Display chords with song</string>
+    <string name="settings_preferred_instrument">@string/dialog_preferred_instrument</string>
+    <string name="settings_preferred_theme">@string/dialog_preferred_theme</string>
+    <string name="settings_remote_data_source">@string/dialog_remote_data_source</string>
+    <string name="settings_remote_data_source_message">Select remote data source</string>
+    <string name="settings_help_developer">Help developer</string>
+    <string name="settings_help_developer_message">Allow app display ads</string>
+    <string name="settings_factory_reset">@string/dialog_factory_reset</string>
+    <string name="settings_factory_reset_message">Reset database to factory configurations</string>
+    <string name="setting_toolbar_title">Settings</string>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="songs_toolbar">Пісні</string>
+
+    <string name="song_category_my_song">Мої пісні</string>
+    <string name="song_category_patriotic">Патріотичні пісні</string>
+    <string name="song_category_bonfire">Приватренні пісні</string>
+    <string name="song_category_abroad">Цікаве закордонне</string>
+    <string name="empty_string" />
+
+    <string name="error_empty_list">Нажаль, тут порожньо</string>
+    <string name="error_load_list">Не вдалося завантажити пісні</string>
+
+    <string name="menu_song_details_favourite">Улюблені</string>
+    <string name="menu_song_details_share">Поділитися</string>
+    <string name="menu_song_details_edit">Редагувати</string>
+    <string name="menu_song_details_delete">Видалити</string>
+    <string name="menu_song_details_tonality">Тональність</string>
+
+    <string name="chords">Акорди</string>
+    <string name="chords_a_of_b">%d із %d</string>
+    <string name="error_song_details">Не вдалось завантажити цю пісню. Спробуй знову.</string>
+
+    <string name="dialog_remove_song">Видалити пісню</string>
+    <string name="dialog_remove_song_text">Чи справді ти хочеш видалити цю пісню зі співаника?</string>
+    <string name="dialog_remove">Видалити</string>
+
+    <string name="add_song_toolbar_add">Додати пісню</string>
+    <string name="add_song_toolbar_edit">Редагувати пісню</string>
+    <string name="edit_song_title">Назва пісні</string>
+    <string name="edit_song_lyrics">Слова з акордами, або без них</string>
+    <string name="edit_song_tutorial_recognizer">Клікни на цю іконку, щоб виділити акорди автоматично</string>
+    <string name="error_save_song_empty_title">Назва пісні не може бути порожньою</string>
+    <string name="error_save_song_empty_lyrics">Слова не можуть бути порожніми</string>
+    <string name="error_save_song_general">Не вдалося зберегти цю пісню</string>
+    <string name="song_recognize">Розпізнати</string>
+    <string name="song_save">Зберегти</string>
+
+</resources>

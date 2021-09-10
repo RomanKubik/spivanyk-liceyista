@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/addToFavourite"
+        android:icon="@drawable/ic_is_not_favourite"
+        android:title="@string/menu_song_details_favourite"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share"
+        android:title="@string/menu_song_details_share"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/edit"
+        android:title="@string/menu_song_details_edit"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/delete"
+        android:title="@string/menu_song_details_delete"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/tonality"
+        android:title="@string/menu_song_details_tonality"
+        app:showAsAction="never" />
+</menu>

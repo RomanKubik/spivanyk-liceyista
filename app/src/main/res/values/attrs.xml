@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="MainItemView">
-        <attr name="image" format="reference"/>
-        <attr name="title" format="string"/>
-        <attr name="description" format="string"/>
-    </declare-styleable>
 
+    <attr name="textAppearanceItemTitle" format="color|reference"/>
+    <attr name="textAppearanceItemSubtitle" format="color|reference"/>
+
+    <declare-styleable name="FabBottomNavigationView">
+        <attr name="fab_cradle_margin" format="dimension"/>
+        <attr name="fab_cradle_rounded_corner_radius" format="dimension"/>
+        <attr name="cradle_vertical_offset" format="dimension"/>
+        <attr name="fab_size" format="dimension"/>
+    </declare-styleable>
 </resources>

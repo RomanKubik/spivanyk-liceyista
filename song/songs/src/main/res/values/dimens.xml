@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="chord_preview_image_size">48dp</dimen>
+    <dimen name="chord_dialog_image_size">140dp</dimen>
+</resources>
