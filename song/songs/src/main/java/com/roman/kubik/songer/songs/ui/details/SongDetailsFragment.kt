@@ -60,6 +60,16 @@ class SongDetailsFragment : BaseSearchFragment(), ChordClickListener {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
+
+    override fun onStop() {
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        super.onStop()
+    }
+
     override fun onDestroy() {
         scrollListener?.onScrollUp()
         super.onDestroy()
