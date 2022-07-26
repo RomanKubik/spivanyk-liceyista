@@ -2,6 +2,7 @@ package com.roman.kubik.songer.room.database
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.roman.kubik.songer.room.category.CategoryEntity.Companion.CATEGORY_ABROAD
 
 
 object DatabaseMigrations {
@@ -12,7 +13,8 @@ object DatabaseMigrations {
         override fun migrate(database: SupportSQLiteDatabase) {
             // Fix history table
             database.execSQL("ALTER TABLE `history` RENAME TO `_history_old`;")
-            database.execSQL("""
+            database.execSQL(
+                """
     CREATE TABLE `history`
     (
     `id` INTEGER NOT NULL PRIMARY KEY,
@@ -21,13 +23,15 @@ object DatabaseMigrations {
     FOREIGN KEY (`song_id`)
     REFERENCES song(`id`)
     ON DELETE CASCADE);
-    """.trimIndent())
+    """.trimIndent()
+            )
             database.execSQL("INSERT INTO `history` SELECT * FROM `_history_old`;")
             database.execSQL("DROP TABLE `_history_old`;")
 
             // Fix favourite table
             database.execSQL("ALTER TABLE `favourite` RENAME TO `_favourite_old`;")
-            database.execSQL("""
+            database.execSQL(
+                """
     CREATE TABLE `favourite`
     (
     `id` INTEGER NOT NULL PRIMARY KEY,
@@ -36,7 +40,8 @@ object DatabaseMigrations {
     FOREIGN KEY (`song_id`)
     REFERENCES song(`id`)
     ON DELETE CASCADE);
-    """.trimIndent())
+    """.trimIndent()
+            )
             database.execSQL("INSERT INTO `favourite` SELECT * FROM `_favourite_old`;")
             database.execSQL("DROP TABLE `_favourite_old`;")
         }
@@ -45,7 +50,8 @@ object DatabaseMigrations {
         override fun migrate(database: SupportSQLiteDatabase) {
             // Fix history table
             database.execSQL("ALTER TABLE `history` RENAME TO `_history_old`;")
-            database.execSQL("""
+            database.execSQL(
+                """
     CREATE TABLE `history`
     (
     `song_id` INTEGER NOT NULL PRIMARY KEY,
@@ -54,7 +60,8 @@ object DatabaseMigrations {
     FOREIGN KEY (`song_id`)
     REFERENCES song(`id`)
     ON DELETE CASCADE);
-    """.trimIndent())
+    """.trimIndent()
+            )
             database.execSQL("INSERT INTO `history` SELECT DISTINCT `song_id`, 0 FROM `_history_old`;")
             database.execSQL("DROP TABLE `_history_old`;")
         }
@@ -65,7 +72,8 @@ object DatabaseMigrations {
             database.execSQL("ALTER TABLE `song` RENAME TO `_song_old`;")
             database.execSQL("ALTER TABLE `history` RENAME TO `_history_old`;")
             database.execSQL("ALTER TABLE `favourite` RENAME TO `_favourite_old`;")
-            database.execSQL("""
+            database.execSQL(
+                """
     CREATE TABLE `song`
     (
     `id` TEXT NOT NULL PRIMARY KEY,
@@ -77,8 +85,10 @@ object DatabaseMigrations {
     FOREIGN KEY (`category_id`)
     REFERENCES category(`id`)
     ON DELETE NO ACTION);
-    """.trimIndent())
-            database.execSQL("""
+    """.trimIndent()
+            )
+            database.execSQL(
+                """
     CREATE TABLE `favourite`
     (
     `id` TEXT NOT NULL PRIMARY KEY,
@@ -87,8 +97,10 @@ object DatabaseMigrations {
     FOREIGN KEY (`song_id`)
     REFERENCES song(`id`)
     ON DELETE CASCADE);
-    """.trimIndent())
-            database.execSQL("""
+    """.trimIndent()
+            )
+            database.execSQL(
+                """
     CREATE TABLE `history`
     (
     `song_id` TEXT NOT NULL PRIMARY KEY,
@@ -97,17 +109,25 @@ object DatabaseMigrations {
     FOREIGN KEY (`song_id`)
     REFERENCES song(`id`)
     ON DELETE CASCADE);
-    """.trimIndent())
-            database.execSQL("INSERT INTO `song` " +
-                    "SELECT lower(hex(randomblob(16))), `id`, `title`, `lyrics`, `category_id` FROM `_song_old`;")
-            database.execSQL("INSERT INTO `favourite` " +
-                    "SELECT lower(hex(randomblob(16))), `song`.`id` FROM `song` " +
-                    "INNER JOIN `_favourite_old` ON `_favourite_old`.`song_id` = `song`.`id_old`")
-            database.execSQL("INSERT INTO `history` " +
-                    "SELECT `song`.`id`, `_history_old`.`timestamp` FROM `_history_old` " +
-                    "INNER JOIN `song` ON `_history_old`.`song_id` = `song`.`id_old`")
+    """.trimIndent()
+            )
+            database.execSQL(
+                "INSERT INTO `song` " +
+                        "SELECT lower(hex(randomblob(16))), `id`, `title`, `lyrics`, `category_id` FROM `_song_old`;"
+            )
+            database.execSQL(
+                "INSERT INTO `favourite` " +
+                        "SELECT lower(hex(randomblob(16))), `song`.`id` FROM `song` " +
+                        "INNER JOIN `_favourite_old` ON `_favourite_old`.`song_id` = `song`.`id_old`"
+            )
+            database.execSQL(
+                "INSERT INTO `history` " +
+                        "SELECT `song`.`id`, `_history_old`.`timestamp` FROM `_history_old` " +
+                        "INNER JOIN `song` ON `_history_old`.`song_id` = `song`.`id_old`"
+            )
             database.execSQL("ALTER TABLE `song` RENAME TO `_song_old_old`;")
-            database.execSQL("""
+            database.execSQL(
+                """
     CREATE TABLE `song`
     (
     `id` TEXT NOT NULL PRIMARY KEY,
@@ -118,9 +138,12 @@ object DatabaseMigrations {
     FOREIGN KEY (`category_id`)
     REFERENCES category(`id`)
     ON DELETE NO ACTION);
-    """.trimIndent())
-            database.execSQL("INSERT INTO `song`" +
-                    "SELECT `id`, `title`, `lyrics`, `category_id` FROM `_song_old_old`;")
+    """.trimIndent()
+            )
+            database.execSQL(
+                "INSERT INTO `song`" +
+                        "SELECT `id`, `title`, `lyrics`, `category_id` FROM `_song_old_old`;"
+            )
             database.execSQL("INSERT INTO `category` VALUES (5, 'web')")
             database.execSQL("DROP TABLE `_song_old`;")
             database.execSQL("DROP TABLE `_song_old_old`;")
@@ -132,7 +155,8 @@ object DatabaseMigrations {
     }
     val MIGRATION_5_6: Migration = object : Migration(5, 6) {
         override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("""
+            database.execSQL(
+                """
     CREATE TABLE `lastAdded`
     (
     `song_id` TEXT NOT NULL PRIMARY KEY,
@@ -140,7 +164,8 @@ object DatabaseMigrations {
     FOREIGN KEY (`song_id`)
     REFERENCES song(`id`)
     ON DELETE CASCADE);
-    """.trimIndent())
+    """.trimIndent()
+            )
         }
     }
 }

@@ -132,4 +132,7 @@ class SongRepository @Inject constructor(
         }
     }
 
+    suspend fun derussify() {
+        songsService.derussify()
+    }
 }

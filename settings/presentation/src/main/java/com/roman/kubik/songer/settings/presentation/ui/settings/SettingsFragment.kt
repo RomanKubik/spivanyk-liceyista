@@ -50,6 +50,9 @@ class SettingsFragment : BaseFragment() {
         helpDeveloper.setOnCheckedChangeListener { _, isChecked ->
             viewModel.allowAds(isChecked)
         }
+        derussification.setOnClickListener {
+            showDerussificationDialog()
+        }
         factoryReset.setOnClickListener {
             showFactoryResetDialog()
         }
@@ -94,6 +97,18 @@ class SettingsFragment : BaseFragment() {
                 .setNegativeButton(R.string.cancel) { _, _ -> }
                 .show()
 
+    }
+
+    private fun showDerussificationDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.dialog_derussification)
+            .setMessage(R.string.dialog_derussification_text)
+            .setPositiveButton(R.string.dialog_derussification_accept) { _, _ ->
+                viewModel.derussify()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+            }
+            .show()
     }
 
     private fun showFactoryResetDialog() {

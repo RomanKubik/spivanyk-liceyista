@@ -29,7 +29,7 @@ buildscript {
             'crashlytics'     : '18.2.1',
             'firestore'       : '23.0.3',
 
-            'hilt'            : '2.38.1',
+            'hilt'            : '2.40.1',
             'hiltAndroid'     : '1.0.0',
 
             'retrofit'        : '2.6.0',
@@ -58,7 +58,7 @@ buildscript {
         maven { url "https://jitpack.io" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.1'
+        classpath 'com.android.tools.build:gradle:7.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.10'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'

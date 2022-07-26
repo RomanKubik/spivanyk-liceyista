@@ -16,4 +16,5 @@
     <string name="home_category_abroad_subtitle">Abroad specials</string>
     <string name="home_tutorial_shake_phone">Shake your phone to get random song from songer</string>
     <string name="home_tutorial_support_developer">Toss a coin to your developer\nSupport application creation. Let us show you ads\nYou can always turn it on and off in settings section</string>
+    <string name="home_tutorial_derussification">Derussify your songer. There will be no more russian songs here.\n\nYou can always restore them from the settings using factory reset</string>
 </resources>

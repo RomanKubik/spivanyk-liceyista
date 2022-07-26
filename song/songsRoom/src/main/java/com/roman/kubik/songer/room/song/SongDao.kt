@@ -24,4 +24,7 @@ interface SongDao {
     @Delete
     suspend fun delete(song: SongEntity)
 
+    @Query("DELETE FROM song WHERE song.category_id = '3' AND song.lyrics LIKE '%а%'")
+    suspend fun derussify()
+
 }

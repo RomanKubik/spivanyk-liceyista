@@ -21,4 +21,6 @@ interface SongsService: SongsSearcher {
     suspend fun addSongsToLastAdded(songs: List<Song>)
 
     suspend fun clearLastAddedSongs()
+
+    suspend fun derussify()
 }

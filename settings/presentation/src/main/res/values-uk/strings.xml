@@ -11,6 +11,9 @@
         <item>Темна</item>
         <item>Відповідна до рівня заряду</item>
     </string-array>
+    <string name="dialog_derussification">Дерусифікація</string>
+    <string name="dialog_derussification_text">Рускій воєнний корабиль іді нахуй.\nВидали усі русняві пісні. Ця дія не зачіпить пісень які були додані тобою</string>
+    <string name="dialog_derussification_accept">Дерусифікуй</string>
     <string name="dialog_factory_reset">Заводські установки</string>
     <string name="dialog_factory_reset_text">Базу даних буде відновлено до заводських установок. Усі попередньо додані пісні будуть збережені. Після відновлення додаток буде перезавантажено</string>
     <string name="dialog_reset">Скинути</string>
@@ -24,6 +27,8 @@
     <string name="settings_remote_data_source_message">Вибрати джерела даних для пошуку</string>
     <string name="settings_help_developer">Допомога розробнику</string>
     <string name="settings_help_developer_message">Дозволь нам показувати рекламу</string>
+    <string name="settings_derussification">Дерусифікація</string>
+    <string name="settings_derussification_message">Видали усі русняві пісні</string>
     <string name="settings_factory_reset">@string/dialog_factory_reset</string>
     <string name="settings_factory_reset_message">Скинути базу даних до заводських установок</string>
     <string name="setting_toolbar_title">Налаштування</string>

@@ -82,4 +82,8 @@ class RoomSongService @Inject constructor(
     override suspend fun clearLastAddedSongs() {
         lastAddedDao.clearAll()
     }
+
+    override suspend fun derussify() {
+        songDao.derussify()
+    }
 }

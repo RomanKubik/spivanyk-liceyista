@@ -11,6 +11,9 @@
         <item>Dark</item>
         <item>Set by battery</item>
     </string-array>
+    <string name="dialog_derussification">Derussification</string>
+    <string name="dialog_derussification_text">Remove all russian songs from the songer. We won\'t touch any song that was added by you</string>
+    <string name="dialog_derussification_accept">Derussify</string>
     <string name="dialog_factory_reset">Factory reset</string>
     <string name="dialog_factory_reset_text">Reset database to factory configurations. All previously added songs will be saved. After reset app will be relaunched.</string>
     <string name="dialog_reset">Reset</string>
@@ -24,6 +27,8 @@
     <string name="settings_remote_data_source_message">Select remote data source</string>
     <string name="settings_help_developer">Help developer</string>
     <string name="settings_help_developer_message">Allow app display ads</string>
+    <string name="settings_derussification">Derussification</string>
+    <string name="settings_derussification_message">Remove russian songs from the songer</string>
     <string name="settings_factory_reset">@string/dialog_factory_reset</string>
     <string name="settings_factory_reset_message">Reset database to factory configurations</string>
     <string name="setting_toolbar_title">Settings</string>

@@ -62,6 +62,13 @@
                 app:settingsValue="@string/settings_help_developer_message" />
 
             <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
+                android:id="@+id/derussification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="@string/settings_derussification"
+                app:settingsValue="@string/settings_derussification_message" />
+
+            <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
                 android:id="@+id/factoryReset"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

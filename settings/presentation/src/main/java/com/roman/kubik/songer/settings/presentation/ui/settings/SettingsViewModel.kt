@@ -11,6 +11,7 @@ import com.roman.kubik.settings.domain.preference.UiMode
 import com.roman.kubik.settings.domain.repository.SettingsRepository
 import com.roman.kubik.songer.core.ui.base.BaseViewModel
 import com.roman.kubik.songer.settings.presentation.navigation.SettingsNavigator
+import com.roman.kubik.songer.songs.domain.repository.SongRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
         private val settingsRepository: SettingsRepository,
         private val databaseController: DatabaseController,
-        private val settingsNavigator: SettingsNavigator
+        private val settingsNavigator: SettingsNavigator,
+        private val songRepository: SongRepository
 ) : BaseViewModel() {
 
     val allDataSources = linkedSetOf(SongDataSource.PISNI_ORG_UA, SongDataSource.MY_CHORDS_NET)
@@ -97,6 +99,12 @@ class SettingsViewModel @Inject constructor(
         preferences.value?.let {
             val prefs = it.copy(showAds = checked)
             updatePreferences(prefs)
+        }
+    }
+
+    fun derussify() {
+        viewModelScope.launch(Dispatchers.IO) {
+            songRepository.derussify()
         }
     }
 

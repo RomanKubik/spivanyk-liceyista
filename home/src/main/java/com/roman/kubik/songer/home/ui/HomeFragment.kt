@@ -49,10 +49,13 @@ class HomeFragment : BaseSearchFragment() {
     }
 
     private fun showHint(hints: Queue<HintType>) {
+        if (hints.isEmpty()) return
+
+        val hint = hints.poll()!!
         val image: Int
         val text: Int
 
-        when (hints.poll()) {
+        when (hint) {
             HintType.SHAKE_PHONE -> {
                 image = R.drawable.ic_tutorial_shake
                 text = R.string.home_tutorial_shake_phone
@@ -61,13 +64,17 @@ class HomeFragment : BaseSearchFragment() {
                 image = R.drawable.ic_tutorial_support_developer
                 text = R.string.home_tutorial_support_developer
             }
-            else -> return
+            HintType.DERUSSIFICATION -> {
+                image = R.drawable.ic_ukraine
+                text = R.string.home_tutorial_derussification
+            }
         }
         TutorialDialogFragment
                 .getInstance(image, text).let {
                     it.dismissListener = object : TutorialDialogFragment.DismissListener {
                         override fun onDismissed(tag: String?) {
                             showHint(hints)
+                            viewModel.hintDismissed(hint)
                         }
                     }
                     it.show(childFragmentManager, null)
