@@ -2,7 +2,6 @@ package com.roman.kubik.songer.room.song
 
 import androidx.room.*
 
-
 @Dao
 interface SongDao {
 

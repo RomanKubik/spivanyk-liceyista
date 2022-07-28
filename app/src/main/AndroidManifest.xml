@@ -18,7 +18,8 @@
             android:value="@string/google_ads_app_id"/>
 
         <activity android:name=".ui.main.MainActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

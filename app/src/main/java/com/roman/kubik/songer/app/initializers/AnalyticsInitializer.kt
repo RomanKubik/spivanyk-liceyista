@@ -10,6 +10,7 @@ import javax.inject.Inject
 class AnalyticsInitializer @Inject constructor(private val analyticsService: AnalyticsService)
     : AppInitializer {
     override fun init(app: Application) {
+        if (BuildConfig.DEBUG) return
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
         analyticsService.register(app, FirebaseAnalyticsModule())
     }

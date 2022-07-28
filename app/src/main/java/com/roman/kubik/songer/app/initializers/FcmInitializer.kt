@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import android.util.Log
 import com.google.firebase.messaging.FirebaseMessaging
 import com.roman.kubik.songer.R
 import com.roman.kubik.songer.notification.NotificationManager.Companion.DEFAULT_CHANNEL_ID
@@ -14,6 +15,9 @@ import javax.inject.Inject
 class FcmInitializer @Inject constructor() : AppInitializer {
     override fun init(app: Application) {
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_ALL)
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            Log.d("MyTag", it.result)
+        }
         createNotificationChannel(app)
     }
 
