@@ -22,51 +22,55 @@ class FirestoreSongsService @Inject constructor(context: Context) : SongsUpdateS
 
     @SuppressLint("ApplySharedPref")
     override suspend fun fetchNewSongs(forceFetch: Boolean): AppResult<List<Song>> {
-        val lastUpdateTimestamp = preferences.getLong(FIRESTORE_LAST_UPDATED_KEY, -1)
-        val uncompletedForceFetch = preferences.getBoolean(FIRESTORE_FORCE_UPDATE_KEY, false)
+        try {
+            val lastUpdateTimestamp = preferences.getLong(FIRESTORE_LAST_UPDATED_KEY, -1)
+            val uncompletedForceFetch = preferences.getBoolean(FIRESTORE_FORCE_UPDATE_KEY, false)
 
-        if (!(forceFetch || uncompletedForceFetch)) {
-            if (System.currentTimeMillis() - lastUpdateTimestamp < MIN_UPDATE_TIMEOUT_MILLIS)
-                return AppResult.Error(SongsUpdateService.UpdateNotNeededError)
+            if (!(forceFetch || uncompletedForceFetch)) {
+                if (System.currentTimeMillis() - lastUpdateTimestamp < MIN_UPDATE_TIMEOUT_MILLIS)
+                    return AppResult.Error(SongsUpdateService.UpdateNotNeededError)
 
-            val remoteLastUpdateTimestamp = database.document(FIRESTORE_METADATA_DOC)
+                val remoteLastUpdateTimestamp = database.document(FIRESTORE_METADATA_DOC)
+                        .get()
+                        .await()
+                        .getTimestamp(FIRESTORE_METADATA_LAST_UPDATED)?.seconds?.times(1000L) ?: -1
+
+                if (remoteLastUpdateTimestamp <= lastUpdateTimestamp)
+                    return AppResult.Error(SongsUpdateService.UpdateNotNeededError)
+
+                preferences.edit().apply {
+                    putBoolean(FIRESTORE_FORCE_UPDATE_KEY, true)
+                }.commit()
+            }
+            val timestamp = Timestamp(Date(lastUpdateTimestamp))
+
+            val data = database.collection(FIRESTORE_SONGS_DOC)
+                    .whereGreaterThanOrEqualTo(FIRESTORE_SONGS_TIMESTAMP, timestamp)
                     .get()
                     .await()
-                    .getTimestamp(FIRESTORE_METADATA_LAST_UPDATED)?.seconds?.times(1000L) ?: -1
 
-            if (remoteLastUpdateTimestamp <= lastUpdateTimestamp)
-                return AppResult.Error(SongsUpdateService.UpdateNotNeededError)
+            val result = mutableListOf<Song>()
+
+            for (doc in data.documents) {
+                val song = Song(
+                        doc.id,
+                        doc[FIRESTORE_SONGS_TITLE].toString(),
+                        doc[FIRESTORE_SONGS_LYRICS].toString().replace("\\n", "\n"),
+                        mapFirestoreCategoryType(doc[FIRESTORE_SONGS_CATEGORY_TYPE].toString()),
+                        false
+                )
+                result.add(song)
+            }
 
             preferences.edit().apply {
-                putBoolean(FIRESTORE_FORCE_UPDATE_KEY, true)
+                putLong(FIRESTORE_LAST_UPDATED_KEY, System.currentTimeMillis())
+                putBoolean(FIRESTORE_FORCE_UPDATE_KEY, false)
             }.commit()
+
+            return AppResult.Success(result)
+        } catch (e: Throwable) {
+            return AppResult.Error(e)
         }
-        val timestamp = Timestamp(Date(lastUpdateTimestamp))
-
-        val data = database.collection(FIRESTORE_SONGS_DOC)
-                .whereGreaterThanOrEqualTo(FIRESTORE_SONGS_TIMESTAMP, timestamp)
-                .get()
-                .await()
-
-        val result = mutableListOf<Song>()
-
-        for (doc in data.documents) {
-            val song = Song(
-                    doc.id,
-                    doc[FIRESTORE_SONGS_TITLE].toString(),
-                    doc[FIRESTORE_SONGS_LYRICS].toString().replace("\\n", "\n"),
-                    mapFirestoreCategoryType(doc[FIRESTORE_SONGS_CATEGORY_TYPE].toString()),
-                    false
-            )
-            result.add(song)
-        }
-
-        preferences.edit().apply {
-            putLong(FIRESTORE_LAST_UPDATED_KEY, System.currentTimeMillis())
-            putBoolean(FIRESTORE_FORCE_UPDATE_KEY, false)
-        }.commit()
-
-        return AppResult.Success(result)
     }
 
     private fun mapFirestoreCategoryType(categoryType: String?): SongCategory {
