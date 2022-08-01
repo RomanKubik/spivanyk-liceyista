@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget" parent="android:Widget"/>
+    <style name="Widget.Songer"/>
+
+    <style name="Widget.Songer.Clickable">
+        <item name="android:background">?selectableItemBackground</item>
+    </style>
+
+    <style name="Widget.Songer.IconButton" parent="Widget.Songer.Clickable">
+        <item name="android:layout_width">@dimen/default_clickable_icon_size</item>
+        <item name="android:layout_height">@dimen/default_clickable_icon_size</item>
+        <item name="android:padding">@dimen/default_padding_x1_5</item>
+    </style>
+
+</resources>

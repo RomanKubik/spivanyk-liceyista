@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="textAppearanceSettingsTitle" format="reference"/>
+    <attr name="textAppearanceSettingsValue" format="reference"/>
+
+    <declare-styleable name="SettingsItemView">
+        <attr name="settingsTitle" format="string" />
+        <attr name="settingsValue" format="string" />
+    </declare-styleable>
+</resources>

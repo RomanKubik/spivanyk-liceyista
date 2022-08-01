@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Співаник</string>
+    <string name="cancel">Відмінити</string>
+    <string name="retry">Повторити</string>
+</resources>

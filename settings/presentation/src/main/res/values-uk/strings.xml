@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_preferred_instrument">Обраний інструмент</string>
+    <string-array name="instruments">
+        <item>Гітара</item>
+        <item>Укулеле</item>
+    </string-array>
+    <string name="dialog_preferred_theme">Тема</string>
+    <string-array name="themes">
+        <item>Світла</item>
+        <item>Темна</item>
+        <item>Відповідна до рівня заряду</item>
+    </string-array>
+    <string name="dialog_derussification">Дерусифікація</string>
+    <string name="dialog_derussification_text">Рускій воєнний корабиль іді нахуй.\nВидали усі русняві пісні. Ця дія не зачіпить пісень які були додані тобою</string>
+    <string name="dialog_derussification_accept">Дерусифікуй</string>
+    <string name="dialog_factory_reset">Заводські установки</string>
+    <string name="dialog_factory_reset_text">Базу даних буде відновлено до заводських установок. Усі попередньо додані пісні будуть збережені. Після відновлення додаток буде перезавантажено</string>
+    <string name="dialog_reset">Скинути</string>
+    <string name="dialog_remote_data_source">Вибрати джерела даних</string>
+    <string name="accept">Прийняти</string>
+    <string name="settings_show_chords">Показувати акорди</string>
+    <string name="settings_show_chords_description">Показувати акорди у пісні</string>
+    <string name="settings_preferred_instrument">@string/dialog_preferred_instrument</string>
+    <string name="settings_preferred_theme">@string/dialog_preferred_theme</string>
+    <string name="settings_remote_data_source">@string/dialog_remote_data_source</string>
+    <string name="settings_remote_data_source_message">Вибрати джерела даних для пошуку</string>
+    <string name="settings_help_developer">Допомога розробнику</string>
+    <string name="settings_help_developer_message">Дозволь нам показувати рекламу</string>
+    <string name="settings_derussification">Дерусифікація</string>
+    <string name="settings_derussification_message">Видали усі русняві пісні</string>
+    <string name="settings_factory_reset">@string/dialog_factory_reset</string>
+    <string name="settings_factory_reset_message">Скинути базу даних до заводських установок</string>
+    <string name="setting_toolbar_title">Налаштування</string>
+</resources>

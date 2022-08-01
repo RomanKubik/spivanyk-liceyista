@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/songDetailsAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/songDetailsToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/navigation_bar_padding"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.roman.kubik.songer.settings.presentation.ui.view.SwitchSettingsItemView
+                android:id="@+id/showChords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="@string/settings_show_chords"
+                app:settingsValue="@string/settings_show_chords_description"/>
+
+            <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
+                android:id="@+id/preferredInstrument"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="@string/settings_preferred_instrument" />
+
+            <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
+                android:id="@+id/preferredTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="@string/dialog_preferred_theme"/>
+
+            <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
+                android:id="@+id/selectedDataSources"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="@string/settings_remote_data_source"
+                app:settingsValue="@string/settings_show_chords_description" />
+
+            <com.roman.kubik.songer.settings.presentation.ui.view.SwitchSettingsItemView
+                android:id="@+id/helpDeveloper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="@string/settings_help_developer"
+                app:settingsValue="@string/settings_help_developer_message" />
+
+            <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
+                android:id="@+id/derussification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="@string/settings_derussification"
+                app:settingsValue="@string/settings_derussification_message" />
+
+            <com.roman.kubik.songer.settings.presentation.ui.view.SimpleSettingsItemView
+                android:id="@+id/factoryReset"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:settingsTitle="@string/settings_factory_reset"
+                app:settingsValue="@string/settings_factory_reset_message" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

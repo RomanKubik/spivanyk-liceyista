@@ -1,112 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/main_nav_graph" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.appbar.AppBarLayout>
+    <com.roman.kubik.songer.ui.view.FabBottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/navigation_bar_size"
+        app:fab_cradle_margin="@dimen/default_padding"
+        app:fab_cradle_rounded_corner_radius="@dimen/default_padding"
+        app:fab_size="@dimen/navigation_bar_size"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_menu" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/lastCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_history"
-                app:title="@string/ttl_last_played"
-                app:description="@string/dsc_last_played"/>
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/surpriseCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_shocked"
-                app:title="@string/ttl_surprise_me"
-                app:description="@string/dsc_surprise_me"/>
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/allCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_books"
-                app:title="@string/ttl_all_songs" />
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/webCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_web"
-                app:title="@string/ttl_web"
-                app:description="@string/dsc_web"/>
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/mySongsCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_my_songs"
-                app:title="@string/ttl_my_songs" />
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/favouriteCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_bookmark_button"
-                app:title="@string/ttl_favourite" />
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/patrioticCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_flag_on_pole"
-                app:title="@string/ttl_patriotic" />
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/bonfireCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_campfire"
-                app:title="@string/ttl_bonfire_songs" />
-
-            <View style="@style/AppTheme.Separator" />
-
-            <com.roman.kubik.songer.presentation.view.MainItemView
-                android:id="@+id/abroadCategory"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/view_size_72"
-                app:image="@drawable/ic_abroad"
-                app:title="@string/ttl_abroad_songs" />
-
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    <com.roman.kubik.songer.ui.view.FabBottomMenuItem
+        android:id="@+id/randomFab"
+        android:layout_width="@dimen/navigation_bar_size"
+        android:layout_height="@dimen/navigation_bar_size"
+        app:srcCompat="@drawable/ic_random"
+        app:tint="@color/mtrl_navigation_bar_colored_item_tint"
+        app:backgroundTint="?colorAccent"
+        app:elevation="@dimen/design_bottom_navigation_elevation"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottomNavigationView"
+        tools:ignore="PrivateResource" />
+</androidx.constraintlayout.widget.ConstraintLayout>

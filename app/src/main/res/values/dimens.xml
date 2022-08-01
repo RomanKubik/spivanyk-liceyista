@@ -1,38 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- Views size -->
+    <dimen name="navigation_bar_size">56dp</dimen>
+    <dimen name="default_image_view_size">40dp</dimen>
+    <dimen name="default_list_item_size">72dp</dimen>
 
-    <dimen name="text_size_12">12sp</dimen>
-    <dimen name="text_size_14">14sp</dimen>
-    <dimen name="text_size_16">16sp</dimen>
-    <dimen name="text_size_20">20sp</dimen>
-    <dimen name="text_size_24">24sp</dimen>
-    <dimen name="text_size_26">26sp</dimen>
-    <dimen name="text_size_28">28sp</dimen>
-    <dimen name="text_size_30">30sp</dimen>
-
-    <!-- typical spacing between two views -->
-    <dimen name="spacing_48">48dp</dimen>
-    <dimen name="spacing_32">32dp</dimen>
-    <dimen name="spacing_24">24dp</dimen>
-    <dimen name="spacing_20">20dp</dimen>
-    <dimen name="spacing_16">16dp</dimen>
-    <dimen name="spacing_8">8dp</dimen>
-    <dimen name="spacing_4">4dp</dimen>
-
-    <!-- typical sizes of views -->
-    <dimen name="view_size_72">72dp</dimen>
-    <dimen name="view_size_64">64dp</dimen>
-    <dimen name="view_size_56">56dp</dimen>
-    <dimen name="view_size_48">48dp</dimen>
-    <dimen name="view_size_40">40dp</dimen>
-    <dimen name="view_size_32">32dp</dimen>
-    <dimen name="view_size_24">24dp</dimen>
-    
-    <dimen name="dialog_chord_image">140dp</dimen>
-    <dimen name="size_100">100dp</dimen>
-    
-    <dimen name="separator_size">1dp</dimen>
 </resources>

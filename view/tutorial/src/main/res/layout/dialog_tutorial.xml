@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?tutorialBackground">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/actionImage"
+        android:layout_width="@dimen/size_tutorial_icon"
+        android:layout_height="@dimen/size_tutorial_icon"
+        android:layout_marginStart="@dimen/default_padding"
+        android:layout_marginTop="@dimen/default_margin_x2"
+        android:layout_marginEnd="@dimen/default_padding"
+        app:tint="?tutorialIconTint"
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:gravity="center"
+        android:textAppearance="?tutorialTextAppearance"
+        app:layout_constraintBottom_toTopOf="@+id/gotItButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/actionImage"
+        tools:text="Long long description which will show what user can do with the app" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/gotItButton"
+        style="?tutorialButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_x2"
+        android:layout_marginEnd="@dimen/default_margin_x2"
+        android:layout_marginBottom="@dimen/default_margin_x2"
+        android:text="@string/tutorial_button_got_it"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

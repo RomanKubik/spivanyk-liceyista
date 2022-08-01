@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="songs_toolbar">Songs</string>
+    
+    <string name="song_category_my_song">My song</string>
+    <string name="song_category_patriotic">Patriotic songs</string>
+    <string name="song_category_bonfire">Bonfire song</string>
+    <string name="song_category_abroad">Abroad songs</string>
+    <string name="empty_string" />
+
+    <string name="error_empty_list">It\'s empty here</string>
+    <string name="error_load_list">Unable to load songs</string>
+
+    <string name="menu_song_details_favourite">Favourite</string>
+    <string name="menu_song_details_share">Share</string>
+    <string name="menu_song_details_edit">Edit</string>
+    <string name="menu_song_details_delete">Delete</string>
+    <string name="menu_song_details_tonality">Tonality</string>
+
+    <string name="chords">Chords</string>
+    <string name="chords_a_of_b">%d of %d</string>
+    <string name="error_song_details">Couldn\'t load this song. Please try again.</string>
+
+    <string name="dialog_remove_song">Remove song</string>
+    <string name="dialog_remove_song_text">Are you sure you want to remove this song from your Songer?</string>
+    <string name="dialog_remove">Remove</string>
+
+    <string name="add_song_toolbar_add">Add song</string>
+    <string name="add_song_toolbar_edit">Edit song</string>
+    <string name="edit_song_title">Title</string>
+    <string name="edit_song_lyrics">Lyrics</string>
+    <string name="edit_song_tutorial_recognizer">Tap on this icon to mark chords automatically with super powerful algorithm</string>
+    <string name="error_save_song_empty_title">Title should not be blank</string>
+    <string name="error_save_song_empty_lyrics">Lyrics should not be blank</string>
+    <string name="error_save_song_general">Could\'t save this song.</string>
+    <string name="song_recognize">Recognize</string>
+    <string name="song_save">Save</string>
+
+</resources>

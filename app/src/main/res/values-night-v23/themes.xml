@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Songer" parent="Base.Songer">
+        <item name="android:windowLightStatusBar">@bool/light_status_bar</item>
+        <item name="colorPrimaryDark">@color/grey_100</item>
+
+    </style>
+</resources>

@@ -2,95 +2,100 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'io.fabric'
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-}
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion targetSdk
+    compileSdkVersion versions.compileSdk
+
     defaultConfig {
-        applicationId "com.roman.kubik.songer"
-        minSdkVersion minSdk
-        targetSdkVersion targetSdk
-        versionCode appCode
-        versionName appName
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.appVersionCode
+        versionName versions.appVersionName
+
+        applicationId names.applicationId
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-        vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
-    lintOptions {
-        checkReleaseBuilds false
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    testOptions {
+        unitTests.all {
+            unitTests.returnDefaultValues = true
+        }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.13'
-//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 
-    // Architecture Modules
-    implementation project(":data")
-    implementation project(":domain")
+    implementation project(':core')
+    implementation project(':shaker')
+    implementation project(':home')
+    implementation project(':view:tutorial')
+    implementation project(':song:songs')
+    implementation project(':song:songsRoom')
+    implementation project(':song:songsMyChords')
+    implementation project(':song:songsPisniOrgUa')
+    implementation project(':song:songsFirebase')
+    implementation project(':song:provider')
 
-    // Support library
-    implementation 'androidx.multidex:multidex:2.0.1'
-    implementation "androidx.appcompat:appcompat:1.1.0"
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation "com.google.android.material:material:1.1.0"
-    implementation "androidx.preference:preference:1.1.1"
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation project(':settings:presentation')
+    implementation project(':settings:preferences')
+    implementation project(':settings:hints')
 
-    // Dependency injection
-    implementation 'com.google.dagger:dagger-android:2.16'
-    kapt 'com.google.dagger:dagger-compiler:2.16'
-    kapt 'com.google.dagger:dagger-android-processor:2.16'
-    compileOnly 'javax.annotation:jsr250-api:1.0'
+    implementation project(':analytics:analyticsCore')
 
-    // Rx / Functional
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation libs.rxJava
-    implementation libs.stream
+    implementation project(':ads:core')
+    implementation project(':ads:google')
 
-    // Butterknife
-    implementation "com.jakewharton:butterknife:$rootProject.butterKnife"
-    kapt "com.jakewharton:butterknife-compiler:$rootProject.butterKnife"
+    //AndroidX
+    implementation "androidx.appcompat:appcompat:$versions.appCompat"
+    implementation "androidx.activity:activity-ktx:$versions.activity"
+    implementation "androidx.fragment:fragment-ktx:$versions.fragment"
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$versions.navigation"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
+    implementation "com.google.android.material:material:$versions.material"
+    implementation "androidx.work:work-runtime-ktx:$versions.workmanager"
 
-    // Architecture components
-    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
-    implementation "androidx.room:room-rxjava2:$rootProject.roomVersion"
-    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
-    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+    // DI / Hilt
+    implementation "com.google.dagger:hilt-android:$versions.hilt"
+    kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
+    kapt "androidx.hilt:hilt-compiler:$versions.hiltAndroid"
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Room
+    implementation "androidx.room:room-runtime:$versions.room"
 
     // Firebase
-    implementation "com.google.firebase:firebase-core:$rootProject.firebase"
+    implementation "com.google.firebase:firebase-analytics-ktx:$versions.analytics"
+    implementation "com.google.firebase:firebase-crashlytics-ktx:$versions.crashlytics"
+    implementation 'com.google.firebase:firebase-messaging:23.0.6'
 
-    // Crashlytics
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-
-    // Glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "org.mockito:mockito-core:$versions.mockito"
+    testImplementation 'org.mockito:mockito-inline:3.3.3'
+    testImplementation 'com.github.dpreussler:android-tdd-utils:v0.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 }
-
-repositories {
-    mavenCentral()
-}
-
-apply plugin: 'com.google.gms.google-services'
