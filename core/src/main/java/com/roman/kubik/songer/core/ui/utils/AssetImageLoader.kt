@@ -26,7 +26,7 @@ object AssetImageLoader {
             // load image as Drawable
             val d = Drawable.createFromStream(ims, null)
             if (isDarkMode(context)) {
-                d.colorFilter = ColorMatrixColorFilter(INVERT_COLOR_MTX)
+                d?.colorFilter = ColorMatrixColorFilter(INVERT_COLOR_MTX)
             }
             return d
         } catch (ex: Exception) {

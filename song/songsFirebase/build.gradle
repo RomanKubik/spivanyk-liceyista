@@ -27,6 +27,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    namespace 'com.roman.kubik.songer.songs.firebase'
 }
 
 dependencies {
@@ -37,7 +38,7 @@ dependencies {
 
     // Firestore
     implementation "com.google.firebase:firebase-firestore-ktx:$versions.firestore"
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
 
     implementation "javax.inject:javax.inject:1"
 

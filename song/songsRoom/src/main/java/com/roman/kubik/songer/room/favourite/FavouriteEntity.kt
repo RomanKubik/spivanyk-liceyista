@@ -1,12 +1,11 @@
 package com.roman.kubik.songer.room.favourite
 
 import androidx.room.*
-import androidx.room.ForeignKey.CASCADE
 import com.roman.kubik.songer.room.song.SongEntity
 import java.util.*
 
 
-@Entity(tableName = "favourite", foreignKeys = [ForeignKey(entity = SongEntity::class, childColumns = ["song_id"], parentColumns = ["id"], onDelete = CASCADE)])
+@Entity(tableName = "favourite", foreignKeys = [ForeignKey(entity = SongEntity::class, childColumns = ["song_id"], parentColumns = ["id"], onDelete = ForeignKey.CASCADE)])
 class FavouriteEntity {
     @PrimaryKey
     var id: String

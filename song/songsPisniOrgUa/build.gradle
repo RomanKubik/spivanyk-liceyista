@@ -27,6 +27,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    namespace 'com.roman.kubik.songer.songs.pisniorgua'
 }
 
 dependencies {
