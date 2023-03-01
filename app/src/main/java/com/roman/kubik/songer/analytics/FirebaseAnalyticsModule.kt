@@ -29,7 +29,7 @@ class FirebaseAnalyticsModule : BaseAnalyticsModule() {
     }
 
     private fun normalize(s: String): String {
-        return NORM_PATTERN.matcher(s).replaceAll("_").toLowerCase(Locale.ENGLISH)
+        return NORM_PATTERN.matcher(s).replaceAll("_").lowercase()
     }
 
     private fun getAttributesBundle(event: Event): Bundle {

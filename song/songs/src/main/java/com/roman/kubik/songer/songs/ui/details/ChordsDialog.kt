@@ -7,6 +7,7 @@ import com.roman.kubik.songer.chords.model.Chord
 import com.roman.kubik.songer.core.ui.utils.AssetImageLoader
 import com.roman.kubik.songs.R
 import kotlinx.android.synthetic.main.dialog_chord.*
+import java.util.*
 
 class ChordsDialog(context: Context,
                    private val chords: List<Chord>,
@@ -16,7 +17,9 @@ class ChordsDialog(context: Context,
             field = validatePage(value)
             val c = chords[field]
             chord.text = c.name
-            chordImage.setImageDrawable(AssetImageLoader.loadAsset(context, c.imagePath?.format(selectedInstrument.name.toLowerCase())))
+            chordImage.setImageDrawable(AssetImageLoader.loadAsset(context, c.imagePath?.format(
+                selectedInstrument.name.lowercase()
+            )))
             indicator.text = String.format(context.getString(R.string.chords_a_of_b), currentPosition + 1, chords.size)
             show()
         }

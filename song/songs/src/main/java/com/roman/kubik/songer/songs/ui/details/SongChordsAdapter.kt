@@ -41,7 +41,7 @@ class SongChordsAdapter(private val chordClickListener: ChordClickListener) : Re
 
         fun bind(chord: Chord, instrument: Instrument) {
             itemView.chordName.text = chord.name
-            itemView.chordImage.setImageDrawable(AssetImageLoader.loadAsset(itemView.context, chord.imagePath?.format(instrument.name.toLowerCase())))
+            itemView.chordImage.setImageDrawable(AssetImageLoader.loadAsset(itemView.context, chord.imagePath?.format(instrument.name.lowercase())))
             itemView.setOnClickListener {
                 chordClickListener.onChordClicked(chord.name)
             }
