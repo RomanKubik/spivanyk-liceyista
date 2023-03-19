@@ -30,8 +30,8 @@ class HomeFragmentViewModel @Inject constructor(
     searchNavigator: SearchNavigator
 ) : BaseSearchViewModel(searchNavigator) {
 
-    private val _categories = MutableLiveData<List<HomeCategory>>()
-    val categories: LiveData<List<HomeCategory>> = _categories
+    private val _homeState = MutableLiveData(HomeUiState.EMPTY)
+    val homeUiState: LiveData<HomeUiState> = _homeState
     val showHintsCommand = Command<Queue<HintType>>()
 
     init {
@@ -51,7 +51,8 @@ class HomeFragmentViewModel @Inject constructor(
                 SongCategory.LAST_PLAYED,
                 stringProvider.getString(R.string.home_category_last_played),
                 stringProvider.getString(R.string.home_category_last_played_subtitle),
-                R.drawable.ic_category_last_played
+                R.drawable.ic_history,
+                R.color.hot_pink
             )
         )
         list.add(
@@ -59,7 +60,8 @@ class HomeFragmentViewModel @Inject constructor(
                 SongCategory.LAST_ADDED,
                 stringProvider.getString(R.string.home_category_new_songs),
                 stringProvider.getString(R.string.home_category_new_songs_subtitle),
-                R.drawable.ic_category_new_songs
+                R.drawable.ic_cloud_sync,
+                R.color.not_purple
             )
         )
         list.add(
@@ -67,7 +69,8 @@ class HomeFragmentViewModel @Inject constructor(
                 SongCategory.MY_SONGS,
                 stringProvider.getString(R.string.home_category_my_songs),
                 stringProvider.getString(R.string.home_category_my_songs_subtitle),
-                R.drawable.ic_category_my_songs
+                R.drawable.ic_light_bulb,
+                R.color.juicy_orange
             )
         )
         list.add(
@@ -75,7 +78,8 @@ class HomeFragmentViewModel @Inject constructor(
                 SongCategory.FAVOURITE,
                 stringProvider.getString(R.string.home_category_favourite),
                 stringProvider.getString(R.string.home_category_favourite_subtitle),
-                R.drawable.ic_category_favourite
+                R.drawable.ic_favorite,
+                R.color.darkish_grey
             )
         )
         list.add(
@@ -83,7 +87,8 @@ class HomeFragmentViewModel @Inject constructor(
                 SongCategory.PATRIOTIC,
                 stringProvider.getString(R.string.home_category_patriotic),
                 stringProvider.getString(R.string.home_category_patriotic_subtitle),
-                R.drawable.ic_category_patriotic
+                R.drawable.ic_flag,
+                R.color.olive_green
             )
         )
         list.add(
@@ -91,7 +96,8 @@ class HomeFragmentViewModel @Inject constructor(
                 SongCategory.BONFIRE,
                 stringProvider.getString(R.string.home_category_bonfire),
                 stringProvider.getString(R.string.home_category_bonfire_subtitle),
-                R.drawable.ic_category_bonfire
+                R.drawable.ic_bonfire,
+                R.color.bright_green
             )
         )
         list.add(
@@ -99,10 +105,11 @@ class HomeFragmentViewModel @Inject constructor(
                 SongCategory.ABROAD,
                 stringProvider.getString(R.string.home_category_abroad),
                 stringProvider.getString(R.string.home_category_abroad_subtitle),
-                R.drawable.ic_category_abroad
+                R.drawable.ic_globe,
+                R.color.aqua_marine
             )
         )
-        _categories.value = list
+        _homeState.postValue(HomeUiState(list))
     }
 
     private fun fetchHintsConfig() {
