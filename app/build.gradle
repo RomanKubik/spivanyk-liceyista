@@ -7,6 +7,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
+    namespace "com.roman.kubik.songer"
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
@@ -89,13 +90,13 @@ dependencies {
     // Firebase
     implementation "com.google.firebase:firebase-analytics-ktx:$versions.analytics"
     implementation "com.google.firebase:firebase-crashlytics-ktx:$versions.crashlytics"
-    implementation 'com.google.firebase:firebase-messaging:23.0.6'
+    implementation 'com.google.firebase:firebase-messaging:23.4.1'
 
     testImplementation "junit:junit:$versions.junit"
     testImplementation "org.mockito:mockito-core:$versions.mockito"
     testImplementation 'org.mockito:mockito-inline:3.3.3'
     testImplementation 'com.github.dpreussler:android-tdd-utils:v0.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
 }
