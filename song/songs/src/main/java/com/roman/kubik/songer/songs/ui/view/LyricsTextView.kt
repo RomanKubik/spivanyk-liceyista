@@ -1,7 +1,6 @@
 package com.roman.kubik.songer.songs.ui.view
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Typeface
 import android.text.SpannableString
 import android.text.Spanned
@@ -10,16 +9,15 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.ColorInt
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.ColorUtils
-import com.google.android.material.textview.MaterialTextView
 import com.roman.kubik.songer.chords.ChordsFormatter
 import com.roman.kubik.songer.core.ui.utils.getAttributeColor
-import com.roman.kubik.songs.R
+import com.roman.kubik.songer.song.songs.R
 import java.util.regex.Pattern
 
-class LyricsTextView : MaterialTextView {
+class LyricsTextView : TextView {
 
     companion object {
         private val bracketsPattern: Pattern = ChordsFormatter.bracketsPattern

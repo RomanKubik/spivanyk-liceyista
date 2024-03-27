@@ -32,4 +32,5 @@
     <string name="settings_factory_reset">@string/dialog_factory_reset</string>
     <string name="settings_factory_reset_message">Скинути базу даних до заводських установок</string>
     <string name="setting_toolbar_title">Налаштування</string>
+    <string name="cancel">Відмінити</string>
 </resources>

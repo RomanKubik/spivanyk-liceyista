@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/settingsItemTitle"
         tools:text="Value" />
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
+    <Switch
         android:id="@+id/settingsItemSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

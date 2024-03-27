@@ -22,7 +22,7 @@
         android:layout_margin="@dimen/default_margin"
         android:textAppearance="?textAppearanceCaption" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/troubleRetry"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"

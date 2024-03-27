@@ -15,7 +15,7 @@ interface FavouriteDao {
     suspend fun isSongExists(songId: String): FavouriteEntity?
 
     @Insert
-    fun add(favouriteEntity: FavouriteEntity?)
+    fun add(favouriteEntity: FavouriteEntity)
 
     @Query("DELETE FROM favourite WHERE favourite.song_id = :songId")
     fun delete(songId: String?)

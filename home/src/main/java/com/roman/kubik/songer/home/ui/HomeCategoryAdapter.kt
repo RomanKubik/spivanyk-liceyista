@@ -1,20 +1,21 @@
 package com.roman.kubik.songer.home.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.roman.kubik.songer.home.R
-import kotlinx.android.synthetic.main.item_home_category.view.*
+import com.roman.kubik.songer.home.databinding.ItemHomeCategoryBinding
 
-class HomeCategoryAdapter(private val clickListener: (HomeCategory) -> Unit)
-    : RecyclerView.Adapter<HomeCategoryAdapter.CategoryHolder>() {
+class HomeCategoryAdapter(private val clickListener: (HomeCategory) -> Unit) :
+    RecyclerView.Adapter<HomeCategoryAdapter.CategoryHolder>() {
 
     private var items = mutableListOf<HomeCategory>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return CategoryHolder(inflater.inflate(R.layout.item_home_category, parent, false), clickListener)
+        return CategoryHolder(
+            ItemHomeCategoryBinding.inflate(inflater, parent, false),
+            clickListener
+        )
     }
 
     override fun getItemCount(): Int = items.size
@@ -29,13 +30,15 @@ class HomeCategoryAdapter(private val clickListener: (HomeCategory) -> Unit)
         notifyDataSetChanged()
     }
 
-    class CategoryHolder(itemView: View, private val clickListener: (HomeCategory) -> Unit)
-        : RecyclerView.ViewHolder(itemView) {
+    class CategoryHolder(
+        private val binding: ItemHomeCategoryBinding,
+        private val clickListener: (HomeCategory) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(homeCategory: HomeCategory) {
-            itemView.categoryIcon.setImageResource(homeCategory.icon)
-            itemView.categoryTitle.text = homeCategory.title
-            itemView.categorySubtitle.text = homeCategory.subtitle
+            binding.categoryIcon.setImageResource(homeCategory.icon)
+            binding.categoryTitle.text = homeCategory.title
+            binding.categorySubtitle.text = homeCategory.subtitle
             itemView.setOnClickListener {
                 clickListener.invoke(homeCategory)
             }

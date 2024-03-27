@@ -46,8 +46,9 @@ class ShakeDetectorImpl @Inject constructor(context: Context) : ShakeDetector {
         }
 
         if (sensorManager != null) {
-            val accelerometer: Sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
-            sensorManager.registerListener(sensorListener, accelerometer, SensorManager.SENSOR_DELAY_UI)
+            sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.let {
+                sensorManager.registerListener(sensorListener, it, SensorManager.SENSOR_DELAY_UI)
+            }
         }
 
         awaitClose { sensorManager?.unregisterListener(sensorListener) }

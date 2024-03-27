@@ -25,7 +25,7 @@ class NotificationManagerImpl @Inject constructor(private val context: Context) 
             PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val n = NotificationCompat.Builder(context, DEFAULT_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_bonfire)
+                .setSmallIcon(com.roman.kubik.songer.home.R.drawable.ic_bonfire)
                 .setContentTitle(notification.title)
                 .setContentText(notification.message)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

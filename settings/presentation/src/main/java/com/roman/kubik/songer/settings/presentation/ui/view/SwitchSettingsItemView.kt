@@ -4,10 +4,13 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.Checkable
 import android.widget.CompoundButton
+import android.widget.Switch
 import com.roman.kubik.songer.settings.presentation.R
-import kotlinx.android.synthetic.main.switch_settings_item.view.*
 
 class SwitchSettingsItemView : SimpleSettingsItemView, Checkable {
+
+    private val settingsItemSwitchView: Switch
+        get() = findViewById(R.id.settingsItemSwitch)
 
     override val layoutId: Int
         get() = R.layout.switch_settings_item
@@ -21,18 +24,18 @@ class SwitchSettingsItemView : SimpleSettingsItemView, Checkable {
         }
     }
 
-    override fun isChecked() = settingsItemSwitch.isChecked
+    override fun isChecked() = settingsItemSwitchView.isChecked
 
     override fun toggle() {
-        settingsItemSwitch.toggle()
+        settingsItemSwitchView.toggle()
     }
 
     override fun setChecked(checked: Boolean) {
-        settingsItemSwitch.isChecked = checked
+        settingsItemSwitchView.isChecked = checked
     }
 
     fun setOnCheckedChangeListener(listener: CompoundButton.OnCheckedChangeListener) {
-        settingsItemSwitch.setOnCheckedChangeListener(listener)
+        settingsItemSwitchView.setOnCheckedChangeListener(listener)
     }
 
 }

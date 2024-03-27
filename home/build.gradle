@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.devtools.ksp'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
@@ -23,13 +22,17 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
 }
@@ -54,8 +57,8 @@ dependencies {
     // DI / Hilt
     implementation "com.google.dagger:hilt-android:$versions.hilt"
 //    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltAndroid"
-    kapt "com.google.dagger:hilt-android-compiler:$versions.hilt"
-    kapt "androidx.hilt:hilt-compiler:$versions.hiltAndroid"
+    ksp "com.google.dagger:hilt-compiler:$versions.hilt"
+//    ksp "androidx.hilt:hilt-compiler:$versions.hiltAndroid"
 
     testImplementation "junit:junit:$versions.junit"
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
