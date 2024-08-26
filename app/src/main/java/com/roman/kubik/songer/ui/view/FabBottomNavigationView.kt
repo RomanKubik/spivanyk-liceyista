@@ -44,7 +44,7 @@ class FabBottomNavigationView @JvmOverloads constructor(
                 .build()
 
         materialShapeDrawable = MaterialShapeDrawable(shapeAppearanceModel).apply {
-            setTint(context.getAttributeColor(R.attr.colorAccent))
+            setTint(context.getAttributeColor(com.google.android.material.R.attr.colorAccent))
             paintStyle = Paint.Style.FILL_AND_STROKE
         }
 

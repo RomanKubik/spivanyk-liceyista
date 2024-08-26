@@ -1,8 +1,8 @@
 package com.roman.kubik.songer.songs.ui.utils
 
 import androidx.annotation.StringRes
+import com.roman.kubik.songer.song.songs.R
 import com.roman.kubik.songer.songs.domain.song.SongCategory
-import com.roman.kubik.songs.R
 
 @StringRes
 fun SongCategory.toUiCategory(): Int {

@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
+    namespace "com.roman.kubik.songer.core"
     compileSdkVersion versions.compileSdk
 
     defaultConfig {
@@ -21,12 +21,12 @@ android {
     }
 
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
 }
@@ -40,6 +40,7 @@ dependencies {
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+    implementation 'androidx.databinding:viewbinding:8.3.1'
 
     testImplementation "junit:junit:$versions.junit"
 

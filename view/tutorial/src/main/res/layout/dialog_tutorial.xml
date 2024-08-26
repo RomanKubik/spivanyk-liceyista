@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?tutorialBackground">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/actionImage"
         android:layout_width="@dimen/size_tutorial_icon"
         android:layout_height="@dimen/size_tutorial_icon"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/actionImage"
         tools:text="Long long description which will show what user can do with the app" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/gotItButton"
         style="?tutorialButton"
         android:layout_width="0dp"

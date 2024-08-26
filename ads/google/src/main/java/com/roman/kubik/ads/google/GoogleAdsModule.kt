@@ -7,6 +7,7 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.roman.kubik.ads.core.AdsModule
+import com.roman.kubik.songer.ads.google.R
 import javax.inject.Inject
 import javax.inject.Singleton
 

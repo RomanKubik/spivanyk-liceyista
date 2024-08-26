@@ -37,7 +37,7 @@ class PushMessageHandlerImpl @Inject constructor(
         }
         val notification = Notification(
                 id = ID_FORCE_UPDATE,
-                title = pushMessage[TITLE_KEY] ?: context.getString(R.string.app_name),
+                title = pushMessage[TITLE_KEY] ?: context.getString(com.roman.kubik.songer.core.R.string.app_name),
                 message = pushMessage[MESSAGE_KEY] ?: context.getString(R.string.notification_generic_message),
                 intent = NotificationIntent(
                         screenName = MainActivity::class.java,
@@ -50,8 +50,8 @@ class PushMessageHandlerImpl @Inject constructor(
     private fun handleOtherType(pushMessage: Map<String, String>) {
         val notification = Notification(
                 id = ID_OTHER,
-                title = pushMessage[TITLE_KEY] ?: context.getString(R.string.app_name),
-                message = pushMessage[MESSAGE_KEY] ?: context.getString(R.string.notification_generic_message),
+                title = pushMessage[TITLE_KEY] ?: context.getString(com.roman.kubik.songer.core.R.string.app_name),
+                message = pushMessage[MESSAGE_KEY] ?:context.getString(R.string.notification_generic_message),
                 intent = NotificationIntent(
                         screenName = MainActivity::class.java,
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -2,10 +2,16 @@ package com.roman.kubik.songer.settings.presentation.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.widget.TextView
 import com.roman.kubik.songer.settings.presentation.R
-import kotlinx.android.synthetic.main.simple_settings_item.view.*
 
 open class SimpleSettingsItemView : SettingsItemView {
+
+    private val settingsItemTitleView: TextView
+        get() = findViewById(R.id.settingsItemTitle)
+
+    private val settingsItemValueView: TextView
+        get() = findViewById(R.id.settingsItemValue)
 
     override val layoutId: Int
             get() = R.layout.simple_settings_item
@@ -17,19 +23,19 @@ open class SimpleSettingsItemView : SettingsItemView {
 
 
     override fun setSettingsTitle(res: Int) {
-        settingsItemTitle.setText(res)
+        settingsItemTitleView.setText(res)
     }
 
     override fun setSettingsTitle(title: String?) {
-        settingsItemTitle.text = title
+        settingsItemTitleView.text = title
     }
 
     override fun setSettingsValue(res: Int) {
-        settingsItemValue.setText(res)
+        settingsItemValueView.setText(res)
     }
 
     override fun setSettingsValue(value: String?) {
-        settingsItemValue.text = value
+        settingsItemValueView.text = value
     }
 
 }

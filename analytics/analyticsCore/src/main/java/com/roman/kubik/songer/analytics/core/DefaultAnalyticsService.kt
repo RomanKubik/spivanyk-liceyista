@@ -3,6 +3,7 @@ package com.roman.kubik.songer.analytics.core
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import com.roman.kubik.songer.analytics.analyticsCore.BuildConfig
 import com.roman.kubik.songer.analytics.core.event.Event
 import com.roman.kubik.songer.analytics.core.params.Property
 import com.roman.kubik.songer.analytics.core.screen.Screen
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 @Singleton
 class DefaultAnalyticsService @Inject constructor(): AnalyticsService {
     companion object {
-        private val TAG: String = "DefaultAnalyticsService"
+        private const val TAG: String = "DefaultAnalyticsService"
     }
 
     private val analytics: MutableSet<AnalyticsModule> = HashSet<AnalyticsModule>()

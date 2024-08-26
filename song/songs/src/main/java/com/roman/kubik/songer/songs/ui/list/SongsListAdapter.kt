@@ -1,22 +1,22 @@
 package com.roman.kubik.songer.songs.ui.list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.roman.kubik.songer.song.songs.databinding.FragmentSongListBinding
+import com.roman.kubik.songer.song.songs.databinding.ItemSongListBinding
 import com.roman.kubik.songer.songs.domain.song.Song
-import com.roman.kubik.songs.R
-import kotlinx.android.synthetic.main.item_song_list.view.*
 
-class SongsListAdapter constructor(private val clickListener: (Song) -> Unit) : RecyclerView.Adapter<SongsListAdapter.SongHolder>() {
+class SongsListAdapter constructor(private val clickListener: (Song) -> Unit) :
+    RecyclerView.Adapter<SongsListAdapter.SongHolder>() {
     private var items = mutableListOf<Song>()
     var showChords: Boolean = true
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SongHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return SongHolder(inflater.inflate(R.layout.item_song_list, parent, false), clickListener)
+        return SongHolder(ItemSongListBinding.inflate(inflater, parent, false), clickListener)
     }
 
     override fun getItemCount(): Int = items.size
@@ -32,15 +32,18 @@ class SongsListAdapter constructor(private val clickListener: (Song) -> Unit) : 
         diffResult.dispatchUpdatesTo(this)
     }
 
-    class SongHolder(itemView: View, private val clickListener: (Song) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class SongHolder(
+        private val binding: ItemSongListBinding,
+        private val clickListener: (Song) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(song: Song, showChords: Boolean) {
-            itemView.title.text = song.title
-            itemView.lyrics.showChords = showChords
-            itemView.lyrics.text = song.lyrics
-            itemView.lyrics.isVisible = song.lyrics.isNotEmpty()
-            itemView.source.text = song.source
-            itemView.source.isVisible = song.source.isNotEmpty()
+            binding.title.text = song.title
+            binding.lyrics.showChords = showChords
+            binding.lyrics.text = song.lyrics
+            binding.lyrics.isVisible = song.lyrics.isNotEmpty()
+            binding.source.text = song.source
+            binding.source.isVisible = song.source.isNotEmpty()
             itemView.setOnClickListener { clickListener.invoke(song) }
         }
 

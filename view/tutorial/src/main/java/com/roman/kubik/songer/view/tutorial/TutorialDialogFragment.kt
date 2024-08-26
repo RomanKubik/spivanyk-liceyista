@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.DialogFragment
-import kotlinx.android.synthetic.main.dialog_tutorial.*
+import com.roman.kubik.songer.view.tutorial.databinding.DialogTutorialBinding
 
 class TutorialDialogFragment : DialogFragment() {
 
+    private lateinit var binding: DialogTutorialBinding
     var dismissListener: DismissListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,16 +20,17 @@ class TutorialDialogFragment : DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.dialog_tutorial, container, false)
+        binding = DialogTutorialBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
-            actionImage.setImageResource(it.getInt(TUTORIAL_ICON))
-            description.setText(it.getInt(TUTORIAL_TEXT))
+            binding.actionImage.setImageResource(it.getInt(TUTORIAL_ICON))
+            binding.description.setText(it.getInt(TUTORIAL_TEXT))
         }
-        gotItButton.setOnClickListener {
+        binding.gotItButton.setOnClickListener {
             this.dismiss()
             dismissListener?.onDismissed(tag)
         }

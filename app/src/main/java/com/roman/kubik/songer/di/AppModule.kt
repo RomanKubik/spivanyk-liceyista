@@ -1,5 +1,6 @@
 package com.roman.kubik.songer.di
 
+import com.roman.kubik.ads.core.AdsModule
 import com.roman.kubik.settings.domain.preference.PreferenceService
 import com.roman.kubik.songer.app.initializers.AnalyticsInitializer
 import com.roman.kubik.songer.app.initializers.AppInitializer
@@ -41,5 +42,17 @@ class AppModule {
                            fcmInitializer: FcmInitializer,
                            themeInitializer: ThemeInitializer): List<AppInitializer> {
         return listOf(analyticsInitializer, fcmInitializer, themeInitializer)
+    }
+
+    @Provides
+    @Singleton
+    fun bindAdsModule(): AdsModule {
+        return object: AdsModule {
+            override fun loadAd() {
+            }
+
+            override fun showAd() {
+            }
+        }
     }
 }
